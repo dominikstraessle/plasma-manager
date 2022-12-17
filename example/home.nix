@@ -2,6 +2,7 @@
 {
   programs.plasma = {
     enable = true;
+    spectacle.General.onLaunchAction = "DoNotTakeScreenshot";
 
     # Some high-level settings:
     workspace.clickItemTo = "select";

@@ -7,6 +7,7 @@
     ./shortcuts.nix
     ./windows.nix
     ./workspace.nix
+    ./spectacle.nix
   ];
 
   options.programs.plasma.enable = lib.mkEnableOption ''
