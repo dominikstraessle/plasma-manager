@@ -2,25 +2,26 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.kwin = {
-    "Wayland" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            InputMethod = mkOption {
-              type = nullOr (either str str);
-              default = "";
-              description = ''
+  options.programs.plasma.kwin = { 
+    "Wayland" = with types; mkOption {
+      type = submodule {
+        options = { 
+          InputMethod = mkOption {
+            type = nullOr (either str str);
+            default = "";
+            description = ''
+              
 
-
-                Type: Path
-              '';
-            };
+              Type: Path
+            '';
           };
         };
-        default = { };
-        description = "Wayland";
       };
+      default = {};
+      description = "Wayland";
+    };    
   };
-  config = mkIf cfg.enable { programs.plasma.files."kwinrc" = cfg.kwin; };
+  config = mkIf cfg.enable {
+    programs.plasma.files."kwinrc" = cfg.kwin;
+  };
 }

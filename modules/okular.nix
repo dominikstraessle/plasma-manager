@@ -2,844 +2,847 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.okular = {
-    "Dlg Performance" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "EnableCompositing" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+  options.programs.plasma.okular = { 
+    "Dlg Performance" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "EnableCompositing" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "Dlg Performance";
       };
-    "Debugging Options" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "DebugDrawBoundaries" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "Dlg Performance";
+    };    
+    "Debugging Options" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "DebugDrawBoundaries" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "DebugDrawAnnotationRect" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "DebugDrawAnnotationRect" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "Debugging Options";
       };
-    "Contents" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "ContentsSearchCaseSensitive" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "Debugging Options";
+    };    
+    "Contents" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "ContentsSearchCaseSensitive" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "ContentsSearchRegularExpression" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "ContentsSearchRegularExpression" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "Contents";
       };
-    "Layers" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "LayersSearchCaseSensitive" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "Contents";
+    };    
+    "Layers" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "LayersSearchCaseSensitive" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "LayersSearchRegularExpression" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "LayersSearchRegularExpression" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "Layers";
       };
-    "Reviews" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "ReviewsSearchCaseSensitive" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "Layers";
+    };    
+    "Reviews" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "ReviewsSearchCaseSensitive" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "ReviewsSearchRegularExpression" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "ReviewsSearchRegularExpression" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "DrawingTools" = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "drawingTools";
+            defaultText = "Code: true";
+            description = ''
+              
 
+              Type: StringList
+            '';
+          };
+          "BuiltinAnnotationTools" = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "builtinAnnotationTools";
+            defaultText = "Code: true";
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "DrawingTools" = mkOption {
-              type = nullOr (either str (listOf str));
-              default = "drawingTools";
-              defaultText = "Code: true";
-              description = ''
+              Type: StringList
+            '';
+          };
+          "QuickAnnotationTools" = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "quickAnnotationTools";
+            defaultText = "Code: true";
+            description = ''
+              
 
+              Type: StringList
+            '';
+          };
+          "AnnotationContinuousMode" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: StringList
-              '';
-            };
-            "BuiltinAnnotationTools" = mkOption {
-              type = nullOr (either str (listOf str));
-              default = "builtinAnnotationTools";
-              defaultText = "Code: true";
-              description = ''
+              Type: Bool
+            '';
+          };
+          "QuickAnnotationDefaultAction" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
-
-                Type: StringList
-              '';
-            };
-            "QuickAnnotationTools" = mkOption {
-              type = nullOr (either str (listOf str));
-              default = "quickAnnotationTools";
-              defaultText = "Code: true";
-              description = ''
-
-
-                Type: StringList
-              '';
-            };
-            "AnnotationContinuousMode" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "QuickAnnotationDefaultAction" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
+              Type: UInt
+            '';
           };
         };
-        default = { };
-        description = "Reviews";
       };
-    "Zoom" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "ZoomMode" = mkOption {
-              type = nullOr (either str int);
-              default = 1;
-              description = ''
+      default = {};
+      description = "Reviews";
+    };    
+    "Zoom" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "ZoomMode" = mkOption {
+            type = nullOr (either str int);
+            default = 1;
+            description = ''
+              
 
-
-                Type: UInt
-                Max: 3
-              '';
-            };
+              Type: UInt
+              Max: 3
+            '';
           };
         };
-        default = { };
-        description = "Zoom";
       };
-    "General" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "ShellOpenFileInTabs" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "Zoom";
+    };    
+    "General" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "ShellOpenFileInTabs" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "SwitchToTabIfOpen" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "SwitchToTabIfOpen" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "ShowOSD" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "ShowEmbeddedContentMessages" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "ShowOSD" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "DisplayDocumentTitle" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "rtlReadingDirection" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "ShowEmbeddedContentMessages" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "DisplayDocumentNameOrPath" = mkOption {
+            type = nullOr (either str (enum [ 
+              "Name"
+              "Path"
+            ]));
+            default = "Name";
+            description = ''
+              
 
+              Type: Enum
+              Choices: 
+                - Name
+                - Path
+            '';
+          };
+          "UseTTS" = mkOption {
+            type = nullOr (either str bool);
+            default = "";
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "DisplayDocumentTitle" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "ttsEngine" = mkOption {
+            type = nullOr (either str str);
+            default = "speechd";
+            description = ''
+              
 
+              Type: String
+            '';
+          };
+          "ttsVoice" = mkOption {
+            type = nullOr (either str str);
+            default = "";
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "rtlReadingDirection" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: String
+            '';
+          };
+          "WatchFile" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-
-                Type: Bool
-              '';
-            };
-            "DisplayDocumentNameOrPath" = mkOption {
-              type = nullOr (either str (enum [ "Name" "Path" ]));
-              default = "Name";
-              description = ''
-
-
-                Type: Enum
-                Choices: 
-                  - Name
-                  - Path
-              '';
-            };
-            "UseTTS" = mkOption {
-              type = nullOr (either str bool);
-              default = "";
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "ttsEngine" = mkOption {
-              type = nullOr (either str str);
-              default = "speechd";
-              description = ''
-
-
-                Type: String
-              '';
-            };
-            "ttsVoice" = mkOption {
-              type = nullOr (either str str);
-              default = "";
-              description = ''
-
-
-                Type: String
-              '';
-            };
-            "WatchFile" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "General";
       };
-    "Dlg Presentation" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "SlidesBackgroundColor" = mkOption {
-              type = nullOr (either str str);
-              default = "Qt::black";
-              defaultText = "Code: true";
-              description = ''
+      default = {};
+      description = "General";
+    };    
+    "Dlg Presentation" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "SlidesBackgroundColor" = mkOption {
+            type = nullOr (either str str);
+            default = "Qt::black";
+            defaultText = "Code: true";
+            description = ''
+              
 
+              Type: Color
+            '';
+          };
+          "SlidesTransition" = mkOption {
+            type = nullOr (either str (enum [ 
+              "NoTransitions"
+              "Replace"
+              "Random"
+              "BlindsHorizontal"
+              "BlindsVertical"
+              "BoxIn"
+              "BoxOut"
+              "Dissolve"
+              "Fade"
+              "GlitterDown"
+              "GlitterRight"
+              "GlitterRightDown"
+              "SplitHorizontalIn"
+              "SplitHorizontalOut"
+              "SplitVerticalIn"
+              "SplitVerticalOut"
+              "WipeDown"
+              "WipeRight"
+              "WipeLeft"
+              "WipeUp"
+            ]));
+            default = "Replace";
+            description = ''
+              
 
-                Type: Color
-              '';
-            };
-            "SlidesTransition" = mkOption {
-              type = nullOr (either str (enum [
-                "NoTransitions"
-                "Replace"
-                "Random"
-                "BlindsHorizontal"
-                "BlindsVertical"
-                "BoxIn"
-                "BoxOut"
-                "Dissolve"
-                "Fade"
-                "GlitterDown"
-                "GlitterRight"
-                "GlitterRightDown"
-                "SplitHorizontalIn"
-                "SplitHorizontalOut"
-                "SplitVerticalIn"
-                "SplitVerticalOut"
-                "WipeDown"
-                "WipeRight"
-                "WipeLeft"
-                "WipeUp"
-              ]));
-              default = "Replace";
-              description = ''
+              Type: Enum
+              Choices: 
+                - NoTransitions
+                - Replace
+                - Random
+                - BlindsHorizontal
+                - BlindsVertical
+                - BoxIn
+                - BoxOut
+                - Dissolve
+                - Fade
+                - GlitterDown
+                - GlitterRight
+                - GlitterRightDown
+                - SplitHorizontalIn
+                - SplitHorizontalOut
+                - SplitVerticalIn
+                - SplitVerticalOut
+                - WipeDown
+                - WipeRight
+                - WipeLeft
+                - WipeUp
+            '';
+          };
+          "SlidesCursor" = mkOption {
+            type = nullOr (either str (enum [ 
+              "HiddenDelay"
+              "Visible"
+              "Hidden"
+            ]));
+            default = "HiddenDelay";
+            description = ''
+              
 
+              Type: Enum
+              Choices: 
+                - HiddenDelay
+                - Visible
+                - Hidden
+            '';
+          };
+          "SlidesShowProgress" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: Enum
-                Choices: 
-                  - NoTransitions
-                  - Replace
-                  - Random
-                  - BlindsHorizontal
-                  - BlindsVertical
-                  - BoxIn
-                  - BoxOut
-                  - Dissolve
-                  - Fade
-                  - GlitterDown
-                  - GlitterRight
-                  - GlitterRightDown
-                  - SplitHorizontalIn
-                  - SplitHorizontalOut
-                  - SplitVerticalIn
-                  - SplitVerticalOut
-                  - WipeDown
-                  - WipeRight
-                  - WipeLeft
-                  - WipeUp
-              '';
-            };
-            "SlidesCursor" = mkOption {
-              type =
-                nullOr (either str (enum [ "HiddenDelay" "Visible" "Hidden" ]));
-              default = "HiddenDelay";
-              description = ''
+              Type: Bool
+            '';
+          };
+          "SlidesShowSummary" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "SlidesScreen" = mkOption {
+            type = nullOr (either str int);
+            default = -2;
+            description = ''
+              
 
-                Type: Enum
-                Choices: 
-                  - HiddenDelay
-                  - Visible
-                  - Hidden
-              '';
-            };
-            "SlidesShowProgress" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "SlidesShowSummary" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "SlidesScreen" = mkOption {
-              type = nullOr (either str int);
-              default = -2;
-              description = ''
-
-
-                Type: Int
-                Min: -2
-                Max: 20
-              '';
-            };
+              Type: Int
+              Min: -2
+              Max: 20
+            '';
           };
         };
-        default = { };
-        description = "Dlg Presentation";
       };
-    "Main View" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "ShowLeftPanel" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+      default = {};
+      description = "Dlg Presentation";
+    };    
+    "Main View" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "ShowLeftPanel" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "SplitterSizes" = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "";
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "SplitterSizes" = mkOption {
-              type = nullOr (either str (listOf int));
-              default = "";
-              description = ''
+              Type: IntList
+            '';
+          };
+          "ShowBottomBar" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-
-                Type: IntList
-              '';
-            };
-            "ShowBottomBar" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "Main View";
       };
-    "Nav Panel" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "CurrentPageOnly" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "Main View";
+    };    
+    "Nav Panel" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "CurrentPageOnly" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "GroupByAuthor" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "GroupByAuthor" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "GroupByPage" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "FilterBookmarks" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "GroupByPage" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "SyncThumbnailsViewport" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "TocPageColumn" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "FilterBookmarks" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "SidebarShowText" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "SidebarIconSize" = mkOption {
+            type = nullOr (either str int);
+            default = 48;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "SyncThumbnailsViewport" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "TocPageColumn" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "SidebarShowText" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "SidebarIconSize" = mkOption {
-              type = nullOr (either str int);
-              default = 48;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
+              Type: UInt
+            '';
           };
         };
-        default = { };
-        description = "Nav Panel";
       };
-    "PageView" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "EditToolBarPlacement" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
+      default = {};
+      description = "Nav Panel";
+    };    
+    "PageView" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "EditToolBarPlacement" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
+              Type: Int
+            '';
+          };
+          "SmoothScrolling" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: Int
-              '';
-            };
-            "SmoothScrolling" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "ShowScrollBars" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "ScrollOverlap" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "ShowScrollBars" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: UInt
+              Min: 0
+              Max: 50
+            '';
+          };
+          "ViewColumns" = mkOption {
+            type = nullOr (either str int);
+            default = 3;
+            description = ''
+              
 
+              Type: UInt
+              Min: 1
+              Max: 8
+            '';
+          };
+          "TrimMargins" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "ScrollOverlap" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "ViewContinuous" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "DragBeyondScreenEdges" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: UInt
-                Min: 0
-                Max: 50
-              '';
-            };
-            "ViewColumns" = mkOption {
-              type = nullOr (either str int);
-              default = 3;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "PrimaryAnnotationToolBar" = mkOption {
+            type = nullOr (either str (enum [ 
+              "FullAnnotationToolBar"
+              "QuickAnnotationToolBar"
+            ]));
+            default = "FullAnnotationToolBar";
+            description = ''
+              
 
+              Type: Enum
+              Choices: 
+                - FullAnnotationToolBar
+                - QuickAnnotationToolBar
+            '';
+          };
+          "ViewMode" = mkOption {
+            type = nullOr (either str (enum [ 
+              "Single"
+              "Facing"
+              "FacingFirstCentered"
+              "Summary"
+            ]));
+            default = "Single";
+            description = ''
+              
 
-                Type: UInt
-                Min: 1
-                Max: 8
-              '';
-            };
-            "TrimMargins" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: Enum
+              Choices: 
+                - Single
+                - Facing
+                - FacingFirstCentered
+                - Summary
+            '';
+          };
+          "TrimMode" = mkOption {
+            type = nullOr (either str (enum [ 
+              "None"
+              "Margins"
+              "Selection"
+            ]));
+            default = "None";
+            description = ''
+              
 
+              Type: Enum
+              Choices: 
+                - None
+                - Margins
+                - Selection
+            '';
+          };
+          "MouseMode" = mkOption {
+            type = nullOr (either str (enum [ 
+              "Browse"
+              "Zoom"
+              "RectSelect"
+              "TextSelect"
+              "TableSelect"
+              "Magnifier"
+              "TrimSelect"
+            ]));
+            default = "Browse";
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "ViewContinuous" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Enum
+              Choices: 
+                - Browse
+                - Zoom
+                - RectSelect
+                - TextSelect
+                - TableSelect
+                - Magnifier
+                - TrimSelect
+            '';
+          };
+          "ShowSourceLocationsGraphically" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "UseCustomBackgroundColor" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "DragBeyondScreenEdges" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "BackgroundColor" = mkOption {
+            type = nullOr (either str str);
+            default = "";
+            description = ''
+              
 
-
-                Type: Bool
-              '';
-            };
-            "PrimaryAnnotationToolBar" = mkOption {
-              type = nullOr (either str
-                (enum [ "FullAnnotationToolBar" "QuickAnnotationToolBar" ]));
-              default = "FullAnnotationToolBar";
-              description = ''
-
-
-                Type: Enum
-                Choices: 
-                  - FullAnnotationToolBar
-                  - QuickAnnotationToolBar
-              '';
-            };
-            "ViewMode" = mkOption {
-              type = nullOr (either str
-                (enum [ "Single" "Facing" "FacingFirstCentered" "Summary" ]));
-              default = "Single";
-              description = ''
-
-
-                Type: Enum
-                Choices: 
-                  - Single
-                  - Facing
-                  - FacingFirstCentered
-                  - Summary
-              '';
-            };
-            "TrimMode" = mkOption {
-              type =
-                nullOr (either str (enum [ "None" "Margins" "Selection" ]));
-              default = "None";
-              description = ''
-
-
-                Type: Enum
-                Choices: 
-                  - None
-                  - Margins
-                  - Selection
-              '';
-            };
-            "MouseMode" = mkOption {
-              type = nullOr (either str (enum [
-                "Browse"
-                "Zoom"
-                "RectSelect"
-                "TextSelect"
-                "TableSelect"
-                "Magnifier"
-                "TrimSelect"
-              ]));
-              default = "Browse";
-              description = ''
-
-
-                Type: Enum
-                Choices: 
-                  - Browse
-                  - Zoom
-                  - RectSelect
-                  - TextSelect
-                  - TableSelect
-                  - Magnifier
-                  - TrimSelect
-              '';
-            };
-            "ShowSourceLocationsGraphically" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "UseCustomBackgroundColor" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "BackgroundColor" = mkOption {
-              type = nullOr (either str str);
-              default = "";
-              description = ''
-
-
-                Type: Color
-              '';
-            };
+              Type: Color
+            '';
           };
         };
-        default = { };
-        description = "PageView";
       };
-    "Search" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "SearchCaseSensitive" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "PageView";
+    };    
+    "Search" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "SearchCaseSensitive" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "SearchFromCurrentPage" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "SearchFromCurrentPage" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "FindAsYouType" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-
-                Type: Bool
-              '';
-            };
-            "FindAsYouType" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "Search";
       };
-    "Dlg Accessibility" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "HighlightImages" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "Search";
+    };    
+    "Dlg Accessibility" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "HighlightImages" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          "HighlightLinks" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "HighlightLinks" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: Bool
+            '';
+          };
+          "RecolorForeground" = mkOption {
+            type = nullOr (either str str);
+            default = "0x600000";
+            defaultText = "Code: true";
+            description = ''
+              
 
+              Type: Color
+            '';
+          };
+          "RecolorBackground" = mkOption {
+            type = nullOr (either str str);
+            default = "0xF0F0F0";
+            defaultText = "Code: true";
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "RecolorForeground" = mkOption {
-              type = nullOr (either str str);
-              default = "0x600000";
-              defaultText = "Code: true";
-              description = ''
+              Type: Color
+            '';
+          };
+          "BWThreshold" = mkOption {
+            type = nullOr (either str int);
+            default = 127;
+            description = ''
+              
 
+              Type: UInt
+              Min: 2
+              Max: 253
+            '';
+          };
+          "BWContrast" = mkOption {
+            type = nullOr (either str int);
+            default = 2;
+            description = ''
+              
 
-                Type: Color
-              '';
-            };
-            "RecolorBackground" = mkOption {
-              type = nullOr (either str str);
-              default = "0xF0F0F0";
-              defaultText = "Code: true";
-              description = ''
-
-
-                Type: Color
-              '';
-            };
-            "BWThreshold" = mkOption {
-              type = nullOr (either str int);
-              default = 127;
-              description = ''
-
-
-                Type: UInt
-                Min: 2
-                Max: 253
-              '';
-            };
-            "BWContrast" = mkOption {
-              type = nullOr (either str int);
-              default = 2;
-              description = ''
-
-
-                Type: UInt
-                Min: 2
-                Max: 6
-              '';
-            };
+              Type: UInt
+              Min: 2
+              Max: 6
+            '';
           };
         };
-        default = { };
-        description = "Dlg Accessibility";
       };
-    "Identity" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "IdentityAuthor" = mkOption {
-              type = nullOr (either str str);
-              default = "userString";
-              defaultText = "Code: true";
-              description = ''
+      default = {};
+      description = "Dlg Accessibility";
+    };    
+    "Identity" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "IdentityAuthor" = mkOption {
+            type = nullOr (either str str);
+            default = "userString";
+            defaultText = "Code: true";
+            description = ''
+              
 
-
-                Type: String
-              '';
-            };
+              Type: String
+            '';
           };
         };
-        default = { };
-        description = "Identity";
       };
+      default = {};
+      description = "Identity";
+    };    
   };
-  config = mkIf cfg.enable { programs.plasma.files."okularrc" = cfg.okular; };
+  config = mkIf cfg.enable {
+    programs.plasma.files."okularrc" = cfg.okular;
+  };
 }

@@ -165,6 +165,8 @@ func createModule(kcfg []byte, name string) {
 		log.Fatal(err)
 	}
 
+	mergeDuplicates(doc)
+
 	if doc.KcfgFile.Name == "" {
 		if _, ok := noKcfg[name]; !ok {
 			log.Printf("%s: No config file name provided in the .kfg file or via --file flag", name)
@@ -194,6 +196,24 @@ func createModule(kcfg []byte, name string) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func mergeDuplicates(doc Kcfg) {
+	var groups = map[string]Group{}
+	for _, group := range doc.Groups {
+		if _, ok := groups[group.Name]; ok {
+			entries := groups[group.Name].Entries
+			entries = append(entries, group.Entries...)
+			continue
+		}
+		groups[group.Name] = group
+	}
+
+	var final = []Group{}
+	for _, group := range groups {
+		final = append(final, group)
+	}
+	doc.Groups = final
 }
 
 func getModuleName(name string) string {

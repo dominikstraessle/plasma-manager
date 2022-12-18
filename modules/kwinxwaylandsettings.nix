@@ -2,31 +2,36 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.kwin = {
-    "Xwayland" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            XwaylandEavesdrops = mkOption {
-              type = nullOr
-                (either str (enum [ "None" "Modifiers" "Combinations" "All" ]));
-              default = "None";
-              description = ''
+  options.programs.plasma.kwin = { 
+    "Xwayland" = with types; mkOption {
+      type = submodule {
+        options = { 
+          XwaylandEavesdrops = mkOption {
+            type = nullOr (either str (enum [ 
+              "None"
+              "Modifiers"
+              "Combinations"
+              "All"
+            ]));
+            default = "None";
+            description = ''
+              
 
-
-                Type: Enum
-                Choices: 
-                  - None
-                  - Modifiers
-                  - Combinations
-                  - All
-              '';
-            };
+              Type: Enum
+              Choices: 
+                - None
+                - Modifiers
+                - Combinations
+                - All
+            '';
           };
         };
-        default = { };
-        description = "Xwayland";
       };
+      default = {};
+      description = "Xwayland";
+    };    
   };
-  config = mkIf cfg.enable { programs.plasma.files."kwinrc" = cfg.kwin; };
+  config = mkIf cfg.enable {
+    programs.plasma.files."kwinrc" = cfg.kwin;
+  };
 }
