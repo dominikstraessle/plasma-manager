@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <include>qfont.h</include>
+  <include>qsize.h</include>
+  <include>QDir</include>
+  <include>kuser.h</include>
+  <include>QStandardPaths</include>
+  <include>QFontDatabase</include>
+  <include>QUrl</include>
+  <include>QStyle</include>
+  <include>QApplication</include>
+  <kcfgfile name="konversationrc" />
+
+  <!--
+  See comment for ShowLauncherEntryCount
+  <signal name="showLauncherEntryCountChanged">
+    <argument type="Bool">ShowLauncherEntryCount</argument>
+  </signal>
+  -->
+
+  <group name="Appearance">
+    <entry key="ShowMenuBar" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TextFont" type="Font">
+      <default code="true">QFontDatabase::systemFont(QFontDatabase::GeneralFont)</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ListFont" type="Font">
+      <default code="true">QFontDatabase::systemFont(QFontDatabase::GeneralFont)</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabFont" type="Font">
+      <default code="true">QFontDatabase::systemFont(QFontDatabase::GeneralFont)</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="CustomTextFont" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="CustomListFont" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="CustomTabFont" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="Timestamping" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowDate" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowDateLine" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TimestampFormat" type="String">
+      <default>hh:mm</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowBacklog" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="BacklogLines" type="Int">
+      <default>10</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowNickList" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowQuickButtons" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowQuickButtonsInContextMenu" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+<!-- quick buttons are handled outside of KConfigXT for now (Eisfuchs)
+    <entry key="QuickButtons" type="StringList" name="ButtonList">
+      <default code="true">(QStringList() &lt;&lt; "Op,/OP %u%n"&lt;&lt;"DeOp,/DEOP %u%n"&lt;&lt;"WhoIs,/WHOIS %s,%%u%n"&lt;&lt;"Version,/CTCP %s,%%u VERSION%n"&lt;&lt;"Kick,/KICK %u%n"&lt;&lt;"Kick,/KICK %u%n"&lt;&lt;"Ban,/BAN %u%n"&lt;&lt;"Part,/PART %c Leaving...%n"&lt;&lt;"Quit,/QUIT Leaving...%n")</default>
+    </entry>  -->
+    <entry key="ShowModeButtons" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="CloseButtons" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutoUserhost" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="UseSpacing" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="Spacing" type="Int">
+      <default>QApplication::style()->layoutSpacing(QSizePolicy::DefaultType, QSizePolicy::DefaultType, Qt::Horizontal)</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="Margin" type="Int">
+      <default>QApplication::style()->pixelMetric(QStyle::PM_LayoutLeftMargin)</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="BackgroundImage" type="Url">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="IrcColorCode$(colorNumber)" type="Color">
+      <parameter name="colorNumber" type="UInt" max="15"/>
+      <default param="0">#ffffff</default>
+      <default param="1">#000000</default>
+      <default param="2">#000080</default>
+      <default param="3">#008000</default>
+      <default param="4">#ff0000</default>
+      <default param="5">#a52a2a</default>
+      <default param="6">#800080</default>
+      <default param="7">#ff8000</default>
+      <default param="8">#808000</default>
+      <default param="9">#00ff00</default>
+      <default param="10">#008080</default>
+      <default param="11">#00ffff</default>
+      <default param="12">#0000ff</default>
+      <default param="13">#ffc0cb</default>
+      <default param="14">#a0a0a0</default>
+      <default param="15">#c0c0c0</default>
+    </entry>
+    <entry key="AllowColorCodes" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="NickColor$(nickNumber)" type="Color">
+      <parameter name="nickNumber" type="UInt" max="9"/>
+      <default param="0">#E90E7F</default>
+      <default param="1">#8E55E9</default>
+      <default param="2">#B30E0E</default>
+      <default param="3">#18B33C</default>
+      <default param="4">#58ADB3</default>
+      <default param="5">#9E54B3</default>
+      <default param="6">#B39875</default>
+      <default param="7">#3176B3</default>
+      <default param="8">#000001</default>
+    </entry>
+    <entry key="UseColoredNicks" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowTabBarCloseButton" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowTopic" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowNicknameBox" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="UseBoldNicks" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="UseLiteralModes" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="FocusNewQueries" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowIRCViewScrollBar" type="Bool">
+      <default>true</default>
+      <label>Hide the scrollbar</label>
+    </entry>
+  </group>
+  <group name="General Options">
+    <entry key="SpellChecking" type="Bool">
+      <default>false</default>
+      <whatsthis>Enable if you want all the IRC input lines to check your spelling as you type</whatsthis>
+    </entry>
+    <entry key="CustomVersionReplyEnabled" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry key="CustomVersionReply" type="String">
+    </entry>
+    <entry key="UseMultiRowInputBox" type="Bool">
+      <default>false</default>
+      <whatsthis>Enabling this will cause the input box to grow vertically when it fills up.</whatsthis>
+    </entry>
+    <entry key="CommandChar" type="String">
+      <default>/</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="PreShellCommand" type="String">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowTrayIcon" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TrayNotify" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TrayNotifyOnlyOwnNick" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TrayNotifyBlink" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="HideToTrayOnStartup" type="Bool">
+      <default>false</default>
+      <label>Start with hidden main window</label>
+    </entry>
+    <entry key="ShowBackgroundImage" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="MultilineEditGeometry" type="Size" name="MultilineEditSize">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="LogfileBufferSize" type="Int">
+      <default>100</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ScrollbackMax" type="Int">
+      <default>1000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutoWhoNicksLimit" type="Int">
+      <default>200</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutoWhoContinuousEnabled" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutoWhoContinuousInterval" type="Int">
+      <default>90</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowRealNames" type="Bool">
+      <default>false</default>
+      <label>&amp;Show real names next to nicknames</label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ChannelDoubleClickAction" type="String">
+      <default>/QUERY %u%n</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="NotifyDoubleClickAction" type="String">
+      <default>/QUERY %u%n</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="Beep" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="RawLog" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="VersionReply" type="String">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="MaximumLag" type="Int" name="MaximumLagTime">
+      <default>180</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="RedirectServerAndAppMsgToStatusPane" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="DisableNotifyWhileAway" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutoAwayPollInterval" type="Int">
+      <default>10</default>
+      <min>10</min>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutomaticRememberLine" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutomaticRememberLineOnlyOnTextChange" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="MarkerLineInAllViews" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Sort Nicknames">
+<!-- done outside of KConfigXT (Eisfuchs)
+    <entry key="AdminValue" type="Int">
+      <default>1</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OwnerValue" type="Int">
+      <default>2</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OperatorValue" type="Int" name="OpValue">
+      <default>4</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="HalfopValue" type="Int">
+      <default>8</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="VoiceValue" type="Int">
+      <default>16</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AwayValue" type="Int">
+      <default>32</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="NoRightsValue" type="Int">
+      <default>64</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+-->
+    <entry key="SortByStatus" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SortByActivity" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SortCaseInsensitive" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="LauncherEntry">
+   <!--
+    kconfigcompiler 5.91 cannot generate code with signals for ItemAccessors=true
+    So Preferences currently manually adds the entry for now.
+    <entry key="ShowLauncherEntryCount" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+      <emit signal="showLauncherEntryCountChanged"/>
+    </entry>
+    -->
+    <entry name="LauncherEntryCountMode" type="Enum">
+      <label></label>
+      <choices>
+        <choice name="CountEvents">
+          <label>All events</label>
+        </choice>
+        <choice name="CountChannelAndQueries">
+          <label>Channels and queries with events</label>
+        </choice>
+        <default>CountEvents</default>
+      </choices>
+    </entry>
+    <entry key="LauncherEntryCountUseNick" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="LauncherEntryCountUseHighlights" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="LauncherEntryCountUsePrivate" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="LauncherEntryCountUseMsgs" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="LauncherEntryCountUseSystem" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="LauncherEntryCountUseChannelEvents" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="OSD">
+    <entry key="UseOSD" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowOwnNick" type="Bool" name="OSDShowOwnNick">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowChannel" type="Bool" name="OSDShowChannel">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowQuery" type="Bool" name="OSDShowQuery">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowChannelEvent" type="Bool" name="OSDShowChannelEvent">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OSDFont" type="Font">
+      <default code="true">QFontDatabase::systemFont(QFontDatabase::GeneralFont)</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OSDUseCustomColors" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OSDDuration" type="Int">
+      <default>3000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OSDScreen" type="Int">
+      <default>0</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OSDDrawShadow" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OffsetX" type="Int" name="OSDOffsetX">
+      <default>30</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OffsetY" type="Int" name="OSDOffsetY">
+      <default>50</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="Alignment" type="Int" name="OSDAlignment">
+      <default>0</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OSDTextColor" type="Color">
+      <default>#ffffff</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OSDBackgroundColor" type="Color">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OSDCheckDesktopLock" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Notify List">
+    <entry key="NotifyDelay" type="Int">
+      <default>20</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="UseNotify" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="OnStartup" type="Bool" name="OpenWatchedNicksAtStartup">
+      <default>false</default>
+      <label>Open Watched Nicks tab at application startup</label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Highlight List">
+    <entry key="HighlightSoundsEnabled" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="HighlightNick" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="HighlightNickColor" type="Color">
+      <default>#FF0000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="HighlightOwnLines" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="HighlightOwnLinesColor" type="Color">
+      <default>#ff0000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="Highlight" type="String">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Aliases">
+    <entry key="AliasList" type="StringList">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Nick Completion">
+    <entry key="Mode" type="Int" name="NickCompletionMode">
+      <default>0</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SuffixStart" type="String" name="NickCompleteSuffixStart">
+      <default>: </default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SuffixMiddle" type="String" name="NickCompleteSuffixMiddle">
+      <default> </default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="PrefixCharacter" type="String">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="CaseSensitive" type="Bool" name="NickCompletionCaseSensitive">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="DCC Settings">
+    <entry key="BufferSize" type="Int" name="DccBufferSize">
+      <default>16384</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="MethodToGetOwnIp" type="Int" name="DccMethodToGetOwnIp">
+      <default>1</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SpecificOwnIp" type="String" name="DccSpecificOwnIp">
+      <default>0.0.0.0</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SpecificSendPorts" type="Bool" name="DccSpecificSendPorts">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SendPortsFirst" type="Int"  name="DccSendPortsFirst">
+      <default>1026</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SendPortsLast" type="UInt" name="DccSendPortsLast">
+      <default>7000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SpecificChatPorts" type="Bool" name="DccSpecificChatPorts">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ChatPortsFirst" type="Int" name="DccChatPortsFirst">
+      <default>1026</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ChatPortsLast" type="UInt" name="DccChatPortsLast">
+      <default>7000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AddPartner" type="Bool" name="DccAddPartner">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="CreateFolder" type="Bool" name="DccCreateFolder">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SpaceToUnderscore" type="Bool" name="DccSpaceToUnderscore">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutoGet" type="Bool" name="DccAutoGet">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutoResume" type="Bool" name="DccAutoResume">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ChatAutoAccept" type="Bool" name="DccChatAutoAccept">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="FastSend" type="Bool" name="DccFastSend">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SendTimeout" type="Int" name="DccSendTimeout">
+      <default>180</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="IPv4Fallback" type="Bool" name="DccIPv4Fallback">
+      <default>false</default>
+    </entry>
+    <entry key="IPv4FallbackIface" type="String" name="DccIPv4FallbackIface">
+      <default>eth0</default>
+    </entry>
+    <entry key="PassiveSend" type="Bool" name="DccPassiveSend">
+      <default>false</default>
+    </entry>
+    <entry key="UPnP" type="Bool" name="DccUPnP">
+      <default>false</default>
+    </entry>
+    <entry key="ColumnWidths" type="IntList" name="DccColumnWidths">
+      <default>47,90,103,173,70,87,157,87,96,165</default>
+    </entry>
+    <entry key="ColumnOrder" type="IntList" name="DccColumnOrders">
+      <default>0,1,2,3,4,5,6,7,8,9</default>
+    </entry>
+    <entry key="ColumnVisible" type="IntList" name="DccColumnVisibles">
+      <default>1,1,1,1,1,1,1,1,1,1</default>
+    </entry>
+    <entry key="ColumnSorted" type="Int" name="DccColumnSorted">
+      <default>1</default>
+    </entry>
+    <entry key="ColumnSortDescending" type="Bool" name="DccColumnSortDescending">
+      <default>true</default>
+    </entry>
+  </group>
+  <group name="Path Settings">
+    <entry key="LogfilePath" type="Url">
+      <default code="true">QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+QLatin1String("/logs"))</default>
+    </entry>
+    <entry key="DccPath" type="Url">
+      <default code="true">QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation))</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Flags">
+    <entry key="Log" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="LowerLog" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AddHostnameToLog" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry key="PrivateOnly" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabPlacement" type="Enum">
+      <label></label>
+      <whatsthis></whatsthis>
+      <choices>
+        <choice name="Top" />
+        <choice name="Bottom" />
+        <choice name="Left" />
+      </choices>
+      <default>Left</default>
+    </entry>
+    <entry key="MiddleClickClose" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry key="UseClickableNicks" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry key="BringToFront" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="HideUnimportantEvents" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="HideUnimportantEventsExcludeActive" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="HideUnimportantEventsExcludeActiveThreshold" type="Int">
+      <default>1</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="DisableExpansion" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="AutoReconnect" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ReconnectDelay" type="UInt">
+      <default>10</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ReconnectCount" type="UInt">
+      <default>0</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="EncryptionType" type="UInt">
+        <default>0</default>
+        <label></label>
+        <whatsthis></whatsthis>
+    </entry>
+    <entry key="FixedMOTD" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="SkipMOTD" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="ShowServerList" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="InputFieldsBackgroundColor" type="Bool" >
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Web Browser Settings">
+    <entry key="UseCustomBrowser" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="WebBrowserCmd" type="String">
+      <default>firefox '%u'</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="External Log Viewer">
+    <entry key="UseExternalLogViewer" type="Bool">
+        <default>false</default>
+        <label></label>
+        <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Themes">
+    <entry key="IconTheme" type="String">
+      <default>default</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="PreferencesDialog">
+    <entry name="PreferencesDialogSize" key="Size" type="Size">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="LastActiveModule" type="Int">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="ServerListDialog">
+    <entry name="ServerListDialogSize" key="Size" type="Size">
+      <default></default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Message Text Colors">
+    <entry name="$(colorName)Color" type="Color" key="$(colorName)">
+      <parameter name="colorName" type="Enum">
+        <values>
+          <value>ActionMessage</value>
+          <value>BacklogMessage</value>
+          <value>ChannelMessage</value>
+          <value>CommandMessage</value>
+          <value>QueryMessage</value>
+          <value>ServerMessage</value>
+          <value>Time</value>
+          <value>Action</value>
+          <value>TextViewBackground</value>
+          <value>AlternateBackground</value>
+          <value>Hyperlink</value>
+        </values>
+      </parameter>
+      <default param="ActionMessage">#0000ff</default>
+      <default param="BacklogMessage">#aaaaaa</default>
+      <default param="ChannelMessage">#000000</default>
+      <default param="CommandMessage">#960096</default>
+      <default param="QueryMessage">#000000</default>
+      <default param="ServerMessage">#91640a</default>
+      <default param="Time">#709070</default>
+      <default param="Action">#0000ff</default>
+      <default param="TextViewBackground">#ffffff</default>
+      <default param="AlternateBackground">#EDF4F9</default>
+      <default param="Hyperlink">#0000ff</default>
+    </entry>
+  </group>
+  <group name="Tab Notifications">
+    <entry key="TabNotificationsText" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsLeds" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsSystem" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsSystemColor" type="Color">
+      <default>#C3C300</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsMsgs" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsMsgsColor" type="Color">
+      <default>#008000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsPrivate" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsPrivateColor" type="Color">
+      <default>#800000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsEvents" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsEventsColor" type="Color">
+      <default>#008000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsNick" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsNickColor" type="Color">
+      <default>#FF0000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsHighlights" type="Bool">
+      <default>true</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsHighlightsColor" type="Color">
+      <default>#FF0000</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+    <entry key="TabNotificationsOverride" type="Bool">
+      <default>false</default>
+      <label></label>
+      <whatsthis></whatsthis>
+    </entry>
+  </group>
+  <group name="Sort Nicknames">
+    <entry key="SortOrder" type="String">
+      <default>qpohv-</default>
+      <label></label>
+    </entry>
+  </group>
+  <group name="QueueRates">
+    <entry name="queueRate$(QueueIndex)" type="IntList" key="EmptyingRate $(QueueIndex)">
+        <!-- kconfig_compiler really should do this for me... -->
+        <code>
+  const QList&lt;int&gt; defaultRate[3] = {
+    { 15, 60, 0 },
+    { 40, 60, 0 },
+    {  1,  1, 0 },
+  };
+        </code>
+        <parameter name="QueueIndex" type="Int" max="2"/>
+        <default code="true">defaultRate[$(QueueIndex)]</default>
+    </entry>
+    <entry key="ShowQueueTuner" type="Bool">
+        <default>false</default>
+    </entry>
+  </group>
+  <group name="Proxy">
+    <entry key="ProxyEnabled" type="Bool">
+        <default>false</default>
+        <label></label>
+    </entry>
+    <entry key="ProxyType" type="Enum">
+        <choices>
+            <choice name="Socksv5Proxy" />
+            <choice name="HTTPProxy" />
+        </choices>
+        <default>Socksv5Proxy</default>
+        <label></label>
+    </entry>
+    <entry key="ProxyAddress" type="String">
+        <default></default>
+        <label></label>
+    </entry>
+    <entry key="ProxyPort" type="Int">
+        <default>8080</default>
+        <label></label>
+    </entry>
+    <entry key="ProxyUsername" type="String">
+        <default></default>
+        <label></label>
+    </entry>
+    <entry key="ProxyPassword" type="String">
+        <default></default>
+        <label></label>
+    </entry>
+  </group>
+</kcfg>

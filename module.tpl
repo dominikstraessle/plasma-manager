@@ -2,7 +2,7 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma."{{ .Name }}" = { {{ range .Groups }}
+  options.programs.plasma.{{ .Name }} = { {{ range .Groups }}
     "{{ .Name }}" = with types; mkOption {
       type = submodule {
         options = { {{ range .Entries }}
@@ -28,6 +28,6 @@ in {
     };    {{ end }}
   };
   config = mkIf cfg.enable {
-    programs.plasma.files."{{ .KcfgFile.Name }}" = cfg.spectacle;
+    programs.plasma.files."{{ .KcfgFile.Name }}" = cfg.{{ .Name }};
   };
 }

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name="neochatrc" />
+  <group name="General">
+    <entry name="CollapsedSections" type="IntList">
+      <label>Collapsed sections in the room list</label>
+    </entry>
+    <entry name="OpenRoom" type="String">
+      <label>Latest opened room</label>
+    </entry>
+    <entry name="ActiveConnection" type="String">
+      <label>Latest active connection</label>
+    </entry>
+    <entry name="ColorScheme" type="String">
+      <label>Color scheme</label>
+    </entry>
+    <entry name="Blur" type="bool">
+      <label>Make NeoChat blurry</label>
+      <default>false</default>
+    </entry>
+    <entry name="Transparency" type="Double">
+      <label>Background transparency value</label>
+      <default>0.3</default>
+    </entry>
+    <entry name="ShowNotifications" type="bool">
+      <label>Show notifications</label>
+      <default>true</default>
+    </entry>
+    <entry name="MergeRoomList" type="bool">
+      <label>Merge Room Lists</label>
+      <default>false</default>
+    </entry>
+    <entry name="ShowLeaveJoinEvent" type="bool">
+      <label>Show leave and join events in the timeline</label>
+      <default>true</default>
+    </entry>
+    <entry name="AllowQuickEdit" type="bool">
+      <label>Use s/text/replacement syntax to edit your last message.</label>
+      <default>false</default>
+    </entry>
+    <entry name="ShowLocalMessagesOnRight" type="bool">
+      <label>"Show your messages on the right</label>
+      <default>true</default>
+    </entry>
+    <entry name="RoomListPageWidth" type="int">
+      <default>-1</default>
+    </entry>
+    <entry name="RoomDrawerWidth" type="int">
+      <default>-1</default>
+    </entry>
+    <entry name="TypingNotifications" type="bool">
+      <default>true</default>
+    </entry>
+    <entry name="AutoRoomInfoDrawer" type="bool">
+      <label>Automatic Hide/Unhide Room Information</label>
+      <default>true</default>
+    </entry>
+    <entry name="DeveloperTools" type="bool">
+      <label>Enable developer tools</label>
+      <default>false</default>
+    </entry>
+    <entry name="LastSaveDirectory" type="String">
+      <label>Directory last used for saving a file</label>
+    </entry>
+  </group>
+  <group name="Timeline">
+    <entry name="ShowAvatarInTimeline" type="bool">
+      <label>Show avatar in the timeline</label>
+      <default>true</default>
+    </entry>
+    <entry name="CompactLayout" type="bool">
+      <label>Use a compact layout</label>
+      <default>false</default>
+    </entry>
+    <entry name="ShowRename" type="bool">
+      <label>Show rename events in the timeline</label>
+      <default>true</default>
+    </entry>
+    <entry name="ShowAvatarUpdate" type="bool">
+      <label>Show avatar update events in the timeline</label>
+      <default>true</default>
+    </entry>
+    <entry name="ShowDeletedMessages" type="bool">
+      <label>Show deleted messages in the timeline</label>
+      <default>true</default>
+    </entry>
+    <entry name="ShowLinkPreview" type="bool">
+      <label>Show preview of the links in the chat messages</label>
+    </entry>
+    <entry name="SystemTray" type="bool">
+      <label>Close NeoChat to system tray</label>
+      <default>true</default>
+    </entry>
+    <entry name="MinimizeToSystemTrayOnStartup" type="bool">
+      <label>Minimize to system tray on startup</label>
+      <default>false</default>
+    </entry>
+    <entry name="ShowFancyEffects" type="bool">
+      <label>Show Fancy Effects</label>
+      <default>true</default>
+    </entry>
+  </group>
+  <group name="RoomDrawer">
+    <entry name="ShowAvatarInRoomDrawer" type="bool">
+      <label>Show avatar in the room drawer</label>
+      <default>true</default>
+    </entry>
+  </group>
+  <group name="NetworkProxy">
+    <entry name="ProxyType" type="Enum">
+      <label>The type of proxy used by the application.</label>
+      <choices>
+        <choice name="System">
+          <label>System Default</label>
+        </choice>
+        <choice name="HTTP">
+          <label>HTTP</label>
+        </choice>
+        <choice name="Socks5">
+          <label>Socks5</label>
+        </choice>
+        <default>System</default>
+      </choices>
+    </entry>
+    <entry name="ProxyHost" type="String">
+      <label>IP or hostname of the proxy</label>
+      <default>127.0.0.1</default>
+    </entry>
+    <entry name="ProxyPort" type="int">
+      <label>The port number of the proxy</label>
+      <default>1080</default>
+    </entry>
+    <entry name="ProxyUser" type="String">
+      <label>The user of the proxy</label>
+      <default></default>
+    </entry>
+    <entry name="ProxyPassword" type="Password">
+      <label>The password of the proxy</label>
+      <default></default>
+    </entry>
+  </group>
+</kcfg>
+

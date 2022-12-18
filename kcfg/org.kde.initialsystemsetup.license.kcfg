@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg
+	xmlns="http://www.kde.org/standards/kcfg/1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+
+	<kcfgfile name="org_kde_initialsystemsetup_licenserc" />
+
+	<group name="General">
+		<entry name="Format" type="Enum">
+			<label>
+				This tells KISS what format the license file is in, which will affect rendering.
+			</label>
+			<default>PlainText</default>
+			<choices>
+				<choice name="PlainText"></choice>
+				<choice name="Markdown"></choice>
+				<choice name="HTML"></choice>
+			</choices>
+		</entry>
+		<entry name="LicenseTextFile" type="String">
+			<default>/dev/null</default>
+			<label>
+				This tells KISS which file contains the license text to display.
+			</label>
+		</entry>
+	</group>
+
+</kcfg>

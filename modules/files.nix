@@ -2,8 +2,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (import ../lib/kwriteconfig.nix { inherit lib pkgs; })
-    kWriteConfig;
+  inherit (import ../lib/kwriteconfig.nix { inherit lib pkgs; }) kWriteConfig;
 
   cfg = config.programs.plasma.files;
 
@@ -25,22 +24,18 @@ let
   ##############################################################################
   # Remove reserved options from a settings attribute set.
   settingsToConfig = settings:
-    lib.filterAttrs
-      (k: v: !(builtins.elem k [ "configGroupNesting" ]))
-      settings;
+    lib.filterAttrs (k: v: !(builtins.elem k [ "configGroupNesting" ]))
+    settings;
 
   ##############################################################################
   # Generate a script that will use kwriteconfig to update all
   # settings.
-  script = pkgs.writeScript "plasma-config"
-    (lib.concatStrings
-      (lib.mapAttrsToList
-        (file: settings: lib.concatMapStringsSep "\n"
-          (set: kWriteConfig file set.configGroupNesting (settingsToConfig set))
-          (builtins.attrValues settings))
-        cfg));
-in
-{
+  script = pkgs.writeScript "plasma-config" (lib.concatStrings
+    (lib.mapAttrsToList (file: settings:
+      lib.concatMapStringsSep "\n"
+      (set: kWriteConfig file set.configGroupNesting (settingsToConfig set))
+      (builtins.attrValues settings)) cfg));
+in {
   options.programs.plasma.files = lib.mkOption {
     type = with lib.types; attrsOf (attrsOf (submodule settingType));
     default = { };
@@ -52,8 +47,9 @@ in
   };
 
   config = lib.mkIf (builtins.length (builtins.attrNames cfg) > 0) {
-    home.activation.configure-plasma = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD ${script}
-    '';
+    home.activation.configure-plasma =
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD ${script}
+      '';
   };
 }
