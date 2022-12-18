@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/xml"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -11,7 +12,8 @@ import (
 )
 
 type Choice struct {
-	Name string `xml:"name,attr"`
+	Name  string `xml:"name,attr"`
+	Label string `xml:"label"`
 }
 
 type Choices struct {
@@ -41,9 +43,15 @@ type Group struct {
 	Entries []Entry `xml:"entry"`
 }
 
+type KcfgFile struct {
+	Name string `xml:"name,attr"`
+}
+
 type Kcfg struct {
-	XMLName xml.Name `xml:"kcfg"`
-	Groups  []Group  `xml:"group"`
+	Name     string
+	XMLName  xml.Name `xml:"kcfg"`
+	KcfgFile KcfgFile `xml:"kcfgfile"`
+	Groups   []Group  `xml:"group"`
 }
 
 func main() {
@@ -51,6 +59,27 @@ func main() {
 	var doc Kcfg
 	if err := dec.Decode(&doc); err != nil {
 		log.Fatal(err)
+	}
+
+	var file string
+	var name string
+
+	// flags declaration using flag package
+	flag.StringVar(&name, "name", "", "Name of the module option. E.g. spectacle, Kalendar, etc.")
+	flag.StringVar(&file, "file", "", "Specify config file name. E.g. plasmarc, spectaclerc, etc.")
+	flag.Parse() // after declaring flags we need to call it
+
+	if name == "" {
+		log.Fatal("Please provide a module name")
+	} else {
+		doc.Name = name
+	}
+
+	if doc.KcfgFile.Name == "" {
+		if file == "" {
+			log.Fatal("No config file name provided in the .kfg file or via --file flag")
+		}
+		doc.KcfgFile.Name = file
 	}
 
 	t, err := template.ParseFiles("options.gonix")
@@ -137,6 +166,16 @@ func (e Entry) HasMin() bool {
 func (e Entry) HasMax() bool {
 	return e.Max != ""
 }
+func (e Entry) HasChoices() bool {
+	if len(e.Choices.Choices) == 0 {
+		return false
+	}
+	return true
+}
+func (c Choice) HasLabel() bool {
+	return c.Label != ""
+}
+
 func (e Entry) IsCode() bool {
 	return e.Code == "true"
 }
