@@ -7,7 +7,7 @@ in {
       type = submodule {
         options = { 
           "defaultNameFilter" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -16,7 +16,7 @@ in {
             '';
           };
           "defaultFolder" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               

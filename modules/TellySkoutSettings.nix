@@ -39,7 +39,7 @@ in {
       type = submodule {
         options = { 
           xmltvFile = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               XMLTV file

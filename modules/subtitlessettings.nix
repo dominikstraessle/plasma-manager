@@ -16,7 +16,7 @@ in {
             '';
           };
           PreferredLanguage = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -43,7 +43,7 @@ in {
             '';
           };
           FontFamily = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Sans Serif";
             description = ''
               
@@ -61,7 +61,7 @@ in {
             '';
           };
           FontColor = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#FFFFFFFF";
             description = ''
               
@@ -70,7 +70,7 @@ in {
             '';
           };
           ShadowColor = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#80F0F0F0";
             description = ''
               
@@ -88,7 +88,7 @@ in {
             '';
           };
           BorderColor = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#FF000000";
             description = ''
               

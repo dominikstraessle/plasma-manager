@@ -3,50 +3,6 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.kwin = { 
-    "TouchEdges" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Top" = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "Right" = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "Bottom" = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "Left" = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "TouchEdges";
-    };    
     "Effect-windowview" = with types; mkOption {
       type = submodule {
         options = { 
@@ -107,6 +63,50 @@ in {
       };
       default = {};
       description = "TabBox";
+    };    
+    "TouchEdges" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "Top" = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "Right" = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "Bottom" = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "Left" = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "TouchEdges";
     };    
   };
   config = mkIf cfg.enable {

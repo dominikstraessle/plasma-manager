@@ -3,38 +3,6 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.ark = { 
-    "General" = with types; mkOption {
-      type = submodule {
-        options = { 
-          showEncryptionWarning = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether to show a warning when creating zip archives with AES encryption.
-
-              Type: Bool
-            '';
-          };
-          defaultOpenAction = mkOption {
-            type = nullOr (either str (enum [ 
-              "Preview"
-              "Open"
-            ]));
-            default = "Preview";
-            description = ''
-              Default action when opening archive entries.
-
-              Type: Enum
-              Choices: 
-                - Preview
-                - Open
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "General";
-    };    
     "Extraction" = with types; mkOption {
       type = submodule {
         options = { 
@@ -78,6 +46,38 @@ in {
       };
       default = {};
       description = "Extraction";
+    };    
+    "General" = with types; mkOption {
+      type = submodule {
+        options = { 
+          showEncryptionWarning = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether to show a warning when creating zip archives with AES encryption.
+
+              Type: Bool
+            '';
+          };
+          defaultOpenAction = mkOption {
+            type = nullOr (either str (enum [ 
+              "Preview"
+              "Open"
+            ]));
+            default = "Preview";
+            description = ''
+              Default action when opening archive entries.
+
+              Type: Enum
+              Choices: 
+                - Preview
+                - Open
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "General";
     };    
     "MainWindow" = with types; mkOption {
       type = submodule {

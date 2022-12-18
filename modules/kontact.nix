@@ -7,7 +7,7 @@ in {
       type = submodule {
         options = { 
           ActivePlugin = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "kontact_summaryplugin";
             description = ''
               
@@ -25,7 +25,7 @@ in {
             '';
           };
           ForcedStartupPlugin = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -79,7 +79,7 @@ in {
             '';
           };
           LastVersionSeen = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               

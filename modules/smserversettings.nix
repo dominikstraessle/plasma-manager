@@ -42,7 +42,7 @@ in {
             '';
           };
           excludeApps = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               Applications to be excluded from session

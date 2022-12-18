@@ -3,117 +3,19 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.akregator = { 
-    "View" = with types; mkOption {
+    "Advanced" = with types; mkOption {
       type = submodule {
         options = { 
-          "Hide Read Feeds" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
+          "Archive Backend" = mkOption {
+            type = nullOr str;
+            default = "metakit";
             description = ''
-              Hide feeds with no unread articles
-
-              Type: Bool
-            '';
-          };
-          "ShowMenuBar" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "Lock Feeds In Place" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Prevent feeds from being moved in the list
-
-              Type: Bool
-            '';
-          };
-          "Auto Expand Folders" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Auto-Expand folders with unread articles
-
-              Type: Bool
-            '';
-          };
-          "Show Quick Filter" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Show Quick Filter
-
-              Type: Bool
-            '';
-          };
-          "Status Filter" = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              Status Filter
-
-              Type: Int
-            '';
-          };
-          "Text Filter" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              Text Filter
+              Archive Backend
 
               Type: String
             '';
           };
-          "View Mode" = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              View Mode
-
-              Type: Int
-            '';
-          };
-          "Splitter 1 Sizes" = mkOption {
-            type = nullOr (either str (listOf int));
-            default = "225,650";
-            description = ''
-              Sizes for first splitter
-
-              Type: IntList
-            '';
-          };
-          "Splitter 2 Sizes" = mkOption {
-            type = nullOr (either str (listOf int));
-            default = "50,350";
-            description = ''
-              Sizes for second splitter
-
-              Type: IntList
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "View";
-    };    
-    "Security" = with types; mkOption {
-      type = submodule {
-        options = { 
-          CheckPhishingUrl = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          LoadExternalReferences = mkOption {
+          "Delay Mark Read" = mkOption {
             type = nullOr (either str bool);
             default = true;
             description = ''
@@ -122,16 +24,34 @@ in {
               Type: Bool
             '';
           };
+          "Mark Read Delay" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "Reset Quick Filter On Node Change" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
         };
       };
       default = {};
-      description = "Security";
+      description = "Advanced";
     };    
     "Appearance" = with types; mkOption {
       type = submodule {
         options = { 
           "Standard Font" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -140,7 +60,7 @@ in {
             '';
           };
           "Fixed Font" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -149,7 +69,7 @@ in {
             '';
           };
           "Serif Font" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -158,7 +78,7 @@ in {
             '';
           };
           "Sans Serif Font" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -176,7 +96,7 @@ in {
             '';
           };
           "ColorUnreadArticles" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#0000FF";
             description = ''
               
@@ -185,7 +105,7 @@ in {
             '';
           };
           "ColorNewArticles" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#FF0000";
             description = ''
               
@@ -194,7 +114,7 @@ in {
             '';
           };
           "GrantleeDirectory" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "5.2";
             description = ''
               
@@ -206,50 +126,6 @@ in {
       };
       default = {};
       description = "Appearance";
-    };    
-    "HTML Settings" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Fonts" = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "";
-            description = ''
-              
-
-              Type: StringList
-            '';
-          };
-          "MediumFontSize" = mkOption {
-            type = nullOr (either str int);
-            default = 12;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "MinimumFontSize" = mkOption {
-            type = nullOr (either str int);
-            default = 8;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "AccessKeyEnabled" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "HTML Settings";
     };    
     "Archive" = with types; mkOption {
       type = submodule {
@@ -304,130 +180,6 @@ in {
       };
       default = {};
       description = "Archive";
-    };    
-    "Network" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Concurrent Fetches" = mkOption {
-            type = nullOr (either str int);
-            default = 6;
-            description = ''
-              Concurrent Fetches
-
-              Type: Int
-            '';
-          };
-          "Use HTML Cache" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Use HTML Cache
-
-              Type: Bool
-            '';
-          };
-          "Custom UserAgent" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Network";
-    };    
-    "General" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Fetch On Startup" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Fetch on startup
-
-              Type: Bool
-            '';
-          };
-          "Mark All Feeds Read On Startup" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Mark all feeds as read on startup
-
-              Type: Bool
-            '';
-          };
-          "Use Interval Fetch" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Use interval fetching
-
-              Type: Bool
-            '';
-          };
-          "Auto Fetch Interval" = mkOption {
-            type = nullOr (either str int);
-            default = 30;
-            description = ''
-              Interval for autofetching
-
-              Type: Int
-            '';
-          };
-          "Use Notifications" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Use notifications
-
-              Type: Bool
-            '';
-          };
-          "Show Tray Icon" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Show tray icon
-
-              Type: Bool
-            '';
-          };
-          "Show Unread In Taskbar" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Show Unread In Taskbar
-
-              Type: Bool
-            '';
-          };
-          "Disable Introduction" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "Disable Save As Notification" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "General";
     };    
     "Browser" = with types; mkOption {
       type = submodule {
@@ -487,7 +239,7 @@ in {
             '';
           };
           "External Browser Custom Command" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "firefox %u";
             description = ''
               
@@ -578,37 +330,82 @@ in {
       default = {};
       description = "Columns";
     };    
-    "Advanced" = with types; mkOption {
+    "General" = with types; mkOption {
       type = submodule {
         options = { 
-          "Archive Backend" = mkOption {
-            type = nullOr (either str str);
-            default = "metakit";
+          "Fetch On Startup" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
             description = ''
-              Archive Backend
+              Fetch on startup
 
-              Type: String
+              Type: Bool
             '';
           };
-          "Delay Mark Read" = mkOption {
+          "Mark All Feeds Read On Startup" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Mark all feeds as read on startup
+
+              Type: Bool
+            '';
+          };
+          "Use Interval Fetch" = mkOption {
             type = nullOr (either str bool);
             default = true;
+            description = ''
+              Use interval fetching
+
+              Type: Bool
+            '';
+          };
+          "Auto Fetch Interval" = mkOption {
+            type = nullOr (either str int);
+            default = 30;
+            description = ''
+              Interval for autofetching
+
+              Type: Int
+            '';
+          };
+          "Use Notifications" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Use notifications
+
+              Type: Bool
+            '';
+          };
+          "Show Tray Icon" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show tray icon
+
+              Type: Bool
+            '';
+          };
+          "Show Unread In Taskbar" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show Unread In Taskbar
+
+              Type: Bool
+            '';
+          };
+          "Disable Introduction" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               
 
               Type: Bool
             '';
           };
-          "Mark Read Delay" = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "Reset Quick Filter On Node Change" = mkOption {
+          "Disable Save As Notification" = mkOption {
             type = nullOr (either str bool);
             default = false;
             description = ''
@@ -620,7 +417,210 @@ in {
         };
       };
       default = {};
-      description = "Advanced";
+      description = "General";
+    };    
+    "HTML Settings" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "Fonts" = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "";
+            description = ''
+              
+
+              Type: StringList
+            '';
+          };
+          "MediumFontSize" = mkOption {
+            type = nullOr (either str int);
+            default = 12;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "MinimumFontSize" = mkOption {
+            type = nullOr (either str int);
+            default = 8;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "AccessKeyEnabled" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "HTML Settings";
+    };    
+    "Network" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "Concurrent Fetches" = mkOption {
+            type = nullOr (either str int);
+            default = 6;
+            description = ''
+              Concurrent Fetches
+
+              Type: Int
+            '';
+          };
+          "Use HTML Cache" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Use HTML Cache
+
+              Type: Bool
+            '';
+          };
+          "Custom UserAgent" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Network";
+    };    
+    "Security" = with types; mkOption {
+      type = submodule {
+        options = { 
+          CheckPhishingUrl = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          LoadExternalReferences = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Security";
+    };    
+    "View" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "Hide Read Feeds" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Hide feeds with no unread articles
+
+              Type: Bool
+            '';
+          };
+          "ShowMenuBar" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "Lock Feeds In Place" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Prevent feeds from being moved in the list
+
+              Type: Bool
+            '';
+          };
+          "Auto Expand Folders" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Auto-Expand folders with unread articles
+
+              Type: Bool
+            '';
+          };
+          "Show Quick Filter" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show Quick Filter
+
+              Type: Bool
+            '';
+          };
+          "Status Filter" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              Status Filter
+
+              Type: Int
+            '';
+          };
+          "Text Filter" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              Text Filter
+
+              Type: String
+            '';
+          };
+          "View Mode" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              View Mode
+
+              Type: Int
+            '';
+          };
+          "Splitter 1 Sizes" = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "225,650";
+            description = ''
+              Sizes for first splitter
+
+              Type: IntList
+            '';
+          };
+          "Splitter 2 Sizes" = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "50,350";
+            description = ''
+              Sizes for second splitter
+
+              Type: IntList
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "View";
     };    
   };
   config = mkIf cfg.enable {

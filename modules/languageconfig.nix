@@ -94,7 +94,7 @@ in {
             '';
           };
           "todoMarkerWords" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "TODO FIXME";
             description = ''
               

@@ -7,7 +7,7 @@ in {
       type = submodule {
         options = { 
           diffAddedColor = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "green";
             description = ''
               Added color
@@ -16,7 +16,7 @@ in {
             '';
           };
           diffRemovedColor = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "red";
             description = ''
               Removed color
@@ -25,7 +25,7 @@ in {
             '';
           };
           diffModifiedColor = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "blue";
             description = ''
               Modified color
@@ -34,7 +34,7 @@ in {
             '';
           };
           colorForeground = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "yellow";
             description = ''
               color of the foreground
@@ -43,7 +43,7 @@ in {
             '';
           };
           gitBinPath = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               age of the project
@@ -52,7 +52,7 @@ in {
             '';
           };
           calendarType = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -61,7 +61,7 @@ in {
             '';
           };
           calendarTypeIndex = mkOption {
-            type = nullOr "";
+            type = nullOr (either str int);
             default = "";
             description = ''
               

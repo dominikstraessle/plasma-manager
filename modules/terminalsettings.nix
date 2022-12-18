@@ -7,8 +7,8 @@ in {
       type = submodule {
         options = { 
           "colorScheme" = mkOption {
-            type = nullOr ""cool-retro-term"";
-            default = ""cool-retro-term"";
+            type = nullOr str;
+            default = ''"cool-retro-term"'';
             description = ''
               
 
@@ -16,8 +16,8 @@ in {
             '';
           };
           "fontFamily" = mkOption {
-            type = nullOr ""Monospace"";
-            default = ""Monospace"";
+            type = nullOr str;
+            default = ''"Monospace"'';
             description = ''
               
 
@@ -25,8 +25,8 @@ in {
             '';
           };
           "fontSize" = mkOption {
-            type = nullOr "12";
-            default = "12";
+            type = nullOr (either str int);
+            default = 12;
             description = ''
               
 
@@ -34,8 +34,8 @@ in {
             '';
           };
           "windowOpacity" = mkOption {
-            type = nullOr "1";
-            default = "1";
+            type = nullOr (either str float);
+            default = 1.0;
             description = ''
               
 
@@ -52,8 +52,8 @@ in {
             '';
           };
           "blurWindow" = mkOption {
-            type = nullOr "false";
-            default = "false";
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               
 

@@ -28,20 +28,20 @@
     ./krunnersettingsbase.nix
     ./kstars.nix
     ./kwin.nix
-    ./kwincompositing_setting.nix
+#    ./kwincompositing_setting.nix
     ./kwindecorationsettings.nix
     ./kwinoptions_kdeglobals_settings.nix
-    ./kwinoptions_settings.nix
+#    ./kwinoptions_settings.nix
     ./kwinpluginssettings.nix
     ./kwinscreenedgeeffectsettings.nix
     ./kwinscreenedgescriptsettings.nix
-    ./kwinscreenedgesettings.nix
+#    ./kwinscreenedgesettings.nix
     ./kwinswitcheffectsettings.nix
     ./kwintabboxsettings.nix
-    ./kwintouchscreenedgeeffectsettings.nix
-    ./kwintouchscreenscriptsettings.nix
-    ./kwintouchscreensettings.nix
-    ./kwinxwaylandsettings.nix
+#    ./kwintouchscreenedgeeffectsettings.nix
+#    ./kwintouchscreenscriptsettings.nix
+#    ./kwintouchscreensettings.nix
+#    ./kwinxwaylandsettings.nix
     ./languageconfig.nix
     ./neochatconfig.nix
     ./nightcolorsettings.nix
@@ -49,14 +49,14 @@
     ./org.kde.initialsystemsetup.license.nix
     ./pimcommonautocorrection.nix
     ./skanpage_config.nix
-    ./skanpage_state.nix
+#    ./skanpage_state.nix
     ./smserversettings.nix
     ./spectacle.nix
     ./subtitlessettings.nix
     ./terminalsettings.nix
-    ./virtualdesktopssettings.nix
-    ./virtualkeyboardsettings.nix
-    ./workspaceoptions_kwinsettings.nix
+#    ./virtualdesktopssettings.nix
+#    ./virtualkeyboardsettings.nix
+#    ./workspaceoptions_kwinsettings.nix
   ];
 
   options.programs.plasma.enable = lib.mkEnableOption ''

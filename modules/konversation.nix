@@ -3,6 +3,23 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.konversation = { 
+    "Aliases" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "AliasList" = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "";
+            description = ''
+              
+
+              Type: StringList
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Aliases";
+    };    
     "Appearance" = with types; mkOption {
       type = submodule {
         options = { 
@@ -16,7 +33,7 @@ in {
             '';
           };
           "TextFont" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             defaultText = "Code: true";
             description = ''
@@ -26,7 +43,7 @@ in {
             '';
           };
           "ListFont" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             defaultText = "Code: true";
             description = ''
@@ -36,7 +53,7 @@ in {
             '';
           };
           "TabFont" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             defaultText = "Code: true";
             description = ''
@@ -100,7 +117,7 @@ in {
             '';
           };
           "TimestampFormat" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "hh:mm";
             description = ''
               
@@ -208,7 +225,7 @@ in {
             '';
           };
           "BackgroundImage" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -217,7 +234,7 @@ in {
             '';
           };
           "IrcColorCode$(colorNumber)" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#c0c0c0";
             description = ''
               
@@ -235,7 +252,7 @@ in {
             '';
           };
           "NickColor$(nickNumber)" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#000001";
             description = ''
               
@@ -320,726 +337,6 @@ in {
       default = {};
       description = "Appearance";
     };    
-    "General Options" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "SpellChecking" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "CustomVersionReplyEnabled" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "CustomVersionReply" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "UseMultiRowInputBox" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "CommandChar" = mkOption {
-            type = nullOr (either str str);
-            default = "/";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "PreShellCommand" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "ShowTrayIcon" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "TrayNotify" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "TrayNotifyOnlyOwnNick" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "TrayNotifyBlink" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "HideToTrayOnStartup" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Start with hidden main window
-
-              Type: Bool
-            '';
-          };
-          "ShowBackgroundImage" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "MultilineEditGeometry" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: Size
-            '';
-          };
-          "LogfileBufferSize" = mkOption {
-            type = nullOr (either str int);
-            default = 100;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "ScrollbackMax" = mkOption {
-            type = nullOr (either str int);
-            default = 1000;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "AutoWhoNicksLimit" = mkOption {
-            type = nullOr (either str int);
-            default = 200;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "AutoWhoContinuousEnabled" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "AutoWhoContinuousInterval" = mkOption {
-            type = nullOr (either str int);
-            default = 90;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "ShowRealNames" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              &Show real names next to nicknames
-
-              Type: Bool
-            '';
-          };
-          "ChannelDoubleClickAction" = mkOption {
-            type = nullOr (either str str);
-            default = "/QUERY %u%n";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "NotifyDoubleClickAction" = mkOption {
-            type = nullOr (either str str);
-            default = "/QUERY %u%n";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "Beep" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "RawLog" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "VersionReply" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "MaximumLag" = mkOption {
-            type = nullOr (either str int);
-            default = 180;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "RedirectServerAndAppMsgToStatusPane" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "DisableNotifyWhileAway" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "AutoAwayPollInterval" = mkOption {
-            type = nullOr (either str int);
-            default = 10;
-            description = ''
-              
-
-              Type: Int
-              Min: 10
-            '';
-          };
-          "AutomaticRememberLine" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "AutomaticRememberLineOnlyOnTextChange" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "MarkerLineInAllViews" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "General Options";
-    };    
-    "Sort Nicknames" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "SortByStatus" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "SortByActivity" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "SortCaseInsensitive" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Sort Nicknames";
-    };    
-    "LauncherEntry" = with types; mkOption {
-      type = submodule {
-        options = { 
-          LauncherEntryCountMode = mkOption {
-            type = nullOr (either str (enum [ 
-              "CountEvents"
-              "CountChannelAndQueries"
-            ]));
-            default = "";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - CountEvents: All events
-                - CountChannelAndQueries: Channels and queries with events
-            '';
-          };
-          "LauncherEntryCountUseNick" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "LauncherEntryCountUseHighlights" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "LauncherEntryCountUsePrivate" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "LauncherEntryCountUseMsgs" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "LauncherEntryCountUseSystem" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "LauncherEntryCountUseChannelEvents" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "LauncherEntry";
-    };    
-    "OSD" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "UseOSD" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ShowOwnNick" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ShowChannel" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ShowQuery" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ShowChannelEvent" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "OSDFont" = mkOption {
-            type = nullOr (either str str);
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
-            defaultText = "Code: true";
-            description = ''
-              
-
-              Type: Font
-            '';
-          };
-          "OSDUseCustomColors" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "OSDDuration" = mkOption {
-            type = nullOr (either str int);
-            default = 3000;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "OSDScreen" = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "OSDDrawShadow" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "OffsetX" = mkOption {
-            type = nullOr (either str int);
-            default = 30;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "OffsetY" = mkOption {
-            type = nullOr (either str int);
-            default = 50;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "Alignment" = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "OSDTextColor" = mkOption {
-            type = nullOr (either str str);
-            default = "#ffffff";
-            description = ''
-              
-
-              Type: Color
-            '';
-          };
-          "OSDBackgroundColor" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: Color
-            '';
-          };
-          "OSDCheckDesktopLock" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "OSD";
-    };    
-    "Notify List" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "NotifyDelay" = mkOption {
-            type = nullOr (either str int);
-            default = 20;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "UseNotify" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "OnStartup" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Open Watched Nicks tab at application startup
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Notify List";
-    };    
-    "Highlight List" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "HighlightSoundsEnabled" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "HighlightNick" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "HighlightNickColor" = mkOption {
-            type = nullOr (either str str);
-            default = "#FF0000";
-            description = ''
-              
-
-              Type: Color
-            '';
-          };
-          "HighlightOwnLines" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "HighlightOwnLinesColor" = mkOption {
-            type = nullOr (either str str);
-            default = "#ff0000";
-            description = ''
-              
-
-              Type: Color
-            '';
-          };
-          "Highlight" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Highlight List";
-    };    
-    "Aliases" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "AliasList" = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "";
-            description = ''
-              
-
-              Type: StringList
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Aliases";
-    };    
-    "Nick Completion" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Mode" = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "SuffixStart" = mkOption {
-            type = nullOr (either str str);
-            default = ": ";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "SuffixMiddle" = mkOption {
-            type = nullOr (either str str);
-            default = " ";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "PrefixCharacter" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "CaseSensitive" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Nick Completion";
-    };    
     "DCC Settings" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1062,7 +359,7 @@ in {
             '';
           };
           "SpecificOwnIp" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "0.0.0.0";
             description = ''
               
@@ -1206,7 +503,7 @@ in {
             '';
           };
           "IPv4FallbackIface" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "eth0";
             description = ''
               
@@ -1282,33 +579,22 @@ in {
       default = {};
       description = "DCC Settings";
     };    
-    "Path Settings" = with types; mkOption {
+    "External Log Viewer" = with types; mkOption {
       type = submodule {
         options = { 
-          "LogfilePath" = mkOption {
-            type = nullOr (either str str);
-            default = "QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+QLatin1String("/logs"))";
-            defaultText = "Code: true";
+          "UseExternalLogViewer" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               
 
-              Type: Url
-            '';
-          };
-          "DccPath" = mkOption {
-            type = nullOr (either str str);
-            default = "QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation))";
-            defaultText = "Code: true";
-            description = ''
-              
-
-              Type: Url
+              Type: Bool
             '';
           };
         };
       };
       default = {};
-      description = "Path Settings";
+      description = "External Log Viewer";
     };    
     "Flags" = with types; mkOption {
       type = submodule {
@@ -1506,10 +792,10 @@ in {
       default = {};
       description = "Flags";
     };    
-    "Web Browser Settings" = with types; mkOption {
+    "General Options" = with types; mkOption {
       type = submodule {
         options = { 
-          "UseCustomBrowser" = mkOption {
+          "SpellChecking" = mkOption {
             type = nullOr (either str bool);
             default = false;
             description = ''
@@ -1518,9 +804,333 @@ in {
               Type: Bool
             '';
           };
-          "WebBrowserCmd" = mkOption {
-            type = nullOr (either str str);
-            default = "firefox '%u'";
+          "CustomVersionReplyEnabled" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "CustomVersionReply" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "UseMultiRowInputBox" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "CommandChar" = mkOption {
+            type = nullOr str;
+            default = "/";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "PreShellCommand" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "ShowTrayIcon" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "TrayNotify" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "TrayNotifyOnlyOwnNick" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "TrayNotifyBlink" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "HideToTrayOnStartup" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Start with hidden main window
+
+              Type: Bool
+            '';
+          };
+          "ShowBackgroundImage" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "MultilineEditGeometry" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: Size
+            '';
+          };
+          "LogfileBufferSize" = mkOption {
+            type = nullOr (either str int);
+            default = 100;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "ScrollbackMax" = mkOption {
+            type = nullOr (either str int);
+            default = 1000;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "AutoWhoNicksLimit" = mkOption {
+            type = nullOr (either str int);
+            default = 200;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "AutoWhoContinuousEnabled" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "AutoWhoContinuousInterval" = mkOption {
+            type = nullOr (either str int);
+            default = 90;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "ShowRealNames" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              &Show real names next to nicknames
+
+              Type: Bool
+            '';
+          };
+          "ChannelDoubleClickAction" = mkOption {
+            type = nullOr str;
+            default = "/QUERY %u%n";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "NotifyDoubleClickAction" = mkOption {
+            type = nullOr str;
+            default = "/QUERY %u%n";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "Beep" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "RawLog" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "VersionReply" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "MaximumLag" = mkOption {
+            type = nullOr (either str int);
+            default = 180;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "RedirectServerAndAppMsgToStatusPane" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "DisableNotifyWhileAway" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "AutoAwayPollInterval" = mkOption {
+            type = nullOr (either str int);
+            default = 10;
+            description = ''
+              
+
+              Type: Int
+              Min: 10
+            '';
+          };
+          "AutomaticRememberLine" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "AutomaticRememberLineOnlyOnTextChange" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "MarkerLineInAllViews" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "General Options";
+    };    
+    "Highlight List" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "HighlightSoundsEnabled" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "HighlightNick" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "HighlightNickColor" = mkOption {
+            type = nullOr str;
+            default = "#FF0000";
+            description = ''
+              
+
+              Type: Color
+            '';
+          };
+          "HighlightOwnLines" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "HighlightOwnLinesColor" = mkOption {
+            type = nullOr str;
+            default = "#ff0000";
+            description = ''
+              
+
+              Type: Color
+            '';
+          };
+          "Highlight" = mkOption {
+            type = nullOr str;
+            default = "";
             description = ''
               
 
@@ -1530,12 +1140,72 @@ in {
         };
       };
       default = {};
-      description = "Web Browser Settings";
+      description = "Highlight List";
     };    
-    "External Log Viewer" = with types; mkOption {
+    "LauncherEntry" = with types; mkOption {
       type = submodule {
         options = { 
-          "UseExternalLogViewer" = mkOption {
+          LauncherEntryCountMode = mkOption {
+            type = nullOr (either str (enum [ 
+              "CountEvents"
+              "CountChannelAndQueries"
+            ]));
+            default = "";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - CountEvents: All events
+                - CountChannelAndQueries: Channels and queries with events
+            '';
+          };
+          "LauncherEntryCountUseNick" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "LauncherEntryCountUseHighlights" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "LauncherEntryCountUsePrivate" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "LauncherEntryCountUseMsgs" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "LauncherEntryCountUseSystem" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "LauncherEntryCountUseChannelEvents" = mkOption {
             type = nullOr (either str bool);
             default = false;
             description = ''
@@ -1547,30 +1217,299 @@ in {
         };
       };
       default = {};
-      description = "External Log Viewer";
+      description = "LauncherEntry";
     };    
-    "Themes" = with types; mkOption {
+    "Message Text Colors" = with types; mkOption {
       type = submodule {
         options = { 
-          "IconTheme" = mkOption {
-            type = nullOr (either str str);
-            default = "default";
+          "$(colorName)" = mkOption {
+            type = nullOr str;
+            default = "#0000ff";
+            description = ''
+              
+
+              Type: Color
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Message Text Colors";
+    };    
+    "Nick Completion" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "Mode" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "SuffixStart" = mkOption {
+            type = nullOr str;
+            default = ": ";
             description = ''
               
 
               Type: String
             '';
           };
+          "SuffixMiddle" = mkOption {
+            type = nullOr str;
+            default = " ";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "PrefixCharacter" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "CaseSensitive" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
         };
       };
       default = {};
-      description = "Themes";
+      description = "Nick Completion";
+    };    
+    "Notify List" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "NotifyDelay" = mkOption {
+            type = nullOr (either str int);
+            default = 20;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "UseNotify" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "OnStartup" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Open Watched Nicks tab at application startup
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Notify List";
+    };    
+    "OSD" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "UseOSD" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ShowOwnNick" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ShowChannel" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ShowQuery" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ShowChannelEvent" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "OSDFont" = mkOption {
+            type = nullOr str;
+            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            defaultText = "Code: true";
+            description = ''
+              
+
+              Type: Font
+            '';
+          };
+          "OSDUseCustomColors" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "OSDDuration" = mkOption {
+            type = nullOr (either str int);
+            default = 3000;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "OSDScreen" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "OSDDrawShadow" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "OffsetX" = mkOption {
+            type = nullOr (either str int);
+            default = 30;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "OffsetY" = mkOption {
+            type = nullOr (either str int);
+            default = 50;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "Alignment" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "OSDTextColor" = mkOption {
+            type = nullOr str;
+            default = "#ffffff";
+            description = ''
+              
+
+              Type: Color
+            '';
+          };
+          "OSDBackgroundColor" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: Color
+            '';
+          };
+          "OSDCheckDesktopLock" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "OSD";
+    };    
+    "Path Settings" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "LogfilePath" = mkOption {
+            type = nullOr str;
+            default = ''QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+QLatin1String("/logs"))'';
+            defaultText = "Code: true";
+            description = ''
+              
+
+              Type: Url
+            '';
+          };
+          "DccPath" = mkOption {
+            type = nullOr str;
+            default = "QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation))";
+            defaultText = "Code: true";
+            description = ''
+              
+
+              Type: Url
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Path Settings";
     };    
     "PreferencesDialog" = with types; mkOption {
       type = submodule {
         options = { 
           "Size" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -1592,11 +1531,106 @@ in {
       default = {};
       description = "PreferencesDialog";
     };    
+    "Proxy" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "ProxyEnabled" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ProxyType" = mkOption {
+            type = nullOr (either str (enum [ 
+              "Socksv5Proxy"
+              "HTTPProxy"
+            ]));
+            default = "Socksv5Proxy";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - Socksv5Proxy
+                - HTTPProxy
+            '';
+          };
+          "ProxyAddress" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "ProxyPort" = mkOption {
+            type = nullOr (either str int);
+            default = 8080;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "ProxyUsername" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "ProxyPassword" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Proxy";
+    };    
+    "QueueRates" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "EmptyingRate $(QueueIndex)" = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "defaultRate[$(QueueIndex)]";
+            defaultText = "Code: true";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          "ShowQueueTuner" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "QueueRates";
+    };    
     "ServerListDialog" = with types; mkOption {
       type = submodule {
         options = { 
           "Size" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -1609,22 +1643,40 @@ in {
       default = {};
       description = "ServerListDialog";
     };    
-    "Message Text Colors" = with types; mkOption {
+    "Sort Nicknames" = with types; mkOption {
       type = submodule {
         options = { 
-          "$(colorName)" = mkOption {
-            type = nullOr (either str str);
-            default = "#0000ff";
+          "SortByStatus" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               
 
-              Type: Color
+              Type: Bool
+            '';
+          };
+          "SortByActivity" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "SortCaseInsensitive" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
             '';
           };
         };
       };
       default = {};
-      description = "Message Text Colors";
+      description = "Sort Nicknames";
     };    
     "Tab Notifications" = with types; mkOption {
       type = submodule {
@@ -1657,7 +1709,7 @@ in {
             '';
           };
           "TabNotificationsSystemColor" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#C3C300";
             description = ''
               
@@ -1675,7 +1727,7 @@ in {
             '';
           };
           "TabNotificationsMsgsColor" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#008000";
             description = ''
               
@@ -1693,7 +1745,7 @@ in {
             '';
           };
           "TabNotificationsPrivateColor" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#800000";
             description = ''
               
@@ -1711,7 +1763,7 @@ in {
             '';
           };
           "TabNotificationsEventsColor" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#008000";
             description = ''
               
@@ -1729,7 +1781,7 @@ in {
             '';
           };
           "TabNotificationsNickColor" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#FF0000";
             description = ''
               
@@ -1747,7 +1799,7 @@ in {
             '';
           };
           "TabNotificationsHighlightsColor" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "#FF0000";
             description = ''
               
@@ -1769,12 +1821,12 @@ in {
       default = {};
       description = "Tab Notifications";
     };    
-    "Sort Nicknames" = with types; mkOption {
+    "Themes" = with types; mkOption {
       type = submodule {
         options = { 
-          "SortOrder" = mkOption {
-            type = nullOr (either str str);
-            default = "qpohv-";
+          "IconTheme" = mkOption {
+            type = nullOr str;
+            default = "default";
             description = ''
               
 
@@ -1784,22 +1836,12 @@ in {
         };
       };
       default = {};
-      description = "Sort Nicknames";
+      description = "Themes";
     };    
-    "QueueRates" = with types; mkOption {
+    "Web Browser Settings" = with types; mkOption {
       type = submodule {
         options = { 
-          "EmptyingRate $(QueueIndex)" = mkOption {
-            type = nullOr (either str (listOf int));
-            default = "defaultRate[$(QueueIndex)]";
-            defaultText = "Code: true";
-            description = ''
-              
-
-              Type: IntList
-            '';
-          };
-          "ShowQueueTuner" = mkOption {
+          "UseCustomBrowser" = mkOption {
             type = nullOr (either str bool);
             default = false;
             description = ''
@@ -1808,68 +1850,9 @@ in {
               Type: Bool
             '';
           };
-        };
-      };
-      default = {};
-      description = "QueueRates";
-    };    
-    "Proxy" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "ProxyEnabled" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ProxyType" = mkOption {
-            type = nullOr (either str (enum [ 
-              "Socksv5Proxy"
-              "HTTPProxy"
-            ]));
-            default = "Socksv5Proxy";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - Socksv5Proxy
-                - HTTPProxy
-            '';
-          };
-          "ProxyAddress" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "ProxyPort" = mkOption {
-            type = nullOr (either str int);
-            default = 8080;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "ProxyUsername" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "ProxyPassword" = mkOption {
-            type = nullOr (either str str);
-            default = "";
+          "WebBrowserCmd" = mkOption {
+            type = nullOr str;
+            default = "firefox '%u'";
             description = ''
               
 
@@ -1879,7 +1862,7 @@ in {
         };
       };
       default = {};
-      description = "Proxy";
+      description = "Web Browser Settings";
     };    
   };
   config = mkIf cfg.enable {

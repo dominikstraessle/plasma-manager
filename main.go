@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 	"text/template"
@@ -165,7 +166,7 @@ func createModule(kcfg []byte, name string) {
 		log.Fatal(err)
 	}
 
-	mergeDuplicates(doc)
+	doc = mergeDuplicates(doc)
 
 	if doc.KcfgFile.Name == "" {
 		if _, ok := noKcfg[name]; !ok {
@@ -198,7 +199,7 @@ func createModule(kcfg []byte, name string) {
 	}
 }
 
-func mergeDuplicates(doc Kcfg) {
+func mergeDuplicates(doc Kcfg) Kcfg {
 	var groups = map[string]Group{}
 	for _, group := range doc.Groups {
 		if _, ok := groups[group.Name]; ok {
@@ -213,7 +214,11 @@ func mergeDuplicates(doc Kcfg) {
 	for _, group := range groups {
 		final = append(final, group)
 	}
+	sort.SliceStable(final, func(i, j int) bool {
+		return final[i].Name < final[j].Name
+	})
 	doc.Groups = final
+	return doc
 }
 
 func getModuleName(name string) string {
@@ -223,22 +228,28 @@ func getModuleName(name string) string {
 	return moduleName
 }
 
+func AsString(text string) string {
+	if strings.Contains(text, `"`) {
+		return fmt.Sprintf(`''%s''`, text)
+	}
+	return fmt.Sprintf(`"%s"`, text)
+}
 func (e Entry) DefaultValue() string {
 	if e.Default.Code == "true" {
-		return fmt.Sprintf(`"%s"`, e.Default.Text)
+		return AsString(e.Default.Text)
 	}
-	switch e.Type {
-	case "Int", "Int64":
+	switch strings.ToLower(e.Type) {
+	case "int", "int64":
 		if _, err := strconv.ParseInt(e.Default.Text, 10, 64); err != nil {
 			return fmt.Sprintf(`"%s"`, e.Default.Text)
 		}
 		return e.Default.Text
-	case "UInt", "UInt64":
+	case "uint", "uint64":
 		if _, err := strconv.ParseUint(e.Default.Text, 10, 64); err != nil {
 			return fmt.Sprintf(`"%s"`, e.Default.Text)
 		}
 		return e.Default.Text
-	case "Double":
+	case "double":
 		if _, err := strconv.ParseFloat(e.Default.Text, 64); err != nil {
 			return fmt.Sprintf(`"%s"`, e.Default.Text)
 		}
@@ -250,32 +261,35 @@ func (e Entry) DefaultValue() string {
 			return e.Default.Text + "0"
 		}
 		return fmt.Sprintf("%s.0", e.Default.Text)
-	case "Bool":
-		if _, err := strconv.ParseBool(e.Default.Text); err != nil {
-			return fmt.Sprintf(`"%s"`, e.Default.Text)
+	case "bool":
+		if val, err := strconv.ParseBool(e.Default.Text); err == nil {
+			if val {
+				return "true"
+			}
+			return "false"
 		}
-		return e.Default.Text
+		return AsString(e.Default.Text)
 	default:
-		return fmt.Sprintf(`"%s"`, e.Default.Text)
+		return AsString(e.Default.Text)
 	}
 }
 
 func (e Entry) TypeValue() string {
 	base := "(either str %s)"
-	switch e.Type {
-	case "Int", "UInt", "Int64", "UInt64":
+	switch strings.ToLower(e.Type) {
+	case "int", "uint", "int64", "uint64":
 		return fmt.Sprintf(base, "int")
-	case "Double":
+	case "double":
 		return fmt.Sprintf(base, "float")
-	case "Bool":
+	case "bool":
 		return fmt.Sprintf(base, "bool")
-	case "String", "Url", "Color", "Font", "Rect", "Size", "Point", "DateTime", "Path", "Password":
-		return fmt.Sprintf(base, "str")
-	case "StringList":
+	case "string", "url", "color", "font", "rect", "size", "point", "datetime", "path", "password":
+		return fmt.Sprintf("str")
+	case "stringlist":
 		return fmt.Sprintf(base, "(listOf str)")
-	case "IntList":
+	case "intlist":
 		return fmt.Sprintf(base, "(listOf int)")
-	case "Enum":
+	case "enum":
 		enum := strings.Builder{}
 		enum.WriteString("(enum [ \n")
 		for _, c := range e.Choices.Choices {

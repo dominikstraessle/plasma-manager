@@ -7,7 +7,7 @@ in {
       type = submodule {
         options = { 
           "resolution" = mkOption {
-            type = nullOr "";
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -16,7 +16,7 @@ in {
             '';
           };
           "cameraDeviceId" = mkOption {
-            type = nullOr "";
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -25,7 +25,7 @@ in {
             '';
           };
           "cameraPosition" = mkOption {
-            type = nullOr "";
+            type = nullOr (either str int);
             default = "";
             description = ''
               
@@ -34,7 +34,7 @@ in {
             '';
           };
           "whiteBalanceMode" = mkOption {
-            type = nullOr "";
+            type = nullOr (either str int);
             default = "";
             description = ''
               

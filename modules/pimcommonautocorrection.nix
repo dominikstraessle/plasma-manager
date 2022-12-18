@@ -133,7 +133,7 @@ in {
             '';
           };
           "typographic-single-quotes" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -142,7 +142,7 @@ in {
             '';
           };
           "typographic-double-quotes" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -151,7 +151,7 @@ in {
             '';
           };
           "custom-writable-path" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -160,7 +160,7 @@ in {
             '';
           };
           "custom-system-path" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               

@@ -7,7 +7,7 @@ in {
       type = submodule {
         options = { 
           InputMethod = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               

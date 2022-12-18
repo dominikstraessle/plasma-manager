@@ -87,7 +87,7 @@ in {
             '';
           };
           "LayoutName" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "TabBoxConfig::defaultLayoutName()";
             defaultText = "Code: true";
             description = ''

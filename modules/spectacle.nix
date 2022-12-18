@@ -3,6 +3,264 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.spectacle = { 
+    "Annotations" = with types; mkOption {
+      type = submodule {
+        options = { 
+          annotationToolType = mkOption {
+            type = nullOr (either str (enum [ 
+            ]));
+            default = "AnnotationDocument::EditActionType::None";
+            description = ''
+              The last used annotation tool type
+
+              Type: Enum
+            '';
+          };
+          freehandStrokeWidth = mkOption {
+            type = nullOr (either str int);
+            default = 4;
+            description = ''
+              Stroke width for freehand annotation tool
+
+              Type: UInt
+              Min: 1
+            '';
+          };
+          highlighterStrokeWidth = mkOption {
+            type = nullOr (either str int);
+            default = 20;
+            description = ''
+              Stroke width for highlighter annotation tool
+
+              Type: UInt
+              Min: 1
+            '';
+          };
+          lineStrokeWidth = mkOption {
+            type = nullOr (either str int);
+            default = 4;
+            description = ''
+              Stroke width for line annotation tool
+
+              Type: UInt
+              Min: 1
+            '';
+          };
+          arrowStrokeWidth = mkOption {
+            type = nullOr (either str int);
+            default = 4;
+            description = ''
+              Stroke width for arrow annotation tool
+
+              Type: UInt
+              Min: 1
+            '';
+          };
+          rectangleStrokeWidth = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              Stroke width for rectangle annotation tool
+
+              Type: UInt
+              Min: 0
+            '';
+          };
+          ellipseStrokeWidth = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              Stroke width for ellipse annotation tool
+
+              Type: UInt
+              Min: 0
+            '';
+          };
+          freehandStrokeColor = mkOption {
+            type = nullOr str;
+            default = "255,0,0,255";
+            description = ''
+              Stroke width for freehand annotation tool
+
+              Type: Color
+            '';
+          };
+          highlighterStrokeColor = mkOption {
+            type = nullOr str;
+            default = "255,255,0,255";
+            description = ''
+              Stroke width for highlighter annotation tool
+
+              Type: Color
+            '';
+          };
+          lineStrokeColor = mkOption {
+            type = nullOr str;
+            default = "255,0,0,255";
+            description = ''
+              Stroke width for line annotation tool
+
+              Type: Color
+            '';
+          };
+          arrowStrokeColor = mkOption {
+            type = nullOr str;
+            default = "255,0,0,255";
+            description = ''
+              Stroke width for arrow annotation tool
+
+              Type: Color
+            '';
+          };
+          rectangleStrokeColor = mkOption {
+            type = nullOr str;
+            default = "0,0,0,255";
+            description = ''
+              Stroke width for rectangle annotation tool
+
+              Type: Color
+            '';
+          };
+          ellipseStrokeColor = mkOption {
+            type = nullOr str;
+            default = "0,0,0,255";
+            description = ''
+              Stroke width for ellipse annotation tool
+
+              Type: Color
+            '';
+          };
+          rectangleFillColor = mkOption {
+            type = nullOr str;
+            default = "255,0,0,255";
+            description = ''
+              Stroke width for rectangle annotation tool
+
+              Type: Color
+            '';
+          };
+          ellipseFillColor = mkOption {
+            type = nullOr str;
+            default = "255,0,0,255";
+            description = ''
+              Stroke width for ellipse annotation tool
+
+              Type: Color
+            '';
+          };
+          numberFillColor = mkOption {
+            type = nullOr str;
+            default = "255,0,0,255";
+            description = ''
+              Stroke width for ellipse annotation tool
+
+              Type: Color
+            '';
+          };
+          textFont = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              Font for annotations
+
+              Type: Font
+            '';
+          };
+          numberFont = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              Font for annotations
+
+              Type: Font
+            '';
+          };
+          textFontColor = mkOption {
+            type = nullOr str;
+            default = "0,0,0,255";
+            description = ''
+              Font color for annotations
+
+              Type: Color
+            '';
+          };
+          numberFontColor = mkOption {
+            type = nullOr str;
+            default = "0,0,0,255";
+            description = ''
+              Font color for annotations
+
+              Type: Color
+            '';
+          };
+          freehandShadow = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether freehand annotation tool has a drop shadow
+
+              Type: Bool
+            '';
+          };
+          lineShadow = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether line annotation tool has a drop shadow
+
+              Type: Bool
+            '';
+          };
+          arrowShadow = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether arrow annotation tool has a drop shadow
+
+              Type: Bool
+            '';
+          };
+          rectangleShadow = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether rectangle annotation tool has a drop shadow
+
+              Type: Bool
+            '';
+          };
+          ellipseShadow = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether ellipse annotation tool has a drop shadow
+
+              Type: Bool
+            '';
+          };
+          textShadow = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether text annotation tool has a drop shadow
+
+              Type: Bool
+            '';
+          };
+          numberShadow = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether number annotation tool has a drop shadow
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Annotations";
+    };    
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -128,7 +386,7 @@ in {
       type = submodule {
         options = { 
           cropRegion = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "QRect()";
             description = ''
               The last used region the user selected
@@ -210,7 +468,7 @@ in {
       type = submodule {
         options = { 
           defaultSaveLocation = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "
             QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)+QLatin1Char('/')) 
         ";
@@ -233,7 +491,7 @@ in {
             '';
           };
           defaultSaveImageFormat = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "PNG";
             description = ''
               Default save image format
@@ -242,7 +500,7 @@ in {
             '';
           };
           saveFilenameFormat = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Screenshot_%Y%M%D_%H%m%S";
             description = ''
               The default filename used when saving
@@ -251,7 +509,7 @@ in {
             '';
           };
           lastSaveLocation = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "defaultSaveLocation()";
             defaultText = "Code: true";
             description = ''
@@ -261,7 +519,7 @@ in {
             '';
           };
           lastSaveAsLocation = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "defaultSaveLocation()";
             defaultText = "Code: true";
             description = ''
@@ -274,264 +532,6 @@ in {
       };
       default = {};
       description = "Save";
-    };    
-    "Annotations" = with types; mkOption {
-      type = submodule {
-        options = { 
-          annotationToolType = mkOption {
-            type = nullOr (either str (enum [ 
-            ]));
-            default = "AnnotationDocument::EditActionType::None";
-            description = ''
-              The last used annotation tool type
-
-              Type: Enum
-            '';
-          };
-          freehandStrokeWidth = mkOption {
-            type = nullOr (either str int);
-            default = 4;
-            description = ''
-              Stroke width for freehand annotation tool
-
-              Type: UInt
-              Min: 1
-            '';
-          };
-          highlighterStrokeWidth = mkOption {
-            type = nullOr (either str int);
-            default = 20;
-            description = ''
-              Stroke width for highlighter annotation tool
-
-              Type: UInt
-              Min: 1
-            '';
-          };
-          lineStrokeWidth = mkOption {
-            type = nullOr (either str int);
-            default = 4;
-            description = ''
-              Stroke width for line annotation tool
-
-              Type: UInt
-              Min: 1
-            '';
-          };
-          arrowStrokeWidth = mkOption {
-            type = nullOr (either str int);
-            default = 4;
-            description = ''
-              Stroke width for arrow annotation tool
-
-              Type: UInt
-              Min: 1
-            '';
-          };
-          rectangleStrokeWidth = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              Stroke width for rectangle annotation tool
-
-              Type: UInt
-              Min: 0
-            '';
-          };
-          ellipseStrokeWidth = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              Stroke width for ellipse annotation tool
-
-              Type: UInt
-              Min: 0
-            '';
-          };
-          freehandStrokeColor = mkOption {
-            type = nullOr (either str str);
-            default = "255,0,0,255";
-            description = ''
-              Stroke width for freehand annotation tool
-
-              Type: Color
-            '';
-          };
-          highlighterStrokeColor = mkOption {
-            type = nullOr (either str str);
-            default = "255,255,0,255";
-            description = ''
-              Stroke width for highlighter annotation tool
-
-              Type: Color
-            '';
-          };
-          lineStrokeColor = mkOption {
-            type = nullOr (either str str);
-            default = "255,0,0,255";
-            description = ''
-              Stroke width for line annotation tool
-
-              Type: Color
-            '';
-          };
-          arrowStrokeColor = mkOption {
-            type = nullOr (either str str);
-            default = "255,0,0,255";
-            description = ''
-              Stroke width for arrow annotation tool
-
-              Type: Color
-            '';
-          };
-          rectangleStrokeColor = mkOption {
-            type = nullOr (either str str);
-            default = "0,0,0,255";
-            description = ''
-              Stroke width for rectangle annotation tool
-
-              Type: Color
-            '';
-          };
-          ellipseStrokeColor = mkOption {
-            type = nullOr (either str str);
-            default = "0,0,0,255";
-            description = ''
-              Stroke width for ellipse annotation tool
-
-              Type: Color
-            '';
-          };
-          rectangleFillColor = mkOption {
-            type = nullOr (either str str);
-            default = "255,0,0,255";
-            description = ''
-              Stroke width for rectangle annotation tool
-
-              Type: Color
-            '';
-          };
-          ellipseFillColor = mkOption {
-            type = nullOr (either str str);
-            default = "255,0,0,255";
-            description = ''
-              Stroke width for ellipse annotation tool
-
-              Type: Color
-            '';
-          };
-          numberFillColor = mkOption {
-            type = nullOr (either str str);
-            default = "255,0,0,255";
-            description = ''
-              Stroke width for ellipse annotation tool
-
-              Type: Color
-            '';
-          };
-          textFont = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              Font for annotations
-
-              Type: Font
-            '';
-          };
-          numberFont = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              Font for annotations
-
-              Type: Font
-            '';
-          };
-          textFontColor = mkOption {
-            type = nullOr (either str str);
-            default = "0,0,0,255";
-            description = ''
-              Font color for annotations
-
-              Type: Color
-            '';
-          };
-          numberFontColor = mkOption {
-            type = nullOr (either str str);
-            default = "0,0,0,255";
-            description = ''
-              Font color for annotations
-
-              Type: Color
-            '';
-          };
-          freehandShadow = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether freehand annotation tool has a drop shadow
-
-              Type: Bool
-            '';
-          };
-          lineShadow = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether line annotation tool has a drop shadow
-
-              Type: Bool
-            '';
-          };
-          arrowShadow = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether arrow annotation tool has a drop shadow
-
-              Type: Bool
-            '';
-          };
-          rectangleShadow = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether rectangle annotation tool has a drop shadow
-
-              Type: Bool
-            '';
-          };
-          ellipseShadow = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether ellipse annotation tool has a drop shadow
-
-              Type: Bool
-            '';
-          };
-          textShadow = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether text annotation tool has a drop shadow
-
-              Type: Bool
-            '';
-          };
-          numberShadow = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether number annotation tool has a drop shadow
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Annotations";
     };    
   };
   config = mkIf cfg.enable {

@@ -7,7 +7,7 @@ in {
       type = submodule {
         options = { 
           "library" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "s_defaultPlugin";
             defaultText = "Code: true";
             description = ''
@@ -17,7 +17,7 @@ in {
             '';
           };
           "theme" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "s_defaultTheme";
             defaultText = "Code: true";
             description = ''
@@ -27,7 +27,7 @@ in {
             '';
           };
           "BorderSize" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Normal";
             description = ''
               Window border size
@@ -63,7 +63,7 @@ in {
             '';
           };
           "ButtonsOnLeft" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "MS";
             description = ''
               Titlebar left buttons
@@ -72,7 +72,7 @@ in {
             '';
           };
           "ButtonsOnRight" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "HIAX";
             description = ''
               Titlebar right buttons

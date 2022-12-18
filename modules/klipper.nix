@@ -3,11 +3,46 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.klipper = { 
+    "Actions" = with types; mkOption {
+      type = submodule {
+        options = { 
+          StripWhiteSpace = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Trim whitespace from selection
+
+              Type: Bool
+            '';
+          };
+          ReplayActionInHistory = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              For an item chosen from history
+
+              Type: Bool
+            '';
+          };
+          EnableMagicMimeActions = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Include MIME actions
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Actions";
+    };    
     "General" = with types; mkOption {
       type = submodule {
         options = { 
           Version = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               Klipper version
@@ -149,41 +184,6 @@ in {
       };
       default = {};
       description = "General";
-    };    
-    "Actions" = with types; mkOption {
-      type = submodule {
-        options = { 
-          StripWhiteSpace = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Trim whitespace from selection
-
-              Type: Bool
-            '';
-          };
-          ReplayActionInHistory = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              For an item chosen from history
-
-              Type: Bool
-            '';
-          };
-          EnableMagicMimeActions = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Include MIME actions
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Actions";
     };    
   };
   config = mkIf cfg.enable {

@@ -3,11 +3,249 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.kwin = { 
+    "Compositing" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Backend = mkOption {
+            type = nullOr str;
+            default = "OpenGL";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Enabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          LastFailureTimestamp = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          GLTextureFilter = mkOption {
+            type = nullOr (either str int);
+            default = 2;
+            description = ''
+              
+
+              Type: Int
+              Min: -1
+              Max: 2
+            '';
+          };
+          GLStrictBinding = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          GLLegacy = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          HiddenPreviews = mkOption {
+            type = nullOr (either str int);
+            default = 5;
+            description = ''
+              
+
+              Type: Int
+              Min: 4
+              Max: 6
+            '';
+          };
+          GLPlatformInterface = mkOption {
+            type = nullOr str;
+            default = "glx";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          WindowsBlockCompositing = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          LatencyPolicy = mkOption {
+            type = nullOr (either str (enum [ 
+              "LatencyExtremelyLow"
+              "LatencyLow"
+              "LatencyMedium"
+              "LatencyHigh"
+              "LatencyExtremelyHigh"
+            ]));
+            default = "LatencyMedium";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - LatencyExtremelyLow
+                - LatencyLow
+                - LatencyMedium
+                - LatencyHigh
+                - LatencyExtremelyHigh
+            '';
+          };
+          RenderTimeEstimator = mkOption {
+            type = nullOr (either str (enum [ 
+              "RenderTimeEstimatorMinimum"
+              "RenderTimeEstimatorMaximum"
+              "RenderTimeEstimatorAverage"
+            ]));
+            default = "RenderTimeEstimatorMaximum";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - RenderTimeEstimatorMinimum
+                - RenderTimeEstimatorMaximum
+                - RenderTimeEstimatorAverage
+            '';
+          };
+          AllowTearing = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Compositing";
+    };    
+    "ElectricBorders" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Top = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          TopRight = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Right = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          BottomRight = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Bottom = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          BottomLeft = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Left = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          TopLeft = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "ElectricBorders";
+    };    
+    "KDE" = with types; mkOption {
+      type = submodule {
+        options = { 
+          AnimationDurationFactor = mkOption {
+            type = nullOr (either str float);
+            default = 1.0;
+            description = ''
+              
+
+              Type: Double
+              Min: 0
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "KDE";
+    };    
     "MouseBindings" = with types; mkOption {
       type = submodule {
         options = { 
           CommandTitlebarWheel = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Nothing";
             description = ''
               
@@ -16,7 +254,7 @@ in {
             '';
           };
           CommandAllKey = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Meta";
             description = ''
               
@@ -25,7 +263,7 @@ in {
             '';
           };
           CommandAllWheel = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Nothing";
             description = ''
               
@@ -34,7 +272,7 @@ in {
             '';
           };
           CommandActiveTitlebar1 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Raise";
             description = ''
               
@@ -43,7 +281,7 @@ in {
             '';
           };
           CommandActiveTitlebar2 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Nothing";
             description = ''
               
@@ -52,7 +290,7 @@ in {
             '';
           };
           CommandActiveTitlebar3 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Operations menu";
             description = ''
               
@@ -61,7 +299,7 @@ in {
             '';
           };
           CommandInactiveTitlebar1 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Activate and raise";
             description = ''
               
@@ -70,7 +308,7 @@ in {
             '';
           };
           CommandInactiveTitlebar2 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Nothing";
             description = ''
               
@@ -79,7 +317,7 @@ in {
             '';
           };
           CommandInactiveTitlebar3 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Operations menu";
             description = ''
               
@@ -88,7 +326,7 @@ in {
             '';
           };
           CommandWindow1 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Activate, raise and pass click";
             description = ''
               
@@ -97,7 +335,7 @@ in {
             '';
           };
           CommandWindow2 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Activate and pass click";
             description = ''
               
@@ -106,7 +344,7 @@ in {
             '';
           };
           CommandWindow3 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Activate and pass click";
             description = ''
               
@@ -115,7 +353,7 @@ in {
             '';
           };
           CommandWindowWheel = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Scroll";
             description = ''
               
@@ -124,7 +362,7 @@ in {
             '';
           };
           CommandAll1 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Move";
             description = ''
               
@@ -133,7 +371,7 @@ in {
             '';
           };
           CommandAll2 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Toggle raise and lower";
             description = ''
               
@@ -142,7 +380,7 @@ in {
             '';
           };
           CommandAll3 = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Resize";
             description = ''
               
@@ -155,85 +393,191 @@ in {
       default = {};
       description = "MouseBindings";
     };    
-    "ElectricBorders" = with types; mkOption {
+    "ScreenEdges" = with types; mkOption {
       type = submodule {
         options = { 
-          Top = mkOption {
-            type = nullOr (either str str);
-            default = "None";
+          RemainActiveOnFullscreen = mkOption {
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               
 
-              Type: String
-            '';
-          };
-          TopRight = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          Right = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          BottomRight = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          Bottom = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          BottomLeft = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          Left = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          TopLeft = mkOption {
-            type = nullOr (either str str);
-            default = "None";
-            description = ''
-              
-
-              Type: String
+              Type: Bool
             '';
           };
         };
       };
       default = {};
-      description = "ElectricBorders";
+      description = "ScreenEdges";
+    };    
+    "TabBox" = with types; mkOption {
+      type = submodule {
+        options = { 
+          ShowDelay = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          DelayTime = mkOption {
+            type = nullOr (either str int);
+            default = 90;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          DesktopMode = mkOption {
+            type = nullOr (either str int);
+            default = 1;
+            description = ''
+              
+
+              Type: UInt
+            '';
+          };
+          ActivitiesMode = mkOption {
+            type = nullOr (either str int);
+            default = 1;
+            description = ''
+              
+
+              Type: UInt
+            '';
+          };
+          ApplicationsMode = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: UInt
+            '';
+          };
+          MinimizedMode = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: UInt
+            '';
+          };
+          ShowDesktopMode = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: UInt
+            '';
+          };
+          MultiScreenMode = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: UInt
+            '';
+          };
+          SwitchingMode = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: UInt
+            '';
+          };
+          ShowOutline = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          ShowTabBox = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          HighlightWindows = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          LayoutName = mkOption {
+            type = nullOr str;
+            default = "thumbnails";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          MoveMinimizedWindowsToEndOfTabBoxFocusChain = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "TabBox";
+    };    
+    "Wayland" = with types; mkOption {
+      type = submodule {
+        options = { 
+          InputMethod = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: Path
+            '';
+          };
+          DoubleTapWakeup = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          EnablePrimarySelection = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Wayland";
     };    
     "Windows" = with types; mkOption {
       type = submodule {
@@ -521,7 +865,7 @@ in {
             '';
           };
           TitlebarDoubleClickCommand = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Maximize";
             description = ''
               
@@ -530,7 +874,7 @@ in {
             '';
           };
           MaximizeButtonLeftClickCommand = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Maximize";
             description = ''
               
@@ -539,7 +883,7 @@ in {
             '';
           };
           MaximizeButtonMiddleClickCommand = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Maximize (vertical only)";
             description = ''
               
@@ -548,7 +892,7 @@ in {
             '';
           };
           MaximizeButtonRightClickCommand = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Maximize (horizontal only)";
             description = ''
               
@@ -614,350 +958,6 @@ in {
       };
       default = {};
       description = "Windows";
-    };    
-    "ScreenEdges" = with types; mkOption {
-      type = submodule {
-        options = { 
-          RemainActiveOnFullscreen = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "ScreenEdges";
-    };    
-    "Compositing" = with types; mkOption {
-      type = submodule {
-        options = { 
-          Backend = mkOption {
-            type = nullOr (either str str);
-            default = "OpenGL";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          Enabled = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          LastFailureTimestamp = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          GLTextureFilter = mkOption {
-            type = nullOr (either str int);
-            default = 2;
-            description = ''
-              
-
-              Type: Int
-              Min: -1
-              Max: 2
-            '';
-          };
-          GLStrictBinding = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          GLLegacy = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          HiddenPreviews = mkOption {
-            type = nullOr (either str int);
-            default = 5;
-            description = ''
-              
-
-              Type: Int
-              Min: 4
-              Max: 6
-            '';
-          };
-          GLPlatformInterface = mkOption {
-            type = nullOr (either str str);
-            default = "glx";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          WindowsBlockCompositing = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          LatencyPolicy = mkOption {
-            type = nullOr (either str (enum [ 
-              "LatencyExtremelyLow"
-              "LatencyLow"
-              "LatencyMedium"
-              "LatencyHigh"
-              "LatencyExtremelyHigh"
-            ]));
-            default = "LatencyMedium";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - LatencyExtremelyLow
-                - LatencyLow
-                - LatencyMedium
-                - LatencyHigh
-                - LatencyExtremelyHigh
-            '';
-          };
-          RenderTimeEstimator = mkOption {
-            type = nullOr (either str (enum [ 
-              "RenderTimeEstimatorMinimum"
-              "RenderTimeEstimatorMaximum"
-              "RenderTimeEstimatorAverage"
-            ]));
-            default = "RenderTimeEstimatorMaximum";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - RenderTimeEstimatorMinimum
-                - RenderTimeEstimatorMaximum
-                - RenderTimeEstimatorAverage
-            '';
-          };
-          AllowTearing = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Compositing";
-    };    
-    "TabBox" = with types; mkOption {
-      type = submodule {
-        options = { 
-          ShowDelay = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          DelayTime = mkOption {
-            type = nullOr (either str int);
-            default = 90;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          DesktopMode = mkOption {
-            type = nullOr (either str int);
-            default = 1;
-            description = ''
-              
-
-              Type: UInt
-            '';
-          };
-          ActivitiesMode = mkOption {
-            type = nullOr (either str int);
-            default = 1;
-            description = ''
-              
-
-              Type: UInt
-            '';
-          };
-          ApplicationsMode = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: UInt
-            '';
-          };
-          MinimizedMode = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: UInt
-            '';
-          };
-          ShowDesktopMode = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: UInt
-            '';
-          };
-          MultiScreenMode = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: UInt
-            '';
-          };
-          SwitchingMode = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: UInt
-            '';
-          };
-          ShowOutline = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          ShowTabBox = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          HighlightWindows = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          LayoutName = mkOption {
-            type = nullOr (either str str);
-            default = "thumbnails";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          MoveMinimizedWindowsToEndOfTabBoxFocusChain = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "TabBox";
-    };    
-    "KDE" = with types; mkOption {
-      type = submodule {
-        options = { 
-          AnimationDurationFactor = mkOption {
-            type = nullOr (either str float);
-            default = 1.0;
-            description = ''
-              
-
-              Type: Double
-              Min: 0
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "KDE";
-    };    
-    "Wayland" = with types; mkOption {
-      type = submodule {
-        options = { 
-          InputMethod = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: Path
-            '';
-          };
-          DoubleTapWakeup = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          EnablePrimarySelection = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Wayland";
     };    
     "Xwayland" = with types; mkOption {
       type = submodule {

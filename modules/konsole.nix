@@ -3,6 +3,50 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.konsole = { 
+    "FileLocation" = with types; mkOption {
+      type = submodule {
+        options = { 
+          scrollbackUseSystemLocation = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              For scrollback files, use system-wide folder location
+
+              Type: Bool
+            '';
+          };
+          scrollbackUseCacheLocation = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              For scrollback files, use user's specific folder location
+
+              Type: Bool
+            '';
+          };
+          scrollbackUseSpecifiedLocation = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              For scrollback files, use specified folder location
+
+              Type: Bool
+            '';
+          };
+          scrollbackUseSpecifiedLocationDirectory = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              For scrollback files, use this folder
+
+              Type: Url
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "FileLocation";
+    };    
     "KonsoleWindow" = with types; mkOption {
       type = submodule {
         options = { 
@@ -65,50 +109,23 @@ in {
       default = {};
       description = "KonsoleWindow";
     };    
-    "ThumbnailsSettings" = with types; mkOption {
+    "PrintOptions" = with types; mkOption {
       type = submodule {
         options = { 
-          EnableThumbnails = mkOption {
+          PrinterFriendly = mkOption {
             type = nullOr (either str bool);
             default = true;
             description = ''
-              
+              Printer &friendly mode (black text, no background)
 
               Type: Bool
             '';
           };
-          ThumbnailSize = mkOption {
-            type = nullOr (either str int);
-            default = 250;
-            description = ''
-              Thumbnail Width
-
-              Type: Int
-            '';
-          };
-          ThumbnailShift = mkOption {
+          ScaleOutput = mkOption {
             type = nullOr (either str bool);
-            default = false;
+            default = true;
             description = ''
-              Use Shift to display a thumbnail
-
-              Type: Bool
-            '';
-          };
-          ThumbnailAlt = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Use Alt to display a thumbnail
-
-              Type: Bool
-            '';
-          };
-          ThumbnailCtrl = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Use Ctrl to display a thumbnail
+              &Scale output
 
               Type: Bool
             '';
@@ -116,7 +133,7 @@ in {
         };
       };
       default = {};
-      description = "ThumbnailsSettings";
+      description = "PrintOptions";
     };    
     "SearchSettings" = with types; mkOption {
       type = submodule {
@@ -240,7 +257,7 @@ in {
             '';
           };
           TabBarStyleSheet = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "QTabBar::tab { min-width: 2em ; max-width: 25em }";
             description = ''
               Control the visual style of the tab bar
@@ -258,7 +275,7 @@ in {
             '';
           };
           TabBarUserStyleSheetFile = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               The .css file to use for the tab bar style
@@ -330,23 +347,50 @@ in {
       default = {};
       description = "TabBar";
     };    
-    "PrintOptions" = with types; mkOption {
+    "ThumbnailsSettings" = with types; mkOption {
       type = submodule {
         options = { 
-          PrinterFriendly = mkOption {
+          EnableThumbnails = mkOption {
             type = nullOr (either str bool);
             default = true;
             description = ''
-              Printer &friendly mode (black text, no background)
+              
 
               Type: Bool
             '';
           };
-          ScaleOutput = mkOption {
-            type = nullOr (either str bool);
-            default = true;
+          ThumbnailSize = mkOption {
+            type = nullOr (either str int);
+            default = 250;
             description = ''
-              &Scale output
+              Thumbnail Width
+
+              Type: Int
+            '';
+          };
+          ThumbnailShift = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Use Shift to display a thumbnail
+
+              Type: Bool
+            '';
+          };
+          ThumbnailAlt = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Use Alt to display a thumbnail
+
+              Type: Bool
+            '';
+          };
+          ThumbnailCtrl = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Use Ctrl to display a thumbnail
 
               Type: Bool
             '';
@@ -354,51 +398,7 @@ in {
         };
       };
       default = {};
-      description = "PrintOptions";
-    };    
-    "FileLocation" = with types; mkOption {
-      type = submodule {
-        options = { 
-          scrollbackUseSystemLocation = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              For scrollback files, use system-wide folder location
-
-              Type: Bool
-            '';
-          };
-          scrollbackUseCacheLocation = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              For scrollback files, use user's specific folder location
-
-              Type: Bool
-            '';
-          };
-          scrollbackUseSpecifiedLocation = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              For scrollback files, use specified folder location
-
-              Type: Bool
-            '';
-          };
-          scrollbackUseSpecifiedLocationDirectory = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              For scrollback files, use this folder
-
-              Type: Url
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "FileLocation";
+      description = "ThumbnailsSettings";
     };    
   };
   config = mkIf cfg.enable {

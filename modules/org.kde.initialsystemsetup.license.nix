@@ -26,7 +26,7 @@ in {
             '';
           };
           LicenseTextFile = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "/dev/null";
             description = ''
               

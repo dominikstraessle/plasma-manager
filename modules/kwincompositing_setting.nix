@@ -3,23 +3,6 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.kwin = { 
-    "KDE" = with types; mkOption {
-      type = submodule {
-        options = { 
-          AnimationDurationFactor = mkOption {
-            type = nullOr (either str float);
-            default = 1.0;
-            description = ''
-              
-
-              Type: Double
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "KDE";
-    };    
     "Compositing" = with types; mkOption {
       type = submodule {
         options = { 
@@ -101,6 +84,23 @@ in {
       };
       default = {};
       description = "Compositing";
+    };    
+    "KDE" = with types; mkOption {
+      type = submodule {
+        options = { 
+          AnimationDurationFactor = mkOption {
+            type = nullOr (either str float);
+            default = 1.0;
+            description = ''
+              
+
+              Type: Double
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "KDE";
     };    
   };
   config = mkIf cfg.enable {

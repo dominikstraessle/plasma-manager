@@ -3,6 +3,128 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.kspread = { 
+    "KSpell kspread" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "KSpell_IgnoreUppercaseWords" = mkOption {
+            type = nullOr (either str bool);
+            default = "";
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "KSpell_IgnoreTitleCaseWords" = mkOption {
+            type = nullOr (either str bool);
+            default = "";
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "KSpell_dont_check_upper_word" = mkOption {
+            type = nullOr (either str bool);
+            default = "";
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "KSpell_dont_check_title_case" = mkOption {
+            type = nullOr (either str bool);
+            default = "";
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "KSpell kspread";
+    };    
+    "KSpread Color" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "GridColor" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: Color
+            '';
+          };
+          "PageOutlineColor" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: Color
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "KSpread Color";
+    };    
+    "KSpread Page Layout" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "Default unit page" = mkOption {
+            type = nullOr (either str int);
+            default = "";
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "Default size page" = mkOption {
+            type = nullOr (either str int);
+            default = "";
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          "Default orientation page" = mkOption {
+            type = nullOr (either str int);
+            default = "";
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "KSpread Page Layout";
+    };    
+    "Misc" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "UndoRedo" = mkOption {
+            type = nullOr (either str int);
+            default = "";
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Misc";
+    };    
     "Parameters" = with types; mkOption {
       type = submodule {
         options = { 
@@ -173,133 +295,11 @@ in {
       default = {};
       description = "Parameters";
     };    
-    "KSpell kspread" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "KSpell_IgnoreUppercaseWords" = mkOption {
-            type = nullOr (either str bool);
-            default = "";
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "KSpell_IgnoreTitleCaseWords" = mkOption {
-            type = nullOr (either str bool);
-            default = "";
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "KSpell_dont_check_upper_word" = mkOption {
-            type = nullOr (either str bool);
-            default = "";
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "KSpell_dont_check_title_case" = mkOption {
-            type = nullOr (either str bool);
-            default = "";
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "KSpell kspread";
-    };    
-    "KSpread Page Layout" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Default unit page" = mkOption {
-            type = nullOr (either str int);
-            default = "";
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "Default size page" = mkOption {
-            type = nullOr (either str int);
-            default = "";
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "Default orientation page" = mkOption {
-            type = nullOr (either str int);
-            default = "";
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "KSpread Page Layout";
-    };    
-    "Misc" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "UndoRedo" = mkOption {
-            type = nullOr (either str int);
-            default = "";
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Misc";
-    };    
-    "KSpread Color" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "GridColor" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: Color
-            '';
-          };
-          "PageOutlineColor" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: Color
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "KSpread Color";
-    };    
     "Sheet-Style" = with types; mkOption {
       type = submodule {
         options = { 
           "XML" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -308,7 +308,7 @@ in {
             '';
           };
           "Image" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -317,7 +317,7 @@ in {
             '';
           };
           "Name" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -388,7 +388,7 @@ in {
             '';
           };
           "AcceleratorPrefixWord" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               

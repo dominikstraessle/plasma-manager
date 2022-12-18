@@ -3,12 +3,21 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.okular = { 
-    "Dlg Performance" = with types; mkOption {
+    "Contents" = with types; mkOption {
       type = submodule {
         options = { 
-          "EnableCompositing" = mkOption {
+          "ContentsSearchCaseSensitive" = mkOption {
             type = nullOr (either str bool);
-            default = true;
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ContentsSearchRegularExpression" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               
 
@@ -18,7 +27,7 @@ in {
         };
       };
       default = {};
-      description = "Dlg Performance";
+      description = "Contents";
     };    
     "Debugging Options" = with types; mkOption {
       type = submodule {
@@ -46,10 +55,10 @@ in {
       default = {};
       description = "Debugging Options";
     };    
-    "Contents" = with types; mkOption {
+    "Dlg Accessibility" = with types; mkOption {
       type = submodule {
         options = { 
-          "ContentsSearchCaseSensitive" = mkOption {
+          "HighlightImages" = mkOption {
             type = nullOr (either str bool);
             default = false;
             description = ''
@@ -58,7 +67,7 @@ in {
               Type: Bool
             '';
           };
-          "ContentsSearchRegularExpression" = mkOption {
+          "HighlightLinks" = mkOption {
             type = nullOr (either str bool);
             default = false;
             description = ''
@@ -67,229 +76,57 @@ in {
               Type: Bool
             '';
           };
-        };
-      };
-      default = {};
-      description = "Contents";
-    };    
-    "Layers" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "LayersSearchCaseSensitive" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "LayersSearchRegularExpression" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Layers";
-    };    
-    "Reviews" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "ReviewsSearchCaseSensitive" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ReviewsSearchRegularExpression" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "DrawingTools" = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "drawingTools";
+          "RecolorForeground" = mkOption {
+            type = nullOr str;
+            default = "0x600000";
             defaultText = "Code: true";
             description = ''
               
 
-              Type: StringList
+              Type: Color
             '';
           };
-          "BuiltinAnnotationTools" = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "builtinAnnotationTools";
+          "RecolorBackground" = mkOption {
+            type = nullOr str;
+            default = "0xF0F0F0";
             defaultText = "Code: true";
             description = ''
               
 
-              Type: StringList
+              Type: Color
             '';
           };
-          "QuickAnnotationTools" = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "quickAnnotationTools";
-            defaultText = "Code: true";
-            description = ''
-              
-
-              Type: StringList
-            '';
-          };
-          "AnnotationContinuousMode" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "QuickAnnotationDefaultAction" = mkOption {
+          "BWThreshold" = mkOption {
             type = nullOr (either str int);
-            default = 0;
+            default = 127;
             description = ''
               
 
               Type: UInt
+              Min: 2
+              Max: 253
             '';
           };
-        };
-      };
-      default = {};
-      description = "Reviews";
-    };    
-    "Zoom" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "ZoomMode" = mkOption {
+          "BWContrast" = mkOption {
             type = nullOr (either str int);
-            default = 1;
+            default = 2;
             description = ''
               
 
               Type: UInt
-              Max: 3
+              Min: 2
+              Max: 6
             '';
           };
         };
       };
       default = {};
-      description = "Zoom";
+      description = "Dlg Accessibility";
     };    
-    "General" = with types; mkOption {
+    "Dlg Performance" = with types; mkOption {
       type = submodule {
         options = { 
-          "ShellOpenFileInTabs" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "SwitchToTabIfOpen" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ShowOSD" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ShowEmbeddedContentMessages" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "DisplayDocumentTitle" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "rtlReadingDirection" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "DisplayDocumentNameOrPath" = mkOption {
-            type = nullOr (either str (enum [ 
-              "Name"
-              "Path"
-            ]));
-            default = "Name";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - Name
-                - Path
-            '';
-          };
-          "UseTTS" = mkOption {
-            type = nullOr (either str bool);
-            default = "";
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ttsEngine" = mkOption {
-            type = nullOr (either str str);
-            default = "speechd";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "ttsVoice" = mkOption {
-            type = nullOr (either str str);
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "WatchFile" = mkOption {
+          "EnableCompositing" = mkOption {
             type = nullOr (either str bool);
             default = true;
             description = ''
@@ -301,13 +138,13 @@ in {
         };
       };
       default = {};
-      description = "General";
+      description = "Dlg Performance";
     };    
     "Dlg Presentation" = with types; mkOption {
       type = submodule {
         options = { 
           "SlidesBackgroundColor" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Qt::black";
             defaultText = "Code: true";
             description = ''
@@ -417,6 +254,163 @@ in {
       };
       default = {};
       description = "Dlg Presentation";
+    };    
+    "General" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "ShellOpenFileInTabs" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "SwitchToTabIfOpen" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ShowOSD" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ShowEmbeddedContentMessages" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "DisplayDocumentTitle" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "rtlReadingDirection" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "DisplayDocumentNameOrPath" = mkOption {
+            type = nullOr (either str (enum [ 
+              "Name"
+              "Path"
+            ]));
+            default = "Name";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - Name
+                - Path
+            '';
+          };
+          "UseTTS" = mkOption {
+            type = nullOr (either str bool);
+            default = "";
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ttsEngine" = mkOption {
+            type = nullOr str;
+            default = "speechd";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "ttsVoice" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          "WatchFile" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "General";
+    };    
+    "Identity" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "IdentityAuthor" = mkOption {
+            type = nullOr str;
+            default = "userString";
+            defaultText = "Code: true";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Identity";
+    };    
+    "Layers" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "LayersSearchCaseSensitive" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "LayersSearchRegularExpression" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Layers";
     };    
     "Main View" = with types; mkOption {
       type = submodule {
@@ -707,7 +701,7 @@ in {
             '';
           };
           "BackgroundColor" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -719,6 +713,80 @@ in {
       };
       default = {};
       description = "PageView";
+    };    
+    "Reviews" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "ReviewsSearchCaseSensitive" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ReviewsSearchRegularExpression" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "DrawingTools" = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "drawingTools";
+            defaultText = "Code: true";
+            description = ''
+              
+
+              Type: StringList
+            '';
+          };
+          "BuiltinAnnotationTools" = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "builtinAnnotationTools";
+            defaultText = "Code: true";
+            description = ''
+              
+
+              Type: StringList
+            '';
+          };
+          "QuickAnnotationTools" = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "quickAnnotationTools";
+            defaultText = "Code: true";
+            description = ''
+              
+
+              Type: StringList
+            '';
+          };
+          "AnnotationContinuousMode" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "QuickAnnotationDefaultAction" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: UInt
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Reviews";
     };    
     "Search" = with types; mkOption {
       type = submodule {
@@ -755,91 +823,23 @@ in {
       default = {};
       description = "Search";
     };    
-    "Dlg Accessibility" = with types; mkOption {
+    "Zoom" = with types; mkOption {
       type = submodule {
         options = { 
-          "HighlightImages" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "HighlightLinks" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "RecolorForeground" = mkOption {
-            type = nullOr (either str str);
-            default = "0x600000";
-            defaultText = "Code: true";
-            description = ''
-              
-
-              Type: Color
-            '';
-          };
-          "RecolorBackground" = mkOption {
-            type = nullOr (either str str);
-            default = "0xF0F0F0";
-            defaultText = "Code: true";
-            description = ''
-              
-
-              Type: Color
-            '';
-          };
-          "BWThreshold" = mkOption {
+          "ZoomMode" = mkOption {
             type = nullOr (either str int);
-            default = 127;
+            default = 1;
             description = ''
               
 
               Type: UInt
-              Min: 2
-              Max: 253
-            '';
-          };
-          "BWContrast" = mkOption {
-            type = nullOr (either str int);
-            default = 2;
-            description = ''
-              
-
-              Type: UInt
-              Min: 2
-              Max: 6
+              Max: 3
             '';
           };
         };
       };
       default = {};
-      description = "Dlg Accessibility";
-    };    
-    "Identity" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "IdentityAuthor" = mkOption {
-            type = nullOr (either str str);
-            default = "userString";
-            defaultText = "Code: true";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Identity";
+      description = "Zoom";
     };    
   };
   config = mkIf cfg.enable {

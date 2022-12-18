@@ -16,7 +16,7 @@ in {
             '';
           };
           OpenRoom = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               Latest opened room
@@ -25,7 +25,7 @@ in {
             '';
           };
           ActiveConnection = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               Latest active connection
@@ -34,7 +34,7 @@ in {
             '';
           };
           ColorScheme = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               Color scheme
@@ -43,8 +43,8 @@ in {
             '';
           };
           Blur = mkOption {
-            type = nullOr "false";
-            default = "false";
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               Make NeoChat blurry
 
@@ -61,8 +61,8 @@ in {
             '';
           };
           ShowNotifications = mkOption {
-            type = nullOr "true";
-            default = "true";
+            type = nullOr (either str bool);
+            default = true;
             description = ''
               Show notifications
 
@@ -70,8 +70,8 @@ in {
             '';
           };
           MergeRoomList = mkOption {
-            type = nullOr "false";
-            default = "false";
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               Merge Room Lists
 
@@ -79,8 +79,8 @@ in {
             '';
           };
           ShowLeaveJoinEvent = mkOption {
-            type = nullOr "true";
-            default = "true";
+            type = nullOr (either str bool);
+            default = true;
             description = ''
               Show leave and join events in the timeline
 
@@ -88,8 +88,8 @@ in {
             '';
           };
           AllowQuickEdit = mkOption {
-            type = nullOr "false";
-            default = "false";
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               Use s/text/replacement syntax to edit your last message.
 
@@ -97,8 +97,8 @@ in {
             '';
           };
           ShowLocalMessagesOnRight = mkOption {
-            type = nullOr "true";
-            default = "true";
+            type = nullOr (either str bool);
+            default = true;
             description = ''
               "Show your messages on the right
 
@@ -106,8 +106,8 @@ in {
             '';
           };
           RoomListPageWidth = mkOption {
-            type = nullOr "-1";
-            default = "-1";
+            type = nullOr (either str int);
+            default = -1;
             description = ''
               
 
@@ -115,8 +115,8 @@ in {
             '';
           };
           RoomDrawerWidth = mkOption {
-            type = nullOr "-1";
-            default = "-1";
+            type = nullOr (either str int);
+            default = -1;
             description = ''
               
 
@@ -124,8 +124,8 @@ in {
             '';
           };
           TypingNotifications = mkOption {
-            type = nullOr "true";
-            default = "true";
+            type = nullOr (either str bool);
+            default = true;
             description = ''
               
 
@@ -133,8 +133,8 @@ in {
             '';
           };
           AutoRoomInfoDrawer = mkOption {
-            type = nullOr "true";
-            default = "true";
+            type = nullOr (either str bool);
+            default = true;
             description = ''
               Automatic Hide/Unhide Room Information
 
@@ -142,8 +142,8 @@ in {
             '';
           };
           DeveloperTools = mkOption {
-            type = nullOr "false";
-            default = "false";
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               Enable developer tools
 
@@ -151,7 +151,7 @@ in {
             '';
           };
           LastSaveDirectory = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               Directory last used for saving a file
@@ -163,112 +163,6 @@ in {
       };
       default = {};
       description = "General";
-    };    
-    "Timeline" = with types; mkOption {
-      type = submodule {
-        options = { 
-          ShowAvatarInTimeline = mkOption {
-            type = nullOr "true";
-            default = "true";
-            description = ''
-              Show avatar in the timeline
-
-              Type: bool
-            '';
-          };
-          CompactLayout = mkOption {
-            type = nullOr "false";
-            default = "false";
-            description = ''
-              Use a compact layout
-
-              Type: bool
-            '';
-          };
-          ShowRename = mkOption {
-            type = nullOr "true";
-            default = "true";
-            description = ''
-              Show rename events in the timeline
-
-              Type: bool
-            '';
-          };
-          ShowAvatarUpdate = mkOption {
-            type = nullOr "true";
-            default = "true";
-            description = ''
-              Show avatar update events in the timeline
-
-              Type: bool
-            '';
-          };
-          ShowDeletedMessages = mkOption {
-            type = nullOr "true";
-            default = "true";
-            description = ''
-              Show deleted messages in the timeline
-
-              Type: bool
-            '';
-          };
-          ShowLinkPreview = mkOption {
-            type = nullOr "";
-            default = "";
-            description = ''
-              Show preview of the links in the chat messages
-
-              Type: bool
-            '';
-          };
-          SystemTray = mkOption {
-            type = nullOr "true";
-            default = "true";
-            description = ''
-              Close NeoChat to system tray
-
-              Type: bool
-            '';
-          };
-          MinimizeToSystemTrayOnStartup = mkOption {
-            type = nullOr "false";
-            default = "false";
-            description = ''
-              Minimize to system tray on startup
-
-              Type: bool
-            '';
-          };
-          ShowFancyEffects = mkOption {
-            type = nullOr "true";
-            default = "true";
-            description = ''
-              Show Fancy Effects
-
-              Type: bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Timeline";
-    };    
-    "RoomDrawer" = with types; mkOption {
-      type = submodule {
-        options = { 
-          ShowAvatarInRoomDrawer = mkOption {
-            type = nullOr "true";
-            default = "true";
-            description = ''
-              Show avatar in the room drawer
-
-              Type: bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "RoomDrawer";
     };    
     "NetworkProxy" = with types; mkOption {
       type = submodule {
@@ -291,7 +185,7 @@ in {
             '';
           };
           ProxyHost = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "127.0.0.1";
             description = ''
               IP or hostname of the proxy
@@ -300,8 +194,8 @@ in {
             '';
           };
           ProxyPort = mkOption {
-            type = nullOr "1080";
-            default = "1080";
+            type = nullOr (either str int);
+            default = 1080;
             description = ''
               The port number of the proxy
 
@@ -309,7 +203,7 @@ in {
             '';
           };
           ProxyUser = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               The user of the proxy
@@ -318,7 +212,7 @@ in {
             '';
           };
           ProxyPassword = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               The password of the proxy
@@ -330,6 +224,112 @@ in {
       };
       default = {};
       description = "NetworkProxy";
+    };    
+    "RoomDrawer" = with types; mkOption {
+      type = submodule {
+        options = { 
+          ShowAvatarInRoomDrawer = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show avatar in the room drawer
+
+              Type: bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "RoomDrawer";
+    };    
+    "Timeline" = with types; mkOption {
+      type = submodule {
+        options = { 
+          ShowAvatarInTimeline = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show avatar in the timeline
+
+              Type: bool
+            '';
+          };
+          CompactLayout = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Use a compact layout
+
+              Type: bool
+            '';
+          };
+          ShowRename = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show rename events in the timeline
+
+              Type: bool
+            '';
+          };
+          ShowAvatarUpdate = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show avatar update events in the timeline
+
+              Type: bool
+            '';
+          };
+          ShowDeletedMessages = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show deleted messages in the timeline
+
+              Type: bool
+            '';
+          };
+          ShowLinkPreview = mkOption {
+            type = nullOr (either str bool);
+            default = "";
+            description = ''
+              Show preview of the links in the chat messages
+
+              Type: bool
+            '';
+          };
+          SystemTray = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Close NeoChat to system tray
+
+              Type: bool
+            '';
+          };
+          MinimizeToSystemTrayOnStartup = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Minimize to system tray on startup
+
+              Type: bool
+            '';
+          };
+          ShowFancyEffects = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show Fancy Effects
+
+              Type: bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Timeline";
     };    
   };
   config = mkIf cfg.enable {

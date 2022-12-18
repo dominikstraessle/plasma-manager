@@ -3,6 +3,32 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.kalendar = { 
+    "Editor" = with types; mkOption {
+      type = submodule {
+        options = { 
+          lastUsedEventCollection = mkOption {
+            type = nullOr (either str int);
+            default = -1;
+            description = ''
+              The last used event collection used when creating a event.
+
+              Type: Int
+            '';
+          };
+          lastUsedTodoCollection = mkOption {
+            type = nullOr (either str int);
+            default = -1;
+            description = ''
+              The last used todo collection used when creating a todo.
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Editor";
+    };    
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -98,58 +124,6 @@ in {
       default = {};
       description = "General";
     };    
-    "MainDrawer" = with types; mkOption {
-      type = submodule {
-        options = { 
-          tagsSectionExpanded = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether the "Tags" section of the mainDrawer is expanded.
-
-              Type: Bool
-            '';
-          };
-          collectionsSectionExpanded = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Whether the "Calendar" or "Contacts" section of the mainDrawer is expanded.
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "MainDrawer";
-    };    
-    "Editor" = with types; mkOption {
-      type = submodule {
-        options = { 
-          lastUsedEventCollection = mkOption {
-            type = nullOr (either str int);
-            default = -1;
-            description = ''
-              The last used event collection used when creating a event.
-
-              Type: Int
-            '';
-          };
-          lastUsedTodoCollection = mkOption {
-            type = nullOr (either str int);
-            default = -1;
-            description = ''
-              The last used todo collection used when creating a todo.
-
-              Type: Int
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Editor";
-    };    
     "GeneralView" = with types; mkOption {
       type = submodule {
         options = { 
@@ -184,6 +158,32 @@ in {
       };
       default = {};
       description = "GeneralView";
+    };    
+    "MainDrawer" = with types; mkOption {
+      type = submodule {
+        options = { 
+          tagsSectionExpanded = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether the "Tags" section of the mainDrawer is expanded.
+
+              Type: Bool
+            '';
+          };
+          collectionsSectionExpanded = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether the "Calendar" or "Contacts" section of the mainDrawer is expanded.
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "MainDrawer";
     };    
     "MonthView" = with types; mkOption {
       type = submodule {
@@ -259,38 +259,6 @@ in {
       };
       default = {};
       description = "MonthView";
-    };    
-    "WeekView" = with types; mkOption {
-      type = submodule {
-        options = { 
-          hourlyViewMode = mkOption {
-            type = nullOr (either str (enum [ 
-              "SwipeableInternalHourlyView"
-              "BasicInternalHourlyView"
-            ]));
-            default = "SwipeableMonthGrid";
-            description = ''
-              Type of day grid view to be used internally in the month view"
-
-              Type: Enum
-              Choices: 
-                - SwipeableInternalHourlyView: Swipeable internal week view
-                - BasicInternalHourlyView: Basic internal week view
-            '';
-          };
-          weekViewAllDayHeaderHeight = mkOption {
-            type = nullOr (either str int);
-            default = -1;
-            description = ''
-              Set the height of the all-day header at the top of the week view."
-
-              Type: Int
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "WeekView";
     };    
     "ScheduleView" = with types; mkOption {
       type = submodule {
@@ -375,6 +343,38 @@ in {
       };
       default = {};
       description = "TaskView";
+    };    
+    "WeekView" = with types; mkOption {
+      type = submodule {
+        options = { 
+          hourlyViewMode = mkOption {
+            type = nullOr (either str (enum [ 
+              "SwipeableInternalHourlyView"
+              "BasicInternalHourlyView"
+            ]));
+            default = "SwipeableMonthGrid";
+            description = ''
+              Type of day grid view to be used internally in the month view"
+
+              Type: Enum
+              Choices: 
+                - SwipeableInternalHourlyView: Swipeable internal week view
+                - BasicInternalHourlyView: Basic internal week view
+            '';
+          };
+          weekViewAllDayHeaderHeight = mkOption {
+            type = nullOr (either str int);
+            default = -1;
+            description = ''
+              Set the height of the all-day header at the top of the week view."
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "WeekView";
     };    
   };
   config = mkIf cfg.enable {

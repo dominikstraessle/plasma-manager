@@ -52,8 +52,8 @@ in {
             '';
           };
           ShowMenuBar = mkOption {
-            type = nullOr "true";
-            default = "true";
+            type = nullOr (either str bool);
+            default = true;
             description = ''
               
 
@@ -61,8 +61,8 @@ in {
             '';
           };
           ShowHeader = mkOption {
-            type = nullOr "true";
-            default = "true";
+            type = nullOr (either str bool);
+            default = true;
             description = ''
               
 
@@ -70,8 +70,8 @@ in {
             '';
           };
           ShowChapterMarkers = mkOption {
-            type = nullOr "true";
-            default = "true";
+            type = nullOr (either str bool);
+            default = true;
             description = ''
               
 
@@ -79,7 +79,7 @@ in {
             '';
           };
           ColorScheme = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -88,8 +88,8 @@ in {
             '';
           };
           UseBreezeIconTheme = mkOption {
-            type = nullOr "false";
-            default = "false";
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               
 
@@ -97,7 +97,7 @@ in {
             '';
           };
           GuiStyle = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "Default";
             description = ''
               
@@ -115,7 +115,7 @@ in {
             '';
           };
           LastPlayedFile = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -124,7 +124,7 @@ in {
             '';
           };
           LastPlaylist = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -133,7 +133,7 @@ in {
             '';
           };
           FileDialogLocation = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -142,7 +142,7 @@ in {
             '';
           };
           FileDialogLastLocation = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "videoFolder";
             defaultText = "Code: true";
             description = ''
@@ -152,7 +152,7 @@ in {
             '';
           };
           LastUrl = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -170,8 +170,8 @@ in {
             '';
           };
           RememberWindowGeometry = mkOption {
-            type = nullOr "false";
-            default = "false";
+            type = nullOr (either str bool);
+            default = false;
             description = ''
               
 

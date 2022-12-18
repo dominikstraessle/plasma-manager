@@ -7,7 +7,7 @@ in {
       type = submodule {
         options = { 
           "TabletMode" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "auto";
             description = ''
               Automatically switch to touch-optimized mode
@@ -24,8 +24,8 @@ in {
       type = submodule {
         options = { 
           "EnablePrimarySelection" = mkOption {
-            type = nullOr "true";
-            default = "true";
+            type = nullOr (either str bool);
+            default = true;
             description = ''
               Enable middle click selection pasting
 

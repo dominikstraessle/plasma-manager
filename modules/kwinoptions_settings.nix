@@ -3,297 +3,6 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.kwin = { 
-    "Windows" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "BorderSnapZone" = mkOption {
-            type = nullOr (either str int);
-            default = 10;
-            description = ''
-              
-
-              Type: Int
-              Min: 0
-              Max: 100
-            '';
-          };
-          "WindowSnapZone" = mkOption {
-            type = nullOr (either str int);
-            default = 10;
-            description = ''
-              
-
-              Type: Int
-              Min: 0
-              Max: 100
-            '';
-          };
-          "CenterSnapZone" = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: Int
-              Min: 0
-              Max: 100
-            '';
-          };
-          "SnapOnlyWhenOverlapping" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ShadeHover" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ShadeHoverInterval" = mkOption {
-            type = nullOr (either str int);
-            default = 250;
-            description = ''
-              
-
-              Type: Int
-              Min: 0
-            '';
-          };
-          Placement = mkOption {
-            type = nullOr (either str (enum [ 
-              "Smart"
-              "Maximizing"
-              "Random"
-              "Centered"
-              "ZeroCornered"
-              "UnderMouse"
-            ]));
-            default = "Centered";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - Smart
-                - Maximizing
-                - Random
-                - Centered
-                - ZeroCornered
-                - UnderMouse
-            '';
-          };
-          "HideUtilityWindowsForInactive" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          ActivationDesktopPolicy = mkOption {
-            type = nullOr (either str (enum [ 
-              "SwitchToOtherDesktop"
-              "BringToCurrentDesktop"
-            ]));
-            default = "SwitchToOtherDesktop";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - SwitchToOtherDesktop
-                - BringToCurrentDesktop
-            '';
-          };
-          "TitlebarDoubleClickCommand" = mkOption {
-            type = nullOr (either str (enum [ 
-              "Maximize"
-              "MaximizeVerticalOnly"
-              "MaximizeHorizontalOnly"
-              "Minimize"
-              "Shade"
-              "Lower"
-              "Close"
-              "OnAllDesktops"
-              "Nothing"
-            ]));
-            default = "Maximize";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - Maximize
-                - MaximizeVerticalOnly
-                - MaximizeHorizontalOnly
-                - Minimize
-                - Shade
-                - Lower
-                - Close
-                - OnAllDesktops
-                - Nothing
-            '';
-          };
-          "MaximizeButtonLeftClickCommand" = mkOption {
-            type = nullOr (either str (enum [ 
-              "Maximize"
-              "MaximizeVerticalOnly"
-              "MaximizeHorizontalOnly"
-            ]));
-            default = "Maximize";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - Maximize
-                - MaximizeVerticalOnly
-                - MaximizeHorizontalOnly
-            '';
-          };
-          "MaximizeButtonMiddleClickCommand" = mkOption {
-            type = nullOr (either str (enum [ 
-              "Maximize"
-              "MaximizeVerticalOnly"
-              "MaximizeHorizontalOnly"
-            ]));
-            default = "MaximizeVerticalOnly";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - Maximize
-                - MaximizeVerticalOnly
-                - MaximizeHorizontalOnly
-            '';
-          };
-          "MaximizeButtonRightClickCommand" = mkOption {
-            type = nullOr (either str (enum [ 
-              "Maximize"
-              "MaximizeVerticalOnly"
-              "MaximizeHorizontalOnly"
-            ]));
-            default = "MaximizeHorizontalOnly";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - Maximize
-                - MaximizeVerticalOnly
-                - MaximizeHorizontalOnly
-            '';
-          };
-          "FocusPolicy" = mkOption {
-            type = nullOr (either str (enum [ 
-              "ClickToFocus"
-              "FocusFollowsMouse"
-              "FocusUnderMouse"
-              "FocusStrictlyUnderMouse"
-            ]));
-            default = "ClickToFocus";
-            description = ''
-              
-
-              Type: Enum
-              Choices: 
-                - ClickToFocus
-                - FocusFollowsMouse
-                - FocusUnderMouse
-                - FocusStrictlyUnderMouse
-            '';
-          };
-          "NextFocusPrefersMouse" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "AutoRaiseInterval" = mkOption {
-            type = nullOr (either str int);
-            default = 750;
-            description = ''
-              
-
-              Type: Int
-              Min: 0
-            '';
-          };
-          "DelayFocusInterval" = mkOption {
-            type = nullOr (either str int);
-            default = 300;
-            description = ''
-              
-
-              Type: Int
-              Min: 0
-            '';
-          };
-          "AutoRaise" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ClickRaise" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "SeparateScreenFocus" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "ActiveMouseScreen" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          "FocusStealingPreventionLevel" = mkOption {
-            type = nullOr (either str int);
-            default = 1;
-            description = ''
-              
-
-              Type: Int
-              Min: 0
-              Max: 4
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Windows";
-    };    
     "MouseBindings" = with types; mkOption {
       type = submodule {
         options = { 
@@ -713,6 +422,297 @@ in {
       };
       default = {};
       description = "MouseBindings";
+    };    
+    "Windows" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "BorderSnapZone" = mkOption {
+            type = nullOr (either str int);
+            default = 10;
+            description = ''
+              
+
+              Type: Int
+              Min: 0
+              Max: 100
+            '';
+          };
+          "WindowSnapZone" = mkOption {
+            type = nullOr (either str int);
+            default = 10;
+            description = ''
+              
+
+              Type: Int
+              Min: 0
+              Max: 100
+            '';
+          };
+          "CenterSnapZone" = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: Int
+              Min: 0
+              Max: 100
+            '';
+          };
+          "SnapOnlyWhenOverlapping" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ShadeHover" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ShadeHoverInterval" = mkOption {
+            type = nullOr (either str int);
+            default = 250;
+            description = ''
+              
+
+              Type: Int
+              Min: 0
+            '';
+          };
+          Placement = mkOption {
+            type = nullOr (either str (enum [ 
+              "Smart"
+              "Maximizing"
+              "Random"
+              "Centered"
+              "ZeroCornered"
+              "UnderMouse"
+            ]));
+            default = "Centered";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - Smart
+                - Maximizing
+                - Random
+                - Centered
+                - ZeroCornered
+                - UnderMouse
+            '';
+          };
+          "HideUtilityWindowsForInactive" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          ActivationDesktopPolicy = mkOption {
+            type = nullOr (either str (enum [ 
+              "SwitchToOtherDesktop"
+              "BringToCurrentDesktop"
+            ]));
+            default = "SwitchToOtherDesktop";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - SwitchToOtherDesktop
+                - BringToCurrentDesktop
+            '';
+          };
+          "TitlebarDoubleClickCommand" = mkOption {
+            type = nullOr (either str (enum [ 
+              "Maximize"
+              "MaximizeVerticalOnly"
+              "MaximizeHorizontalOnly"
+              "Minimize"
+              "Shade"
+              "Lower"
+              "Close"
+              "OnAllDesktops"
+              "Nothing"
+            ]));
+            default = "Maximize";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - Maximize
+                - MaximizeVerticalOnly
+                - MaximizeHorizontalOnly
+                - Minimize
+                - Shade
+                - Lower
+                - Close
+                - OnAllDesktops
+                - Nothing
+            '';
+          };
+          "MaximizeButtonLeftClickCommand" = mkOption {
+            type = nullOr (either str (enum [ 
+              "Maximize"
+              "MaximizeVerticalOnly"
+              "MaximizeHorizontalOnly"
+            ]));
+            default = "Maximize";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - Maximize
+                - MaximizeVerticalOnly
+                - MaximizeHorizontalOnly
+            '';
+          };
+          "MaximizeButtonMiddleClickCommand" = mkOption {
+            type = nullOr (either str (enum [ 
+              "Maximize"
+              "MaximizeVerticalOnly"
+              "MaximizeHorizontalOnly"
+            ]));
+            default = "MaximizeVerticalOnly";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - Maximize
+                - MaximizeVerticalOnly
+                - MaximizeHorizontalOnly
+            '';
+          };
+          "MaximizeButtonRightClickCommand" = mkOption {
+            type = nullOr (either str (enum [ 
+              "Maximize"
+              "MaximizeVerticalOnly"
+              "MaximizeHorizontalOnly"
+            ]));
+            default = "MaximizeHorizontalOnly";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - Maximize
+                - MaximizeVerticalOnly
+                - MaximizeHorizontalOnly
+            '';
+          };
+          "FocusPolicy" = mkOption {
+            type = nullOr (either str (enum [ 
+              "ClickToFocus"
+              "FocusFollowsMouse"
+              "FocusUnderMouse"
+              "FocusStrictlyUnderMouse"
+            ]));
+            default = "ClickToFocus";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - ClickToFocus
+                - FocusFollowsMouse
+                - FocusUnderMouse
+                - FocusStrictlyUnderMouse
+            '';
+          };
+          "NextFocusPrefersMouse" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "AutoRaiseInterval" = mkOption {
+            type = nullOr (either str int);
+            default = 750;
+            description = ''
+              
+
+              Type: Int
+              Min: 0
+            '';
+          };
+          "DelayFocusInterval" = mkOption {
+            type = nullOr (either str int);
+            default = 300;
+            description = ''
+              
+
+              Type: Int
+              Min: 0
+            '';
+          };
+          "AutoRaise" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ClickRaise" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "SeparateScreenFocus" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "ActiveMouseScreen" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "FocusStealingPreventionLevel" = mkOption {
+            type = nullOr (either str int);
+            default = 1;
+            description = ''
+              
+
+              Type: Int
+              Min: 0
+              Max: 4
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Windows";
     };    
   };
   config = mkIf cfg.enable {

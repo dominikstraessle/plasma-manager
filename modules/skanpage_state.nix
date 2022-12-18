@@ -7,7 +7,7 @@ in {
       type = submodule {
         options = { 
           "deviceName" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -16,7 +16,7 @@ in {
             '';
           };
           "deviceModel" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               
@@ -25,7 +25,7 @@ in {
             '';
           };
           "deviceVendor" = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               

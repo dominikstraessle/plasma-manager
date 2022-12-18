@@ -39,7 +39,7 @@ in {
             '';
           };
           ShadowColor = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "0, 0, 0";
             description = ''
               
@@ -176,7 +176,7 @@ in {
             '';
           };
           ExceptionPattern = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "";
             description = ''
               

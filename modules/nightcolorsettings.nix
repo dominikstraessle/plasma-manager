@@ -89,7 +89,7 @@ in {
             '';
           };
           MorningBeginFixed = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "0600";
             description = ''
               
@@ -98,7 +98,7 @@ in {
             '';
           };
           EveningBeginFixed = mkOption {
-            type = nullOr (either str str);
+            type = nullOr str;
             default = "1800";
             description = ''
               

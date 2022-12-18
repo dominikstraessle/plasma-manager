@@ -2,11 +2,9 @@
 {
   programs.plasma = {
     enable = true;
-    spectacle.General.onLaunchAction = "DoNotTakeScreenshot";
+#    spectacle.General.onLaunchAction = "DoNotTakeScreenshot";
 
     # Some high-level settings:
-    workspace.clickItemTo = "select";
-
     hotkeys.commands."Launch Konsole" = {
       key = "Meta+Alt+K";
       command = "konsole";
