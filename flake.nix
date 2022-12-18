@@ -11,27 +11,20 @@
   outputs = inputs@{ self, ... }:
     let
       # Systems that can run tests:
-      supportedSystems = [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
-      ];
+      supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
 
       # Function to generate a set based on supported systems:
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
 
       # Attribute set of nixpkgs for each system:
-      nixpkgsFor = forAllSystems (system:
-        import inputs.nixpkgs { inherit system; });
-    in
-    {
-      homeManagerModules.plasma-manager = { ... }: {
-        imports = [ ./modules ];
-      };
+      nixpkgsFor =
+        forAllSystems (system: import inputs.nixpkgs { inherit system; });
+    in {
+      homeManagerModules.plasma-manager = { ... }: { imports = [ ./modules ]; };
 
       packages = forAllSystems (system:
-        let pkgs = nixpkgsFor.${system}; in
-        {
+        let pkgs = nixpkgsFor.${system};
+        in {
           default = self.packages.${system}.rc2nix;
 
           demo = (inputs.nixpkgs.lib.nixosSystem {
@@ -41,9 +34,7 @@
                 pkgs = nixpkgsFor.x86_64-linux;
                 home-manager = inputs.home-manager;
                 module = self.homeManagerModules.plasma-manager;
-                extraPackages = with self.packages.${system}; [
-                  rc2nix
-                ];
+                extraPackages = with self.packages.${system}; [ rc2nix ];
               })
             ];
           }).config.system.build.vm;
@@ -71,21 +62,23 @@
 
       checks = forAllSystems (system:
         let
-          test = path: import path {
-            pkgs = nixpkgsFor.${system};
-            home-manager = inputs.home-manager;
-            module = self.homeManagerModules.plasma-manager;
-          };
-        in
-        {
-          default = test ./test/basic.nix;
-        });
+          test = path:
+            import path {
+              pkgs = nixpkgsFor.${system};
+              home-manager = inputs.home-manager;
+              module = self.homeManagerModules.plasma-manager;
+            };
+        in { default = test ./test/basic.nix; });
 
       devShells = forAllSystems (system: {
         default = nixpkgsFor.${system}.mkShell {
           buildInputs = with nixpkgsFor.${system}; [
             ruby
             ruby.devdoc
+            go
+            gopls
+            gotools
+            go-tools
           ];
         };
       });
