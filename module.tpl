@@ -28,6 +28,6 @@ in {
     };    {{ end }}
   };
   config = mkIf cfg.enable {
-    programs.plasma.files."{{ .KcfgFile.Name }}" = cfg.{{ .Name }};
+    programs.plasma.files."{{ .RCName }}" = cfg.{{ .Name }};
   };
 }

@@ -7,11 +7,42 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 	"text/template"
 )
+
+type Option struct {
+	Name          string
+	Key           string
+	HasKey        bool
+	TypeValue     string
+	IsDefaultCode bool
+	Label         string
+	Type          string
+	Min           string
+	HasMin        bool
+	Max           string
+	HasMax        bool
+	Code          string
+	IsCode        bool
+	HasChoices    bool
+	Choices       []Choice
+}
+
+type OptionGroup struct {
+	Options     map[string]*Option
+	Description string
+	Name        string
+}
+
+type Module struct {
+	RCName string
+	Name   string
+	Groups map[string]*OptionGroup
+}
+
+var modules = map[string]*Module{}
 
 type Choice struct {
 	Name  string `xml:"name,attr"`
@@ -125,7 +156,7 @@ var mapping = map[string]string{
 	"okularrc":                             "okular",
 }
 
-var modules = []string{}
+var allModules []string
 
 func main() {
 	dirs, err := os.ReadDir("kcfg/")
@@ -138,7 +169,11 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		createModule(kcfg, entry.Name())
+		scanModules(kcfg, entry.Name())
+	}
+
+	for s, module := range modules {
+		createModule(module, s)
 	}
 
 	t, err := template.ParseFiles("default.tpl")
@@ -151,22 +186,20 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = t.Execute(nix, modules)
+	err = t.Execute(nix, allModules)
 	if err != nil {
 		panic(err)
 	}
 
 }
 
-func createModule(kcfg []byte, name string) {
+func scanModules(kcfg []byte, name string) {
 	// get all kcfg files: https://github.com/search?q=filename%3A*.kcfg+user%3AKDE+language%3AXML+language%3AXML&type=Code&ref=advsearch&l=XML&l=XML
 	dec := xml.NewDecoder(bytes.NewReader(kcfg))
 	var doc Kcfg
 	if err := dec.Decode(&doc); err != nil {
 		log.Fatal(err)
 	}
-
-	doc = mergeDuplicates(doc)
 
 	if doc.KcfgFile.Name == "" {
 		if _, ok := noKcfg[name]; !ok {
@@ -183,6 +216,52 @@ func createModule(kcfg []byte, name string) {
 		doc.Name = mapping[doc.KcfgFile.Name]
 	}
 
+	var module = &Module{
+		RCName: doc.KcfgFile.Name,
+		Name:   doc.Name,
+		Groups: map[string]*OptionGroup{},
+	}
+
+	if m, ok := modules[doc.Name]; ok {
+		module = m
+	}
+
+	for _, group := range doc.Groups {
+		var optionGroup = &OptionGroup{
+			Options:     map[string]*Option{},
+			Description: group.Name,
+			Name:        group.Name,
+		}
+		if g, ok := module.Groups[group.Name]; ok {
+			optionGroup = g
+		}
+
+		for _, entry := range group.Entries {
+			if _, ok := optionGroup.Options[entry.Name]; ok {
+				continue
+			}
+			optionGroup.Options[entry.Name] = &Option{
+				Name:          entry.Name,
+				Key:           entry.Key,
+				HasKey:        entry.HasKey(),
+				TypeValue:     entry.TypeValue(),
+				IsDefaultCode: entry.IsDefaultCode(),
+				Label:         entry.Label,
+				Type:          entry.Type,
+				Min:           entry.Min,
+				HasMin:        entry.HasMin(),
+				Max:           entry.Max,
+				HasMax:        entry.HasMax(),
+				Code:          entry.Code,
+				IsCode:        entry.IsCode(),
+				HasChoices:    entry.HasChoices(),
+				Choices:       entry.Choices.Choices,
+			}
+		}
+	}
+	modules[doc.Name] = module
+}
+func createModule(module *Module, name string) {
 	t, err := template.ParseFiles("module.tpl")
 
 	if err != nil {
@@ -193,38 +272,16 @@ func createModule(kcfg []byte, name string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = t.Execute(nix, doc)
+	err = t.Execute(nix, module)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func mergeDuplicates(doc Kcfg) Kcfg {
-	var groups = map[string]Group{}
-	for _, group := range doc.Groups {
-		if _, ok := groups[group.Name]; ok {
-			entries := groups[group.Name].Entries
-			entries = append(entries, group.Entries...)
-			continue
-		}
-		groups[group.Name] = group
-	}
-
-	var final = []Group{}
-	for _, group := range groups {
-		final = append(final, group)
-	}
-	sort.SliceStable(final, func(i, j int) bool {
-		return final[i].Name < final[j].Name
-	})
-	doc.Groups = final
-	return doc
-}
-
 func getModuleName(name string) string {
 	base, _, _ := strings.Cut(name, ".kcfg")
 	moduleName := base + ".nix"
-	modules = append(modules, moduleName)
+	allModules = append(allModules, moduleName)
 	return moduleName
 }
 

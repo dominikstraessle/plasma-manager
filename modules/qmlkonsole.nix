@@ -2,9 +2,9 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.config = { 
+  options.programs.plasma.qmlkonsole = { 
   };
   config = mkIf cfg.enable {
-    programs.plasma.files."configrc" = cfg.config;
+    programs.plasma.files."qmlkonsolerc" = cfg.qmlkonsole;
   };
 }

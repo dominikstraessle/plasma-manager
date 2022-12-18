@@ -2,9 +2,9 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.config = { 
+  options.programs.plasma.kdeglobals = { 
   };
   config = mkIf cfg.enable {
-    programs.plasma.files."configrc" = cfg.config;
+    programs.plasma.files."kdeglobals" = cfg.kdeglobals;
   };
 }

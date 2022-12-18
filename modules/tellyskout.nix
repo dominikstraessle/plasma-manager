@@ -2,9 +2,9 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.config = { 
+  options.programs.plasma.tellyskout = { 
   };
   config = mkIf cfg.enable {
-    programs.plasma.files."configrc" = cfg.config;
+    programs.plasma.files."tellyskoutrc" = cfg.tellyskout;
   };
 }

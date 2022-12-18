@@ -2,9 +2,9 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.config = { 
+  options.programs.plasma.plasmacamera = { 
   };
   config = mkIf cfg.enable {
-    programs.plasma.files."configrc" = cfg.config;
+    programs.plasma.files."plasmacamerarc" = cfg.plasmacamera;
   };
 }
