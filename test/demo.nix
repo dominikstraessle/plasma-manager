@@ -58,5 +58,7 @@ in
     };
 
     environment.systemPackages = extraPackages;
+
+    system.stateVersion = "22.11";
   };
 }
