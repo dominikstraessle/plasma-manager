@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
@@ -13,82 +14,7 @@ import (
 	"text/template"
 )
 
-type Option struct {
-	Name          string
-	Key           string
-	HasKey        bool
-	TypeValue     string
-	DefaultValue  string
-	IsDefaultCode bool
-	Label         string
-	Type          string
-	Min           string
-	HasMin        bool
-	Max           string
-	HasMax        bool
-	Code          string
-	IsCode        bool
-	HasChoices    bool
-	Choices       []Choice
-}
-
-type OptionGroup struct {
-	Options     map[string]*Option
-	Description string
-	Name        string
-}
-
-type Module struct {
-	RCName string
-	Name   string
-	Groups map[string]*OptionGroup
-}
-
 var modules = map[string]*Module{}
-
-type Choice struct {
-	Name  string `xml:"name,attr"`
-	Label string `xml:"label"`
-}
-
-type Choices struct {
-	Name    string   `xml:"name,attr"`
-	Choices []Choice `xml:"choice"`
-}
-
-type Default struct {
-	Text string `xml:",chardata"`
-	Code string `xml:"code,attr"`
-}
-
-type Entry struct {
-	Name    string  `xml:"name,attr"`
-	Key     string  `xml:"key,attr"`
-	Type    string  `xml:"type,attr"`
-	Label   string  `xml:"label"`
-	Hidden  string  `xml:"hidden"`
-	Code    string  `xml:"code"`
-	Choices Choices `xml:"choices"`
-	Default Default `xml:"default"`
-	Min     string  `xml:"min"`
-	Max     string  `xml:"max"`
-}
-
-type Group struct {
-	Name    string  `xml:"name,attr"`
-	Entries []Entry `xml:"entry"`
-}
-
-type KcfgFile struct {
-	Name string `xml:"name,attr"`
-}
-
-type Kcfg struct {
-	Name     string
-	XMLName  xml.Name `xml:"kcfg"`
-	KcfgFile KcfgFile `xml:"kcfgfile"`
-	Groups   []Group  `xml:"group"`
-}
 
 var noKcfg = map[string]string{
 	"bytetableviewsettings.kcfg": "bytetableviewsettingsrc",
@@ -102,10 +28,10 @@ var noKcfg = map[string]string{
 }
 
 var mapping = map[string]string{
-	"kded_device_automounterrc":            "kded_device_automounter",
-	"kcminputrc":                           "kcminput",
-	"kglobalshortcutsrc":                   "kglobalshortcuts",
-	"kactivitymanagerdrc":                  "kactivitymanagerd",
+	"kded_device_automounterrc": "kded_device_automounter",
+	"kcminputrc":                "kcminput",
+	"kglobalshortcutsrc":        "kglobalshortcuts",
+	//"kactivitymanagerdrc":                  "kactivitymanagerd",
 	"ksplashrc":                            "ksplash",
 	"kwin_rules_dialogrc":                  "kwin_rules_dialog",
 	"kmixrc":                               "kmix",
@@ -176,6 +102,15 @@ func main() {
 		scanModules(kcfg, entry.Name())
 	}
 
+	b, err := json.Marshal(modules)
+	if err != nil {
+		log.Fatalf("Failed to create module json: %v", err)
+	}
+	err = ioutil.WriteFile("modules.json", b, 0644)
+	if err != nil {
+		log.Fatalf("Failed to save json: %v", err)
+	}
+
 	for s, module := range modules {
 		createModule(module, s)
 	}
@@ -201,7 +136,7 @@ func main() {
 func scanModules(kcfg []byte, name string) {
 	// get all kcfg files: https://github.com/search?q=filename%3A*.kcfg+user%3AKDE+language%3AXML+language%3AXML&type=Code&ref=advsearch&l=XML&l=XML
 	dec := xml.NewDecoder(bytes.NewReader(kcfg))
-	var doc Kcfg
+	var doc ConfigKcfg
 	if err := dec.Decode(&doc); err != nil {
 		log.Fatal(err)
 	}
@@ -308,7 +243,7 @@ func AsString(text string) string {
 	}
 	return fmt.Sprintf(`"%s"`, text)
 }
-func (e Entry) DefaultValue() string {
+func (e ConfigEntry) DefaultValue() string {
 	if e.Default.Code == "true" {
 		return AsString(e.Default.Text)
 	}
@@ -348,7 +283,7 @@ func (e Entry) DefaultValue() string {
 	}
 }
 
-func (e Entry) TypeValue() string {
+func (e ConfigEntry) TypeValue() string {
 	base := "(either str %s)"
 	switch strings.ToLower(e.Type) {
 	case "int", "uint", "int64", "uint64":
@@ -379,28 +314,28 @@ func (e Entry) TypeValue() string {
 	}
 
 }
-func (e Entry) HasKey() bool {
+func (e ConfigEntry) HasKey() bool {
 	return e.Key != ""
 }
-func (e Entry) HasMin() bool {
+func (e ConfigEntry) HasMin() bool {
 	return e.Min != ""
 }
-func (e Entry) HasMax() bool {
+func (e ConfigEntry) HasMax() bool {
 	return e.Max != ""
 }
-func (e Entry) HasChoices() bool {
+func (e ConfigEntry) HasChoices() bool {
 	if len(e.Choices.Choices) == 0 {
 		return false
 	}
 	return true
 }
-func (c Choice) HasLabel() bool {
+func (c ConfigChoice) HasLabel() bool {
 	return c.Label != ""
 }
 
-func (e Entry) IsCode() bool {
+func (e ConfigEntry) IsCode() bool {
 	return e.Code == "true"
 }
-func (e Entry) IsDefaultCode() bool {
+func (e ConfigEntry) IsDefaultCode() bool {
 	return e.Default.Code == "true"
 }

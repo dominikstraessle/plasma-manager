@@ -4,21 +4,23 @@ let
 
   ##############################################################################
   # Convert a Nix value into a command line argument to kwriteconfig.
-  toKdeValue = v:
+  toKdeValue = with builtins; v:
     if v == null then
       "--delete"
-    else if builtins.isString v then
+    else if isString v then
       lib.escapeShellArg v
-    else if builtins.isBool v then
+    else if isBool v then
       "--type bool " + lib.boolToString v
-    else if builtins.isInt v then
-      builtins.toString v
-    else if builtins.isFloat v then
-      builtins.toString v
-    else if builtins.isList v then
-      builtins.concatStringsSep "," v
+    else if isInt v then
+      toString v
+    else if isFloat v then
+      toString v
+    else if isList v then
+      concatStringsSep "," (toString v)
+    else if isEnum v then
+      toString v
     else
-      builtins.abort ("Unknown value type: " ++ builtins.toString v);
+      abort ("Unknown value type: " ++ xtoString v);
 
   ##############################################################################
   # Generate a series of shell commands that will update a
