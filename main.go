@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 	"text/template"
@@ -17,6 +18,7 @@ type Option struct {
 	Key           string
 	HasKey        bool
 	TypeValue     string
+	DefaultValue  string
 	IsDefaultCode bool
 	Label         string
 	Type          string
@@ -119,7 +121,7 @@ var mapping = map[string]string{
 	"plasmarc":                             "plasma",
 	"kwinrc":                               "kwin",
 	"kdeglobals":                           "kdeglobals",
-	"baloofilerc":                          "baloofile",
+	"baloofilerc":                          "baloo",
 	"dolphinrc":                            "dolphin",
 	"klipperrc":                            "klipper",
 	"plasma-localerc":                      "plasma-locale",
@@ -186,6 +188,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	sort.Strings(allModules)
 	err = t.Execute(nix, allModules)
 	if err != nil {
 		panic(err)
@@ -240,11 +243,18 @@ func scanModules(kcfg []byte, name string) {
 			if _, ok := optionGroup.Options[entry.Name]; ok {
 				continue
 			}
-			optionGroup.Options[entry.Name] = &Option{
+			var name string
+			if entry.HasKey() {
+				name = entry.Key
+			} else {
+				name = entry.Name
+			}
+			optionGroup.Options[name] = &Option{
 				Name:          entry.Name,
 				Key:           entry.Key,
 				HasKey:        entry.HasKey(),
 				TypeValue:     entry.TypeValue(),
+				DefaultValue:  entry.DefaultValue(),
 				IsDefaultCode: entry.IsDefaultCode(),
 				Label:         entry.Label,
 				Type:          entry.Type,
@@ -258,6 +268,8 @@ func scanModules(kcfg []byte, name string) {
 				Choices:       entry.Choices.Choices,
 			}
 		}
+
+		module.Groups[optionGroup.Name] = optionGroup
 	}
 	modules[doc.Name] = module
 }
@@ -342,7 +354,7 @@ func (e Entry) TypeValue() string {
 		return fmt.Sprintf(base, "bool")
 	case "string", "url", "color", "font", "rect", "size", "point", "datetime", "path", "password":
 		return fmt.Sprintf("str")
-	case "stringlist":
+	case "stringlist", "qstringlist()", "pathlist":
 		return fmt.Sprintf(base, "(listOf str)")
 	case "intlist":
 		return fmt.Sprintf(base, "(listOf int)")
@@ -356,7 +368,9 @@ func (e Entry) TypeValue() string {
 		enum.WriteString(fmt.Sprintf(`            ])`))
 		return fmt.Sprintf(base, enum.String())
 	default:
-		return fmt.Sprintf(`"%s"`, e.Default.Text)
+		fmt.Printf("Invalid type: %s\n", e.Type)
+		fmt.Printf("Checked as: %s\n", strings.ToLower(e.Type))
+		return fmt.Sprintf("str")
 	}
 
 }

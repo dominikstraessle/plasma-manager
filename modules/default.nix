@@ -5,39 +5,40 @@
     ./files.nix
     ./hotkeys.nix
     ./shortcuts.nix
-    ./kalendarcontact.nix
-    ./klipper.nix
-    ./okular.nix
-    ./org_kde_initialsystemsetup_license.nix
-    ./qmlkonsole.nix
-    ./ark.nix
-    ./plasmacamera.nix
-    ./config.nix
-    ./breeze.nix
-    ./haruna.nix
-    ./kalzium.nix
-    ./krunner.nix
-    ./neochat.nix
-    ./ksmserver.nix
-    ./kded_device_automounter.nix
-    ./tellyskout.nix
-    ./fieldingconfig.nix
-    ./kdevelop.nix
-    ./kalendar.nix
-    ./kontact.nix
-    ./kwin.nix
-    ./skanpage.nix
-    ./bytetableviewsettings.nix
-    ./konsole.nix
-    ./kdeglobals.nix
-    ./pimcommon.nix
-    ./spectacle.nix
-    ./infoviewsettings.nix
-    ./konversation.nix
-    ./kstars.nix
     ./GitKlientSettings.nix
     ./akregator.nix
+    ./ark.nix
+    ./baloo.nix
+    ./breeze.nix
+    ./bytetableviewsettings.nix
+    ./config.nix
+    ./fieldingconfig.nix
+    ./haruna.nix
+    ./infoviewsettings.nix
+    ./kalendar.nix
+    ./kalendarcontact.nix
+    ./kalzium.nix
+    ./kded_device_automounter.nix
+    ./kdeglobals.nix
+    ./kdevelop.nix
+    ./klipper.nix
+    ./konsole.nix
+    ./kontact.nix
+    ./konversation.nix
+    ./krunner.nix
+    ./ksmserver.nix
     ./kspread.nix
+    ./kstars.nix
+    ./kwin.nix
+    ./neochat.nix
+    ./okular.nix
+    ./org_kde_initialsystemsetup_license.nix
+    ./pimcommon.nix
+    ./plasmacamera.nix
+    ./qmlkonsole.nix
+    ./skanpage.nix
+    ./spectacle.nix
+    ./tellyskout.nix
   ];
 
   options.programs.plasma.enable = lib.mkEnableOption ''

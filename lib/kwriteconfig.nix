@@ -15,6 +15,8 @@ let
       builtins.toString v
     else if builtins.isFloat v then
       builtins.toString v
+    else if builtins.isList v then
+      builtins.concatStringsSep "," v
     else
       builtins.abort ("Unknown value type: " ++ builtins.toString v);
 
@@ -31,16 +33,14 @@ let
   #
   # Type: string -> [string] -> AttrSet -> string
   kWriteConfig = file: groups: attrs:
-    lib.concatStringsSep "\n" (lib.mapAttrsToList
-      (key: value: ''
-        ${pkgs.libsForQt5.kconfig}/bin/kwriteconfig5 \
-          --file ''${XDG_CONFIG_HOME:-$HOME/.config}/${lib.escapeShellArg file} \
-          ${lib.concatMapStringsSep " " (g: "--group " + lib.escapeShellArg g) groups} \
-          --key ${lib.escapeShellArg key} \
-          ${toKdeValue value}
-      '')
-      attrs);
-in
-{
-  inherit kWriteConfig;
-}
+    lib.concatStringsSep "\n" (lib.mapAttrsToList (key: value: ''
+      ${pkgs.libsForQt5.kconfig}/bin/kwriteconfig5 \
+        --file ''${XDG_CONFIG_HOME:-$HOME/.config}/${lib.escapeShellArg file} \
+        ${
+          lib.concatMapStringsSep " " (g: "--group " + lib.escapeShellArg g)
+          groups
+        } \
+        --key ${lib.escapeShellArg key} \
+        ${toKdeValue value}
+    '') attrs);
+in { inherit kWriteConfig; }

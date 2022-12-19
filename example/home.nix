@@ -2,6 +2,10 @@
 {
   programs.plasma = {
     enable = true;
+
+    baloo = {
+      General.folders = [ "/var" "/home/fake" ];
+    };
 #    spectacle.General.onLaunchAction = "DoNotTakeScreenshot";
 
     # Some high-level settings:
@@ -25,7 +29,9 @@
       };
     };
 
+
+
     # A low-level setting:
-    files."baloofilerc"."Basic Settings"."Indexing-Enabled" = false;
+#    files."baloofilerc"."Basic Settings"."Indexing-Enabled" = false;
   };
 }

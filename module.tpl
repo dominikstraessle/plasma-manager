@@ -5,7 +5,7 @@ in {
   options.programs.plasma.{{ .Name }} = { {{ range .Groups }}
     "{{ .Name }}" = with types; mkOption {
       type = submodule {
-        options = { {{ range .Entries }}
+        options = { {{ range .Options }}
           {{if .HasKey }}"{{ .Key }}"{{else}}{{ .Name }}{{end}} = mkOption {
             type = nullOr {{ .TypeValue }};
             default = {{ .DefaultValue }};{{if .IsDefaultCode }}
@@ -17,7 +17,7 @@ in {
               Min: {{ .Min }}{{end}}{{if .HasMax }}
               Max: {{ .Max }}{{end}}{{if .IsCode }}
               Code: {{ .Code }}{{end}}{{if .HasChoices}}
-              Choices: {{ range .Choices.Choices }}
+              Choices: {{ range .Choices }}
                 - {{ .Name }}{{if .HasLabel }}: {{ .Label }}{{end}}{{end}}{{end}}
             '';
           };{{ end }}

@@ -9,8 +9,7 @@ let
   ##############################################################################
   # A module for storing settings.
   settingType = { name, ... }: {
-    freeformType = with lib.types;
-      attrsOf (nullOr (oneOf [ bool float int str ]));
+    freeformType = with lib.types; attrsOf anything;
 
     options = {
       configGroupNesting = lib.mkOption {
