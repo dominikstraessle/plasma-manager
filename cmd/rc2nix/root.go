@@ -1,4 +1,4 @@
-package main
+package rc2nix
 
 import (
 	"bufio"
@@ -8,108 +8,12 @@ import (
 	"log"
 	"os"
 	"path"
+	"plasma-manager/cmd"
 	"regexp"
 	"strings"
 	"text/template"
 	"unicode"
 )
-
-type Option struct {
-	Name          string
-	Key           string
-	HasKey        bool
-	TypeValue     string
-	DefaultValue  string
-	IsDefaultCode bool
-	Label         string
-	Type          string
-	Min           string
-	HasMin        bool
-	Max           string
-	HasMax        bool
-	Code          string
-	IsCode        bool
-	HasChoices    bool
-	Choices       []ConfigChoice
-}
-
-type ConfigChoice struct {
-	Name  string `xml:"name,attr"`
-	Label string `xml:"label"`
-}
-
-type OptionGroup struct {
-	Options     map[string]*Option
-	Description string
-	Name        string
-}
-
-type Module struct {
-	RCName string
-	Name   string
-	Groups map[string]*OptionGroup
-}
-
-var mapping = map[string]string{
-	"kded_device_automounterrc": "kded_device_automounter",
-	"kcminputrc":                "kcminput",
-	"kglobalshortcutsrc":        "kglobalshortcuts",
-	//"kactivitymanagerdrc":                  "kactivitymanagerd",
-	"ksplashrc":                            "ksplash",
-	"kwin_rules_dialogrc":                  "kwin_rules_dialog",
-	"kmixrc":                               "kmix",
-	"kwalletrc":                            "kwallet",
-	"kgammarc":                             "kgamma",
-	"krunnerrc":                            "krunner",
-	"klaunchrc":                            "klaunch",
-	"plasmanotifyrc":                       "plasmanotify",
-	"systemsettingsrc":                     "systemsettings",
-	"kscreenlockerrc":                      "kscreenlocker",
-	"kwinrulesrc":                          "kwinrules",
-	"khotkeysrc":                           "hotkeys",
-	"ksmserverrc":                          "ksmserver",
-	"kded5rc":                              "kded5",
-	"plasmarc":                             "plasma",
-	"kwinrc":                               "kwin",
-	"kdeglobals":                           "kdeglobals",
-	"baloofilerc":                          "baloo",
-	"dolphinrc":                            "dolphin",
-	"klipperrc":                            "klipper",
-	"plasma-localerc":                      "plasma-locale",
-	"kxkbrc":                               "kxkb",
-	"ffmpegthumbsrc":                       "ffmpegthumbs",
-	"kservicemenurc":                       "kservicemenu",
-	"kiorc":                                "kio",
-	"spectaclerc":                          "spectacle",
-	"kalendarrc":                           "kalendar",
-	"GitKlientSettings":                    "GitKlientSettings",
-	"tellyskoutrc":                         "tellyskout",
-	"akregatorrc":                          "akregator",
-	"arkrc":                                "ark",
-	"breezerc":                             "breeze",
-	"kspreadrc":                            "kspread",
-	"plasmacamerarc":                       "plasmacamera",
-	"kalendarcontactrc":                    "kalendarcontact",
-	"haruna/haruna.conf":                   "haruna",
-	"kalziumrc":                            "kalzium",
-	"konsolerc":                            "konsole",
-	"kontactrc":                            "kontact",
-	"konversationrc":                       "konversation",
-	"kstarsrc":                             "kstars",
-	"kdeveloprc":                           "kdevelop",
-	"neochatrc":                            "neochat",
-	"org_kde_initialsystemsetup_licenserc": "org_kde_initialsystemsetup_license",
-	"pimcommonrc":                          "pimcommon",
-	"skanpagerc":                           "skanpage",
-	"qmlkonsolerc":                         "qmlkonsole",
-	"bytetableviewsettingsrc":              "bytetableviewsettings",
-	"configrc":                             "config",
-	"fieldingconfigrc":                     "fieldingconfig",
-	"infoviewsettingsrc":                   "infoviewsettings",
-	"okularrc":                             "okular",
-	"discoverrc":                           "discover",
-	"elisarc":                              "elisa",
-}
 
 var skipChecks = []string{
 	//"hotkeys",
@@ -189,7 +93,7 @@ func AsString(text string) string {
 	return fmt.Sprintf(`"%s"`, text)
 }
 
-var allExistingModules = map[string]*Module{}
+var allExistingModules = map[string]*cmd.Module{}
 
 func main() {
 	b, err := ioutil.ReadFile("modules.json")
@@ -204,7 +108,7 @@ func main() {
 	configDir := getConfigDir()
 	modules = map[string]*module{}
 
-	for rc, module := range mapping {
+	for rc, module := range cmd.RCToModuleMapping {
 		err := parseFile(path.Join(configDir, rc), module)
 		if err != nil {
 			log.Printf("Failed to parse %s: %v", rc, err)

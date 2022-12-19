@@ -1,7 +1,6 @@
-package main
+package collectKonfigs
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -117,9 +116,4 @@ func download(url string) (io.ReadCloser, func()) {
 			log.Fatal(err)
 		}
 	}
-}
-
-func basicAuth(username, password string) string {
-	auth := username + ":" + password
-	return base64.StdEncoding.EncodeToString([]byte(auth))
 }
