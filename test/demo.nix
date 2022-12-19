@@ -1,21 +1,11 @@
-{ pkgs
-, home-manager
-, module
-, extraPackages
-}:
+{ pkgs, home-manager, module, extraPackages }:
 
 let
-  homeConfig = {
-    imports = [ ../example/home.nix ];
-  };
+  homeConfig = { imports = [ ../example/home.nix ]; };
 
-  user = import ./user.nix {
-    inherit module home-manager homeConfig;
-  };
+  user = import ./user.nix { inherit module home-manager homeConfig; };
 
-in
-{ modulesPath, ... }:
-{
+in { modulesPath, ... }: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     (modulesPath + "/virtualisation/qemu-vm.nix")
@@ -34,10 +24,7 @@ in
     boot = {
       growPartition = true;
       loader.timeout = 5;
-      kernelParams = [
-        "console=ttyS0"
-        "boot.shell_on_fail"
-      ];
+      kernelParams = [ "console=ttyS0" "boot.shell_on_fail" ];
     };
 
     virtualisation = {

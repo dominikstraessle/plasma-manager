@@ -16,15 +16,13 @@
     let
       system = "x86_64-linux";
       username = "jdoe";
-    in
-    {
+    in {
       # Standalone Home Manager Setup:
       homeConfigurations.${username} =
         inputs.home-manager.lib.homeManagerConfiguration {
           # Ensure Plasma Manager is available:
-          extraModules = [
-            inputs.plasma-manager.homeManagerModules.plasma-manager
-          ];
+          extraModules =
+            [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
 
           # Specify the path to your home configuration here:
           configuration = import ./home.nix;
@@ -35,11 +33,9 @@
 
       # A shell where Home Manager can be used:
       devShells.${system}.default =
-        let pkgs = import inputs.nixpkgs { inherit system; }; in
-        pkgs.mkShell {
-          buildInputs = [
-            inputs.home-manager.packages.${system}.home-manager
-          ];
+        let pkgs = import inputs.nixpkgs { inherit system; };
+        in pkgs.mkShell {
+          buildInputs = [ inputs.home-manager.packages.${system}.home-manager ];
         };
     };
 }

@@ -34,16 +34,11 @@ let
     };
   };
 
-  user = import ./user.nix {
-    inherit module home-manager homeConfig;
-  };
-in
-pkgs.nixosTest {
+  user = import ./user.nix { inherit module home-manager homeConfig; };
+in pkgs.nixosTest {
   name = "plasma-basic";
 
-  nodes.machine = { ... }: {
-    imports = [ user ];
-  };
+  nodes.machine = { ... }: { imports = [ user ]; };
 
   testScript = ''
     # Boot:

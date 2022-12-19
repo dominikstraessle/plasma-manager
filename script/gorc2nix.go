@@ -199,6 +199,8 @@ func main() {
 		}
 	}
 
+	cleanupEmptyEntries()
+
 	t, err := template.ParseFiles("script/plasma.tpl")
 
 	if err != nil {
@@ -212,6 +214,21 @@ func main() {
 	err = t.Execute(nix, modules)
 	if err != nil {
 		log.Fatalf("Failed to execute template: %v", err)
+	}
+}
+
+func cleanupEmptyEntries() {
+	for k, m := range modules {
+		for k, g := range m.Groups {
+			if len(g.Options) == 0 {
+				delete(m.Groups, k)
+				continue
+			}
+		}
+		if len(m.Groups) == 0 {
+			delete(modules, k)
+			continue
+		}
 	}
 }
 
