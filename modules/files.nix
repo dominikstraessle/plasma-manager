@@ -14,8 +14,13 @@ let
     options = {
       configGroupNesting = lib.mkOption {
         type = lib.types.nonEmptyListOf lib.types.str;
-        default = (lib.splitString "." name);
-        description = "Group name, and sub-group names.";
+        default = [name];
+        description = ''
+       Disabled by default.
+
+       To use group nesting e.g. "group.subgroup" -> [ "group" "subgroup" ] use something like `(lib.splitString "." name)`
+
+        '';
       };
     };
   };

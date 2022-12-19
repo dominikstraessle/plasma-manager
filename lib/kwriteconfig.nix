@@ -4,7 +4,8 @@ let
 
   ##############################################################################
   # Convert a Nix value into a command line argument to kwriteconfig.
-  toKdeValue = with builtins; v:
+  toKdeValue = with builtins;
+    v:
     if v == null then
       "--delete"
     else if isString v then
@@ -34,14 +35,11 @@ let
   # The attribute set is the settings and values to set.
   #
   # Type: string -> [string] -> AttrSet -> string
-  kWriteConfig = file: groups: attrs:
+  kWriteConfig = file: group: attrs:
     lib.concatStringsSep "\n" (lib.mapAttrsToList (key: value: ''
       ${pkgs.libsForQt5.kconfig}/bin/kwriteconfig5 \
         --file ''${XDG_CONFIG_HOME:-$HOME/.config}/${lib.escapeShellArg file} \
-        ${
-          lib.concatMapStringsSep " " (g: "--group " + lib.escapeShellArg g)
-          groups
-        } \
+        --group ${lib.escapeShellArg group} \
         --key ${lib.escapeShellArg key} \
         ${toKdeValue value}
     '') attrs);
