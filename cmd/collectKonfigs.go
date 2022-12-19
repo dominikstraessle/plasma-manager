@@ -20,13 +20,16 @@ import (
 // collectKonfigsCmd represents the collectKonfigs command
 var collectKonfigsCmd = &cobra.Command{
 	Use:   "collectKonfigs",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Collect kcfg files (konfigs) from the kde github organisation",
+	Long: `Collect kcfg files
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+           Using github code search api you can search for .kcfg and similar files on github.
+           The file contents are then stored together with metadata in a yaml file.
+           Existing entries will just be updated.
+           No existing entries will be removed.
+
+           After collecting the infos, you can proceed with the kcfg2nix command.
+`,
 	Run: func(cmd *cobra.Command, args []string) {
 		tokenFile, err := cmd.Flags().GetString("tokenFile")
 		if err != nil {
@@ -51,15 +54,6 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(collectKonfigsCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// collectKonfigsCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
 	collectKonfigsCmd.Flags().StringP("tokenFile", "t", "token.secret", "File with a github personal access token")
 	collectKonfigsCmd.Flags().StringP("infosFile", "i", "infos.yaml", "File containing all infos used for the export")
 	defaultUrls := []string{
@@ -103,7 +97,7 @@ func NewDownloader(tokenFile string) *Downloader {
 }
 
 func (k *Downloader) Populate(file string, url string) {
-	allInfos := k.loadInfos(file)
+	allInfos := LoadInfos(file)
 
 	r, closer := k.download(url)
 	defer closer()
@@ -218,7 +212,7 @@ func (k *Downloader) download(url string) (io.ReadCloser, func()) {
 	}
 }
 
-func (k *Downloader) loadInfos(file string) map[string][]*KfcFileInfo {
+func LoadInfos(file string) map[string][]*KfcFileInfo {
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
 		log.Fatalf("failed to load infos: %v", err)
