@@ -1,0 +1,154 @@
+[
+  {
+    "name": "dolphin_placespanelsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/dolphin/af2baf8047c0f4ca248b22f2c36074ad86a2020e/src/panels/places/dolphin_placespanelsettings.kcfg"
+  },
+  {
+    "name": "dolphin_compactmodesettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/dolphin/ad23079e1b2daf9c0c7be1535dd13a26c895085c/src/settings/dolphin_compactmodesettings.kcfg"
+  },
+  {
+    "name": "dolphin_iconsmodesettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/dolphin/ad23079e1b2daf9c0c7be1535dd13a26c895085c/src/settings/dolphin_iconsmodesettings.kcfg"
+  },
+  {
+    "name": "dolphin_detailsmodesettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/dolphin/f267544472905c44d5d9721d18a5a6785bccb3ee/src/settings/dolphin_detailsmodesettings.kcfg"
+  },
+  {
+    "name": "dolphin_contextmenusettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/dolphin/08a4edad3ee4ab4b997e5a7567b0ea685cad078d/src/settings/dolphin_contextmenusettings.kcfg"
+  },
+  {
+    "name": "dolphin_generalsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/dolphin/8ff021ca69288a27ef8d6fe64b7efff8b02a27e4/src/settings/dolphin_generalsettings.kcfg"
+  },
+  {
+    "name": "dolphin_directoryviewpropertysettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/dolphin/3e95a6cccc76d61473a2815457beefaaae62ec7c/src/settings/dolphin_directoryviewpropertysettings.kcfg"
+  },
+  {
+    "name": "baloosettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/baloo/430f8459e6790675334ccc0424c240e82b9cee3c/src/lib/baloosettings.kcfg"
+  },
+  {
+    "name": "virtualdesktopssettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/desktop/virtualdesktopssettings.kcfg"
+  },
+  {
+    "name": "kwintouchscreenscriptsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/screenedges/kwintouchscreenscriptsettings.kcfg"
+  },
+  {
+    "name": "kwinscreenedgescriptsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/screenedges/kwinscreenedgescriptsettings.kcfg"
+  },
+  {
+    "name": "kwintouchscreensettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/screenedges/kwintouchscreensettings.kcfg"
+  },
+  {
+    "name": "kwinpluginssettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/tabbox/kwinpluginssettings.kcfg"
+  },
+  {
+    "name": "kwinoptions_settings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/options/kwinoptions_settings.kcfg"
+  },
+  {
+    "name": "kwinscreenedgesettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/screenedges/kwinscreenedgesettings.kcfg"
+  },
+  {
+    "name": "kwindecorationsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/decoration/kwindecorationsettings.kcfg"
+  },
+  {
+    "name": "kwinswitcheffectsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/tabbox/kwinswitcheffectsettings.kcfg"
+  },
+  {
+    "name": "kwintouchscreenedgeeffectsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/screenedges/kwintouchscreenedgeeffectsettings.kcfg"
+  },
+  {
+    "name": "kwintabboxsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/tabbox/kwintabboxsettings.kcfg"
+  },
+  {
+    "name": "virtualkeyboardsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/virtualkeyboard/virtualkeyboardsettings.kcfg"
+  },
+  {
+    "name": "kwinxwaylandsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/xwayland/kwinxwaylandsettings.kcfg"
+  },
+  {
+    "name": "kwinoptions_kdeglobals_settings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/options/kwinoptions_kdeglobals_settings.kcfg"
+  },
+  {
+    "name": "kwincompositing_setting.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/compositing/kwincompositing_setting.kcfg"
+  },
+  {
+    "name": "kwinscreenedgeeffectsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/screenedges/kwinscreenedgeeffectsettings.kcfg"
+  },
+  {
+    "name": "config.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/tokodon/ef2bbf2bb879be80b73afa12b09d7e69c731a22e/src/config.kcfg"
+  },
+  {
+    "name": "kwin.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kwin/fc2447071e3bae3f21270be03d025a928872340d/src/kwin.kcfg"
+  },
+  {
+    "name": "pimcommonautocorrection.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/pimcommon/8fcadf939f335208a0d8ce6e39c78294206bda26/src/pimcommonautocorrection/settings/pimcommonautocorrection.kcfg"
+  },
+  {
+    "name": "generalsettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/haruna/5066f783f7c4b2dad8d5285ed8bec66943e8aaa3/src/settings/generalsettings.kcfg"
+  },
+  {
+    "name": "spectacle.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/spectacle/1b2cd051366d69e5c72c8f02344f0535860c0888/src/Gui/SettingsDialog/spectacle.kcfg"
+  },
+  {
+    "name": "smserversettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/plasma-desktop/a2192107bf847752aa9d945c44f770770ce91448/kcms/ksmserver/smserversettings.kcfg"
+  },
+  {
+    "name": "kalendarconfig.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kalendar/e3e473458f21e7b8c091b00c1c29d7c14f01d18c/src/kalendarconfig.kcfg"
+  },
+  {
+    "name": "config.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/plasma-welcome/aadd3306d50031feccae5239bb7cfa99b2302208/src/config.kcfg"
+  },
+  {
+    "name": "neochatconfig.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/neochat/9e01c9647681ee0d823712a83e9da93ea4bf4f8c/src/neochatconfig.kcfg"
+  },
+  {
+    "name": "konsole.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/konsole/d4ff52d03e65a73550c487638c02e898cc5f60cd/src/settings/konsole.kcfg"
+  },
+  {
+    "name": "kstars.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/kstars/2e7fb6e00083a55871932b0e212a35f785137997/kstars/kstars.kcfg"
+  },
+  {
+    "name": "subtitlessettings.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/haruna/eceb107eb9bf3cf7001b70e4529fd0efb64086e4/src/settings/subtitlessettings.kcfg"
+  },
+  {
+    "name": "breezesettingsdata.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/breeze/8437603bf24ee6f9257de2a48a830cd08314a9c0/kdecoration/breezesettingsdata.kcfg"
+  },
+  {
+    "name": "klipper.kcfg",
+    "download_url": "https://raw.githubusercontent.com/KDE/plasma-workspace/278cd896ce86b1a16b6c3db70d118069341f9619/klipper/klipper.kcfg"
+  }
+]

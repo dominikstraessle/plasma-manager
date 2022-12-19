@@ -97,6 +97,7 @@ var noKcfg = map[string]string{
 	"kwin.kcfg":                  "kwinrc",
 	"okular.kcfg":                "okularrc",
 	"spectacle.kcfg":             "spectaclerc",
+	"dolphin_directoryviewpropertysettings.kcfg": "dolphinrc",
 }
 
 var mapping = map[string]string{

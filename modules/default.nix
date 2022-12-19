@@ -12,6 +12,7 @@
     ./breeze.nix
     ./bytetableviewsettings.nix
     ./config.nix
+    ./dolphin.nix
     ./fieldingconfig.nix
     ./haruna.nix
     ./infoviewsettings.nix
