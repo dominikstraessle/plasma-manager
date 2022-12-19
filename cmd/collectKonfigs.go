@@ -32,7 +32,19 @@ to quickly create a Cobra application.`,
 		if err != nil {
 			log.Fatalf("missing token file: %v", err)
 		}
-		NewDownloader(tokenFile).Populate()
+		infosFile, err := cmd.Flags().GetString("infosFile")
+		if err != nil {
+			log.Fatalf("missing info file: %v", err)
+		}
+		downloader := NewDownloader(tokenFile)
+
+		urls, err := cmd.Flags().GetStringSlice("urls")
+		if err != nil {
+			log.Fatalf("missing urls: %s", err)
+		}
+		for _, url := range urls {
+			downloader.Populate(infosFile, url)
+		}
 
 	},
 }
@@ -49,6 +61,13 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	collectKonfigsCmd.Flags().StringP("tokenFile", "t", "token.secret", "File with a github personal access token")
+	collectKonfigsCmd.Flags().StringP("infosFile", "i", "infos.yaml", "File containing all infos used for the export")
+	defaultUrls := []string{
+		`https://api.github.com/search/code?q=kcfg+xmlns+language%3AXML+user%3Akde+language%3AXML&type=Code&per_page=100`,
+		`https://api.github.com/search/code?q=.kcfg+repo%3AKDE%2Fdolphin+language%3AXML+language%3AXML&type=Code&ref=advsearch&l=XML&l=XML&per_page=100`,
+		`https://api.github.com/search/code?q=kcfg+repo%3AKDE%2Fdiscover+language%3AXML&type=Code&ref=advsearch&l=XML&per_page=100`,
+	}
+	collectKonfigsCmd.Flags().StringSliceP("urls", "u", defaultUrls, "All urls to search for results")
 }
 
 type searchResultRepository struct {
@@ -83,13 +102,14 @@ func NewDownloader(tokenFile string) *Downloader {
 	}
 }
 
-func (k *Downloader) Populate() {
-	r, closer := k.download("https://api.github.com/search/code?q=kcfg+xmlns+language%3AXML+user%3Akde+language%3AXML&type=Code&per_page=100")
+func (k *Downloader) Populate(file string, url string) {
+	allInfos := k.loadInfos(file)
+
+	r, closer := k.download(url)
 	defer closer()
 
 	result := decodeSearchResult(r)
 
-	var allInfos = map[string][]*KfcFileInfo{}
 	m := &sync.Mutex{}
 	wg := &sync.WaitGroup{}
 	wg.Add(len(result.Items))
@@ -105,7 +125,7 @@ func (k *Downloader) Populate() {
 	}
 
 	wg.Wait()
-	k.exportInfos(allInfos)
+	k.exportInfos(file, allInfos)
 }
 
 func (k *Downloader) collectInfoFunc(m *sync.Mutex, wg *sync.WaitGroup, infos map[string][]*KfcFileInfo, i searchResultItem) {
@@ -116,7 +136,18 @@ func (k *Downloader) collectInfoFunc(m *sync.Mutex, wg *sync.WaitGroup, infos ma
 	}
 	m.Lock()
 	if _, ok := infos[i.Repository.Name]; ok {
-		infos[i.Repository.Name] = append(infos[i.Repository.Name], f)
+		isNew := true
+		for index, existingInfo := range infos[i.Repository.Name] {
+			if existingInfo.Path == f.Path {
+				infos[i.Repository.Name][index] = f
+				isNew = false
+				break
+			}
+		}
+
+		if isNew {
+			infos[i.Repository.Name] = append(infos[i.Repository.Name], f)
+		}
 	} else {
 		infos[i.Repository.Name] = []*KfcFileInfo{f}
 	}
@@ -187,40 +218,54 @@ func (k *Downloader) download(url string) (io.ReadCloser, func()) {
 	}
 }
 
-func (k *Downloader) exportInfos(infos map[string][]*KfcFileInfo) {
+func (k *Downloader) loadInfos(file string) map[string][]*KfcFileInfo {
+	b, err := ioutil.ReadFile(file)
+	if err != nil {
+		log.Fatalf("failed to load infos: %v", err)
+	}
+
+	var infos []*RepoKfcFileInfos
+	err = yaml.NewDecoder(bytes.NewReader(b)).Decode(&infos)
+	if err != nil {
+		log.Fatalf("failed to decode infos: %v", err)
+	}
+
+	allInfos := map[string][]*KfcFileInfo{}
+	for _, info := range infos {
+		allInfos[info.Name] = info.Infos
+	}
+
+	return allInfos
+}
+
+func (k *Downloader) exportInfos(file string, infos map[string][]*KfcFileInfo) {
 	sortedInfos := sortInfos(infos)
 
 	b, err := yaml.Marshal(sortedInfos)
 	if err != nil {
 		log.Fatalf("failed to marshal yaml: %v", err)
 	}
-	err = ioutil.WriteFile("infos.yaml", b, 0644)
+	err = ioutil.WriteFile(file, b, 0644)
 	if err != nil {
 		log.Fatalf("failed to export infos: %v", err)
 	}
 }
 
-func sortInfos(infos map[string][]*KfcFileInfo) []struct {
-	Name  string
-	Infos []*KfcFileInfo
-} {
+func sortInfos(infos map[string][]*KfcFileInfo) []*RepoKfcFileInfos {
 	var keys []string
 	for k := range infos {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
 
-	var sortedInfos []struct {
-		Name  string
-		Infos []*KfcFileInfo
-	}
+	var sortedInfos []*RepoKfcFileInfos
 	for _, k := range keys {
 		items := infos[k]
 		sort.Slice(items, func(i, j int) bool {
 			return items[i].Path < items[j].Path
 		})
 
-		sortedInfos = append(sortedInfos, RepoKfcFileInfos{Name: k, Infos: items})
+		sortedInfos = append(sortedInfos, &RepoKfcFileInfos{Name: k, Infos: items})
 	}
 	return sortedInfos
 }

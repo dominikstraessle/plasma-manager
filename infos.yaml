@@ -1,5 +1,409 @@
 - name: akonadi-mime
   infos:
+    - name: imapresource.kcfg
+      path: src/imapresource.kcfg
+      url: https://api.github.com/repositories/62258007/contents/src/imapresource.kcfg?ref=ce7b54f4dc389efe0f4504e78e3e861aa457b3a3
+      download: https://raw.githubusercontent.com/KDE/akonadi-mime/ce7b54f4dc389efe0f4504e78e3e861aa457b3a3/src/imapresource.kcfg
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: network
+              entries:
+                - name: ImapServer
+                  key: ""
+                  type: String
+                  label: IMAP server
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ImapPort
+                  key: ""
+                  type: Int
+                  label: Defines the port the IMAP service is running on
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "993"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: UserName
+                  key: ""
+                  type: String
+                  label: Username
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Safety
+                  key: ""
+                  type: String
+                  label: Defines the encryption type to use
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: SSL
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: OverrideEncryption
+                  key: ""
+                  type: String
+                  label: Override configured encryption mode
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Authentication
+                  key: ""
+                  type: Int
+                  label: Defines the authentication type to use
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SubscriptionEnabled
+                  key: ""
+                  type: Bool
+                  label: Defines if the server side subscription is enabled
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SessionTimeout
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "30"
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: cache
+              entries:
+                - name: DisconnectedModeEnabled
+                  key: ""
+                  type: Bool
+                  label: Defines if all the IMAP data should be cached locally all the time
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: IntervalCheckEnabled
+                  key: ""
+                  type: Bool
+                  label: Defines if interval checking is enabled.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: IntervalCheckTime
+                  key: ""
+                  type: Int
+                  label: Check interval in minutes
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "5"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: RetrieveMetadataOnFolderListing
+                  key: ""
+                  type: Bool
+                  label: |-
+                    Defines if the annotations, ACLs and quota information of mailboxes should
+                                 also be retrieved when the mailboxes get listed.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: AutomaticExpungeEnabled
+                  key: ""
+                  type: Bool
+                  label: |-
+                    Defines if the expunge command is issued automatically, otherwise it should be
+                                 triggered manually through the D-Bus interface.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TrashCollection
+                  key: ""
+                  type: LongLong
+                  label: Define which folder is used for trash
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "-1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TrashCollectionMigrated
+                  key: ""
+                  type: Bool
+                  label: Define if the trash collection received the special attribute
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: UseDefaultIdentity
+                  key: ""
+                  type: Bool
+                  label: Define if account uses the default identity
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: AccountIdentity
+                  key: ""
+                  type: Int
+                  label: Identity account
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: KnownMailBoxes
+                  key: ""
+                  type: StringList
+                  label: List of mailbox names reported by the server the last time
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: idle
+              entries:
+                - name: IdleRidPath
+                  key: ""
+                  type: StringList
+                  label: RID path to the mailbox to watch for changes
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: siever
+              entries:
+                - name: SieveSupport
+                  key: ""
+                  type: Bool
+                  label: Define if server supports sieve
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SieveReuseConfig
+                  key: ""
+                  type: Bool
+                  label: Define if we reuse host and login configuration
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SievePort
+                  key: ""
+                  type: Int
+                  label: Define sieve port
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "4190"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SieveAlternateUrl
+                  key: ""
+                  type: String
+                  label: Define alternate URL
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: AlternateAuthentication
+                  key: ""
+                  type: Int
+                  label: Defines the authentication type to use for alternate server
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SieveVacationFilename
+                  key: ""
+                  type: String
+                  label: Define default sieve vacation filename
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: kmail-vacation.siv
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SieveCustomUsername
+                  key: ""
+                  type: String
+                  label: Define username used from custom server sieve url
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SieveCustomAuthentification
+                  key: ""
+                  type: String
+                  label: Defines the type of identification used by custom sieve server
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ImapUserPassword
+                    code: ""
+                  min: ""
+                  max: ""
     - name: specialmailcollections.kcfg
       path: src/specialmailcollections.kcfg
       url: https://api.github.com/repositories/62258007/contents/src/specialmailcollections.kcfg?ref=ce7b54f4dc389efe0f4504e78e3e861aa457b3a3
@@ -980,6 +1384,1282 @@
                     code: ""
                   min: ""
                   max: ""
+- name: discover
+  infos:
+    - name: discoversettings.kcfg
+      path: kcm/discoversettings.kcfg
+      url: https://api.github.com/repositories/45697202/contents/kcm/discoversettings.kcfg?ref=6fab0a2d88225d6a6b1d69365d17ab5380288d9d
+      download: https://raw.githubusercontent.com/KDE/discover/6fab0a2d88225d6a6b1d69365d17ab5380288d9d/kcm/discoversettings.kcfg
+      content: ""
+      rcName: discoverrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: discoverrc
+        groups:
+            - name: Software
+              entries:
+                - name: UseOfflineUpdates
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: updatessettings.kcfg
+      path: kcm/updatessettings.kcfg
+      url: https://api.github.com/repositories/45697202/contents/kcm/updatessettings.kcfg?ref=fa885a366985e36998d98fc04c8cf14b4fa043ca
+      download: https://raw.githubusercontent.com/KDE/discover/fa885a366985e36998d98fc04c8cf14b4fa043ca/kcm/updatessettings.kcfg
+      content: ""
+      rcName: PlasmaDiscoverUpdates
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: PlasmaDiscoverUpdates
+        groups:
+            - name: Global
+              entries:
+                - name: UseUnattendedUpdates
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: LastUnattendedTrigger
+                  key: ""
+                  type: DateTime
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: RequiredNotificationInterval
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: 60 * 60 * 24
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: LastNotificationTime
+                  key: ""
+                  type: DateTime
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+- name: dolphin
+  infos:
+    - name: dolphin_placespanelsettings.kcfg
+      path: src/panels/places/dolphin_placespanelsettings.kcfg
+      url: https://api.github.com/repositories/42727548/contents/src/panels/places/dolphin_placespanelsettings.kcfg?ref=af2baf8047c0f4ca248b22f2c36074ad86a2020e
+      download: https://raw.githubusercontent.com/KDE/dolphin/af2baf8047c0f4ca248b22f2c36074ad86a2020e/src/panels/places/dolphin_placespanelsettings.kcfg
+      content: ""
+      rcName: dolphinrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: dolphinrc
+        groups:
+            - name: PlacesPanel
+              entries:
+                - name: IconSize
+                  key: ""
+                  type: Int
+                  label: Size of icons in the Places Panel (-1 means "automatic")
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: KIconLoader::SizeSmallMedium
+                    code: "true"
+                  min: ""
+                  max: ""
+    - name: dolphin_compactmodesettings.kcfg
+      path: src/settings/dolphin_compactmodesettings.kcfg
+      url: https://api.github.com/repositories/42727548/contents/src/settings/dolphin_compactmodesettings.kcfg?ref=ad23079e1b2daf9c0c7be1535dd13a26c895085c
+      download: https://raw.githubusercontent.com/KDE/dolphin/ad23079e1b2daf9c0c7be1535dd13a26c895085c/src/settings/dolphin_compactmodesettings.kcfg
+      content: ""
+      rcName: dolphinrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: dolphinrc
+        groups:
+            - name: CompactMode
+              entries:
+                - name: UseSystemFont
+                  key: ""
+                  type: Bool
+                  label: Use system font
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ViewFont
+                  key: ""
+                  type: Font
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: QFont()
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: IconSize
+                  key: ""
+                  type: Int
+                  label: Icon size
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: KIconLoader::SizeSmall
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: PreviewSize
+                  key: ""
+                  type: Int
+                  label: Preview size
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: KIconLoader::SizeLarge
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: MaximumTextWidthIndex
+                  key: ""
+                  type: Int
+                  label: Maximum text width index (0 means unlimited)
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: dolphin_contextmenusettings.kcfg
+      path: src/settings/dolphin_contextmenusettings.kcfg
+      url: https://api.github.com/repositories/42727548/contents/src/settings/dolphin_contextmenusettings.kcfg?ref=08a4edad3ee4ab4b997e5a7567b0ea685cad078d
+      download: https://raw.githubusercontent.com/KDE/dolphin/08a4edad3ee4ab4b997e5a7567b0ea685cad078d/src/settings/dolphin_contextmenusettings.kcfg
+      content: ""
+      rcName: dolphinrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: dolphinrc
+        groups:
+            - name: ContextMenu
+              entries:
+                - name: ShowCopyMoveMenu
+                  key: ""
+                  type: Bool
+                  label: Show 'Copy To' and 'Move To' commands in context menu
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowAddToPlaces
+                  key: ""
+                  type: Bool
+                  label: Show 'Add to Places' in context menu.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowSortBy
+                  key: ""
+                  type: Bool
+                  label: Show 'Sort By' in context menu.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowViewMode
+                  key: ""
+                  type: Bool
+                  label: Show 'View Mode' in context menu.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowOpenInNewTab
+                  key: ""
+                  type: Bool
+                  label: Show 'Open in New Tab' and 'Open in New Tabs' in context menu.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowOpenInNewWindow
+                  key: ""
+                  type: Bool
+                  label: Show 'Open in New Window' in context menu.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowCopyLocation
+                  key: ""
+                  type: Bool
+                  label: Show 'Copy Location' in context menu.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowDuplicateHere
+                  key: ""
+                  type: Bool
+                  label: Show 'Duplicate Here' in context menu.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowOpenTerminal
+                  key: ""
+                  type: Bool
+                  label: Show 'Open Terminal' in context menu.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: dolphin_detailsmodesettings.kcfg
+      path: src/settings/dolphin_detailsmodesettings.kcfg
+      url: https://api.github.com/repositories/42727548/contents/src/settings/dolphin_detailsmodesettings.kcfg?ref=f267544472905c44d5d9721d18a5a6785bccb3ee
+      download: https://raw.githubusercontent.com/KDE/dolphin/f267544472905c44d5d9721d18a5a6785bccb3ee/src/settings/dolphin_detailsmodesettings.kcfg
+      content: ""
+      rcName: dolphinrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: dolphinrc
+        groups:
+            - name: DetailsMode
+              entries:
+                - name: ViewFont
+                  key: ""
+                  type: Font
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: QFont()
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: UseSystemFont
+                  key: ""
+                  type: Bool
+                  label: Use system font
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: IconSize
+                  key: ""
+                  type: Int
+                  label: Icon size
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: KIconLoader::SizeSmall
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: PreviewSize
+                  key: ""
+                  type: Int
+                  label: Preview size
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: KIconLoader::SizeLarge
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: ColumnPositions
+                  key: ""
+                  type: IntList
+                  label: Position of columns
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: 0,1,2,3,4,5,6,7,8
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SidePadding
+                  key: ""
+                  type: UInt
+                  label: Side Padding
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "20"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: HighlightEntireRow
+                  key: ""
+                  type: Bool
+                  label: Highlight entire row
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ExpandableFolders
+                  key: ""
+                  type: Bool
+                  label: Expandable folders
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: DirectorySizeCount
+                  key: ""
+                  type: Bool
+                  label: Whether or not content count is used as directory size
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: RecursiveDirectorySizeLimit
+                  key: ""
+                  type: UInt
+                  label: Recursive directory size limit
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "10"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: UseShortRelativeDates
+                  key: ""
+                  type: Bool
+                  label: if true we use short relative dates, if not short dates
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: dolphin_directoryviewpropertysettings.kcfg
+      path: src/settings/dolphin_directoryviewpropertysettings.kcfg
+      url: https://api.github.com/repositories/42727548/contents/src/settings/dolphin_directoryviewpropertysettings.kcfg?ref=3e95a6cccc76d61473a2815457beefaaae62ec7c
+      download: https://raw.githubusercontent.com/KDE/dolphin/3e95a6cccc76d61473a2815457beefaaae62ec7c/src/settings/dolphin_directoryviewpropertysettings.kcfg
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: Settings
+              entries:
+                - name: HiddenFilesShown
+                  key: ""
+                  type: Bool
+                  label: Hidden files shown
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: Dolphin
+              entries:
+                - name: Version
+                  key: ""
+                  type: Int
+                  label: Version
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "-1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ViewMode
+                  key: ""
+                  type: Int
+                  label: View Mode
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: DolphinView::IconsView
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: PreviewsShown
+                  key: ""
+                  type: Bool
+                  label: Previews shown
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: GroupedSorting
+                  key: ""
+                  type: Bool
+                  label: Grouped Sorting
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SortRole
+                  key: ""
+                  type: String
+                  label: Sort files by
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: text
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SortOrder
+                  key: ""
+                  type: Int
+                  label: Order in which to sort files
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: Qt::AscendingOrder
+                    code: "true"
+                  min: Qt::AscendingOrder
+                  max: Qt::DescendingOrder
+                - name: SortFoldersFirst
+                  key: ""
+                  type: Bool
+                  label: Show folders first when sorting files and folders
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SortHiddenLast
+                  key: ""
+                  type: Bool
+                  label: Show hidden files and folders last
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: VisibleRoles
+                  key: ""
+                  type: StringList
+                  label: Visible roles
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: HeaderColumnWidths
+                  key: ""
+                  type: IntList
+                  label: Header column widths
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Timestamp
+                  key: ""
+                  type: DateTime
+                  label: Properties last changed
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: AdditionalInfo
+                  key: ""
+                  type: StringList
+                  label: Additional Information
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: dolphin_generalsettings.kcfg
+      path: src/settings/dolphin_generalsettings.kcfg
+      url: https://api.github.com/repositories/42727548/contents/src/settings/dolphin_generalsettings.kcfg?ref=8ff021ca69288a27ef8d6fe64b7efff8b02a27e4
+      download: https://raw.githubusercontent.com/KDE/dolphin/8ff021ca69288a27ef8d6fe64b7efff8b02a27e4/src/settings/dolphin_generalsettings.kcfg
+      content: ""
+      rcName: dolphinrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: dolphinrc
+        groups:
+            - name: General
+              entries:
+                - name: EditableUrl
+                  key: ""
+                  type: Bool
+                  label: Should the URL be editable for the user
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: UrlCompletionMode
+                  key: ""
+                  type: Enum
+                  label: Text completion mode of the URL Navigator
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: KCompletion::CompletionPopupAuto
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowFullPath
+                  key: ""
+                  type: Bool
+                  label: Should the full path be shown inside the location bar
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowFullPathInTitlebar
+                  key: ""
+                  type: Bool
+                  label: Should the full path be shown in the title bar
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: OpenExternallyCalledFolderInNewTab
+                  key: ""
+                  type: Bool
+                  label: Should an externally called folder open in a new tab in an existing Dolphin instance
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Version
+                  key: ""
+                  type: Int
+                  label: Internal config version of Dolphin, mainly Used to determine whether an updated version of Dolphin is running, so as to migrate config entries that were removed/renamed ...etc
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ModifiedStartupSettings
+                  key: ""
+                  type: Bool
+                  label: Have the startup settings been modified (internal setting not shown in the UI)
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: HomeUrl
+                  key: ""
+                  type: String
+                  label: Home URL
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: QUrl::fromLocalFile(QDir::homePath()).toDisplayString(QUrl::PreferLocalFile)
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: RememberOpenedTabs
+                  key: ""
+                  type: Bool
+                  label: Remember open folders and tabs
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SplitView
+                  key: ""
+                  type: Bool
+                  label: Split the view into two panes
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: FilterBar
+                  key: ""
+                  type: Bool
+                  label: Should the filter bar be shown
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: GlobalViewProps
+                  key: ""
+                  type: Bool
+                  label: Should the view properties be used for all folders
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: BrowseThroughArchives
+                  key: ""
+                  type: Bool
+                  label: Browse through archives
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ConfirmClosingMultipleTabs
+                  key: ""
+                  type: Bool
+                  label: Ask for confirmation when closing windows with multiple tabs.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ConfirmClosingTerminalRunningProgram
+                  key: ""
+                  type: Bool
+                  label: Ask for confirmation when closing windows with a program that is still running in the Terminal panel.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: RenameInline
+                  key: ""
+                  type: Bool
+                  label: Rename inline
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowSelectionToggle
+                  key: ""
+                  type: Bool
+                  label: Show selection toggle
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowPasteBarAfterCopying
+                  key: ""
+                  type: Bool
+                  label: Show a bar for easy pasting after a cut or copy was done using the selection mode bottom bar.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: UseTabForSwitchingSplitView
+                  key: ""
+                  type: Bool
+                  label: Use tab for switching between right and left split
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: CloseActiveSplitView
+                  key: ""
+                  type: Bool
+                  label: Close active pane when toggling off split view
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: OpenNewTabAfterLastTab
+                  key: ""
+                  type: Bool
+                  label: New tab will be open after last one
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowToolTips
+                  key: ""
+                  type: Bool
+                  label: Show tooltips
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ViewPropsTimestamp
+                  key: ""
+                  type: DateTime
+                  label: Timestamp since when the view properties are valid
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: AutoExpandFolders
+                  key: ""
+                  type: Bool
+                  label: Use auto-expanding folders for all view types
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowStatusBar
+                  key: ""
+                  type: Bool
+                  label: Show the statusbar
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowZoomSlider
+                  key: ""
+                  type: Bool
+                  label: Show zoom slider in the statusbar
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowSpaceInfo
+                  key: ""
+                  type: Bool
+                  label: Show the space information in the statusbar
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: LockPanels
+                  key: ""
+                  type: Bool
+                  label: Lock the layout of the panels
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: EnlargeSmallPreviews
+                  key: ""
+                  type: Bool
+                  label: Enlarge Small Previews
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SortingChoice
+                  key: ""
+                  type: Enum
+                  label: Choose Natural, Case Sensitive, or Case Insensitive order of sorting the items
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: NaturalSorting
+                          label: ""
+                        - name: CaseInsensitiveSorting
+                          label: ""
+                        - name: CaseSensitiveSorting
+                          label: ""
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: dolphin_iconsmodesettings.kcfg
+      path: src/settings/dolphin_iconsmodesettings.kcfg
+      url: https://api.github.com/repositories/42727548/contents/src/settings/dolphin_iconsmodesettings.kcfg?ref=ad23079e1b2daf9c0c7be1535dd13a26c895085c
+      download: https://raw.githubusercontent.com/KDE/dolphin/ad23079e1b2daf9c0c7be1535dd13a26c895085c/src/settings/dolphin_iconsmodesettings.kcfg
+      content: ""
+      rcName: dolphinrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: dolphinrc
+        groups:
+            - name: IconsMode
+              entries:
+                - name: UseSystemFont
+                  key: ""
+                  type: Bool
+                  label: Use system font
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ViewFont
+                  key: ""
+                  type: Font
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: QFont()
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: IconSize
+                  key: ""
+                  type: Int
+                  label: Icon size
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: KIconLoader::SizeMedium
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: PreviewSize
+                  key: ""
+                  type: Int
+                  label: Preview size
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: KIconLoader::SizeHuge
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: TextWidthIndex
+                  key: ""
+                  type: Int
+                  label: Text width index
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: MaximumTextLines
+                  key: ""
+                  type: Int
+                  label: Maximum textlines (0 means unlimited)
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "3"
+                    code: ""
+                  min: ""
+                  max: ""
 - name: elisa
   infos:
     - name: elisa_core.kcfg
@@ -1562,6 +3242,64 @@
                     code: ""
                   min: ""
                   max: ""
+    - name: videosettings.kcfg
+      path: src/settings/videosettings.kcfg
+      url: https://api.github.com/repositories/386111141/contents/src/settings/videosettings.kcfg?ref=091020d71e657ec6aa27d7187744986ec79291f1
+      download: https://raw.githubusercontent.com/KDE/haruna/091020d71e657ec6aa27d7187744986ec79291f1/src/settings/videosettings.kcfg
+      content: ""
+      rcName: haruna/haruna.conf
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: haruna/haruna.conf
+        groups:
+            - name: Video
+              entries:
+                - name: DefaultCover
+                  key: ""
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ScreenshotFormat
+                  key: ""
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: jpg
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ScreenshotTemplate
+                  key: ""
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: "\n        QString screenshotsFolder = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);\n        screenshotsFolder.append(\"/Haruna screenshots/%F-%n\");\n      "
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: screenshotsFolder
+                    code: "true"
+                  min: ""
+                  max: ""
 - name: homerun
   infos:
     - name: main.xml
@@ -1812,6 +3550,184 @@
                     code: ""
                   min: ""
                   max: ""
+- name: kblackbox
+  infos:
+    - name: kblackbox.kcfg
+      path: src/kblackbox.kcfg
+      url: https://api.github.com/repositories/42717334/contents/src/kblackbox.kcfg?ref=5ae91c3cc6dbdc590879d88266c58f054b8fd21e
+      download: https://raw.githubusercontent.com/KDE/kblackbox/5ae91c3cc6dbdc590879d88266c58f054b8fd21e/src/kblackbox.kcfg
+      content: ""
+      rcName: kblackboxrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: kblackboxrc
+        groups:
+            - name: KBlackBox Setup
+              entries:
+                - name: theme
+                  key: ""
+                  type: String
+                  label: File of the current theme of the graphic elements. (SVGZ file with path and file extension)
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: balls
+                  key: ""
+                  type: Int
+                  label: Number of balls for custom difficulty level
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "4"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: columns
+                  key: ""
+                  type: Int
+                  label: Number of columns of the board for custom difficulty level
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "8"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: rows
+                  key: ""
+                  type: Int
+                  label: Number of rows of the board for custom difficuty level
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "8"
+                    code: ""
+                  min: ""
+                  max: ""
+- name: kclock
+  infos:
+    - name: kclockdsettings.kcfg
+      path: src/kclockd/kclockdsettings.kcfg
+      url: https://api.github.com/repositories/258306481/contents/src/kclockd/kclockdsettings.kcfg?ref=bd0588e27dac4cbf8cfc3d3fb513aca322678196
+      download: https://raw.githubusercontent.com/KDE/kclock/bd0588e27dac4cbf8cfc3d3fb513aca322678196/src/kclockd/kclockdsettings.kcfg
+      content: ""
+      rcName: kclockrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: kclockrc
+        groups:
+            - name: Global
+              entries:
+                - name: timeFormat
+                  key: ""
+                  type: String
+                  label: Whether to use 24 hour or 12 hour time in the UI.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: SystemDefault
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: main.xml
+      path: src/plasmoid/KClock_1x2/package/contents/config/main.xml
+      url: https://api.github.com/repositories/258306481/contents/src/plasmoid/KClock_1x2/package/contents/config/main.xml?ref=4388f38b90fc29d3b105c6f5fd0a1da44ccfc389
+      download: https://raw.githubusercontent.com/KDE/kclock/4388f38b90fc29d3b105c6f5fd0a1da44ccfc389/src/plasmoid/KClock_1x2/package/contents/config/main.xml
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: General
+              entries:
+                - name: twelveHourTime
+                  key: ""
+                  type: Bool
+                  label: Whether or not to show the time in 12 hour format rather than 24 hour format.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showDate
+                  key: ""
+                  type: Bool
+                  label: Whether or not to show the date below the time.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showAlarms
+                  key: ""
+                  type: Bool
+                  label: Whether or not to show the next alarm to ring.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: textAlignment
+                  key: ""
+                  type: String
+                  label: The alignment of the widget text.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: Center
+                    code: ""
+                  min: ""
+                  max: ""
 - name: kde-workspace
   infos:
     - name: main.xml
@@ -2003,6 +3919,162 @@
                   min: ""
                   max: ""
     - name: main.xml
+      path: kwin/effects/translucency/package/contents/config/main.xml
+      url: https://api.github.com/repositories/42721777/contents/kwin/effects/translucency/package/contents/config/main.xml?ref=257b997132217fd73a1b3be14db49735b64235e7
+      download: https://raw.githubusercontent.com/KDE/kde-workspace/257b997132217fd73a1b3be14db49735b64235e7/kwin/effects/translucency/package/contents/config/main.xml
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: ""
+              entries:
+                - name: Decoration
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "100"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: MoveResize
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "80"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Dialogs
+                  key: ""
+                  type: UInt
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "100"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Inactive
+                  key: ""
+                  type: UInt
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "100"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ComboboxPopups
+                  key: ""
+                  type: UInt
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "100"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Menus
+                  key: ""
+                  type: UInt
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "100"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: IndividualMenuConfig
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: DropdownMenus
+                  key: ""
+                  type: UInt
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "100"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: PopupMenus
+                  key: ""
+                  type: UInt
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "100"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TornOffMenus
+                  key: ""
+                  type: UInt
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "100"
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: main.xml
       path: plasma-desktop/applets/kickoff/package/contents/config/main.xml
       url: https://api.github.com/repositories/42721777/contents/plasma-desktop/applets/kickoff/package/contents/config/main.xml?ref=257b997132217fd73a1b3be14db49735b64235e7
       download: https://raw.githubusercontent.com/KDE/kde-workspace/257b997132217fd73a1b3be14db49735b64235e7/plasma-desktop/applets/kickoff/package/contents/config/main.xml
@@ -2131,6 +4203,290 @@
                   min: ""
                   max: ""
     - name: main.xml
+      path: plasma-desktop/applets/taskmanager/package/contents/config/main.xml
+      url: https://api.github.com/repositories/42721777/contents/plasma-desktop/applets/taskmanager/package/contents/config/main.xml?ref=257b997132217fd73a1b3be14db49735b64235e7
+      download: https://raw.githubusercontent.com/KDE/kde-workspace/257b997132217fd73a1b3be14db49735b64235e7/plasma-desktop/applets/taskmanager/package/contents/config/main.xml
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: General
+              entries:
+                - name: showOnlyCurrentScreen
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showOnlyCurrentDesktop
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showOnlyCurrentActivity
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showOnlyMinimized
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: groupingStrategy
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "2"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: onlyGroupWhenFull
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: sortingStrategy
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "2"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: maxStripes
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "2"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: forceStripes
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showToolTips
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: highlightWindows
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: launchers
+                  key: ""
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: main.xml
+      path: plasma-desktop/containments/desktop/package/contents/config/main.xml
+      url: https://api.github.com/repositories/42721777/contents/plasma-desktop/containments/desktop/package/contents/config/main.xml?ref=257b997132217fd73a1b3be14db49735b64235e7
+      download: https://raw.githubusercontent.com/KDE/kde-workspace/257b997132217fd73a1b3be14db49735b64235e7/plasma-desktop/containments/desktop/package/contents/config/main.xml
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: General
+              entries:
+                - name: ItemsGeometries
+                  key: ""
+                  type: String
+                  label: encoded geometries of items (resource categories)
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ToolBoxButtonState
+                  key: ""
+                  type: String
+                  label: Position state of the toolbox button
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: topleft
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ToolBoxButtonX
+                  key: ""
+                  type: int
+                  label: X coordinate of the toolbox
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ToolBoxButtonY
+                  key: ""
+                  type: int
+                  label: Y coordinate of the toolbox
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ItemsGeometries
+                  key: ""
+                  type: String
+                  label: encoded geometries of items (resource categories)
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: FirstStartup
+                  key: ""
+                  type: Bool
+                  label: first time the containment starts?
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: main.xml
       path: plasma-desktop/containments/panel/contents/config/main.xml
       url: https://api.github.com/repositories/42721777/contents/plasma-desktop/containments/panel/contents/config/main.xml?ref=257b997132217fd73a1b3be14db49735b64235e7
       download: https://raw.githubusercontent.com/KDE/kde-workspace/257b997132217fd73a1b3be14db49735b64235e7/plasma-desktop/containments/panel/contents/config/main.xml
@@ -2157,6 +4513,106 @@
                     choices: []
                   default:
                     text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: main.xml
+      path: plasma-desktop/toolboxes/desktoptoolbox/contents/config/main.xml
+      url: https://api.github.com/repositories/42721777/contents/plasma-desktop/toolboxes/desktoptoolbox/contents/config/main.xml?ref=257b997132217fd73a1b3be14db49735b64235e7
+      download: https://raw.githubusercontent.com/KDE/kde-workspace/257b997132217fd73a1b3be14db49735b64235e7/plasma-desktop/toolboxes/desktoptoolbox/contents/config/main.xml
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: General
+              entries:
+                - name: ItemsGeometries
+                  key: ""
+                  type: String
+                  label: encoded geometries of items (resource categories)
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ToolBoxButtonState
+                  key: ""
+                  type: String
+                  label: Position state of the toolbox button
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: topleft
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ToolBoxButtonX
+                  key: ""
+                  type: int
+                  label: X coordinate of the toolbox
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ToolBoxButtonY
+                  key: ""
+                  type: int
+                  label: Y coordinate of the toolbox
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ItemsGeometries
+                  key: ""
+                  type: String
+                  label: encoded geometries of items (resource categories)
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: FirstStartup
+                  key: ""
+                  type: Bool
+                  label: first time the containment starts?
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
                     code: ""
                   min: ""
                   max: ""
@@ -2765,6 +5221,234 @@
                     choices: []
                   default:
                     text: '#0000ff'
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: main.xml
+      path: plasma-workspace/wallpapers/image/imagepackage/contents/config/main.xml
+      url: https://api.github.com/repositories/42721777/contents/plasma-workspace/wallpapers/image/imagepackage/contents/config/main.xml?ref=257b997132217fd73a1b3be14db49735b64235e7
+      download: https://raw.githubusercontent.com/KDE/kde-workspace/257b997132217fd73a1b3be14db49735b64235e7/plasma-workspace/wallpapers/image/imagepackage/contents/config/main.xml
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: General
+              entries:
+                - name: Color
+                  key: ""
+                  type: Color
+                  label: Color of the wallpaper
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: '#000000'
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Image
+                  key: ""
+                  type: String
+                  label: Wallpaper image path or wallpaper name
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: FillMode
+                  key: ""
+                  type: int
+                  label: Sizing, cropping and positioning of the wallpaper image
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: width
+                  key: ""
+                  type: int
+                  label: Width of the wallpaper on screen
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: height
+                  key: ""
+                  type: int
+                  label: Height of the wallpaper on screen
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SlidePaths
+                  key: ""
+                  type: StringList
+                  label: Paths used for the slideshow
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SlideInterval
+                  key: ""
+                  type: int
+                  label: Interval between slides
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "10"
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: main.xml
+      path: plasma-workspace/wallpapers/image/slideshowpackage/contents/config/main.xml
+      url: https://api.github.com/repositories/42721777/contents/plasma-workspace/wallpapers/image/slideshowpackage/contents/config/main.xml?ref=257b997132217fd73a1b3be14db49735b64235e7
+      download: https://raw.githubusercontent.com/KDE/kde-workspace/257b997132217fd73a1b3be14db49735b64235e7/plasma-workspace/wallpapers/image/slideshowpackage/contents/config/main.xml
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: General
+              entries:
+                - name: Color
+                  key: ""
+                  type: Color
+                  label: Color of the wallpaper
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: '#000000'
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Image
+                  key: ""
+                  type: String
+                  label: Wallpaper image path or wallpaper name
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: FillMode
+                  key: ""
+                  type: int
+                  label: Sizing, cropping and positioning of the wallpaper image
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: width
+                  key: ""
+                  type: int
+                  label: Width of the wallpaper on screen
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: height
+                  key: ""
+                  type: int
+                  label: Height of the wallpaper on screen
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SlidePaths
+                  key: ""
+                  type: StringList
+                  label: Paths used for the slideshow
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: SlideInterval
+                  key: ""
+                  type: int
+                  label: Interval between slides
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "10"
                     code: ""
                   min: ""
                   max: ""
@@ -4175,6 +6859,194 @@
                   min: ""
                   max: ""
     - name: main.xml
+      path: applets/weather/package/contents/config/main.xml
+      url: https://api.github.com/repositories/42733222/contents/applets/weather/package/contents/config/main.xml?ref=f75b778a7c5d213fb698a314845a0093fec89d0f
+      download: https://raw.githubusercontent.com/KDE/kdeplasma-addons/f75b778a7c5d213fb698a314845a0093fec89d0f/applets/weather/package/contents/config/main.xml
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: WeatherStation
+              entries:
+                - name: updateInterval
+                  key: ""
+                  type: int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "30"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: source
+                  key: ""
+                  type: string
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: Appearance
+              entries:
+                - name: showTemperatureInCompactMode
+                  key: ""
+                  type: bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showTemperatureInBadge
+                  key: ""
+                  type: bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showTemperatureInTooltip
+                  key: ""
+                  type: bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showWindInTooltip
+                  key: ""
+                  type: bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showPressureInTooltip
+                  key: ""
+                  type: bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showHumidityInTooltip
+                  key: ""
+                  type: bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: Units
+              entries:
+                - name: temperatureUnit
+                  key: ""
+                  type: int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: pressureUnit
+                  key: ""
+                  type: int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: speedUnit
+                  key: ""
+                  type: int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: visibilityUnit
+                  key: ""
+                  type: int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: main.xml
       path: applets/webbrowser/package/contents/config/main.xml
       url: https://api.github.com/repositories/42733222/contents/applets/webbrowser/package/contents/config/main.xml?ref=96f6bbc9111b753d20bda4c2f9cafeb8e00dcd6a
       download: https://raw.githubusercontent.com/KDE/kdeplasma-addons/96f6bbc9111b753d20bda4c2f9cafeb8e00dcd6a/applets/webbrowser/package/contents/config/main.xml
@@ -4581,6 +7453,62 @@
                     choices: []
                   default:
                     text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+- name: kiss
+  infos:
+    - name: org.kde.initialsystemsetup.license.kcfg
+      path: src/plugins/license/org.kde.initialsystemsetup.license.kcfg
+      url: https://api.github.com/repositories/440034203/contents/src/plugins/license/org.kde.initialsystemsetup.license.kcfg?ref=09ba50b1cc3a85dfacf69dbd105087dd296bb753
+      download: https://raw.githubusercontent.com/KDE/kiss/09ba50b1cc3a85dfacf69dbd105087dd296bb753/src/plugins/license/org.kde.initialsystemsetup.license.kcfg
+      content: ""
+      rcName: org_kde_initialsystemsetup_licenserc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: org_kde_initialsystemsetup_licenserc
+        groups:
+            - name: General
+              entries:
+                - name: Format
+                  key: ""
+                  type: Enum
+                  label: |
+                    This tells KISS what format the license file is in, which will affect rendering.
+                    			
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: PlainText
+                          label: ""
+                        - name: Markdown
+                          label: ""
+                        - name: HTML
+                          label: ""
+                  default:
+                    text: PlainText
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: LicenseTextFile
+                  key: ""
+                  type: String
+                  label: |
+                    This tells KISS which file contains the license text to display.
+                    			
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: /dev/null
                     code: ""
                   min: ""
                   max: ""
@@ -5520,6 +8448,180 @@
                     code: ""
                   min: ""
                   max: ""
+- name: kshisen
+  infos:
+    - name: kshisen.kcfg
+      path: src/kshisen.kcfg
+      url: https://api.github.com/repositories/42729957/contents/src/kshisen.kcfg?ref=c8988ed35960578355b942f19b268e2cb4075e22
+      download: https://raw.githubusercontent.com/KDE/kshisen/c8988ed35960578355b942f19b268e2cb4075e22/src/kshisen.kcfg
+      content: ""
+      rcName: kshisenrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: kshisenrc
+        groups:
+            - name: General
+              entries:
+                - name: TileSet
+                  key: Tileset_file
+                  type: String
+                  label: The tile set to use.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Background
+                  key: Background_file
+                  type: String
+                  label: The background to use.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: Game
+              entries:
+                - name: ChineseStyle
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TilesCanSlide
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Solvable
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ShowUnsolvableMessage
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Gravity
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Sounds
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Speed
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "2"
+                    code: ""
+                  min: "0"
+                  max: "4"
+                - name: Size
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "2"
+                    code: ""
+                  min: "0"
+                  max: "5"
+                - name: Level
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "1"
+                    code: ""
+                  min: "0"
+                  max: "2"
 - name: kspaceduel
   infos:
     - name: kspaceduel.kcfg
@@ -6089,6 +9191,950 @@
                     choices: []
                   default:
                     text: "1.00"
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: main.xml
+      path: plasmoid/package/contents/config/main.xml
+      url: https://api.github.com/repositories/101990564/contents/plasmoid/package/contents/config/main.xml?ref=230738f4ae29b3afd149dd8a2850420478deb926
+      download: https://raw.githubusercontent.com/KDE/latte-dock/230738f4ae29b3afd149dd8a2850420478deb926/plasmoid/package/contents/config/main.xml
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: General
+              entries:
+                - name: groupingAppIdBlacklist
+                  key: ""
+                  type: StringList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: groupingLauncherUrlBlacklist
+                  key: ""
+                  type: StringList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: separateLaunchers
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: wheelEnabled
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: launchers
+                  key: ""
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: launchers59
+                  key: ""
+                  type: StringList
+                  label: New launchers mechanism. The list of launcher tasks on the widget. Usually .desktop file or executable URLs. Special URLs such as preferred://browser that expand to default applications are supported.
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showBarLine
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showShadows
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showGlow
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: isPreferredForPositionShortcuts
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: isPreferredForDroppedLaunchers
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: zoomLevel
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "14"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: iconSize
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "48"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: zoomHelper
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: threeColorsWindows
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: dotsOnActive
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: useThemePanel
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: panelSize
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "10"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: transparentPanel
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: isInLatteDock
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: durationTime
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: previewsDelay
+                  key: ""
+                  type: Int
+                  label: Delay in order to show previews or highlight windows. Values lower than 150ms are ignored because previews do not work correctly
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "650"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: forceMonochromaticIcons
+                  key: ""
+                  type: Bool
+                  label: When "true" Latte color palette is used in order to provide monochromatic icons at all times. It is not needed in general and can be used only with specific icon themes
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: previewWindowAsPopup
+                  key: ""
+                  type: Bool
+                  label: When "true" Preview window behaves as popup
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: launchersGroup
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: Unique
+                          label: ""
+                        - name: Layout
+                          label: ""
+                        - name: Global
+                          label: ""
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showWindowActions
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showWindowsOnlyFromLaunchers
+                  key: ""
+                  type: Bool
+                  label: show only windows that there is a launcher for them
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: groupTasksByDefault
+                  key: ""
+                  type: Bool
+                  label: by default group same tasks
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showOnlyCurrentScreen
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showOnlyCurrentDesktop
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showOnlyCurrentActivity
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: hideAllTasks
+                  key: ""
+                  type: Bool
+                  label: When "true" all tasks are filtered and its behavior also
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showInfoBadge
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showProgressBadge
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: showAudioBadge
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: audioBadgeActionsEnabled
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: infoBadgeProminentColorEnabled
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: animationLauncherBouncing
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: animationWindowInAttention
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: animationNewWindowSliding
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: animationWindowAddedInGroup
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: animationWindowRemovedFromGroup
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: scrollTasksEnabled
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: autoScrollTasksEnabled
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: manualScrollTasksType
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: Disabled
+                          label: ""
+                        - name: Parallel
+                          label: ""
+                        - name: VerticalHorizontal
+                          label: ""
+                  default:
+                    text: "1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: leftClickAction
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: None
+                          label: ""
+                        - name: Close
+                          label: ""
+                        - name: NewInstance
+                          label: ""
+                        - name: ToggleMinimized
+                          label: ""
+                        - name: CycleThroughTasks
+                          label: ""
+                        - name: ToggleGrouping
+                          label: ""
+                        - name: PresentWindows
+                          label: ""
+                        - name: PreviewWindows
+                          label: ""
+                        - name: HighlightWindows
+                          label: ""
+                        - name: PreviewAndHighlightWindows
+                          label: ""
+                  default:
+                    text: "6"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: middleClickAction
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: None
+                          label: ""
+                        - name: Close
+                          label: ""
+                        - name: NewInstance
+                          label: ""
+                        - name: ToggleMinimized
+                          label: ""
+                        - name: CycleThroughTasks
+                          label: ""
+                        - name: ToggleGrouping
+                          label: ""
+                        - name: PresentWindows
+                          label: ""
+                        - name: PreviewWindows
+                          label: ""
+                        - name: HighlightWindows
+                          label: ""
+                        - name: PreviewAndHighlightWindows
+                          label: ""
+                  default:
+                    text: "2"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: hoverAction
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: None
+                          label: ""
+                        - name: Close
+                          label: ""
+                        - name: NewInstance
+                          label: ""
+                        - name: ToggleMinimized
+                          label: ""
+                        - name: CycleThroughTasks
+                          label: ""
+                        - name: ToggleGrouping
+                          label: ""
+                        - name: PresentWindows
+                          label: ""
+                        - name: PreviewWindows
+                          label: ""
+                        - name: HighlightWindows
+                          label: ""
+                        - name: PreviewAndHighlightWindows
+                          label: ""
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: taskScrollAction
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: ScrollNone
+                          label: ""
+                        - name: ScrollTasks
+                          label: ""
+                        - name: ScrollToggleMinimized
+                          label: ""
+                  default:
+                    text: "1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: modifierClickAction
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: None
+                          label: ""
+                        - name: Close
+                          label: ""
+                        - name: NewInstance
+                          label: ""
+                        - name: ToggleMinimized
+                          label: ""
+                        - name: CycleThroughTasks
+                          label: ""
+                        - name: ToggleGrouping
+                          label: ""
+                        - name: PresentWindows
+                          label: ""
+                        - name: PreviewWindows
+                          label: ""
+                        - name: HighlightWindows
+                          label: ""
+                        - name: PreviewAndHighlightWindows
+                          label: ""
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: modifier
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: Shift
+                          label: ""
+                        - name: Control
+                          label: ""
+                        - name: Alt
+                          label: ""
+                        - name: Meta
+                          label: ""
+                  default:
+                    text: "1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: modifierClick
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices:
+                        - name: LeftClick
+                          label: ""
+                        - name: MiddleClick
+                          label: ""
+                        - name: RightClick
+                          label: ""
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+- name: libgravatar
+  infos:
+    - name: gravatar.kcfg
+      path: src/settings/gravatar.kcfg
+      url: https://api.github.com/repositories/47668301/contents/src/settings/gravatar.kcfg?ref=ff27a48aba9a792685dd1029178a7dfc16e1323a
+      download: https://raw.githubusercontent.com/KDE/libgravatar/ff27a48aba9a792685dd1029178a7dfc16e1323a/src/settings/gravatar.kcfg
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: Gravatar
+              entries:
+                - name: GravatarSupportEnabled
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: GravatarUseDefaultImage
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: GravatarCacheSize
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "20"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: FallbackToGravatar
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: LibravatarSupportEnabled
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
                     code: ""
                   min: ""
                   max: ""
@@ -7534,6 +11580,66 @@
                     code: ""
                   min: ""
                   max: ""
+- name: pim-data-exporter
+  infos:
+    - name: pimdataexporterglobalconfig.kcfg
+      path: gui/settings/pimdataexporterglobalconfig.kcfg
+      url: https://api.github.com/repositories/66907517/contents/gui/settings/pimdataexporterglobalconfig.kcfg?ref=dbbc050d5b26eb6b91799e172a5c62d4ff80f10b
+      download: https://raw.githubusercontent.com/KDE/pim-data-exporter/dbbc050d5b26eb6b91799e172a5c62d4ff80f10b/gui/settings/pimdataexporterglobalconfig.kcfg
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: General
+              entries:
+                - name: AlwaysOverrideFile
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: AlwaysMergeConfigFile
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: AlwaysOverrideDirectory
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
 - name: pim-sieve-editor
   infos:
     - name: sieveeditorglobalconfig.kcfg
@@ -8559,6 +12665,184 @@
                     choices: []
                   default:
                     text: org.kde.phone.dialer.desktop
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: nightcolorsettings.kcfg
+      path: quicksettings/nightcolor/nightcolorsettings.kcfg
+      url: https://api.github.com/repositories/42721540/contents/quicksettings/nightcolor/nightcolorsettings.kcfg?ref=419de3fbe7a0e9f0aac1a48b4f4f1e41bb9a4685
+      download: https://raw.githubusercontent.com/KDE/plasma-mobile/419de3fbe7a0e9f0aac1a48b4f4f1e41bb9a4685/quicksettings/nightcolor/nightcolorsettings.kcfg
+      content: ""
+      rcName: kwinrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: kwinrc
+        groups:
+            - name: NightColor
+              entries:
+                - name: Active
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: Mode
+                  key: ""
+                  type: Enum
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ColorCorrect::NightColorMode
+                    choices:
+                        - name: Automatic
+                          label: ""
+                        - name: Location
+                          label: ""
+                        - name: Times
+                          label: ""
+                        - name: Constant
+                          label: ""
+                  default:
+                    text: Automatic
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: DayTemperature
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "6500"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: NightTemperature
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "4500"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: LatitudeAuto
+                  key: ""
+                  type: Double
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0."
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: LongitudeAuto
+                  key: ""
+                  type: Double
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0."
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: LatitudeFixed
+                  key: ""
+                  type: Double
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0."
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: LongitudeFixed
+                  key: ""
+                  type: Double
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0."
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: MorningBeginFixed
+                  key: ""
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0600"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: EveningBeginFixed
+                  key: ""
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "1800"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TransitionTime
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "30"
                     code: ""
                   min: ""
                   max: ""
