@@ -32,15 +32,6 @@ in {
               Type: Int
             '';
           };
-          "disable initial update" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              disable initial update (deprecated)
-
-              Type: Bool
-            '';
-          };
           "exclude filters" = mkOption {
             type = nullOr (either str (listOf str));
             default = "Baloo::defaultExcludeFilterList()";

@@ -6,6 +6,13 @@
     baloo = {
       General.folders = [ "/var" "/home/fake" ];
     };
+
+    dolphin = {
+      General = {
+        HomeUrl = "/var";
+        RememberOpenedTabs = false;
+      };
+    };
 #    spectacle.General.onLaunchAction = "DoNotTakeScreenshot";
 
     # Some high-level settings:

@@ -66,6 +66,7 @@ type Entry struct {
 	Key     string  `xml:"key,attr"`
 	Type    string  `xml:"type,attr"`
 	Label   string  `xml:"label"`
+	Hidden  string  `xml:"hidden"`
 	Code    string  `xml:"code"`
 	Choices Choices `xml:"choices"`
 	Default Default `xml:"default"`
@@ -241,6 +242,9 @@ func scanModules(kcfg []byte, name string) {
 		}
 
 		for _, entry := range group.Entries {
+			if entry.Hidden == "true" {
+				continue
+			}
 			if _, ok := optionGroup.Options[entry.Name]; ok {
 				continue
 			}
