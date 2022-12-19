@@ -139,15 +139,15 @@ func (k *Downloader) collectInfos(i searchResultItem) *KfcFileInfo {
 		log.Printf("failed to decode xml: %v", err)
 		return nil
 	}
-	getRCName(result)
+	getKcfg(result)
 
-	f.Content = result.Content
 	f.Download = result.Download
-	f.RcName = getRCName(result)
+	f.Kcfg = getKcfg(result)
+	f.RcName = f.Kcfg.KcfgFile.Name
 	return f
 }
 
-func getRCName(result KfcFileInfo) string {
+func getKcfg(result KfcFileInfo) ConfigKcfg {
 	content, err := base64.StdEncoding.DecodeString(result.Content)
 	if err != nil {
 		log.Fatalf("failed to decode content: %v", err)
@@ -157,9 +157,9 @@ func getRCName(result KfcFileInfo) string {
 	var doc ConfigKcfg
 	if err := dec.Decode(&doc); err != nil {
 		log.Printf("failed to parse rc: %v\n%v", err, result)
-		return ""
+		return doc
 	}
-	return doc.KcfgFile.Name
+	return doc
 }
 
 func decodeSearchResult(r io.ReadCloser) searchResult {

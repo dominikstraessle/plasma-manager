@@ -139,12 +139,13 @@ type ConfigKcfg struct {
 }
 
 type KfcFileInfo struct {
-	Name     string `yaml:"name"`
-	Path     string `yaml:"path"`
-	Url      string `yaml:"url"`
-	Download string `yaml:"download" json:"download_url"`
-	Content  string `yaml:"content" json:"content"`
-	RcName   string `yaml:"rcName"`
+	Name     string     `yaml:"name"`
+	Path     string     `yaml:"path"`
+	Url      string     `yaml:"url"`
+	Download string     `yaml:"download" json:"download_url"`
+	Content  string     `yaml:"content" json:"content"`
+	RcName   string     `yaml:"rcName"`
+	Kcfg     ConfigKcfg `yaml:"kcfg"`
 }
 
 type RepoKfcFileInfos struct {
