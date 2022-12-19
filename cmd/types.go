@@ -137,3 +137,17 @@ type ConfigKcfg struct {
 	KcfgFile ConfigKcfgFile `xml:"kcfgfile"`
 	Groups   []ConfigGroup  `xml:"group"`
 }
+
+type KfcFileInfo struct {
+	Name     string `yaml:"name"`
+	Path     string `yaml:"path"`
+	Url      string `yaml:"url"`
+	Download string `yaml:"download" json:"download_url"`
+	Content  string `yaml:"content" json:"content"`
+	RcName   string `yaml:"rcName"`
+}
+
+type RepoKfcFileInfos struct {
+	Name  string
+	Infos []*KfcFileInfo
+}

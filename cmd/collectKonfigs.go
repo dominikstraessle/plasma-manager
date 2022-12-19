@@ -12,6 +12,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"sort"
 	"strings"
 	"sync"
 )
@@ -31,7 +32,7 @@ to quickly create a Cobra application.`,
 		if err != nil {
 			log.Fatalf("missing token file: %v", err)
 		}
-		NewKonfigDownloader(tokenFile).Populate()
+		NewDownloader(tokenFile).Populate()
 
 	},
 }
@@ -50,55 +51,46 @@ func init() {
 	collectKonfigsCmd.Flags().StringP("tokenFile", "t", "token.secret", "File with a github personal access token")
 }
 
-type fileInfo struct {
-	Name     string `yaml:"name"`
-	Path     string `yaml:"path"`
-	Url      string `yaml:"url"`
-	Download string `yaml:"download" json:"download_url"`
-	Content  string `yaml:"content" json:"content"`
-	RcName   string `yaml:"rcName"`
-}
-
-type repository struct {
+type searchResultRepository struct {
 	Name string `json:"name"`
 }
 
-type item struct {
-	Name       string     `json:"name"`
-	Path       string     `json:"path"`
-	Url        string     `json:"url"`
-	Repository repository `json:"repository"`
+type searchResultItem struct {
+	Name       string                 `json:"name"`
+	Path       string                 `json:"path"`
+	Url        string                 `json:"url"`
+	Repository searchResultRepository `json:"repository"`
 }
 
 type searchResult struct {
-	TotalCount int    `json:"total_count"`
-	Items      []item `json:"items"`
+	TotalCount int                `json:"total_count"`
+	Items      []searchResultItem `json:"items"`
 }
 
-type KonfigDownloader struct {
+type Downloader struct {
 	client http.Client
 	token  string
 }
 
-func NewKonfigDownloader(tokenFile string) *KonfigDownloader {
+func NewDownloader(tokenFile string) *Downloader {
 	token, err := ioutil.ReadFile(tokenFile)
 	if err != nil {
 		log.Fatalf("failed to read github token: %s", err)
 	}
-	return &KonfigDownloader{
+	return &Downloader{
 		token:  string(token),
 		client: http.Client{},
 	}
 }
 
-func (k *KonfigDownloader) Populate() {
+func (k *Downloader) Populate() {
 	r, closer := k.download("https://api.github.com/search/code?q=kcfg+xmlns+language%3AXML+user%3Akde+language%3AXML&type=Code&per_page=100")
 	defer closer()
 
 	result := decodeSearchResult(r)
 
-	var allInfos = map[string][]*fileInfo{}
-	m := sync.Mutex{}
+	var allInfos = map[string][]*KfcFileInfo{}
+	m := &sync.Mutex{}
 	wg := &sync.WaitGroup{}
 	wg.Add(len(result.Items))
 	for _, item := range result.Items {
@@ -109,29 +101,31 @@ func (k *KonfigDownloader) Populate() {
 		}
 
 		i := item
-		go func() {
-			f := k.collectInfos(i)
-			if f == nil {
-				wg.Done()
-				return
-			}
-			m.Lock()
-			if _, ok := allInfos[i.Repository.Name]; ok {
-				allInfos[i.Repository.Name] = append(allInfos[i.Repository.Name], f)
-			} else {
-				allInfos[i.Repository.Name] = []*fileInfo{f}
-			}
-			defer m.Unlock()
-			defer wg.Done()
-		}()
+		go k.collectInfoFunc(m, wg, allInfos, i)
 	}
 
 	wg.Wait()
 	k.exportInfos(allInfos)
 }
 
-func (k *KonfigDownloader) collectInfos(i item) *fileInfo {
-	f := &fileInfo{
+func (k *Downloader) collectInfoFunc(m *sync.Mutex, wg *sync.WaitGroup, infos map[string][]*KfcFileInfo, i searchResultItem) {
+	f := k.collectInfos(i)
+	if f == nil {
+		wg.Done()
+		return
+	}
+	m.Lock()
+	if _, ok := infos[i.Repository.Name]; ok {
+		infos[i.Repository.Name] = append(infos[i.Repository.Name], f)
+	} else {
+		infos[i.Repository.Name] = []*KfcFileInfo{f}
+	}
+	defer m.Unlock()
+	defer wg.Done()
+}
+
+func (k *Downloader) collectInfos(i searchResultItem) *KfcFileInfo {
+	f := &KfcFileInfo{
 		Name: i.Name,
 		Path: i.Path,
 		Url:  i.Url,
@@ -140,7 +134,7 @@ func (k *KonfigDownloader) collectInfos(i item) *fileInfo {
 	defer closeFunc()
 
 	dec := json.NewDecoder(b)
-	var result fileInfo
+	var result KfcFileInfo
 	if err := dec.Decode(&result); err != nil {
 		log.Printf("failed to decode xml: %v", err)
 		return nil
@@ -153,7 +147,7 @@ func (k *KonfigDownloader) collectInfos(i item) *fileInfo {
 	return f
 }
 
-func getRCName(result fileInfo) string {
+func getRCName(result KfcFileInfo) string {
 	content, err := base64.StdEncoding.DecodeString(result.Content)
 	if err != nil {
 		log.Fatalf("failed to decode content: %v", err)
@@ -177,7 +171,7 @@ func decodeSearchResult(r io.ReadCloser) searchResult {
 	return result
 }
 
-func (k *KonfigDownloader) download(url string) (io.ReadCloser, func()) {
+func (k *Downloader) download(url string) (io.ReadCloser, func()) {
 	r, _ := http.NewRequest(http.MethodGet, url, nil)
 	r.Header.Add("Authorization", "Basic "+basicAuth("dominikstraessle", k.token))
 	resp, err := k.client.Do(r)
@@ -193,8 +187,10 @@ func (k *KonfigDownloader) download(url string) (io.ReadCloser, func()) {
 	}
 }
 
-func (k *KonfigDownloader) exportInfos(infos map[string][]*fileInfo) {
-	b, err := yaml.Marshal(infos)
+func (k *Downloader) exportInfos(infos map[string][]*KfcFileInfo) {
+	sortedInfos := sortInfos(infos)
+
+	b, err := yaml.Marshal(sortedInfos)
 	if err != nil {
 		log.Fatalf("failed to marshal yaml: %v", err)
 	}
@@ -202,6 +198,31 @@ func (k *KonfigDownloader) exportInfos(infos map[string][]*fileInfo) {
 	if err != nil {
 		log.Fatalf("failed to export infos: %v", err)
 	}
+}
+
+func sortInfos(infos map[string][]*KfcFileInfo) []struct {
+	Name  string
+	Infos []*KfcFileInfo
+} {
+	var keys []string
+	for k := range infos {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
+	var sortedInfos []struct {
+		Name  string
+		Infos []*KfcFileInfo
+	}
+	for _, k := range keys {
+		items := infos[k]
+		sort.Slice(items, func(i, j int) bool {
+			return items[i].Path < items[j].Path
+		})
+
+		sortedInfos = append(sortedInfos, RepoKfcFileInfos{Name: k, Infos: items})
+	}
+	return sortedInfos
 }
 
 func basicAuth(username, password string) string {
