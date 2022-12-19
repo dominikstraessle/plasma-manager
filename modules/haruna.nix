@@ -3,6 +3,33 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.haruna = {
+    "Audio" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            PreferredLanguage = mkOption {
+              type = nullOr str;
+              default = "";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            PreferredTrack = mkOption {
+              type = nullOr (either str int);
+              default = "";
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Audio";
+      };
     "General" = with types;
       mkOption {
         type = submodule {
@@ -183,6 +210,87 @@ in {
         };
         default = { };
         description = "General";
+      };
+    "Mouse" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            Left = mkOption {
+              type = nullOr str;
+              default = "";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            Leftx2 = mkOption {
+              type = nullOr str;
+              default = "toggleFullscreenAction";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            Middle = mkOption {
+              type = nullOr str;
+              default = "muteAction";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            Middlex2 = mkOption {
+              type = nullOr str;
+              default = "configureAction";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            Right = mkOption {
+              type = nullOr str;
+              default = "playPauseAction";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            Rightx2 = mkOption {
+              type = nullOr str;
+              default = "";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            ScrollDown = mkOption {
+              type = nullOr str;
+              default = "volumeDownAction";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            ScrollUp = mkOption {
+              type = nullOr str;
+              default = "volumeUpAction";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Mouse";
       };
     "Subtitles" = with types;
       mkOption {

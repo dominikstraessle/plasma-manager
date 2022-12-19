@@ -62,6 +62,259 @@ in {
         default = { };
         description = "Common";
       };
+    "Style" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            AnimationSteps = mkOption {
+              type = nullOr (either str int);
+              default = 10;
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+            AnimationsDuration = mkOption {
+              type = nullOr (either str int);
+              default = 100;
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+            AnimationsEnabled = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            DockWidgetDrawFrame = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            DrawWidgetRects = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            MenuItemDrawStrongFocus = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            MenuOpacity = mkOption {
+              type = nullOr (either str int);
+              default = 100;
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+            MnemonicsMode = mkOption {
+              type =
+                nullOr (either str (enum [ "MN_NEVER" "MN_AUTO" "MN_ALWAYS" ]));
+              default = "MN_AUTO";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - MN_NEVER
+                  - MN_AUTO
+                  - MN_ALWAYS
+              '';
+            };
+            ProgressBarAnimated = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            ProgressBarBusyStepDuration = mkOption {
+              type = nullOr (either str int);
+              default = 800;
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+            ScrollBarAddLineButtons = mkOption {
+              type = nullOr (either str int);
+              default = 0;
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+            ScrollBarSubLineButtons = mkOption {
+              type = nullOr (either str int);
+              default = 0;
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+            SidePanelDrawFrame = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            SliderDrawTickMarks = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            SplitterProxyEnabled = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            SplitterProxyWidth = mkOption {
+              type = nullOr (either str int);
+              default = 12;
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+            StackedWidgetTransitionsEnabled = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            TabBarDrawCenteredTabs = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            ToolBarDrawItemSeparator = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            ViewDrawFocusIndicator = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            ViewDrawTreeBranchLines = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            ViewInvertSortIndicator = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            WidgetExplorerEnabled = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            WindowDragBlackList = mkOption {
+              type = nullOr (either str (listOf str));
+              default = "";
+              description = ''
+
+
+                Type: StringList
+              '';
+            };
+            WindowDragMode = mkOption {
+              type =
+                nullOr (either str (enum [ "WD_NONE" "WD_MINIMAL" "WD_FULL" ]));
+              default = "WD_FULL";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - WD_NONE
+                  - WD_MINIMAL
+                  - WD_FULL
+              '';
+            };
+            WindowDragWhiteList = mkOption {
+              type = nullOr (either str (listOf str));
+              default = "";
+              description = ''
+
+
+                Type: StringList
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Style";
+      };
     "Windeco" = with types;
       mkOption {
         type = submodule {

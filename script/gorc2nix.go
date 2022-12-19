@@ -66,7 +66,7 @@ var mapping = map[string]string{
 	"systemsettingsrc":                     "systemsettings",
 	"kscreenlockerrc":                      "kscreenlocker",
 	"kwinrulesrc":                          "kwinrules",
-	"khotkeysrc":                           "khotkeys",
+	"khotkeysrc":                           "hotkeys",
 	"ksmserverrc":                          "ksmserver",
 	"kded5rc":                              "kded5",
 	"plasmarc":                             "plasma",
@@ -102,6 +102,17 @@ var mapping = map[string]string{
 	"pimcommonrc":                          "pimcommon",
 	"skanpagerc":                           "skanpage",
 	"qmlkonsolerc":                         "qmlkonsole",
+	"bytetableviewsettingsrc":              "bytetableviewsettings",
+	"configrc":                             "config",
+	"fieldingconfigrc":                     "fieldingconfig",
+	"infoviewsettingsrc":                   "infoviewsettings",
+	"okularrc":                             "okular",
+	"discoverrc":                           "discover",
+}
+
+var skipChecks = []string{
+	//"hotkeys",
+	"shortcuts",
 }
 
 type option struct {
@@ -232,10 +243,21 @@ func cleanupEmptyEntries() {
 	}
 }
 
+func shouldSkipChecks(moduleName string) bool {
+	for _, moduleToSkip := range skipChecks {
+		if moduleToSkip == moduleName {
+			return true
+		}
+	}
+	return false
+}
+
 func parseFile(rc, moduleName string) error {
 	if _, ok := allExistingModules[moduleName]; !ok {
-		log.Printf("Skipping unknown module: %s", moduleName)
-		return nil
+		if !shouldSkipChecks(moduleName) {
+			log.Printf("Skipping unknown module: %s", moduleName)
+			return nil
+		}
 	}
 
 	file, err := os.Open(rc)
@@ -326,11 +348,17 @@ func parseFile(rc, moduleName string) error {
 }
 
 func isUnknownOption(module string, group string, key string) bool {
+	if shouldSkipChecks(module) {
+		return false
+	}
 	_, ok := allExistingModules[module].Groups[group].Options[key]
 	return !ok
 }
 
 func isUnknownGroup(module, key string) bool {
+	if shouldSkipChecks(module) {
+		return false
+	}
 	_, ok := allExistingModules[module].Groups[key]
 	return !ok
 }

@@ -962,13 +962,13 @@ in {
                 Type: Bool
               '';
             };
-            DayTemperature = mkOption {
-              type = nullOr (either str int);
-              default = 6500;
+            ActiveEnabled = mkOption {
+              type = nullOr (either str bool);
+              default = true;
               description = ''
 
 
-                Type: Int
+                Type: Bool
               '';
             };
             EveningBeginFixed = mkOption {
@@ -996,6 +996,15 @@ in {
 
 
                 Type: Double
+              '';
+            };
+            LocationEnabled = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
               '';
             };
             LongitudeAuto = mkOption {
@@ -1031,6 +1040,15 @@ in {
                   - Constant
               '';
             };
+            ModeEnabled = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
             MorningBeginFixed = mkOption {
               type = nullOr str;
               default = "0600";
@@ -1047,6 +1065,17 @@ in {
 
 
                 Type: Int
+                Min: 1000
+                Max: 6500
+              '';
+            };
+            NightTemperatureEnabled = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
               '';
             };
             TransitionTime = mkOption {

@@ -11,8 +11,9 @@
     ./baloo.nix
     ./breeze.nix
     ./bytetableviewsettings.nix
-    ./config.nix
     ./dolphin.nix
+    ./elisa.nix
+    ./ffmpegthumbs.nix
     ./fieldingconfig.nix
     ./haruna.nix
     ./infoviewsettings.nix
@@ -27,6 +28,7 @@
     ./kontact.nix
     ./konversation.nix
     ./krunner.nix
+    ./kscreenlocker.nix
     ./ksmserver.nix
     ./kspread.nix
     ./kstars.nix
