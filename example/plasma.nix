@@ -11,6 +11,7 @@
       };
     };
     dolphin = { "IconsMode" = { "PreviewSize" = "256"; }; };
+    elisa = { "PlayerSettings" = { "UseFavoriteStyleRatings" = true; }; };
     krunner = { "General" = { "FreeFloating" = true; }; };
     kwin = {
       "Effect-windowview" = { "BorderActivateAll" = "9"; };

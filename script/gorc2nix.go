@@ -108,6 +108,7 @@ var mapping = map[string]string{
 	"infoviewsettingsrc":                   "infoviewsettings",
 	"okularrc":                             "okular",
 	"discoverrc":                           "discover",
+	"elisarc":                              "elisa",
 }
 
 var skipChecks = []string{
