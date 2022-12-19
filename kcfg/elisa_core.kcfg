@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+ <kcfgfile arg="true" />
+ <group name="ElisaFileIndexer">
+  <entry key="RootPath" type="PathList" >
+  </entry>
+  <entry key="ForceUsageOfFastFileSearch" type="Bool" >
+  </entry>
+ </group>
+ <group name="PlayerSettings">
+ <entry key="ShowNowPlayingBackground" type="Bool">
+     <default>
+         true
+     </default>
+  </entry>
+  <entry key="ShowProgressOnTaskBar" type="Bool" >
+    <default>
+      true
+    </default>
+  </entry>
+  <entry key="ShowSystemTrayIcon" type="Bool" >
+    <default>
+      false
+    </default>
+  </entry>
+  <entry key="PlayAtStartup" type="Bool" >
+    <default>
+      false
+    </default>
+  </entry>
+  <entry key="ScanAtStartup" type="Bool" >
+    <default>
+      true
+    </default>
+  </entry>
+  <entry key="UseFavoriteStyleRatings" type="Bool" >
+    <default>
+      false
+    </default>
+  </entry>
+  </group>
+  <group name="Playlist">
+   <entry key="AlwaysUseAbsolutePlaylistPaths" type="Bool" >
+   <default>
+     false
+   </default>
+   </entry>
+  </group>
+ <group name="Views">
+  <entry key="EmbeddedView" type="Enum">
+   <choices>
+    <choice name="NoView" />
+    <choice name="AllAlbums" />
+    <choice name="AllArtists" />
+    <choice name="AllGenres" />
+   </choices>
+  </entry>
+  <entry key="InitialView" type="Enum">
+   <choices>
+    <choice name="ContextView" />
+    <choice name="RecentlyPlayed" />
+    <choice name="FrequentlyPlayed" />
+    <choice name="AllAlbums" />
+    <choice name="AllArtists" />
+    <choice name="AllTracks" />
+    <choice name="AllGenres" />
+    <choice name="Files" />
+    <choice name="Radios" />
+   </choices>
+  </entry>
+  <entry key="ColorScheme" type="String">
+  </entry>
+  <entry key="SortRolePreferences" type="StringList">
+  </entry>
+  <entry key="SortOrderPreferences" type="StringList">
+  </entry>
+ </group>
+</kcfg>
