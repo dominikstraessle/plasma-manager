@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            addAlias = mkOption {
+            "addAlias" = mkOption {
               type = nullOr (either str bool);
               default = "";
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: Bool
               '';
             };
-            alias = mkOption {
+            "alias" = mkOption {
               type = nullOr (either str bool);
               default = "";
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: Bool
               '';
             };
-            ideal = mkOption {
+            "ideal" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -34,7 +34,7 @@ in {
                 Type: Bool
               '';
             };
-            mass = mkOption {
+            "mass" = mkOption {
               type = nullOr (either str bool);
               default = "";
               description = ''
@@ -43,7 +43,7 @@ in {
                 Type: Bool
               '';
             };
-            soluteMass = mkOption {
+            "soluteMass" = mkOption {
               type = nullOr (either str bool);
               default = "";
               description = ''
@@ -52,7 +52,7 @@ in {
                 Type: Bool
               '';
             };
-            solventVolume = mkOption {
+            "solventVolume" = mkOption {
               type = nullOr (either str bool);
               default = "";
               description = ''
@@ -70,7 +70,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            MaxColor = mkOption {
+            "MaxColor" = mkOption {
               type = nullOr str;
               default = "#FF0000";
               description = ''
@@ -79,7 +79,7 @@ in {
                 Type: Color
               '';
             };
-            MinColor = mkOption {
+            "MinColor" = mkOption {
               type = nullOr str;
               default = "#FFFFFF";
               description = ''
@@ -88,7 +88,7 @@ in {
                 Type: Color
               '';
             };
-            alkalie = mkOption {
+            "alkalie" = mkOption {
               type = nullOr str;
               default = "#FFEB55";
               description = ''
@@ -97,7 +97,7 @@ in {
                 Type: Color
               '';
             };
-            alkaline = mkOption {
+            "alkaline" = mkOption {
               type = nullOr str;
               default = "#00A7B3";
               description = ''
@@ -106,7 +106,7 @@ in {
                 Type: Color
               '';
             };
-            block_d = mkOption {
+            "block_d" = mkOption {
               type = nullOr str;
               default = "#FFEB55";
               description = ''
@@ -115,7 +115,7 @@ in {
                 Type: Color
               '';
             };
-            block_f = mkOption {
+            "block_f" = mkOption {
               type = nullOr str;
               default = "#E85752";
               description = ''
@@ -124,7 +124,7 @@ in {
                 Type: Color
               '';
             };
-            block_p = mkOption {
+            "block_p" = mkOption {
               type = nullOr str;
               default = "#77B753";
               description = ''
@@ -133,7 +133,7 @@ in {
                 Type: Color
               '';
             };
-            block_s = mkOption {
+            "block_s" = mkOption {
               type = nullOr str;
               default = "#B14F9A";
               description = ''
@@ -142,7 +142,7 @@ in {
                 Type: Color
               '';
             };
-            color_artificial = mkOption {
+            "color_artificial" = mkOption {
               type = nullOr str;
               default = "#FFA94E";
               description = ''
@@ -151,7 +151,7 @@ in {
                 Type: Color
               '';
             };
-            color_liquid = mkOption {
+            "color_liquid" = mkOption {
               type = nullOr str;
               default = "#2C72C8";
               description = ''
@@ -160,7 +160,7 @@ in {
                 Type: Color
               '';
             };
-            color_radioactive = mkOption {
+            "color_radioactive" = mkOption {
               type = nullOr str;
               default = "#FFFFFF";
               description = ''
@@ -169,7 +169,7 @@ in {
                 Type: Color
               '';
             };
-            color_solid = mkOption {
+            "color_solid" = mkOption {
               type = nullOr str;
               default = "#E85753";
               description = ''
@@ -178,7 +178,7 @@ in {
                 Type: Color
               '';
             };
-            color_vapor = mkOption {
+            "color_vapor" = mkOption {
               type = nullOr str;
               default = "#77B754";
               description = ''
@@ -187,7 +187,7 @@ in {
                 Type: Color
               '';
             };
-            colorgradientbox = mkOption {
+            "colorgradientbox" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -196,7 +196,7 @@ in {
                 Type: Int
               '';
             };
-            group_1 = mkOption {
+            "group_1" = mkOption {
               type = nullOr str;
               default = "#B14F9A";
               description = ''
@@ -205,7 +205,7 @@ in {
                 Type: Color
               '';
             };
-            group_2 = mkOption {
+            "group_2" = mkOption {
               type = nullOr str;
               default = "#2C72C7";
               description = ''
@@ -214,7 +214,7 @@ in {
                 Type: Color
               '';
             };
-            group_3 = mkOption {
+            "group_3" = mkOption {
               type = nullOr str;
               default = "#00B377";
               description = ''
@@ -223,7 +223,7 @@ in {
                 Type: Color
               '';
             };
-            group_4 = mkOption {
+            "group_4" = mkOption {
               type = nullOr str;
               default = "#E85752";
               description = ''
@@ -232,7 +232,7 @@ in {
                 Type: Color
               '';
             };
-            group_5 = mkOption {
+            "group_5" = mkOption {
               type = nullOr str;
               default = "#FFEB55";
               description = ''
@@ -241,7 +241,7 @@ in {
                 Type: Color
               '';
             };
-            group_6 = mkOption {
+            "group_6" = mkOption {
               type = nullOr str;
               default = "#644A9B";
               description = ''
@@ -250,7 +250,7 @@ in {
                 Type: Color
               '';
             };
-            group_7 = mkOption {
+            "group_7" = mkOption {
               type = nullOr str;
               default = "#E85290";
               description = ''
@@ -259,7 +259,7 @@ in {
                 Type: Color
               '';
             };
-            group_8 = mkOption {
+            "group_8" = mkOption {
               type = nullOr str;
               default = "#00A7B3";
               description = ''
@@ -268,7 +268,7 @@ in {
                 Type: Color
               '';
             };
-            halogene = mkOption {
+            "halogene" = mkOption {
               type = nullOr str;
               default = "#77B753";
               description = ''
@@ -277,7 +277,7 @@ in {
                 Type: Color
               '';
             };
-            metalloid = mkOption {
+            "metalloid" = mkOption {
               type = nullOr str;
               default = "#E8D888";
               description = ''
@@ -286,7 +286,7 @@ in {
                 Type: Color
               '';
             };
-            noble_gas = mkOption {
+            "noble_gas" = mkOption {
               type = nullOr str;
               default = "#E85290";
               description = ''
@@ -295,7 +295,7 @@ in {
                 Type: Color
               '';
             };
-            nonmetal = mkOption {
+            "nonmetal" = mkOption {
               type = nullOr str;
               default = "#F29B68";
               description = ''
@@ -304,7 +304,7 @@ in {
                 Type: Color
               '';
             };
-            noscheme = mkOption {
+            "noscheme" = mkOption {
               type = nullOr str;
               default = "#2C72C7";
               description = ''
@@ -313,7 +313,7 @@ in {
                 Type: Color
               '';
             };
-            other_metal = mkOption {
+            "other_metal" = mkOption {
               type = nullOr str;
               default = "#8F6B32";
               description = ''
@@ -322,7 +322,7 @@ in {
                 Type: Color
               '';
             };
-            rare = mkOption {
+            "rare" = mkOption {
               type = nullOr str;
               default = "#644A9B";
               description = ''
@@ -331,7 +331,7 @@ in {
                 Type: Color
               '';
             };
-            transition = mkOption {
+            "transition" = mkOption {
               type = nullOr str;
               default = "#00B377";
               description = ''
@@ -349,7 +349,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            isotopeTableMode = mkOption {
+            "isotopeTableMode" = mkOption {
               type = nullOr (either str (enum [
                 "isotopeTableMode_0"
                 "isotopeTableMode_1"
@@ -377,7 +377,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            LogarithmicBoilingPointGradient = mkOption {
+            "LogarithmicBoilingPointGradient" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -386,7 +386,7 @@ in {
                 Type: Bool
               '';
             };
-            LogarithmicCovalentRadiusGradient = mkOption {
+            "LogarithmicCovalentRadiusGradient" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -395,7 +395,7 @@ in {
                 Type: Bool
               '';
             };
-            LogarithmicDiscoverydateGradient = mkOption {
+            "LogarithmicDiscoverydateGradient" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -404,7 +404,7 @@ in {
                 Type: Bool
               '';
             };
-            LogarithmicElectronaffinityGradient = mkOption {
+            "LogarithmicElectronaffinityGradient" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -413,7 +413,7 @@ in {
                 Type: Bool
               '';
             };
-            LogarithmicElectronegativityGradient = mkOption {
+            "LogarithmicElectronegativityGradient" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -422,7 +422,7 @@ in {
                 Type: Bool
               '';
             };
-            LogarithmicIonizationGradient = mkOption {
+            "LogarithmicIonizationGradient" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -431,7 +431,7 @@ in {
                 Type: Bool
               '';
             };
-            LogarithmicMassGradient = mkOption {
+            "LogarithmicMassGradient" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -440,7 +440,7 @@ in {
                 Type: Bool
               '';
             };
-            LogarithmicMeltingPointGradient = mkOption {
+            "LogarithmicMeltingPointGradient" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -449,7 +449,7 @@ in {
                 Type: Bool
               '';
             };
-            LogarithmicVanDerWaalsRadiusGradient = mkOption {
+            "LogarithmicVanDerWaalsRadiusGradient" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -467,7 +467,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            colorschemebox = mkOption {
+            "colorschemebox" = mkOption {
               type = nullOr (either str int);
               default = 1;
               description = ''
@@ -476,7 +476,7 @@ in {
                 Type: Int
               '';
             };
-            gradient = mkOption {
+            "gradient" = mkOption {
               type = nullOr (either str int);
               default = 1;
               description = ''
@@ -485,7 +485,7 @@ in {
                 Type: Int
               '';
             };
-            numeration = mkOption {
+            "numeration" = mkOption {
               type = nullOr (either str int);
               default = 1;
               description = ''
@@ -494,7 +494,7 @@ in {
                 Type: Int
               '';
             };
-            pselook = mkOption {
+            "pselook" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -503,7 +503,7 @@ in {
                 Type: Int
               '';
             };
-            schemaPSE = mkOption {
+            "schemaPSE" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -512,7 +512,7 @@ in {
                 Type: Int
               '';
             };
-            showlegend = mkOption {
+            "showlegend" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -521,7 +521,7 @@ in {
                 Type: Bool
               '';
             };
-            table = mkOption {
+            "table" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -539,7 +539,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            showsidebar = mkOption {
+            "showsidebar" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -557,7 +557,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            spectrumType = mkOption {
+            "spectrumType" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -566,7 +566,7 @@ in {
                 Type: Int
               '';
             };
-            spectrumWavelengthUnit = mkOption {
+            "spectrumWavelengthUnit" = mkOption {
               type = nullOr (either str int);
               default = 2015;
               description = ''
@@ -584,7 +584,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            combobox_energies = mkOption {
+            "combobox_energies" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -593,7 +593,7 @@ in {
                 Type: Int
               '';
             };
-            combobox_length = mkOption {
+            "combobox_length" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -602,7 +602,7 @@ in {
                 Type: Int
               '';
             };
-            combobox_temperature = mkOption {
+            "combobox_temperature" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -611,7 +611,7 @@ in {
                 Type: Int
               '';
             };
-            energiesUnit = mkOption {
+            "energiesUnit" = mkOption {
               type = nullOr (either str int);
               default = 7022;
               description = ''
@@ -620,7 +620,7 @@ in {
                 Type: Int
               '';
             };
-            lengthUnit = mkOption {
+            "lengthUnit" = mkOption {
               type = nullOr (either str int);
               default = 2016;
               description = ''
@@ -629,7 +629,7 @@ in {
                 Type: Int
               '';
             };
-            schemaSelected = mkOption {
+            "schemaSelected" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -638,7 +638,7 @@ in {
                 Type: Bool
               '';
             };
-            temperatureUnit = mkOption {
+            "temperatureUnit" = mkOption {
               type = nullOr (either str int);
               default = 6000;
               description = ''

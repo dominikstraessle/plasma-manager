@@ -39,5 +39,5 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.PersistentFlags().StringP("moduleInfosFile", "m", "modules.yaml", "File containing all infos used for the export/import")
 }

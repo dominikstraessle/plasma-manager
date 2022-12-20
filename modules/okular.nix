@@ -30,6 +30,190 @@ in {
         default = { };
         description = "Contents";
       };
+    "Core General" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            "ChooseGenerators" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "ExternalEditor" = mkOption {
+              type = nullOr (either str (enum [
+                "Custom"
+                "Kate"
+                "Kile"
+                "Scite"
+                "Emacsclient"
+                "Lyxclient"
+                "Texstudio"
+                "Texifyidea"
+              ]));
+              default = "Kate";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - Custom
+                  - Kate
+                  - Kile
+                  - Scite
+                  - Emacsclient
+                  - Lyxclient
+                  - Texstudio
+                  - Texifyidea
+              '';
+            };
+            "ExternalEditorCommand" = mkOption {
+              type = nullOr str;
+              default = "kate --line %l --column %c";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "ObeyDRM" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Core General";
+      };
+    "Core Performance" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            "EnableThreading" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "GraphicsAntialias" = mkOption {
+              type = nullOr (either str (enum [ "Disabled" "Enabled" ]));
+              default = "Enabled";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - Disabled
+                  - Enabled
+              '';
+            };
+            "MemoryLevel" = mkOption {
+              type = nullOr
+                (either str (enum [ "Low" "Normal" "Aggressive" "Greedy" ]));
+              default = "Normal";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - Low
+                  - Normal
+                  - Aggressive
+                  - Greedy
+              '';
+            };
+            "TextAntialias" = mkOption {
+              type = nullOr (either str (enum [ "Disabled" "Enabled" ]));
+              default = "Enabled";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - Disabled
+                  - Enabled
+              '';
+            };
+            "TextHinting" = mkOption {
+              type = nullOr (either str (enum [ "Disabled" "Enabled" ]));
+              default = "Disabled";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - Disabled
+                  - Enabled
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Core Performance";
+      };
+    "Core Presentation" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            "SlidesAdvance" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "SlidesAdvanceTime" = mkOption {
+              type = nullOr (either str int);
+              default = 5;
+              description = ''
+
+
+                Type: UInt
+                Min: 1
+                Max: 3600
+              '';
+            };
+            "SlidesLoop" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "SlidesTapNavigation" = mkOption {
+              type = nullOr
+                (either str (enum [ "ForwardBackward" "Forward" "Disabled" ]));
+              default = "Forward";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - ForwardBackward
+                  - Forward
+                  - Disabled
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Core Presentation";
+      };
     "Debugging Options" = with types;
       mkOption {
         type = submodule {
@@ -257,6 +441,63 @@ in {
         default = { };
         description = "Dlg Presentation";
       };
+    "Document" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            "ChangeColors" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "PaperColor" = mkOption {
+              type = nullOr str;
+              default = "Qt::white";
+              defaultText = "Code: true";
+              description = ''
+
+
+                Type: Color
+              '';
+            };
+            "RenderMode" = mkOption {
+              type = nullOr (either str (enum [
+                "Inverted"
+                "Paper"
+                "Recolor"
+                "BlackWhite"
+                "InvertLightness"
+                "InvertLuma"
+                "InvertLumaSymmetric"
+                "HueShiftPositive"
+                "HueShiftNegative"
+              ]));
+              default = "Inverted";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - Inverted
+                  - Paper
+                  - Recolor
+                  - BlackWhite
+                  - InvertLightness
+                  - InvertLuma
+                  - InvertLumaSymmetric
+                  - HueShiftPositive
+                  - HueShiftNegative
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Document";
+      };
     "General" = with types;
       mkOption {
         type = submodule {
@@ -280,6 +521,19 @@ in {
 
 
                 Type: Bool
+              '';
+            };
+            "EnhanceThinLines" = mkOption {
+              type = nullOr (either str (enum [ "No" "Solid" "Shape" ]));
+              default = "No";
+              description = ''
+
+
+                Type: Enum
+                Choices: 
+                  - No
+                  - Solid
+                  - Shape
               '';
             };
             "ShellOpenFileInTabs" = mkOption {
@@ -820,6 +1074,42 @@ in {
         };
         default = { };
         description = "Search";
+      };
+    "Signatures" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            "CheckOCSPServers" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "DBCertificatePath" = mkOption {
+              type = nullOr str;
+              default = "";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "UseDefaultCertDB" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Signatures";
       };
     "Zoom" = with types;
       mkOption {

@@ -6,7 +6,7 @@ in {
     "{{ .Name }}" = with types; mkOption {
       type = submodule {
         options = { {{ range .Options }}
-          {{if .HasKey }}"{{ .Key }}"{{else}}{{ .Name }}{{end}} = mkOption {
+          {{if .HasKey }}"{{ .Key }}"{{else}}"{{ .Name }}"{{end}} = mkOption {
             type = nullOr {{ .TypeValue }};
             default = {{ .DefaultValue }};{{if .IsDefaultCode }}
             defaultText = "Code: true";{{end}}

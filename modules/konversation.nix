@@ -61,6 +61,15 @@ in {
                 Type: Int
               '';
             };
+            "ChannelSplitterSizes" = mkOption {
+              type = nullOr (either str (listOf int));
+              default = "";
+              description = ''
+
+
+                Type: IntList
+              '';
+            };
             "CloseButtons" = mkOption {
               type = nullOr (either str bool);
               default = false;
@@ -298,6 +307,24 @@ in {
 
 
                 Type: Bool
+              '';
+            };
+            "TopicSplitterSizes" = mkOption {
+              type = nullOr (either str (listOf int));
+              default = "";
+              description = ''
+
+
+                Type: IntList
+              '';
+            };
+            "TreeSplitterSizes" = mkOption {
+              type = nullOr (either str (listOf int));
+              default = "";
+              description = ''
+
+
+                Type: IntList
               '';
             };
             "UseBoldNicks" = mkOption {
@@ -1151,7 +1178,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            LauncherEntryCountMode = mkOption {
+            "LauncherEntryCountMode" = mkOption {
               type = nullOr
                 (either str (enum [ "CountEvents" "CountChannelAndQueries" ]));
               default = "";

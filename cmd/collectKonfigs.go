@@ -20,7 +20,6 @@ import (
 	"strings"
 	"sync"
 	"text/template"
-	"time"
 )
 
 var repos = []string{
@@ -377,6 +376,16 @@ var repos = []string{
 	"kjsembed",
 	"kmediaplayer",
 	"kross",
+	// additional
+	"kwin",
+	"breeze",
+	"baloo",
+	"discover",
+	"fielding",
+	"gitklient",
+	"haruna",
+	"kscreenlocker",
+	"plasma-desktop",
 }
 
 // collectKonfigsCmd represents the collectKonfigs command
@@ -397,7 +406,7 @@ var collectKonfigsCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalf("missing token file: %v", err)
 		}
-		infosFile, err := cmd.Flags().GetString("infosFile")
+		moduleInfosFile, err := cmd.Flags().GetString("moduleInfosFile")
 		if err != nil {
 			log.Fatalf("missing info file: %v", err)
 		}
@@ -416,7 +425,7 @@ var collectKonfigsCmd = &cobra.Command{
 			builder.WriteString(`+repo%3AKDE%2F`)
 			builder.WriteString(url.QueryEscape(repo))
 			url := builder.String()
-			downloader.Populate(infosFile, url)
+			downloader.Populate(moduleInfosFile, url)
 			builder = strings.Builder{}
 		}
 	},
@@ -425,10 +434,9 @@ var collectKonfigsCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(collectKonfigsCmd)
 	collectKonfigsCmd.Flags().StringP("tokenFile", "t", "token.secret", "File with a github personal access token")
-	collectKonfigsCmd.Flags().StringP("infosFile", "i", "modules.yaml", "File containing all infos used for the export")
-	//urlTemplate := "https://api.github.com/search/code?q=kcfg+xmlns+repo%3AKDE%2F{{ . }}+extension%3Akcfg+extension%3Axml+language%3AXML&type=Code&ref=advsearch&l=XML&l="
-	fd := `https://api.github.com/search/code?q=kcfg+xmlns{{ . }}+extension%3Akcfg+extension%3Axml+language%3AXML&type=Code&ref=advsearch&l=XML`
-	collectKonfigsCmd.Flags().StringP("urlTemplate", "u", fd, "Url template where the kde repo name will be inserted for each repo")
+	urlTemplate := `https://api.github.com/search/code?q=kcfg+xmlns{{ . }}+extension%3Akcfg+extension%3Axml+language%3AXML&type=Code&ref=advsearch&l=XML`
+	//urlTemplate := `https://api.github.com/search/code?q=kcfg+xmlns{{ . }}&type=Code`
+	collectKonfigsCmd.Flags().StringP("urlTemplate", "u", urlTemplate, "Url template where the kde repo name will be inserted for each repo")
 	collectKonfigsCmd.Flags().StringSliceP("repos", "r", repos, "All repo names to search for configs")
 }
 
@@ -594,12 +602,12 @@ func decodeSearchResult(r io.ReadCloser) searchResult {
 }
 
 func (k *Downloader) download(url string) (io.ReadCloser, func()) {
-	if strings.Contains(url, "search") {
-		for i := 0; i < 10; i++ {
-			fmt.Print(".")
-			time.Sleep(time.Second)
-		}
-	}
+	//if strings.Contains(url, "search") {
+	//	for i := 0; i < 10; i++ {
+	//		fmt.Print(".")
+	//		time.Sleep(time.Second)
+	//	}
+	//}
 	fmt.Println()
 	r, _ := http.NewRequest(http.MethodGet, url, nil)
 	r.Header.Add("Authorization", "Basic "+basicAuth("dominikstraessle", k.token))

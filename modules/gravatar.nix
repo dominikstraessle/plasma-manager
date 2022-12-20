@@ -2,12 +2,12 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.kded_device_automounter = {
-    "General" = with types;
+  options.programs.plasma.gravatar = {
+    "Gravatar" = with types;
       mkOption {
         type = submodule {
           options = {
-            "AutomountEnabled" = mkOption {
+            "FallbackToGravatar" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -16,7 +16,16 @@ in {
                 Type: Bool
               '';
             };
-            "AutomountOnLogin" = mkOption {
+            "GravatarCacheSize" = mkOption {
+              type = nullOr (either str int);
+              default = 20;
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+            "GravatarSupportEnabled" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -25,7 +34,7 @@ in {
                 Type: Bool
               '';
             };
-            "AutomountOnPlugin" = mkOption {
+            "GravatarUseDefaultImage" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -34,7 +43,7 @@ in {
                 Type: Bool
               '';
             };
-            "AutomountUnknownDevices" = mkOption {
+            "LibravatarSupportEnabled" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -46,11 +55,9 @@ in {
           };
         };
         default = { };
-        description = "General";
+        description = "Gravatar";
       };
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kded_device_automounterrc" =
-      cfg.kded_device_automounter;
-  };
+  config =
+    mkIf cfg.enable { programs.plasma.files."gravatarrc" = cfg.gravatar; };
 }

@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            OutlineCloseButton = mkOption {
+            "OutlineCloseButton" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: Bool
               '';
             };
-            ShadowColor = mkOption {
+            "ShadowColor" = mkOption {
               type = nullOr str;
               default = "0, 0, 0";
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: Color
               '';
             };
-            ShadowSize = mkOption {
+            "ShadowSize" = mkOption {
               type = nullOr (either str (enum [
                 "ShadowNone"
                 "ShadowSmall"
@@ -46,7 +46,7 @@ in {
                   - ShadowVeryLarge
               '';
             };
-            ShadowStrength = mkOption {
+            "ShadowStrength" = mkOption {
               type = nullOr (either str int);
               default = 255;
               description = ''
@@ -66,7 +66,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            AnimationSteps = mkOption {
+            "AnimationSteps" = mkOption {
               type = nullOr (either str int);
               default = 10;
               description = ''
@@ -75,7 +75,7 @@ in {
                 Type: Int
               '';
             };
-            AnimationsDuration = mkOption {
+            "AnimationsDuration" = mkOption {
               type = nullOr (either str int);
               default = 100;
               description = ''
@@ -84,7 +84,7 @@ in {
                 Type: Int
               '';
             };
-            AnimationsEnabled = mkOption {
+            "AnimationsEnabled" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -93,7 +93,7 @@ in {
                 Type: Bool
               '';
             };
-            DockWidgetDrawFrame = mkOption {
+            "DockWidgetDrawFrame" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -102,7 +102,7 @@ in {
                 Type: Bool
               '';
             };
-            DrawWidgetRects = mkOption {
+            "DrawWidgetRects" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -111,7 +111,7 @@ in {
                 Type: Bool
               '';
             };
-            MenuItemDrawStrongFocus = mkOption {
+            "MenuItemDrawStrongFocus" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -120,7 +120,7 @@ in {
                 Type: Bool
               '';
             };
-            MenuOpacity = mkOption {
+            "MenuOpacity" = mkOption {
               type = nullOr (either str int);
               default = 100;
               description = ''
@@ -129,7 +129,7 @@ in {
                 Type: Int
               '';
             };
-            MnemonicsMode = mkOption {
+            "MnemonicsMode" = mkOption {
               type =
                 nullOr (either str (enum [ "MN_NEVER" "MN_AUTO" "MN_ALWAYS" ]));
               default = "MN_AUTO";
@@ -143,7 +143,7 @@ in {
                   - MN_ALWAYS
               '';
             };
-            ProgressBarAnimated = mkOption {
+            "ProgressBarAnimated" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -152,7 +152,7 @@ in {
                 Type: Bool
               '';
             };
-            ProgressBarBusyStepDuration = mkOption {
+            "ProgressBarBusyStepDuration" = mkOption {
               type = nullOr (either str int);
               default = 800;
               description = ''
@@ -161,7 +161,7 @@ in {
                 Type: Int
               '';
             };
-            ScrollBarAddLineButtons = mkOption {
+            "ScrollBarAddLineButtons" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -170,7 +170,7 @@ in {
                 Type: Int
               '';
             };
-            ScrollBarSubLineButtons = mkOption {
+            "ScrollBarSubLineButtons" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -179,7 +179,7 @@ in {
                 Type: Int
               '';
             };
-            SidePanelDrawFrame = mkOption {
+            "SidePanelDrawFrame" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -188,7 +188,7 @@ in {
                 Type: Bool
               '';
             };
-            SliderDrawTickMarks = mkOption {
+            "SliderDrawTickMarks" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -197,7 +197,7 @@ in {
                 Type: Bool
               '';
             };
-            SplitterProxyEnabled = mkOption {
+            "SplitterProxyEnabled" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -206,7 +206,7 @@ in {
                 Type: Bool
               '';
             };
-            SplitterProxyWidth = mkOption {
+            "SplitterProxyWidth" = mkOption {
               type = nullOr (either str int);
               default = 12;
               description = ''
@@ -215,7 +215,7 @@ in {
                 Type: Int
               '';
             };
-            StackedWidgetTransitionsEnabled = mkOption {
+            "StackedWidgetTransitionsEnabled" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -224,7 +224,7 @@ in {
                 Type: Bool
               '';
             };
-            TabBarDrawCenteredTabs = mkOption {
+            "TabBarDrawCenteredTabs" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -233,7 +233,7 @@ in {
                 Type: Bool
               '';
             };
-            ToolBarDrawItemSeparator = mkOption {
+            "ToolBarDrawItemSeparator" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -242,7 +242,7 @@ in {
                 Type: Bool
               '';
             };
-            ViewDrawFocusIndicator = mkOption {
+            "ViewDrawFocusIndicator" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -251,7 +251,7 @@ in {
                 Type: Bool
               '';
             };
-            ViewDrawTreeBranchLines = mkOption {
+            "ViewDrawTreeBranchLines" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -260,7 +260,7 @@ in {
                 Type: Bool
               '';
             };
-            ViewInvertSortIndicator = mkOption {
+            "ViewInvertSortIndicator" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -269,7 +269,7 @@ in {
                 Type: Bool
               '';
             };
-            WidgetExplorerEnabled = mkOption {
+            "WidgetExplorerEnabled" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -278,7 +278,7 @@ in {
                 Type: Bool
               '';
             };
-            WindowDragBlackList = mkOption {
+            "WindowDragBlackList" = mkOption {
               type = nullOr (either str (listOf str));
               default = "";
               description = ''
@@ -287,7 +287,7 @@ in {
                 Type: StringList
               '';
             };
-            WindowDragMode = mkOption {
+            "WindowDragMode" = mkOption {
               type =
                 nullOr (either str (enum [ "WD_NONE" "WD_MINIMAL" "WD_FULL" ]));
               default = "WD_FULL";
@@ -301,7 +301,7 @@ in {
                   - WD_FULL
               '';
             };
-            WindowDragWhiteList = mkOption {
+            "WindowDragWhiteList" = mkOption {
               type = nullOr (either str (listOf str));
               default = "";
               description = ''
@@ -319,7 +319,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            BorderSize = mkOption {
+            "BorderSize" = mkOption {
               type = nullOr (either str (enum [
                 "BorderNone"
                 "BorderNoSides"
@@ -348,7 +348,7 @@ in {
                   - BorderOversized
               '';
             };
-            ButtonSize = mkOption {
+            "ButtonSize" = mkOption {
               type = nullOr (either str (enum [
                 "ButtonTiny"
                 "ButtonSmall"
@@ -369,7 +369,7 @@ in {
                   - ButtonVeryLarge
               '';
             };
-            DrawBackgroundGradient = mkOption {
+            "DrawBackgroundGradient" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -378,7 +378,7 @@ in {
                 Type: Bool
               '';
             };
-            DrawBorderOnMaximizedWindows = mkOption {
+            "DrawBorderOnMaximizedWindows" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -387,7 +387,7 @@ in {
                 Type: Bool
               '';
             };
-            Enabled = mkOption {
+            "Enabled" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -396,7 +396,7 @@ in {
                 Type: Bool
               '';
             };
-            ExceptionPattern = mkOption {
+            "ExceptionPattern" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -405,7 +405,7 @@ in {
                 Type: String
               '';
             };
-            ExceptionType = mkOption {
+            "ExceptionType" = mkOption {
               type = nullOr (either str
                 (enum [ "ExceptionWindowClassName" "ExceptionWindowTitle" ]));
               default = "ExceptionWindowClassName";
@@ -418,7 +418,7 @@ in {
                   - ExceptionWindowTitle
               '';
             };
-            HideTitleBar = mkOption {
+            "HideTitleBar" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -427,7 +427,7 @@ in {
                 Type: Bool
               '';
             };
-            Mask = mkOption {
+            "Mask" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -436,7 +436,7 @@ in {
                 Type: Int
               '';
             };
-            TitleAlignment = mkOption {
+            "TitleAlignment" = mkOption {
               type = nullOr (either str (enum [
                 "AlignLeft"
                 "AlignCenter"

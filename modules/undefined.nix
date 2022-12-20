@@ -2,12 +2,12 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.kded_device_automounter = {
+  options.programs.plasma.undefined = {
     "General" = with types;
       mkOption {
         type = submodule {
           options = {
-            "AutomountEnabled" = mkOption {
+            "AlwaysMergeConfigFile" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: Bool
               '';
             };
-            "AutomountOnLogin" = mkOption {
+            "AlwaysOverrideDirectory" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: Bool
               '';
             };
-            "AutomountOnPlugin" = mkOption {
+            "AlwaysOverrideFile" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -34,9 +34,27 @@ in {
                 Type: Bool
               '';
             };
-            "AutomountUnknownDevices" = mkOption {
+            "activeJobs" = mkOption {
               type = nullOr (either str bool);
-              default = false;
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "allJobs" = mkOption {
+              type = nullOr (either str bool);
+              default = "";
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "completedJobs" = mkOption {
+              type = nullOr (either str bool);
+              default = "";
               description = ''
 
 
@@ -49,8 +67,6 @@ in {
         description = "General";
       };
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kded_device_automounterrc" =
-      cfg.kded_device_automounter;
-  };
+  config =
+    mkIf cfg.enable { programs.plasma.files."undefinedrc" = cfg.undefined; };
 }

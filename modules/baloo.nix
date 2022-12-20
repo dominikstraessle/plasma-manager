@@ -25,7 +25,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            dbVersion = mkOption {
+            "dbVersion" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -73,7 +73,7 @@ in {
                 Type: StringList
               '';
             };
-            folders = mkOption {
+            "folders" = mkOption {
               type = nullOr (either str (listOf str));
               default = "QStringList() << QDir::homePath()";
               defaultText = "Code: true";

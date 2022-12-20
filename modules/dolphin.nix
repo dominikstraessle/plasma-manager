@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            IconSize = mkOption {
+            "IconSize" = mkOption {
               type = nullOr (either str int);
               default = "KIconLoader::SizeSmall";
               defaultText = "Code: true";
@@ -17,7 +17,7 @@ in {
                 Type: Int
               '';
             };
-            MaximumTextWidthIndex = mkOption {
+            "MaximumTextWidthIndex" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -26,7 +26,7 @@ in {
                 Type: Int
               '';
             };
-            PreviewSize = mkOption {
+            "PreviewSize" = mkOption {
               type = nullOr (either str int);
               default = "KIconLoader::SizeLarge";
               defaultText = "Code: true";
@@ -36,7 +36,7 @@ in {
                 Type: Int
               '';
             };
-            UseSystemFont = mkOption {
+            "UseSystemFont" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -45,7 +45,7 @@ in {
                 Type: Bool
               '';
             };
-            ViewFont = mkOption {
+            "ViewFont" = mkOption {
               type = nullOr str;
               default = "QFont()";
               defaultText = "Code: true";
@@ -64,7 +64,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            ShowAddToPlaces = mkOption {
+            "ShowAddToPlaces" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -73,7 +73,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowCopyLocation = mkOption {
+            "ShowCopyLocation" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -82,7 +82,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowCopyMoveMenu = mkOption {
+            "ShowCopyMoveMenu" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -91,7 +91,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowDuplicateHere = mkOption {
+            "ShowDuplicateHere" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -100,7 +100,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowOpenInNewTab = mkOption {
+            "ShowOpenInNewTab" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -109,7 +109,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowOpenInNewWindow = mkOption {
+            "ShowOpenInNewWindow" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -118,7 +118,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowOpenTerminal = mkOption {
+            "ShowOpenTerminal" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -127,7 +127,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowSortBy = mkOption {
+            "ShowSortBy" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -136,7 +136,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowViewMode = mkOption {
+            "ShowViewMode" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -154,7 +154,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            ColumnPositions = mkOption {
+            "ColumnPositions" = mkOption {
               type = nullOr (either str (listOf int));
               default = "0,1,2,3,4,5,6,7,8";
               description = ''
@@ -163,7 +163,7 @@ in {
                 Type: IntList
               '';
             };
-            DirectorySizeCount = mkOption {
+            "DirectorySizeCount" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -172,7 +172,7 @@ in {
                 Type: Bool
               '';
             };
-            ExpandableFolders = mkOption {
+            "ExpandableFolders" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -181,7 +181,7 @@ in {
                 Type: Bool
               '';
             };
-            HighlightEntireRow = mkOption {
+            "HighlightEntireRow" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -190,7 +190,7 @@ in {
                 Type: Bool
               '';
             };
-            IconSize = mkOption {
+            "IconSize" = mkOption {
               type = nullOr (either str int);
               default = "KIconLoader::SizeSmall";
               defaultText = "Code: true";
@@ -200,7 +200,7 @@ in {
                 Type: Int
               '';
             };
-            PreviewSize = mkOption {
+            "PreviewSize" = mkOption {
               type = nullOr (either str int);
               default = "KIconLoader::SizeLarge";
               defaultText = "Code: true";
@@ -210,7 +210,7 @@ in {
                 Type: Int
               '';
             };
-            RecursiveDirectorySizeLimit = mkOption {
+            "RecursiveDirectorySizeLimit" = mkOption {
               type = nullOr (either str int);
               default = 10;
               description = ''
@@ -219,7 +219,7 @@ in {
                 Type: UInt
               '';
             };
-            SidePadding = mkOption {
+            "SidePadding" = mkOption {
               type = nullOr (either str int);
               default = 20;
               description = ''
@@ -228,7 +228,7 @@ in {
                 Type: UInt
               '';
             };
-            UseShortRelativeDates = mkOption {
+            "UseShortRelativeDates" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -237,7 +237,7 @@ in {
                 Type: Bool
               '';
             };
-            UseSystemFont = mkOption {
+            "UseSystemFont" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -246,7 +246,7 @@ in {
                 Type: Bool
               '';
             };
-            ViewFont = mkOption {
+            "ViewFont" = mkOption {
               type = nullOr str;
               default = "QFont()";
               defaultText = "Code: true";
@@ -265,7 +265,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            AdditionalInfo = mkOption {
+            "AdditionalInfo" = mkOption {
               type = nullOr (either str (listOf str));
               default = "";
               description = ''
@@ -274,7 +274,7 @@ in {
                 Type: StringList
               '';
             };
-            GroupedSorting = mkOption {
+            "GroupedSorting" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -283,7 +283,7 @@ in {
                 Type: Bool
               '';
             };
-            HeaderColumnWidths = mkOption {
+            "HeaderColumnWidths" = mkOption {
               type = nullOr (either str (listOf int));
               default = "";
               description = ''
@@ -292,7 +292,7 @@ in {
                 Type: IntList
               '';
             };
-            PreviewsShown = mkOption {
+            "PreviewsShown" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -301,7 +301,7 @@ in {
                 Type: Bool
               '';
             };
-            SortFoldersFirst = mkOption {
+            "SortFoldersFirst" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -310,7 +310,7 @@ in {
                 Type: Bool
               '';
             };
-            SortHiddenLast = mkOption {
+            "SortHiddenLast" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -319,7 +319,7 @@ in {
                 Type: Bool
               '';
             };
-            SortOrder = mkOption {
+            "SortOrder" = mkOption {
               type = nullOr (either str int);
               default = "Qt::AscendingOrder";
               defaultText = "Code: true";
@@ -331,7 +331,7 @@ in {
                 Max: Qt::DescendingOrder
               '';
             };
-            SortRole = mkOption {
+            "SortRole" = mkOption {
               type = nullOr str;
               default = "text";
               description = ''
@@ -340,7 +340,7 @@ in {
                 Type: String
               '';
             };
-            Timestamp = mkOption {
+            "Timestamp" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -349,7 +349,7 @@ in {
                 Type: DateTime
               '';
             };
-            Version = mkOption {
+            "Version" = mkOption {
               type = nullOr (either str int);
               default = -1;
               description = ''
@@ -358,7 +358,7 @@ in {
                 Type: Int
               '';
             };
-            ViewMode = mkOption {
+            "ViewMode" = mkOption {
               type = nullOr (either str int);
               default = "DolphinView::IconsView";
               description = ''
@@ -367,7 +367,7 @@ in {
                 Type: Int
               '';
             };
-            VisibleRoles = mkOption {
+            "VisibleRoles" = mkOption {
               type = nullOr (either str (listOf str));
               default = "";
               description = ''
@@ -385,7 +385,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            AutoExpandFolders = mkOption {
+            "AutoExpandFolders" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -394,7 +394,7 @@ in {
                 Type: Bool
               '';
             };
-            BrowseThroughArchives = mkOption {
+            "BrowseThroughArchives" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -403,7 +403,7 @@ in {
                 Type: Bool
               '';
             };
-            CloseActiveSplitView = mkOption {
+            "CloseActiveSplitView" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -412,7 +412,7 @@ in {
                 Type: Bool
               '';
             };
-            ConfirmClosingMultipleTabs = mkOption {
+            "ConfirmClosingMultipleTabs" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -421,7 +421,7 @@ in {
                 Type: Bool
               '';
             };
-            ConfirmClosingTerminalRunningProgram = mkOption {
+            "ConfirmClosingTerminalRunningProgram" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -430,7 +430,7 @@ in {
                 Type: Bool
               '';
             };
-            EditableUrl = mkOption {
+            "EditableUrl" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -439,7 +439,7 @@ in {
                 Type: Bool
               '';
             };
-            EnlargeSmallPreviews = mkOption {
+            "EnlargeSmallPreviews" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -448,7 +448,7 @@ in {
                 Type: Bool
               '';
             };
-            FilterBar = mkOption {
+            "FilterBar" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -457,7 +457,7 @@ in {
                 Type: Bool
               '';
             };
-            GlobalViewProps = mkOption {
+            "GlobalViewProps" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -466,7 +466,7 @@ in {
                 Type: Bool
               '';
             };
-            HomeUrl = mkOption {
+            "HomeUrl" = mkOption {
               type = nullOr str;
               default =
                 "QUrl::fromLocalFile(QDir::homePath()).toDisplayString(QUrl::PreferLocalFile)";
@@ -477,7 +477,7 @@ in {
                 Type: String
               '';
             };
-            LockPanels = mkOption {
+            "LockPanels" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -486,7 +486,7 @@ in {
                 Type: Bool
               '';
             };
-            ModifiedStartupSettings = mkOption {
+            "ModifiedStartupSettings" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -495,7 +495,7 @@ in {
                 Type: Bool
               '';
             };
-            OpenExternallyCalledFolderInNewTab = mkOption {
+            "OpenExternallyCalledFolderInNewTab" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -504,7 +504,7 @@ in {
                 Type: Bool
               '';
             };
-            OpenNewTabAfterLastTab = mkOption {
+            "OpenNewTabAfterLastTab" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -513,7 +513,7 @@ in {
                 Type: Bool
               '';
             };
-            RememberOpenedTabs = mkOption {
+            "RememberOpenedTabs" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -522,7 +522,7 @@ in {
                 Type: Bool
               '';
             };
-            RenameInline = mkOption {
+            "RenameInline" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -531,7 +531,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowFullPath = mkOption {
+            "ShowFullPath" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -540,7 +540,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowFullPathInTitlebar = mkOption {
+            "ShowFullPathInTitlebar" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -549,7 +549,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowPasteBarAfterCopying = mkOption {
+            "ShowPasteBarAfterCopying" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -558,7 +558,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowSelectionToggle = mkOption {
+            "ShowSelectionToggle" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -567,7 +567,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowSpaceInfo = mkOption {
+            "ShowSpaceInfo" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -576,7 +576,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowStatusBar = mkOption {
+            "ShowStatusBar" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -585,7 +585,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowToolTips = mkOption {
+            "ShowToolTips" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -594,7 +594,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowZoomSlider = mkOption {
+            "ShowZoomSlider" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -603,7 +603,7 @@ in {
                 Type: Bool
               '';
             };
-            SortingChoice = mkOption {
+            "SortingChoice" = mkOption {
               type = nullOr (either str (enum [
                 "NaturalSorting"
                 "CaseInsensitiveSorting"
@@ -620,7 +620,7 @@ in {
                   - CaseSensitiveSorting
               '';
             };
-            SplitView = mkOption {
+            "SplitView" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -629,7 +629,7 @@ in {
                 Type: Bool
               '';
             };
-            UrlCompletionMode = mkOption {
+            "UrlCompletionMode" = mkOption {
               type = nullOr (either str (enum [ ]));
               default = "KCompletion::CompletionPopupAuto";
               description = ''
@@ -638,7 +638,7 @@ in {
                 Type: Enum
               '';
             };
-            UseTabForSwitchingSplitView = mkOption {
+            "UseTabForSwitchingSplitView" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -647,7 +647,7 @@ in {
                 Type: Bool
               '';
             };
-            Version = mkOption {
+            "Version" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -656,7 +656,7 @@ in {
                 Type: Int
               '';
             };
-            ViewPropsTimestamp = mkOption {
+            "ViewPropsTimestamp" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -674,7 +674,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            IconSize = mkOption {
+            "IconSize" = mkOption {
               type = nullOr (either str int);
               default = "KIconLoader::SizeMedium";
               defaultText = "Code: true";
@@ -684,7 +684,7 @@ in {
                 Type: Int
               '';
             };
-            MaximumTextLines = mkOption {
+            "MaximumTextLines" = mkOption {
               type = nullOr (either str int);
               default = 3;
               description = ''
@@ -693,7 +693,7 @@ in {
                 Type: Int
               '';
             };
-            PreviewSize = mkOption {
+            "PreviewSize" = mkOption {
               type = nullOr (either str int);
               default = "KIconLoader::SizeHuge";
               defaultText = "Code: true";
@@ -703,7 +703,7 @@ in {
                 Type: Int
               '';
             };
-            TextWidthIndex = mkOption {
+            "TextWidthIndex" = mkOption {
               type = nullOr (either str int);
               default = 1;
               description = ''
@@ -712,7 +712,7 @@ in {
                 Type: Int
               '';
             };
-            UseSystemFont = mkOption {
+            "UseSystemFont" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -721,7 +721,7 @@ in {
                 Type: Bool
               '';
             };
-            ViewFont = mkOption {
+            "ViewFont" = mkOption {
               type = nullOr str;
               default = "QFont()";
               defaultText = "Code: true";
@@ -740,7 +740,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            IconSize = mkOption {
+            "IconSize" = mkOption {
               type = nullOr (either str int);
               default = "KIconLoader::SizeSmallMedium";
               defaultText = "Code: true";
@@ -759,7 +759,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            HiddenFilesShown = mkOption {
+            "HiddenFilesShown" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''

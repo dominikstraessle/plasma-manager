@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            lastUsedEventCollection = mkOption {
+            "lastUsedEventCollection" = mkOption {
               type = nullOr (either str int);
               default = -1;
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: Int
               '';
             };
-            lastUsedTodoCollection = mkOption {
+            "lastUsedTodoCollection" = mkOption {
               type = nullOr (either str int);
               default = -1;
               description = ''
@@ -34,7 +34,16 @@ in {
       mkOption {
         type = submodule {
           options = {
-            enableMailIntegration = mkOption {
+            "barcodeType" = mkOption {
+              type = nullOr (either str int);
+              default = 1;
+              description = ''
+
+
+                Type: Int
+              '';
+            };
+            "enableMailIntegration" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -43,7 +52,7 @@ in {
                 Type: Bool
               '';
             };
-            enableMaps = mkOption {
+            "enableMaps" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -52,7 +61,7 @@ in {
                 Type: Bool
               '';
             };
-            forceCollapsedMainDrawer = mkOption {
+            "forceCollapsedMainDrawer" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -61,7 +70,7 @@ in {
                 Type: Bool
               '';
             };
-            incidenceInfoDrawerDrawerWidth = mkOption {
+            "incidenceInfoDrawerDrawerWidth" = mkOption {
               type = nullOr (either str int);
               default = -1;
               description = ''
@@ -70,7 +79,7 @@ in {
                 Type: Int
               '';
             };
-            lastOpenedView = mkOption {
+            "lastOpenedView" = mkOption {
               type = nullOr (either str (enum [
                 "MonthView"
                 "ScheduleView"
@@ -97,7 +106,7 @@ in {
                   - MailView
               '';
             };
-            locationMarker = mkOption {
+            "locationMarker" = mkOption {
               type = nullOr (either str (enum [ "Circle" "Pin" ]));
               default = "Pin";
               description = ''
@@ -109,7 +118,7 @@ in {
                   - Pin: Center
               '';
             };
-            showMenubar = mkOption {
+            "showMenubar" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -127,7 +136,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            showSubtodosInCalendarViews = mkOption {
+            "showSubtodosInCalendarViews" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -136,7 +145,7 @@ in {
                 Type: Bool
               '';
             };
-            showTodosInCalendarViews = mkOption {
+            "showTodosInCalendarViews" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -145,7 +154,7 @@ in {
                 Type: Bool
               '';
             };
-            useIncidenceInfoPopup = mkOption {
+            "useIncidenceInfoPopup" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -163,7 +172,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            collectionsSectionExpanded = mkOption {
+            "collectionsSectionExpanded" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -172,7 +181,7 @@ in {
                 Type: Bool
               '';
             };
-            tagsSectionExpanded = mkOption {
+            "tagsSectionExpanded" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -190,7 +199,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            monthGridBorderWidth = mkOption {
+            "monthGridBorderWidth" = mkOption {
               type = nullOr (either str int);
               default = 1;
               description = ''
@@ -199,7 +208,7 @@ in {
                 Type: Int
               '';
             };
-            monthGridMode = mkOption {
+            "monthGridMode" = mkOption {
               type = nullOr
                 (either str (enum [ "SwipeableMonthGrid" "BasicMonthGrid" ]));
               default = "SwipeableMonthGrid";
@@ -212,7 +221,7 @@ in {
                   - BasicMonthGrid: Basic month grid
               '';
             };
-            showWeekNumbers = mkOption {
+            "showWeekNumbers" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -221,7 +230,7 @@ in {
                 Type: Bool
               '';
             };
-            weekdayLabelAlignment = mkOption {
+            "weekdayLabelAlignment" = mkOption {
               type = nullOr (either str (enum [ "Left" "Center" "Right" ]));
               default = "Right";
               description = ''
@@ -234,7 +243,7 @@ in {
                   - Right: Right
               '';
             };
-            weekdayLabelLength = mkOption {
+            "weekdayLabelLength" = mkOption {
               type =
                 nullOr (either str (enum [ "Full" "Abbreviated" "Letter" ]));
               default = "Full";
@@ -257,7 +266,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            monthListMode = mkOption {
+            "monthListMode" = mkOption {
               type = nullOr
                 (either str (enum [ "SwipeableMonthList" "BasicMonthList" ]));
               default = "SwipeableMonthList";
@@ -270,7 +279,7 @@ in {
                   - BasicMonthList: Basic internal month list view
               '';
             };
-            showWeekHeaders = mkOption {
+            "showWeekHeaders" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -288,7 +297,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            ascendingOrder = mkOption {
+            "ascendingOrder" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -297,7 +306,7 @@ in {
                 Type: Bool
               '';
             };
-            pastEventsTransparencyLevel = mkOption {
+            "pastEventsTransparencyLevel" = mkOption {
               type = nullOr (either str float);
               default = 0.0;
               description = ''
@@ -306,7 +315,7 @@ in {
                 Type: Double
               '';
             };
-            showCompletedSubtodos = mkOption {
+            "showCompletedSubtodos" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -315,7 +324,7 @@ in {
                 Type: Bool
               '';
             };
-            sort = mkOption {
+            "sort" = mkOption {
               type = nullOr
                 (either str (enum [ "DueTime" "Alphabetically" "Priority" ]));
               default = "DueTime";
@@ -338,7 +347,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            hourlyViewMode = mkOption {
+            "hourlyViewMode" = mkOption {
               type = nullOr (either str (enum [
                 "SwipeableInternalHourlyView"
                 "BasicInternalHourlyView"
@@ -353,7 +362,7 @@ in {
                   - BasicInternalHourlyView: Basic internal week view
               '';
             };
-            weekViewAllDayHeaderHeight = mkOption {
+            "weekViewAllDayHeaderHeight" = mkOption {
               type = nullOr (either str int);
               default = -1;
               description = ''

@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            PreferredLanguage = mkOption {
+            "PreferredLanguage" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: String
               '';
             };
-            PreferredTrack = mkOption {
+            "PreferredTrack" = mkOption {
               type = nullOr (either str int);
               default = "";
               description = ''
@@ -34,7 +34,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            ColorScheme = mkOption {
+            "ColorScheme" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -43,7 +43,7 @@ in {
                 Type: String
               '';
             };
-            FileDialogLastLocation = mkOption {
+            "FileDialogLastLocation" = mkOption {
               type = nullOr str;
               default = "videoFolder";
               defaultText = "Code: true";
@@ -53,7 +53,7 @@ in {
                 Type: String
               '';
             };
-            FileDialogLocation = mkOption {
+            "FileDialogLocation" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -62,7 +62,7 @@ in {
                 Type: String
               '';
             };
-            GuiStyle = mkOption {
+            "GuiStyle" = mkOption {
               type = nullOr str;
               default = "Default";
               description = ''
@@ -71,7 +71,7 @@ in {
                 Type: String
               '';
             };
-            LastPlayedFile = mkOption {
+            "LastPlayedFile" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -80,7 +80,7 @@ in {
                 Type: String
               '';
             };
-            LastPlaylist = mkOption {
+            "LastPlaylist" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -89,7 +89,7 @@ in {
                 Type: String
               '';
             };
-            LastUrl = mkOption {
+            "LastUrl" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -98,7 +98,7 @@ in {
                 Type: String
               '';
             };
-            MaxRecentFiles = mkOption {
+            "MaxRecentFiles" = mkOption {
               type = nullOr (either str int);
               default = 10;
               description = ''
@@ -107,7 +107,7 @@ in {
                 Type: Int
               '';
             };
-            OsdFontSize = mkOption {
+            "OsdFontSize" = mkOption {
               type = nullOr (either str int);
               default = 25;
               description = ''
@@ -116,7 +116,7 @@ in {
                 Type: Int
               '';
             };
-            RememberWindowGeometry = mkOption {
+            "RememberWindowGeometry" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -125,7 +125,7 @@ in {
                 Type: bool
               '';
             };
-            SeekBigStep = mkOption {
+            "SeekBigStep" = mkOption {
               type = nullOr (either str int);
               default = 30;
               description = ''
@@ -134,7 +134,7 @@ in {
                 Type: Int
               '';
             };
-            SeekMediumStep = mkOption {
+            "SeekMediumStep" = mkOption {
               type = nullOr (either str int);
               default = 15;
               description = ''
@@ -143,7 +143,7 @@ in {
                 Type: Int
               '';
             };
-            SeekSmallStep = mkOption {
+            "SeekSmallStep" = mkOption {
               type = nullOr (either str int);
               default = 5;
               description = ''
@@ -152,7 +152,7 @@ in {
                 Type: Int
               '';
             };
-            ShowChapterMarkers = mkOption {
+            "ShowChapterMarkers" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -161,7 +161,7 @@ in {
                 Type: bool
               '';
             };
-            ShowHeader = mkOption {
+            "ShowHeader" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -170,7 +170,7 @@ in {
                 Type: bool
               '';
             };
-            ShowMenuBar = mkOption {
+            "ShowMenuBar" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -179,7 +179,7 @@ in {
                 Type: bool
               '';
             };
-            UseBreezeIconTheme = mkOption {
+            "UseBreezeIconTheme" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -188,7 +188,7 @@ in {
                 Type: bool
               '';
             };
-            Volume = mkOption {
+            "Volume" = mkOption {
               type = nullOr (either str int);
               default = 80;
               description = ''
@@ -197,7 +197,7 @@ in {
                 Type: Int
               '';
             };
-            VolumeStep = mkOption {
+            "VolumeStep" = mkOption {
               type = nullOr (either str int);
               default = 5;
               description = ''
@@ -215,7 +215,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            Left = mkOption {
+            "Left" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -224,7 +224,7 @@ in {
                 Type: String
               '';
             };
-            Leftx2 = mkOption {
+            "Leftx2" = mkOption {
               type = nullOr str;
               default = "toggleFullscreenAction";
               description = ''
@@ -233,7 +233,7 @@ in {
                 Type: String
               '';
             };
-            Middle = mkOption {
+            "Middle" = mkOption {
               type = nullOr str;
               default = "muteAction";
               description = ''
@@ -242,7 +242,7 @@ in {
                 Type: String
               '';
             };
-            Middlex2 = mkOption {
+            "Middlex2" = mkOption {
               type = nullOr str;
               default = "configureAction";
               description = ''
@@ -251,7 +251,7 @@ in {
                 Type: String
               '';
             };
-            Right = mkOption {
+            "Right" = mkOption {
               type = nullOr str;
               default = "playPauseAction";
               description = ''
@@ -260,7 +260,7 @@ in {
                 Type: String
               '';
             };
-            Rightx2 = mkOption {
+            "Rightx2" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -269,7 +269,7 @@ in {
                 Type: String
               '';
             };
-            ScrollDown = mkOption {
+            "ScrollDown" = mkOption {
               type = nullOr str;
               default = "volumeDownAction";
               description = ''
@@ -278,7 +278,7 @@ in {
                 Type: String
               '';
             };
-            ScrollUp = mkOption {
+            "ScrollUp" = mkOption {
               type = nullOr str;
               default = "volumeUpAction";
               description = ''
@@ -292,11 +292,245 @@ in {
         default = { };
         description = "Mouse";
       };
+    "Playback" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            "ChaptersToSkip" = mkOption {
+              type = nullOr str;
+              default = "";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "HWDecoding" = mkOption {
+              type = nullOr str;
+              default = "auto";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "MinDurationToSavePosition" = mkOption {
+              type = nullOr (either str int);
+              default = 1;
+              description = ''
+
+
+                Type: int
+              '';
+            };
+            "OpenLastPlayedFile" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "PauseWhileMinimized" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "PlayOnResume" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "SavePositionInterval" = mkOption {
+              type = nullOr (either str int);
+              default = 1;
+              description = ''
+
+
+                Type: int
+              '';
+            };
+            "SeekToLastPosition" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "ShowOsdOnSkipChapters" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "SkipChapters" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "UseHWDecoding" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "YtdlFormat" = mkOption {
+              type = nullOr str;
+              default = "";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Playback";
+      };
+    "Playlist" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            "BigFontFullscreen" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "CanToggleWithMouse" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "LoadSiblings" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "OverlayVideo" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "Position" = mkOption {
+              type = nullOr str;
+              default = "right";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "RememberState" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "Repeat" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "ShowMediaTitle" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "ShowRowNumber" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "ShowThumbnails" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+            "Style" = mkOption {
+              type = nullOr str;
+              default = "default";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "Visible" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: bool
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Playlist";
+      };
     "Subtitles" = with types;
       mkOption {
         type = submodule {
           options = {
-            AllowOnBlackBorders = mkOption {
+            "AllowOnBlackBorders" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -305,7 +539,7 @@ in {
                 Type: Bool
               '';
             };
-            BorderColor = mkOption {
+            "BorderColor" = mkOption {
               type = nullOr str;
               default = "#FF000000";
               description = ''
@@ -314,7 +548,7 @@ in {
                 Type: String
               '';
             };
-            BorderSize = mkOption {
+            "BorderSize" = mkOption {
               type = nullOr (either str int);
               default = 3;
               description = ''
@@ -323,7 +557,7 @@ in {
                 Type: Int
               '';
             };
-            FontColor = mkOption {
+            "FontColor" = mkOption {
               type = nullOr str;
               default = "#FFFFFFFF";
               description = ''
@@ -332,7 +566,7 @@ in {
                 Type: String
               '';
             };
-            FontFamily = mkOption {
+            "FontFamily" = mkOption {
               type = nullOr str;
               default = "Sans Serif";
               description = ''
@@ -341,7 +575,7 @@ in {
                 Type: String
               '';
             };
-            FontSize = mkOption {
+            "FontSize" = mkOption {
               type = nullOr (either str int);
               default = "";
               description = ''
@@ -350,7 +584,7 @@ in {
                 Type: Int
               '';
             };
-            IsBold = mkOption {
+            "IsBold" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -359,7 +593,7 @@ in {
                 Type: Bool
               '';
             };
-            IsItalic = mkOption {
+            "IsItalic" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -368,7 +602,7 @@ in {
                 Type: Bool
               '';
             };
-            PreferredLanguage = mkOption {
+            "PreferredLanguage" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -377,7 +611,7 @@ in {
                 Type: String
               '';
             };
-            PreferredTrack = mkOption {
+            "PreferredTrack" = mkOption {
               type = nullOr (either str int);
               default = "";
               description = ''
@@ -386,7 +620,7 @@ in {
                 Type: Int
               '';
             };
-            ShadowColor = mkOption {
+            "ShadowColor" = mkOption {
               type = nullOr str;
               default = "#80F0F0F0";
               description = ''
@@ -395,7 +629,7 @@ in {
                 Type: String
               '';
             };
-            ShadowOffset = mkOption {
+            "ShadowOffset" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -404,7 +638,7 @@ in {
                 Type: Int
               '';
             };
-            SubtitlesFolders = mkOption {
+            "SubtitlesFolders" = mkOption {
               type = nullOr (either str (listOf str));
               default = "subs";
               description = ''
@@ -417,6 +651,43 @@ in {
         };
         default = { };
         description = "Subtitles";
+      };
+    "Video" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            "DefaultCover" = mkOption {
+              type = nullOr str;
+              default = "";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "ScreenshotFormat" = mkOption {
+              type = nullOr str;
+              default = "jpg";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "ScreenshotTemplate" = mkOption {
+              type = nullOr str;
+              default = "screenshotsFolder";
+              defaultText = "Code: true";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "Video";
       };
   };
   config = mkIf cfg.enable {

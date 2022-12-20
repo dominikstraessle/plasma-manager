@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            calendarType = mkOption {
+            "calendarType" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: String
               '';
             };
-            calendarTypeIndex = mkOption {
+            "calendarTypeIndex" = mkOption {
               type = nullOr (either str int);
               default = "";
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: int
               '';
             };
-            colorForeground = mkOption {
+            "colorForeground" = mkOption {
               type = nullOr str;
               default = "yellow";
               description = ''
@@ -34,7 +34,7 @@ in {
                 Type: Color
               '';
             };
-            diffAddedColor = mkOption {
+            "diffAddedColor" = mkOption {
               type = nullOr str;
               default = "green";
               description = ''
@@ -43,7 +43,7 @@ in {
                 Type: Color
               '';
             };
-            diffModifiedColor = mkOption {
+            "diffModifiedColor" = mkOption {
               type = nullOr str;
               default = "blue";
               description = ''
@@ -52,7 +52,7 @@ in {
                 Type: Color
               '';
             };
-            diffRemovedColor = mkOption {
+            "diffRemovedColor" = mkOption {
               type = nullOr str;
               default = "red";
               description = ''
@@ -61,7 +61,7 @@ in {
                 Type: Color
               '';
             };
-            gitBinPath = mkOption {
+            "gitBinPath" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -70,7 +70,7 @@ in {
                 Type: String
               '';
             };
-            openLastRepo = mkOption {
+            "openLastRepo" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -79,7 +79,7 @@ in {
                 Type: Bool
               '';
             };
-            registerDiffTool = mkOption {
+            "registerDiffTool" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -88,7 +88,7 @@ in {
                 Type: Bool
               '';
             };
-            registerMergeTool = mkOption {
+            "registerMergeTool" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''

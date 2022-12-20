@@ -510,7 +510,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            CheckPhishingUrl = mkOption {
+            "CheckPhishingUrl" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -519,7 +519,7 @@ in {
                 Type: Bool
               '';
             };
-            LoadExternalReferences = mkOption {
+            "LoadExternalReferences" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''

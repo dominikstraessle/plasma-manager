@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            scrollbackUseCacheLocation = mkOption {
+            "scrollbackUseCacheLocation" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: Bool
               '';
             };
-            scrollbackUseSpecifiedLocation = mkOption {
+            "scrollbackUseSpecifiedLocation" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: Bool
               '';
             };
-            scrollbackUseSpecifiedLocationDirectory = mkOption {
+            "scrollbackUseSpecifiedLocationDirectory" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -34,7 +34,7 @@ in {
                 Type: Url
               '';
             };
-            scrollbackUseSystemLocation = mkOption {
+            "scrollbackUseSystemLocation" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -52,7 +52,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            AllowMenuAccelerators = mkOption {
+            "AllowMenuAccelerators" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -61,7 +61,7 @@ in {
                 Type: Bool
               '';
             };
-            FocusFollowsMouse = mkOption {
+            "FocusFollowsMouse" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -70,7 +70,7 @@ in {
                 Type: Bool
               '';
             };
-            RememberWindowSize = mkOption {
+            "RememberWindowSize" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -79,7 +79,7 @@ in {
                 Type: Bool
               '';
             };
-            RemoveWindowTitleBarAndFrame = mkOption {
+            "RemoveWindowTitleBarAndFrame" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -88,7 +88,7 @@ in {
                 Type: Bool
               '';
             };
-            ShowWindowTitleOnTitleBar = mkOption {
+            "ShowWindowTitleOnTitleBar" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -97,7 +97,7 @@ in {
                 Type: Bool
               '';
             };
-            UseSingleInstance = mkOption {
+            "UseSingleInstance" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -115,7 +115,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            PrinterFriendly = mkOption {
+            "PrinterFriendly" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -124,7 +124,7 @@ in {
                 Type: Bool
               '';
             };
-            ScaleOutput = mkOption {
+            "ScaleOutput" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -142,7 +142,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            SearchCaseSensitive = mkOption {
+            "SearchCaseSensitive" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -151,7 +151,7 @@ in {
                 Type: Bool
               '';
             };
-            SearchHighlightMatches = mkOption {
+            "SearchHighlightMatches" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -160,7 +160,7 @@ in {
                 Type: Bool
               '';
             };
-            SearchRegExpression = mkOption {
+            "SearchRegExpression" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -169,7 +169,7 @@ in {
                 Type: Bool
               '';
             };
-            SearchReverseSearch = mkOption {
+            "SearchReverseSearch" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -187,7 +187,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            SplitDragHandleSize = mkOption {
+            "SplitDragHandleSize" = mkOption {
               type = nullOr (either str (enum [
                 "SplitDragHandleSmall"
                 "SplitDragHandleMedium"
@@ -204,7 +204,7 @@ in {
                   - SplitDragHandleLarge
               '';
             };
-            SplitViewVisibility = mkOption {
+            "SplitViewVisibility" = mkOption {
               type = nullOr (either str (enum [
                 "AlwaysShowSplitHeader"
                 "ShowSplitHeaderWhenNeeded"
@@ -230,7 +230,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            CloseTabButton = mkOption {
+            "CloseTabButton" = mkOption {
               type =
                 nullOr (either str (enum [ "OnEachTab" "OnTabBar" "None" ]));
               default = "OnEachTab";
@@ -244,7 +244,7 @@ in {
                   - None
               '';
             };
-            CloseTabOnMiddleMouseButton = mkOption {
+            "CloseTabOnMiddleMouseButton" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -253,7 +253,7 @@ in {
                 Type: Bool
               '';
             };
-            ExpandTabWidth = mkOption {
+            "ExpandTabWidth" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -262,7 +262,7 @@ in {
                 Type: Bool
               '';
             };
-            NewTabBehavior = mkOption {
+            "NewTabBehavior" = mkOption {
               type = nullOr (either str
                 (enum [ "PutNewTabAtTheEnd" "PutNewTabAfterCurrentTab" ]));
               default = "PutNewTabAtTheEnd";
@@ -275,7 +275,7 @@ in {
                   - PutNewTabAfterCurrentTab
               '';
             };
-            NewTabButton = mkOption {
+            "NewTabButton" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -284,7 +284,7 @@ in {
                 Type: Bool
               '';
             };
-            TabBarPosition = mkOption {
+            "TabBarPosition" = mkOption {
               type = nullOr (either str (enum [ "Top" "Bottom" ]));
               default = "Top";
               description = ''
@@ -296,7 +296,7 @@ in {
                   - Bottom
               '';
             };
-            TabBarStyleSheet = mkOption {
+            "TabBarStyleSheet" = mkOption {
               type = nullOr str;
               default = "QTabBar::tab { min-width: 2em ; max-width: 25em }";
               description = ''
@@ -305,7 +305,7 @@ in {
                 Type: String
               '';
             };
-            TabBarUseUserStyleSheet = mkOption {
+            "TabBarUseUserStyleSheet" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -314,7 +314,7 @@ in {
                 Type: Bool
               '';
             };
-            TabBarUserStyleSheetFile = mkOption {
+            "TabBarUserStyleSheetFile" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -323,7 +323,7 @@ in {
                 Type: Url
               '';
             };
-            TabBarVisibility = mkOption {
+            "TabBarVisibility" = mkOption {
               type = nullOr (either str (enum [
                 "AlwaysShowTabBar"
                 "ShowTabBarWhenNeeded"
@@ -349,7 +349,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            EnableThumbnails = mkOption {
+            "EnableThumbnails" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -358,7 +358,7 @@ in {
                 Type: Bool
               '';
             };
-            ThumbnailAlt = mkOption {
+            "ThumbnailAlt" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -367,7 +367,7 @@ in {
                 Type: Bool
               '';
             };
-            ThumbnailCtrl = mkOption {
+            "ThumbnailCtrl" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -376,7 +376,7 @@ in {
                 Type: Bool
               '';
             };
-            ThumbnailShift = mkOption {
+            "ThumbnailShift" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -385,7 +385,7 @@ in {
                 Type: Bool
               '';
             };
-            ThumbnailSize = mkOption {
+            "ThumbnailSize" = mkOption {
               type = nullOr (either str int);
               default = 250;
               description = ''

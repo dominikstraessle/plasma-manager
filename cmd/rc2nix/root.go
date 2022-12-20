@@ -108,7 +108,7 @@ func main() {
 	configDir := getConfigDir()
 	modules = map[string]*module{}
 
-	for rc, module := range cmd.RCToModuleMapping {
+	for rc, module := range cmd.rCToModuleMapping {
 		err := parseFile(path.Join(configDir, rc), module)
 		if err != nil {
 			log.Printf("Failed to parse %s: %v", rc, err)

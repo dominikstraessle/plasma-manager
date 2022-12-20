@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            closeAfterExtraction = mkOption {
+            "closeAfterExtraction" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: Bool
               '';
             };
-            extractToSubfolder = mkOption {
+            "extractToSubfolder" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: Bool
               '';
             };
-            openDestinationFolderAfterExtraction = mkOption {
+            "openDestinationFolderAfterExtraction" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -34,7 +34,7 @@ in {
                 Type: Bool
               '';
             };
-            preservePaths = mkOption {
+            "preservePaths" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -52,7 +52,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            defaultOpenAction = mkOption {
+            "defaultOpenAction" = mkOption {
               type = nullOr (either str (enum [ "Preview" "Open" ]));
               default = "Preview";
               description = ''
@@ -64,7 +64,7 @@ in {
                   - Open
               '';
             };
-            showEncryptionWarning = mkOption {
+            "showEncryptionWarning" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -82,7 +82,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            showInfoPanel = mkOption {
+            "showInfoPanel" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -91,7 +91,7 @@ in {
                 Type: Bool
               '';
             };
-            splitterSizes = mkOption {
+            "splitterSizes" = mkOption {
               type = nullOr (either str (listOf int));
               default = "200,100";
               description = ''
@@ -109,7 +109,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            disabledPlugins = mkOption {
+            "disabledPlugins" = mkOption {
               type = nullOr (either str (listOf str));
               default = "";
               description = ''
@@ -127,7 +127,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            limitPreviewFileSize = mkOption {
+            "limitPreviewFileSize" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -136,7 +136,7 @@ in {
                 Type: Bool
               '';
             };
-            previewFileSizeLimit = mkOption {
+            "previewFileSizeLimit" = mkOption {
               type = nullOr (either str int);
               default = 200;
               description = ''

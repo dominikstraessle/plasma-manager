@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            lastUsedAddressBookCollection = mkOption {
+            "lastUsedAddressBookCollection" = mkOption {
               type = nullOr (either str int);
               default = -1;
               description = ''

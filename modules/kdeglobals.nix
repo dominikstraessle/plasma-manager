@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            AllowKDEAppsToRememberWindowPositions = mkOption {
+            "AllowKDEAppsToRememberWindowPositions" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''

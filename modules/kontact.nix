@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            ActivePlugin = mkOption {
+            "ActivePlugin" = mkOption {
               type = nullOr str;
               default = "kontact_summaryplugin";
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: String
               '';
             };
-            ForceStartupPlugin = mkOption {
+            "ForceStartupPlugin" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: Bool
               '';
             };
-            ForcedStartupPlugin = mkOption {
+            "ForcedStartupPlugin" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -34,7 +34,7 @@ in {
                 Type: String
               '';
             };
-            LastVersionSeen = mkOption {
+            "LastVersionSeen" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -52,7 +52,7 @@ in {
                 Type: Bool
               '';
             };
-            SideBarOpen = mkOption {
+            "SideBarOpen" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -61,7 +61,7 @@ in {
                 Type: Bool
               '';
             };
-            SidePaneIconSize = mkOption {
+            "SidePaneIconSize" = mkOption {
               type = nullOr (either str int);
               default = 32;
               description = ''
@@ -70,7 +70,7 @@ in {
                 Type: Int
               '';
             };
-            SidePaneShowIcons = mkOption {
+            "SidePaneShowIcons" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -79,7 +79,7 @@ in {
                 Type: Bool
               '';
             };
-            SidePaneShowText = mkOption {
+            "SidePaneShowText" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -88,7 +88,7 @@ in {
                 Type: Bool
               '';
             };
-            SidePaneSplitter = mkOption {
+            "SidePaneSplitter" = mkOption {
               type = nullOr (either str (listOf int));
               default = "1";
               description = ''

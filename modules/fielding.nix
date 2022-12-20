@@ -2,12 +2,12 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.fieldingconfig = {
+  options.programs.plasma.fielding = {
     "General" = with types;
       mkOption {
         type = submodule {
           options = {
-            Method = mkOption {
+            "Method" = mkOption {
               type = nullOr
                 (either str (enum [ "Get" "Post" "Put" "Patch" "Delete" ]));
               default = "Get";
@@ -29,7 +29,6 @@ in {
         description = "General";
       };
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."fieldingconfigrc" = cfg.fieldingconfig;
-  };
+  config =
+    mkIf cfg.enable { programs.plasma.files."fieldingrc" = cfg.fielding; };
 }

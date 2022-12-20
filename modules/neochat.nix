@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            ActiveConnection = mkOption {
+            "ActiveConnection" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: String
               '';
             };
-            AllowQuickEdit = mkOption {
+            "AllowQuickEdit" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: bool
               '';
             };
-            AutoRoomInfoDrawer = mkOption {
+            "AutoRoomInfoDrawer" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -34,7 +34,7 @@ in {
                 Type: bool
               '';
             };
-            Blur = mkOption {
+            "Blur" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -43,7 +43,7 @@ in {
                 Type: bool
               '';
             };
-            CollapsedSections = mkOption {
+            "CollapsedSections" = mkOption {
               type = nullOr (either str (listOf int));
               default = "";
               description = ''
@@ -52,7 +52,7 @@ in {
                 Type: IntList
               '';
             };
-            ColorScheme = mkOption {
+            "ColorScheme" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -61,7 +61,7 @@ in {
                 Type: String
               '';
             };
-            DeveloperTools = mkOption {
+            "DeveloperTools" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -70,7 +70,7 @@ in {
                 Type: bool
               '';
             };
-            LastSaveDirectory = mkOption {
+            "LastSaveDirectory" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -79,7 +79,7 @@ in {
                 Type: String
               '';
             };
-            MergeRoomList = mkOption {
+            "MergeRoomList" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -88,7 +88,7 @@ in {
                 Type: bool
               '';
             };
-            OpenRoom = mkOption {
+            "OpenRoom" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -97,7 +97,7 @@ in {
                 Type: String
               '';
             };
-            RoomDrawerWidth = mkOption {
+            "RoomDrawerWidth" = mkOption {
               type = nullOr (either str int);
               default = -1;
               description = ''
@@ -106,7 +106,7 @@ in {
                 Type: int
               '';
             };
-            RoomListPageWidth = mkOption {
+            "RoomListPageWidth" = mkOption {
               type = nullOr (either str int);
               default = -1;
               description = ''
@@ -115,7 +115,7 @@ in {
                 Type: int
               '';
             };
-            ShowLeaveJoinEvent = mkOption {
+            "ShowLeaveJoinEvent" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -124,7 +124,7 @@ in {
                 Type: bool
               '';
             };
-            ShowLocalMessagesOnRight = mkOption {
+            "ShowLocalMessagesOnRight" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -133,7 +133,7 @@ in {
                 Type: bool
               '';
             };
-            ShowNotifications = mkOption {
+            "ShowNotifications" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -142,7 +142,7 @@ in {
                 Type: bool
               '';
             };
-            Transparency = mkOption {
+            "Transparency" = mkOption {
               type = nullOr (either str float);
               default = 0.3;
               description = ''
@@ -151,7 +151,7 @@ in {
                 Type: Double
               '';
             };
-            TypingNotifications = mkOption {
+            "TypingNotifications" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -169,7 +169,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            ProxyHost = mkOption {
+            "ProxyHost" = mkOption {
               type = nullOr str;
               default = "127.0.0.1";
               description = ''
@@ -178,7 +178,7 @@ in {
                 Type: String
               '';
             };
-            ProxyPassword = mkOption {
+            "ProxyPassword" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -187,7 +187,7 @@ in {
                 Type: Password
               '';
             };
-            ProxyPort = mkOption {
+            "ProxyPort" = mkOption {
               type = nullOr (either str int);
               default = 1080;
               description = ''
@@ -196,7 +196,7 @@ in {
                 Type: int
               '';
             };
-            ProxyType = mkOption {
+            "ProxyType" = mkOption {
               type = nullOr (either str (enum [ "System" "HTTP" "Socks5" ]));
               default = "";
               description = ''
@@ -209,7 +209,7 @@ in {
                   - Socks5: Socks5
               '';
             };
-            ProxyUser = mkOption {
+            "ProxyUser" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -227,7 +227,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            ShowAvatarInRoomDrawer = mkOption {
+            "ShowAvatarInRoomDrawer" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -245,7 +245,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            CompactLayout = mkOption {
+            "CompactLayout" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -254,7 +254,7 @@ in {
                 Type: bool
               '';
             };
-            MinimizeToSystemTrayOnStartup = mkOption {
+            "MinimizeToSystemTrayOnStartup" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -263,7 +263,7 @@ in {
                 Type: bool
               '';
             };
-            ShowAvatarInTimeline = mkOption {
+            "ShowAvatarInTimeline" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -272,7 +272,7 @@ in {
                 Type: bool
               '';
             };
-            ShowAvatarUpdate = mkOption {
+            "ShowAvatarUpdate" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -281,7 +281,7 @@ in {
                 Type: bool
               '';
             };
-            ShowDeletedMessages = mkOption {
+            "ShowDeletedMessages" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -290,7 +290,7 @@ in {
                 Type: bool
               '';
             };
-            ShowFancyEffects = mkOption {
+            "ShowFancyEffects" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -299,7 +299,7 @@ in {
                 Type: bool
               '';
             };
-            ShowLinkPreview = mkOption {
+            "ShowLinkPreview" = mkOption {
               type = nullOr (either str bool);
               default = "";
               description = ''
@@ -308,7 +308,7 @@ in {
                 Type: bool
               '';
             };
-            ShowRename = mkOption {
+            "ShowRename" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -317,7 +317,7 @@ in {
                 Type: bool
               '';
             };
-            SystemTray = mkOption {
+            "SystemTray" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''

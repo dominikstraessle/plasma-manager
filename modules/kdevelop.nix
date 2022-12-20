@@ -129,6 +129,106 @@ in {
         default = { };
         description = "Language Support";
       };
+    "MakeBuilder" = with types;
+      mkOption {
+        type = submodule {
+          options = {
+            "Abort on First Error" = mkOption {
+              type = nullOr (either str bool);
+              default = true;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "Additional Options" = mkOption {
+              type = nullOr str;
+              default = "";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "Default Make Environment Profile" = mkOption {
+              type = nullOr str;
+              default = "default";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "Default Target" = mkOption {
+              type = nullOr str;
+              default = "";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "Display Only" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "Install As Root" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "Make Binary" = mkOption {
+              type = nullOr str;
+              default = "MakeBuilderPreferences::standardMakeExecutable()";
+              defaultText = "Code: true";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+            "Number Of Jobs" = mkOption {
+              type = nullOr (either str int);
+              default = 1;
+              description = ''
+
+
+                Type: UInt
+              '';
+            };
+            "Override Number Of Jobs" = mkOption {
+              type = nullOr (either str bool);
+              default = false;
+              description = ''
+
+
+                Type: Bool
+              '';
+            };
+            "Su Command" = mkOption {
+              type = nullOr str;
+              default = "kdesu -t";
+              description = ''
+
+
+                Type: String
+              '';
+            };
+          };
+        };
+        default = { };
+        description = "MakeBuilder";
+      };
   };
   config =
     mkIf cfg.enable { programs.plasma.files."kdeveloprc" = cfg.kdevelop; };

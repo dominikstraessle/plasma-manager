@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            confirmLogout = mkOption {
+            "confirmLogout" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: Bool
               '';
             };
-            excludeApps = mkOption {
+            "excludeApps" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: String
               '';
             };
-            loginMode = mkOption {
+            "loginMode" = mkOption {
               type = nullOr (either str (enum [
                 "restorePreviousLogout"
                 "restoreSavedSession"
@@ -42,7 +42,7 @@ in {
                   - emptySession
               '';
             };
-            shutdownType = mkOption {
+            "shutdownType" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''

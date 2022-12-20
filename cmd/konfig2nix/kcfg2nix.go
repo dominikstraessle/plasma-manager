@@ -92,11 +92,11 @@ func scanModules(kcfg []byte, name string) {
 		doc.KcfgFile.Name = noKcfg[name]
 	}
 
-	if _, ok := cmd.RCToModuleMapping[doc.KcfgFile.Name]; !ok {
-		log.Printf("%s", doc.KcfgFile.Name)
+	if _, ok := cmd.rCToModuleMapping[doc.KcfgFile.Name]; !ok {
+		log.Printf("Skip %s: missing rc to module mapping", doc.KcfgFile.Name)
 		return
 	} else {
-		doc.Name = cmd.RCToModuleMapping[doc.KcfgFile.Name]
+		doc.Name = cmd.rCToModuleMapping[doc.KcfgFile.Name]
 	}
 
 	var module = &cmd.Module{

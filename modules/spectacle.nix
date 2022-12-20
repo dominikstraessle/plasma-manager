@@ -7,7 +7,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            annotationToolType = mkOption {
+            "annotationToolType" = mkOption {
               type = nullOr (either str (enum [ ]));
               default = "AnnotationDocument::EditActionType::None";
               description = ''
@@ -16,7 +16,7 @@ in {
                 Type: Enum
               '';
             };
-            arrowShadow = mkOption {
+            "arrowShadow" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -25,7 +25,7 @@ in {
                 Type: Bool
               '';
             };
-            arrowStrokeColor = mkOption {
+            "arrowStrokeColor" = mkOption {
               type = nullOr str;
               default = "255,0,0,255";
               description = ''
@@ -34,7 +34,7 @@ in {
                 Type: Color
               '';
             };
-            arrowStrokeWidth = mkOption {
+            "arrowStrokeWidth" = mkOption {
               type = nullOr (either str int);
               default = 4;
               description = ''
@@ -44,7 +44,7 @@ in {
                 Min: 1
               '';
             };
-            ellipseFillColor = mkOption {
+            "ellipseFillColor" = mkOption {
               type = nullOr str;
               default = "255,0,0,255";
               description = ''
@@ -53,7 +53,7 @@ in {
                 Type: Color
               '';
             };
-            ellipseShadow = mkOption {
+            "ellipseShadow" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -62,7 +62,7 @@ in {
                 Type: Bool
               '';
             };
-            ellipseStrokeColor = mkOption {
+            "ellipseStrokeColor" = mkOption {
               type = nullOr str;
               default = "0,0,0,255";
               description = ''
@@ -71,7 +71,7 @@ in {
                 Type: Color
               '';
             };
-            ellipseStrokeWidth = mkOption {
+            "ellipseStrokeWidth" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -81,7 +81,7 @@ in {
                 Min: 0
               '';
             };
-            freehandShadow = mkOption {
+            "freehandShadow" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -90,7 +90,7 @@ in {
                 Type: Bool
               '';
             };
-            freehandStrokeColor = mkOption {
+            "freehandStrokeColor" = mkOption {
               type = nullOr str;
               default = "255,0,0,255";
               description = ''
@@ -99,7 +99,7 @@ in {
                 Type: Color
               '';
             };
-            freehandStrokeWidth = mkOption {
+            "freehandStrokeWidth" = mkOption {
               type = nullOr (either str int);
               default = 4;
               description = ''
@@ -109,7 +109,7 @@ in {
                 Min: 1
               '';
             };
-            highlighterStrokeColor = mkOption {
+            "highlighterStrokeColor" = mkOption {
               type = nullOr str;
               default = "255,255,0,255";
               description = ''
@@ -118,7 +118,7 @@ in {
                 Type: Color
               '';
             };
-            highlighterStrokeWidth = mkOption {
+            "highlighterStrokeWidth" = mkOption {
               type = nullOr (either str int);
               default = 20;
               description = ''
@@ -128,7 +128,7 @@ in {
                 Min: 1
               '';
             };
-            lineShadow = mkOption {
+            "lineShadow" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -137,7 +137,7 @@ in {
                 Type: Bool
               '';
             };
-            lineStrokeColor = mkOption {
+            "lineStrokeColor" = mkOption {
               type = nullOr str;
               default = "255,0,0,255";
               description = ''
@@ -146,7 +146,7 @@ in {
                 Type: Color
               '';
             };
-            lineStrokeWidth = mkOption {
+            "lineStrokeWidth" = mkOption {
               type = nullOr (either str int);
               default = 4;
               description = ''
@@ -156,7 +156,7 @@ in {
                 Min: 1
               '';
             };
-            numberFillColor = mkOption {
+            "numberFillColor" = mkOption {
               type = nullOr str;
               default = "255,0,0,255";
               description = ''
@@ -165,7 +165,7 @@ in {
                 Type: Color
               '';
             };
-            numberFont = mkOption {
+            "numberFont" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -174,7 +174,7 @@ in {
                 Type: Font
               '';
             };
-            numberFontColor = mkOption {
+            "numberFontColor" = mkOption {
               type = nullOr str;
               default = "0,0,0,255";
               description = ''
@@ -183,7 +183,7 @@ in {
                 Type: Color
               '';
             };
-            numberShadow = mkOption {
+            "numberShadow" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -192,7 +192,7 @@ in {
                 Type: Bool
               '';
             };
-            rectangleFillColor = mkOption {
+            "rectangleFillColor" = mkOption {
               type = nullOr str;
               default = "255,0,0,255";
               description = ''
@@ -201,7 +201,7 @@ in {
                 Type: Color
               '';
             };
-            rectangleShadow = mkOption {
+            "rectangleShadow" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -210,7 +210,7 @@ in {
                 Type: Bool
               '';
             };
-            rectangleStrokeColor = mkOption {
+            "rectangleStrokeColor" = mkOption {
               type = nullOr str;
               default = "0,0,0,255";
               description = ''
@@ -219,7 +219,7 @@ in {
                 Type: Color
               '';
             };
-            rectangleStrokeWidth = mkOption {
+            "rectangleStrokeWidth" = mkOption {
               type = nullOr (either str int);
               default = 0;
               description = ''
@@ -229,7 +229,7 @@ in {
                 Min: 0
               '';
             };
-            textFont = mkOption {
+            "textFont" = mkOption {
               type = nullOr str;
               default = "";
               description = ''
@@ -238,7 +238,7 @@ in {
                 Type: Font
               '';
             };
-            textFontColor = mkOption {
+            "textFontColor" = mkOption {
               type = nullOr str;
               default = "0,0,0,255";
               description = ''
@@ -247,7 +247,7 @@ in {
                 Type: Color
               '';
             };
-            textShadow = mkOption {
+            "textShadow" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -265,7 +265,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            autoSaveImage = mkOption {
+            "autoSaveImage" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -274,7 +274,7 @@ in {
                 Type: Bool
               '';
             };
-            clipboardGroup = mkOption {
+            "clipboardGroup" = mkOption {
               type = nullOr (either str (enum [
                 "PostScreenshotDoNothing"
                 "PostScreenshotCopyImage"
@@ -308,7 +308,7 @@ in {
                   - DoNotTakeScreenshot
               '';
             };
-            printKeyActionRunning = mkOption {
+            "printKeyActionRunning" = mkOption {
               type = nullOr (either str (enum [
                 "TakeNewScreenshot"
                 "StartNewInstance"
@@ -325,7 +325,7 @@ in {
                   - FocusWindow
               '';
             };
-            rememberLastRectangularRegion = mkOption {
+            "rememberLastRectangularRegion" = mkOption {
               type = nullOr (either str
                 (enum [ "Never" "Always" "UntilSpectacleIsClosed" ]));
               default = "Always";
@@ -339,7 +339,7 @@ in {
                   - UntilSpectacleIsClosed
               '';
             };
-            showCaptureInstructions = mkOption {
+            "showCaptureInstructions" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -348,7 +348,7 @@ in {
                 Type: Bool
               '';
             };
-            showMagnifier = mkOption {
+            "showMagnifier" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -366,7 +366,7 @@ in {
                 Type: Bool
               '';
             };
-            useReleaseToCapture = mkOption {
+            "useReleaseToCapture" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -384,7 +384,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            captureDelay = mkOption {
+            "captureDelay" = mkOption {
               type = nullOr (either str float);
               default = 0.0;
               description = ''
@@ -394,7 +394,7 @@ in {
                 Min: 0
               '';
             };
-            captureMode = mkOption {
+            "captureMode" = mkOption {
               type = nullOr (either str (enum [ ]));
               default = "CaptureModeModel::CaptureMode::AllScreens";
               description = ''
@@ -403,7 +403,7 @@ in {
                 Type: Enum
               '';
             };
-            cropRegion = mkOption {
+            "cropRegion" = mkOption {
               type = nullOr str;
               default = "QRect()";
               description = ''
@@ -412,7 +412,7 @@ in {
                 Type: Rect
               '';
             };
-            includeDecorations = mkOption {
+            "includeDecorations" = mkOption {
               type = nullOr (either str bool);
               default = true;
               description = ''
@@ -421,7 +421,7 @@ in {
                 Type: Bool
               '';
             };
-            includePointer = mkOption {
+            "includePointer" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -439,7 +439,7 @@ in {
                 Type: Bool
               '';
             };
-            quitAfterSaveCopyExport = mkOption {
+            "quitAfterSaveCopyExport" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -448,7 +448,7 @@ in {
                 Type: Bool
               '';
             };
-            transientOnly = mkOption {
+            "transientOnly" = mkOption {
               type = nullOr (either str bool);
               default = false;
               description = ''
@@ -466,7 +466,7 @@ in {
       mkOption {
         type = submodule {
           options = {
-            compressionQuality = mkOption {
+            "compressionQuality" = mkOption {
               type = nullOr (either str int);
               default = 90;
               description = ''
@@ -477,7 +477,7 @@ in {
                 Max: 100
               '';
             };
-            defaultSaveImageFormat = mkOption {
+            "defaultSaveImageFormat" = mkOption {
               type = nullOr str;
               default = "PNG";
               description = ''
@@ -486,7 +486,7 @@ in {
                 Type: String
               '';
             };
-            defaultSaveLocation = mkOption {
+            "defaultSaveLocation" = mkOption {
               type = nullOr str;
               default =
                 "\n            QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)+QLatin1Char('/')) \n        ";
@@ -497,7 +497,7 @@ in {
                 Type: Url
               '';
             };
-            lastSaveAsLocation = mkOption {
+            "lastSaveAsLocation" = mkOption {
               type = nullOr str;
               default = "defaultSaveLocation()";
               defaultText = "Code: true";
@@ -507,7 +507,7 @@ in {
                 Type: Url
               '';
             };
-            lastSaveLocation = mkOption {
+            "lastSaveLocation" = mkOption {
               type = nullOr str;
               default = "defaultSaveLocation()";
               defaultText = "Code: true";
@@ -517,7 +517,7 @@ in {
                 Type: Url
               '';
             };
-            saveFilenameFormat = mkOption {
+            "saveFilenameFormat" = mkOption {
               type = nullOr str;
               default = "Screenshot_%Y%M%D_%H%m%S";
               description = ''
