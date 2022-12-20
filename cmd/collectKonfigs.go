@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"encoding/xml"
+	"errors"
 	"fmt"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
@@ -12,10 +13,371 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
+	"os"
 	"sort"
+	"strconv"
 	"strings"
 	"sync"
+	"text/template"
+	"time"
 )
+
+var repos = []string{
+	//source: https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/kde/default.nix
+	"akonadi",
+	"akonadi-calendar",
+	"akonadi-calendar-tools",
+	"akonadi-contacts",
+	"akonadi-import-wizard",
+	"akonadi-mime",
+	"akonadi-notes",
+	"akonadi-search",
+	"akonadiconsole",
+	"akregator",
+	"ark",
+	"baloo-widgets",
+	"bomber",
+	"bovo",
+	"calendarsupport",
+	"dolphin",
+	"dolphin-plugins",
+	"dragon",
+	"elisa",
+	"eventviews",
+	"falkon",
+	"ffmpegthumbs",
+	"filelight",
+	"granatier",
+	"grantleetheme",
+	"gwenview",
+	"incidenceeditor",
+	"k3b",
+	"kaccounts-integration",
+	"kaccounts-providers",
+	"kaddressbook",
+	"kalarm",
+	"kalendar",
+	"kalzium",
+	"kamoso",
+	"kapman",
+	"kapptemplate",
+	"kate",
+	"katomic",
+	"kblackbox",
+	"kblocks",
+	"kbounce",
+	"kbreakout",
+	"kcachegrind",
+	"kcalc",
+	"kcalutils",
+	"kcharselect",
+	"kcolorchooser",
+	"kdebugsettings",
+	"kdeconnect-kde",
+	"kdegraphics-mobipocket",
+	"kdegraphics-thumbnailers",
+	"kdenetwork-filesharing",
+	"kdenlive",
+	"kdepim-addons",
+	"kdepim-runtime",
+	"kdev-php",
+	"kdev-python",
+	"kdevelop",
+	"kdevelop-pg-qt",
+	"kdevelop-unwrapped",
+	"kdf",
+	"kdialog",
+	"kdiamond",
+	"keditbookmarks",
+	"kfind",
+	"kfloppy",
+	"kgeography",
+	"kget",
+	"kgpg",
+	"khelpcenter",
+	"kidentitymanagement",
+	"kig",
+	"kigo",
+	"killbots",
+	"kimap",
+	"kio-extras",
+	"kio-gdrive",
+	"kipi-plugins",
+	"kirigami-gallery",
+	"kitinerary",
+	"kldap",
+	"kleopatra",
+	"klettres",
+	"klines",
+	"kmag",
+	"kmahjongg",
+	"kmail",
+	"kmail-account-wizard",
+	"kmailtransport",
+	"kmbox",
+	"kmime",
+	"kmines",
+	"kmix",
+	"kmousetool",
+	"kmplot",
+	"knavalbattle",
+	"knetwalk",
+	"knights",
+	"knotes",
+	"kolf",
+	"kollision",
+	"kolourpaint",
+	"kompare",
+	"konqueror",
+	"konquest",
+	"konsole",
+	"kontact",
+	"konversation",
+	"kontactinterface",
+	"korganizer",
+	"kpat",
+	"kpimtextedit",
+	"kpkpass",
+	"kpublictransport",
+	"kqtquickcharts",
+	"krdc",
+	"kreversi",
+	"krfb",
+	"kruler",
+	"ksanecore",
+	"kshisen",
+	"ksmtp",
+	"kspaceduel",
+	"ksquares",
+	"ksudoku",
+	"ksystemlog",
+	"kteatime",
+	"ktimer",
+	"ktnef",
+	"ktorrent",
+	"ktouch",
+	"kturtle",
+	"kwalletmanager",
+	"kwave",
+	"libgravatar",
+	"libkcddb",
+	"libkdcraw",
+	"libkdegames",
+	"libkdepim",
+	"libkexiv2",
+	"libkgapi",
+	"libkipi",
+	"libkleo",
+	"libkmahjongg",
+	"libkomparediff2",
+	"libksane",
+	"libksieve",
+	"libktorrent",
+	"mailcommon",
+	"mailimporter",
+	"marble",
+	"mbox-importer",
+	"messagelib",
+	"minuet",
+	"okular",
+	"picmi",
+	"pim-data-exporter",
+	"pim-sieve-editor",
+	"pimcommon",
+	"print-manager",
+	"rocs",
+	"skanlite",
+	"skanpage",
+	"spectacle",
+	"umbrello",
+	"yakuake",
+	"zanshin",
+	//source: https://github.com/NixOS/nixpkgs/blob/master/pkgs/desktops/plasma-5/default.nix
+	"aura-browserurlTemplate",
+	"bluedevilurlTemplate",
+	"breeze-gtkurlTemplate",
+	"breeze-qt5urlTemplate",
+	"breeze-gruburlTemplate",
+	"breeze-plymouthurlTemplate",
+	"discoverurlTemplate",
+	"kactivitymanagerdurlTemplate",
+	"kde-cli-toolsurlTemplate",
+	"kde-gtk-configurlTemplate",
+	"kdecorationurlTemplate",
+	"kdeplasma-addonsurlTemplate",
+	"kgamma5urlTemplate",
+	"khotkeysurlTemplate",
+	"kinfocenterurlTemplate",
+	"kmenuediturlTemplate",
+	"kpipewireurlTemplate",
+	"kscreenurlTemplate",
+	"kscreenlockerurlTemplate",
+	"ksshaskpassurlTemplate",
+	"ksystemstatsurlTemplate",
+	"kwallet-pamurlTemplate",
+	"kwayland-integrationurlTemplate",
+	"kwinurlTemplate",
+	"kwritedurlTemplate",
+	"layer-shell-qturlTemplate",
+	"libkscreenurlTemplate",
+	"libksysguardurlTemplate",
+	"milouurlTemplate",
+	"oxygenurlTemplate",
+	"oxygen-soundsurlTemplate",
+	"plank-playerurlTemplate",
+	"plasma-bigscreenurlTemplate",
+	"plasma-browser-integrationurlTemplate",
+	"plasma-desktopurlTemplate",
+	"plasma-disksurlTemplate",
+	"plasma-integrationurlTemplate",
+	"plasma-mobileurlTemplate",
+	"plasma-nanourlTemplate",
+	"plasma-nmurlTemplate",
+	"plasma-paurlTemplate",
+	"plasma-remotecontrollersurlTemplate",
+	"plasma-sdkurlTemplate",
+	"plasma-systemmonitorurlTemplate",
+	"plasma-thunderbolturlTemplate",
+	"plasma-vaulturlTemplate",
+	"plasma-workspaceurlTemplate",
+	"plasma-workspace-wallpapersurlTemplate",
+	"polkit-kde-agenturlTemplate",
+	"powerdevilurlTemplate",
+	"qqc2-breeze-styleurlTemplate",
+	"sddm-kcmurlTemplate",
+	"systemsettingsurlTemplate",
+	"xdg-desktop-portal-kdeurlTemplate",
+	"plasma-applet-caffeine-plusurlTemplate",
+	"plasma-applet-virtual-desktop-barurlTemplate",
+	"bismuthurlTemplate",
+	"kwin-dynamic-workspacesurlTemplate",
+	"kwin-tilingurlTemplate",
+	"krohnkiteurlTemplate",
+	"krunner-sshurlTemplate",
+	"krunner-symbolsurlTemplate",
+	"kzonesurlTemplate",
+	"lightlyurlTemplate",
+	"parachuteurlTemplate",
+	//source: https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/plasma-mobile/default.nix
+	"alligator",
+	"angelfish",
+	"audiotube",
+	"calindori",
+	"kalk",
+	"kasts",
+	"kclock",
+	"keysmith",
+	"koko",
+	"krecorder",
+	"ktrip",
+	"kweather",
+	"neochat",
+	"plasma-dialer",
+	"plasma-phonebook",
+	"plasma-settings",
+	"plasmatube",
+	"spacebar",
+	//source: https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/maui/default.nix
+	"mauikit",
+	"mauikit-accounts",
+	"mauikit-filebrowsing",
+	"mauikit-imagetools",
+	"mauikit-texteditor",
+	"mauiman",
+	"booth",
+	"buho",
+	"clip",
+	"communicator",
+	"index",
+	"nota",
+	"pix",
+	"shelf",
+	"station",
+	"vvave",
+	//source: https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/libraries/kde-frameworks/default.nix
+	"attica",
+	"bluez-qt",
+	"breeze-icons",
+	"kapidox",
+	"karchive",
+	"kcalendarcore",
+	"kcodecs",
+	"kconfig",
+	"kcontacts",
+	"kcoreaddons",
+	"kdbusaddons",
+	"kdnssd",
+	"kguiaddons",
+	"kholidays",
+	"ki18n",
+	"kidletime",
+	"kirigami2",
+	"kitemmodels",
+	"kitemviews",
+	"kplotting",
+	"kquickcharts",
+	"kwayland",
+	"kwidgetsaddons",
+	"kwindowsystem",
+	"modemmanager-qt",
+	"networkmanager-qt",
+	"oxygen-icons5",
+	"prison",
+	"qqc2-desktop-style",
+	"solid",
+	"sonnet",
+	"syntax-highlighting",
+	"threadweaver",
+	"kactivities",
+	"kactivities-stats",
+	"kauth",
+	"kcompletion",
+	"kcrash",
+	"kdoctools",
+	"kfilemetadata",
+	"kimageformats",
+	"kjobwidgets",
+	"knotifications",
+	"kpackage",
+	"kpty",
+	"kunitconversion",
+	"syndication",
+	"baloo",
+	"kbookmarks",
+	"kcmutils",
+	"kconfigwidgets",
+	"kdav",
+	"kdeclarative",
+	"kded",
+	"kdesignerplugin",
+	"kdesu",
+	"kemoticons",
+	"kglobalaccel",
+	"kiconthemes",
+	"kinit",
+	"kio",
+	"knewstuff",
+	"knotifyconfig",
+	"kparts",
+	"kpeople",
+	"krunner",
+	"kservice",
+	"ktexteditor",
+	"ktextwidgets",
+	"kwallet",
+	"kxmlgui",
+	"kxmlrpcclient",
+	"plasma-framework",
+	"kpurpose",
+	"frameworkintegration",
+	"kdelibs4support",
+	"khtml",
+	"kjs",
+	"kjsembed",
+	"kmediaplayer",
+	"kross",
+}
 
 // collectKonfigsCmd represents the collectKonfigs command
 var collectKonfigsCmd = &cobra.Command{
@@ -39,29 +401,35 @@ var collectKonfigsCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalf("missing info file: %v", err)
 		}
-		downloader := NewDownloader(tokenFile)
-
-		urls, err := cmd.Flags().GetStringSlice("urls")
+		urlTemplate, err := cmd.Flags().GetString("urlTemplate")
 		if err != nil {
-			log.Fatalf("missing urls: %s", err)
+			log.Fatalf("missing info file: %v", err)
 		}
-		for _, url := range urls {
-			downloader.Populate(infosFile, url)
-		}
+		downloader := NewDownloader(tokenFile, urlTemplate)
 
+		repos, err := cmd.Flags().GetStringSlice("repos")
+		if err != nil {
+			log.Fatalf("missing repos: %s", err)
+		}
+		builder := strings.Builder{}
+		for _, repo := range repos {
+			builder.WriteString(`+repo%3AKDE%2F`)
+			builder.WriteString(url.QueryEscape(repo))
+			url := builder.String()
+			downloader.Populate(infosFile, url)
+			builder = strings.Builder{}
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(collectKonfigsCmd)
 	collectKonfigsCmd.Flags().StringP("tokenFile", "t", "token.secret", "File with a github personal access token")
-	collectKonfigsCmd.Flags().StringP("infosFile", "i", "infos.yaml", "File containing all infos used for the export")
-	defaultUrls := []string{
-		`https://api.github.com/search/code?q=kcfg+xmlns+language%3AXML+user%3Akde+language%3AXML&type=Code&per_page=100`,
-		`https://api.github.com/search/code?q=.kcfg+repo%3AKDE%2Fdolphin+language%3AXML+language%3AXML&type=Code&ref=advsearch&l=XML&l=XML&per_page=100`,
-		`https://api.github.com/search/code?q=kcfg+repo%3AKDE%2Fdiscover+language%3AXML&type=Code&ref=advsearch&l=XML&per_page=100`,
-	}
-	collectKonfigsCmd.Flags().StringSliceP("urls", "u", defaultUrls, "All urls to search for results")
+	collectKonfigsCmd.Flags().StringP("infosFile", "i", "modules.yaml", "File containing all infos used for the export")
+	//urlTemplate := "https://api.github.com/search/code?q=kcfg+xmlns+repo%3AKDE%2F{{ . }}+extension%3Akcfg+extension%3Axml+language%3AXML&type=Code&ref=advsearch&l=XML&l="
+	fd := `https://api.github.com/search/code?q=kcfg+xmlns{{ . }}+extension%3Akcfg+extension%3Axml+language%3AXML&type=Code&ref=advsearch&l=XML`
+	collectKonfigsCmd.Flags().StringP("urlTemplate", "u", fd, "Url template where the kde repo name will be inserted for each repo")
+	collectKonfigsCmd.Flags().StringSliceP("repos", "r", repos, "All repo names to search for configs")
 }
 
 type searchResultRepository struct {
@@ -81,28 +449,49 @@ type searchResult struct {
 }
 
 type Downloader struct {
-	client http.Client
-	token  string
+	client   http.Client
+	token    string
+	template *template.Template
 }
 
-func NewDownloader(tokenFile string) *Downloader {
+func NewDownloader(tokenFile string, url string) *Downloader {
 	token, err := ioutil.ReadFile(tokenFile)
 	if err != nil {
 		log.Fatalf("failed to read github token: %s", err)
 	}
+
+	t := template.New("url template")
+	t, err = t.Parse(url)
+	if err != nil {
+		log.Fatalf("failed to parse template: %v", err)
+	}
 	return &Downloader{
-		token:  string(token),
-		client: http.Client{},
+		token:    string(token),
+		client:   http.Client{},
+		template: t,
 	}
 }
 
-func (k *Downloader) Populate(file string, url string) {
+func (k *Downloader) Populate(file string, repoSearch string) {
 	allInfos := LoadInfos(file)
 
-	r, closer := k.download(url)
-	defer closer()
+	writer := &strings.Builder{}
+	err := k.template.Execute(writer, repoSearch)
+	if err != nil {
+		log.Fatalf("failed to execute template: %v", err)
+	}
+
+	searchUrl := writer.String()
+	log.Printf("download from %s", searchUrl)
+	r, closeFunc := k.download(searchUrl)
+	defer closeFunc()
 
 	result := decodeSearchResult(r)
+
+	log.Printf("found %d results", result.TotalCount)
+	for _, i := range result.Items {
+		log.Printf("file: %s", i.Path)
+	}
 
 	m := &sync.Mutex{}
 	wg := &sync.WaitGroup{}
@@ -184,6 +573,13 @@ func getKcfg(result KfcFileInfo) ConfigKcfg {
 		log.Printf("failed to parse rc: %v\n%v", err, result)
 		return doc
 	}
+	//for i, group := range doc.Groups {
+	//	for j, entry := range group.Entries {
+	//		if strings.Contains(entry.Code, "\t") {
+	//			doc.Groups[i].Entries[j].Code = strings.ReplaceAll(entry.Code, "\t", "  ")
+	//		}
+	//	}
+	//}
 	return doc
 }
 
@@ -191,35 +587,70 @@ func decodeSearchResult(r io.ReadCloser) searchResult {
 	dec := json.NewDecoder(r)
 	var result searchResult
 	if err := dec.Decode(&result); err != nil {
-		log.Fatal(err)
+		b, readErr := io.ReadAll(r)
+		log.Fatalf("failed to decode json search result: %v, %v\n%v", err, readErr, string(b))
 	}
 	return result
 }
 
 func (k *Downloader) download(url string) (io.ReadCloser, func()) {
+	if strings.Contains(url, "search") {
+		for i := 0; i < 10; i++ {
+			fmt.Print(".")
+			time.Sleep(time.Second)
+		}
+	}
+	fmt.Println()
 	r, _ := http.NewRequest(http.MethodGet, url, nil)
 	r.Header.Add("Authorization", "Basic "+basicAuth("dominikstraessle", k.token))
+	r.Header.Add("user-agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36")
 	resp, err := k.client.Do(r)
 	if err != nil {
 		log.Fatalf("Failed to get %s, %v", url, err)
 	}
 
+	remaining, err := strconv.ParseInt(resp.Header.Get("X-Ratelimit-Remaining"), 10, 64)
+	if err != nil {
+		log.Fatalf("failed to get ratelimit remaining: %v", err)
+	}
+
+	log.Printf("limit: %d", remaining)
+
+	//if remaining <= 20 {
+	//log.Printf("rate limit: sleep for %ds", 30)
+	//time.Sleep(time.Second * 30)
+	//}
+
 	return resp.Body, func() {
 		err = resp.Body.Close()
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalf("failed to close body: %v", err)
 		}
 	}
 }
 
+func fileExists(filePath string) bool {
+	_, err := os.Stat(filePath)
+	return !errors.Is(err, os.ErrNotExist)
+}
+
 func LoadInfos(file string) map[string][]*KfcFileInfo {
+	if !fileExists(file) {
+		_, err := os.Create(file)
+		if err != nil {
+			log.Fatalf("failed to create infos file: %v", err)
+		}
+		return map[string][]*KfcFileInfo{}
+	}
+
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
 		log.Fatalf("failed to load infos: %v", err)
 	}
+	yamlText := strings.ReplaceAll(string(b), "\t", "  ")
 
 	var infos []*RepoKfcFileInfos
-	err = yaml.NewDecoder(bytes.NewReader(b)).Decode(&infos)
+	err = yaml.NewDecoder(strings.NewReader(yamlText)).Decode(&infos)
 	if err != nil {
 		log.Fatalf("failed to decode infos: %v", err)
 	}

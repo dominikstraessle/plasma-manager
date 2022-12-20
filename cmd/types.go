@@ -3,10 +3,10 @@ package cmd
 import "encoding/xml"
 
 var RCToModuleMapping = map[string]string{
-	"kded_device_automounterrc": "kded_device_automounter",
-	"kcminputrc":                "kcminput",
-	"kglobalshortcutsrc":        "kglobalshortcuts",
 	//"kactivitymanagerdrc":                  "kactivitymanagerd",
+	"kded_device_automounterrc":            "kded_device_automounter",
+	"kcminputrc":                           "kcminput",
+	"kglobalshortcutsrc":                   "kglobalshortcuts",
 	"ksplashrc":                            "ksplash",
 	"kwin_rules_dialogrc":                  "kwin_rules_dialog",
 	"kmixrc":                               "kmix",
