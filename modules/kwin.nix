@@ -2,952 +2,934 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.kwin = {
-    "" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "ApplyTo" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+  options.programs.plasma.kwin = { 
+    "" = with types; mkOption {
+      type = submodule {
+        options = { 
+          ApplyTo = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: bool
+            '';
+          };
+          Blacklist = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
 
-                Type: bool
-              '';
-            };
-            "Blacklist" = mkOption {
-              type = nullOr str;
-              default = "";
-              description = ''
+              Type: string
+            '';
+          };
+          ComboboxPopups = mkOption {
+            type = nullOr (either str int);
+            default = 100;
+            description = ''
+              
 
+              Type: UInt
+            '';
+          };
+          Dialogs = mkOption {
+            type = nullOr (either str int);
+            default = 100;
+            description = ''
+              
 
-                Type: string
-              '';
-            };
-            "ComboboxPopups" = mkOption {
-              type = nullOr (either str int);
-              default = 100;
-              description = ''
+              Type: UInt
+            '';
+          };
+          DropdownMenus = mkOption {
+            type = nullOr (either str int);
+            default = 100;
+            description = ''
+              
 
+              Type: UInt
+            '';
+          };
+          Duration = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
-                Type: UInt
-              '';
-            };
-            "Dialogs" = mkOption {
-              type = nullOr (either str int);
-              default = 100;
-              description = ''
+              Type: UInt
+            '';
+          };
+          FadeInTime = mkOption {
+            type = nullOr (either str int);
+            default = 150;
+            description = ''
+              
 
+              Type: Int
+            '';
+          };
+          FadeOutTime = mkOption {
+            type = nullOr (either str int);
+            default = 150;
+            description = ''
+              
 
-                Type: UInt
-              '';
-            };
-            "DropdownMenus" = mkOption {
-              type = nullOr (either str int);
-              default = 100;
-              description = ''
+              Type: Int
+            '';
+          };
+          FadeToBlack = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          FadeWindows = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: UInt
-              '';
-            };
-            "Duration" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
+              Type: Bool
+            '';
+          };
+          Ignore = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: bool
+            '';
+          };
+          InScale = mkOption {
+            type = nullOr (either str float);
+            default = 0.8;
+            description = ''
+              
 
-                Type: UInt
-              '';
-            };
-            "FadeInTime" = mkOption {
-              type = nullOr (either str int);
-              default = 150;
-              description = ''
+              Type: Double
+            '';
+          };
+          Inactive = mkOption {
+            type = nullOr (either str int);
+            default = 100;
+            description = ''
+              
 
+              Type: UInt
+            '';
+          };
+          IndividualMenuConfig = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Int
-              '';
-            };
-            "FadeOutTime" = mkOption {
-              type = nullOr (either str int);
-              default = 150;
-              description = ''
+              Type: Bool
+            '';
+          };
+          Menus = mkOption {
+            type = nullOr (either str int);
+            default = 100;
+            description = ''
+              
 
+              Type: UInt
+            '';
+          };
+          MoveResize = mkOption {
+            type = nullOr (either str int);
+            default = 80;
+            description = ''
+              
 
-                Type: Int
-              '';
-            };
-            "FadeToBlack" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: Int
+            '';
+          };
+          OutScale = mkOption {
+            type = nullOr (either str float);
+            default = 0.8;
+            description = ''
+              
 
+              Type: Double
+            '';
+          };
+          PopupMenus = mkOption {
+            type = nullOr (either str int);
+            default = 100;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "FadeWindows" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: UInt
+            '';
+          };
+          TornOffMenus = mkOption {
+            type = nullOr (either str int);
+            default = 100;
+            description = ''
+              
 
+              Type: UInt
+            '';
+          };
+          Whitelist = mkOption {
+            type = nullOr str;
+            default = "vlc, xv, vdpau, smplayer, dragon, xine, ffplay, mplayer";
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "Ignore" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: string
+            '';
+          };
+          animateButtons = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          coloredBorder = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: bool
-              '';
-            };
-            "InScale" = mkOption {
-              type = nullOr (either str float);
-              default = 0.8;
-              description = ''
+              Type: Bool
+            '';
+          };
+          titleAlignCenter = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          titleAlignLeft = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: Double
-              '';
-            };
-            "Inactive" = mkOption {
-              type = nullOr (either str int);
-              default = 100;
-              description = ''
+              Type: Bool
+            '';
+          };
+          titleAlignRight = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-
-                Type: UInt
-              '';
-            };
-            "IndividualMenuConfig" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "Menus" = mkOption {
-              type = nullOr (either str int);
-              default = 100;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
-            "MoveResize" = mkOption {
-              type = nullOr (either str int);
-              default = 80;
-              description = ''
-
-
-                Type: Int
-              '';
-            };
-            "OutScale" = mkOption {
-              type = nullOr (either str float);
-              default = 0.8;
-              description = ''
-
-
-                Type: Double
-              '';
-            };
-            "PopupMenus" = mkOption {
-              type = nullOr (either str int);
-              default = 100;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
-            "TornOffMenus" = mkOption {
-              type = nullOr (either str int);
-              default = 100;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
-            "Whitelist" = mkOption {
-              type = nullOr str;
-              default =
-                "vlc, xv, vdpau, smplayer, dragon, xine, ffplay, mplayer";
-              description = ''
-
-
-                Type: string
-              '';
-            };
-            "animateButtons" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "coloredBorder" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "titleAlignCenter" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "titleAlignLeft" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "titleAlignRight" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "";
       };
-    "$(EffectGroup)" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "TabBox" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "";
+    };    
+    "$(EffectGroup)" = with types; mkOption {
+      type = submodule {
+        options = { 
+          TabBox = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          TabBoxAlternative = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "TabBoxAlternative" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "$(EffectGroup)";
       };
-    "Effect-$(EffectName)" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "BorderActivate" = mkOption {
-              type = nullOr (either str (listOf int));
-              default = "ElectricNone";
-              description = ''
+      default = {};
+      description = "$(EffectGroup)";
+    };    
+    "Effect-$(EffectName)" = with types; mkOption {
+      type = submodule {
+        options = { 
+          BorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
 
+              Type: IntList
+            '';
+          };
+          TouchBorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
 
-                Type: IntList
-              '';
-            };
-            "TouchBorderActivate" = mkOption {
-              type = nullOr (either str (listOf int));
-              default = "ElectricNone";
-              description = ''
-
-
-                Type: IntList
-              '';
-            };
+              Type: IntList
+            '';
           };
         };
-        default = { };
-        description = "Effect-$(EffectName)";
       };
-    "Effect-blur" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "BlurStrength" = mkOption {
-              type = nullOr (either str int);
-              default = 15;
-              description = ''
+      default = {};
+      description = "Effect-$(EffectName)";
+    };    
+    "Effect-blur" = with types; mkOption {
+      type = submodule {
+        options = { 
+          BlurStrength = mkOption {
+            type = nullOr (either str int);
+            default = 15;
+            description = ''
+              
 
+              Type: Int
+            '';
+          };
+          NoiseStrength = mkOption {
+            type = nullOr (either str int);
+            default = 5;
+            description = ''
+              
 
-                Type: Int
-              '';
-            };
-            "NoiseStrength" = mkOption {
-              type = nullOr (either str int);
-              default = 5;
-              description = ''
-
-
-                Type: Int
-              '';
-            };
+              Type: Int
+            '';
           };
         };
-        default = { };
-        description = "Effect-blur";
       };
-    "Effect-diminactive" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "DimByGroup" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+      default = {};
+      description = "Effect-blur";
+    };    
+    "Effect-diminactive" = with types; mkOption {
+      type = submodule {
+        options = { 
+          DimByGroup = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          DimDesktop = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "DimDesktop" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: Bool
+            '';
+          };
+          DimFullScreen = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          DimKeepAbove = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "DimFullScreen" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          DimPanels = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          Strength = mkOption {
+            type = nullOr (either str int);
+            default = 25;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "DimKeepAbove" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "DimPanels" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "Strength" = mkOption {
-              type = nullOr (either str int);
-              default = 25;
-              description = ''
-
-
-                Type: Int
-              '';
-            };
+              Type: Int
+            '';
           };
         };
-        default = { };
-        description = "Effect-diminactive";
       };
-    "Effect-fallapart" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "BlockSize" = mkOption {
-              type = nullOr (either str int);
-              default = 40;
-              description = ''
+      default = {};
+      description = "Effect-diminactive";
+    };    
+    "Effect-fallapart" = with types; mkOption {
+      type = submodule {
+        options = { 
+          BlockSize = mkOption {
+            type = nullOr (either str int);
+            default = 40;
+            description = ''
+              
 
-
-                Type: Int
-                Min: 1
-                Max: 100000
-              '';
-            };
+              Type: Int
+              Min: 1
+              Max: 100000
+            '';
           };
         };
-        default = { };
-        description = "Effect-fallapart";
       };
-    "Effect-kscreen" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "Duration" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
+      default = {};
+      description = "Effect-fallapart";
+    };    
+    "Effect-kscreen" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Duration = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
-
-                Type: Int
-              '';
-            };
+              Type: Int
+            '';
           };
         };
-        default = { };
-        description = "Effect-kscreen";
       };
-    "Effect-magiclamp" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "AnimationDuration" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
+      default = {};
+      description = "Effect-kscreen";
+    };    
+    "Effect-magiclamp" = with types; mkOption {
+      type = submodule {
+        options = { 
+          AnimationDuration = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
-
-                Type: Int
-              '';
-            };
+              Type: Int
+            '';
           };
         };
-        default = { };
-        description = "Effect-magiclamp";
       };
-    "Effect-magnifier" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "Height" = mkOption {
-              type = nullOr (either str int);
-              default = 200;
-              description = ''
+      default = {};
+      description = "Effect-magiclamp";
+    };    
+    "Effect-magnifier" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Height = mkOption {
+            type = nullOr (either str int);
+            default = 200;
+            description = ''
+              
 
+              Type: UInt
+            '';
+          };
+          InitialZoom = mkOption {
+            type = nullOr (either str float);
+            default = 1.0;
+            description = ''
+              
 
-                Type: UInt
-              '';
-            };
-            "InitialZoom" = mkOption {
-              type = nullOr (either str float);
-              default = 1.0;
-              description = ''
+              Type: Double
+            '';
+          };
+          Width = mkOption {
+            type = nullOr (either str int);
+            default = 200;
+            description = ''
+              
 
-
-                Type: Double
-              '';
-            };
-            "Width" = mkOption {
-              type = nullOr (either str int);
-              default = 200;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
+              Type: UInt
+            '';
           };
         };
-        default = { };
-        description = "Effect-magnifier";
       };
-    "Effect-mousemark" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "Color" = mkOption {
-              type = nullOr str;
-              default = "255,0,0";
-              description = ''
+      default = {};
+      description = "Effect-magnifier";
+    };    
+    "Effect-mousemark" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Color = mkOption {
+            type = nullOr str;
+            default = "255,0,0";
+            description = ''
+              
 
+              Type: Color
+            '';
+          };
+          LineWidth = mkOption {
+            type = nullOr (either str int);
+            default = 3;
+            description = ''
+              
 
-                Type: Color
-              '';
-            };
-            "LineWidth" = mkOption {
-              type = nullOr (either str int);
-              default = 3;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
+              Type: UInt
+            '';
           };
         };
-        default = { };
-        description = "Effect-mousemark";
       };
-    "Effect-overview" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "BlurBackground" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+      default = {};
+      description = "Effect-mousemark";
+    };    
+    "Effect-overview" = with types; mkOption {
+      type = submodule {
+        options = { 
+          BlurBackground = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          BorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "";
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "BorderActivate" = mkOption {
-              type = nullOr (either str (listOf int));
-              default = "";
-              description = ''
+              Type: IntList
+            '';
+          };
+          IgnoreMinimized = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: bool
+            '';
+          };
+          LayoutMode = mkOption {
+            type = nullOr (either str int);
+            default = 1;
+            description = ''
+              
 
-                Type: IntList
-              '';
-            };
-            "IgnoreMinimized" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: Int
+            '';
+          };
+          TouchBorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "";
+            description = ''
+              
 
-
-                Type: bool
-              '';
-            };
-            "LayoutMode" = mkOption {
-              type = nullOr (either str int);
-              default = 1;
-              description = ''
-
-
-                Type: Int
-              '';
-            };
-            "TouchBorderActivate" = mkOption {
-              type = nullOr (either str (listOf int));
-              default = "";
-              description = ''
-
-
-                Type: IntList
-              '';
-            };
+              Type: IntList
+            '';
           };
         };
-        default = { };
-        description = "Effect-overview";
       };
-    "Effect-sheet" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "AnimationTime" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
+      default = {};
+      description = "Effect-overview";
+    };    
+    "Effect-sheet" = with types; mkOption {
+      type = submodule {
+        options = { 
+          AnimationTime = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
-
-                Type: Int
-              '';
-            };
+              Type: Int
+            '';
           };
         };
-        default = { };
-        description = "Effect-sheet";
       };
-    "Effect-slide" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "HorizontalGap" = mkOption {
-              type = nullOr (either str int);
-              default = 45;
-              description = ''
+      default = {};
+      description = "Effect-sheet";
+    };    
+    "Effect-slide" = with types; mkOption {
+      type = submodule {
+        options = { 
+          HorizontalGap = mkOption {
+            type = nullOr (either str int);
+            default = 45;
+            description = ''
+              
 
+              Type: UInt
+            '';
+          };
+          SlideBackground = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: UInt
-              '';
-            };
-            "SlideBackground" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          VerticalGap = mkOption {
+            type = nullOr (either str int);
+            default = 20;
+            description = ''
+              
 
-
-                Type: Bool
-              '';
-            };
-            "VerticalGap" = mkOption {
-              type = nullOr (either str int);
-              default = 20;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
+              Type: UInt
+            '';
           };
         };
-        default = { };
-        description = "Effect-slide";
       };
-    "Effect-slidingpopups" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "SlideInTime" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
+      default = {};
+      description = "Effect-slide";
+    };    
+    "Effect-slidingpopups" = with types; mkOption {
+      type = submodule {
+        options = { 
+          SlideInTime = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
+              Type: Int
+            '';
+          };
+          SlideOutTime = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
-                Type: Int
-              '';
-            };
-            "SlideOutTime" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
-
-
-                Type: Int
-              '';
-            };
+              Type: Int
+            '';
           };
         };
-        default = { };
-        description = "Effect-slidingpopups";
       };
-    "Effect-thumbnailaside" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "MaxWidth" = mkOption {
-              type = nullOr (either str int);
-              default = 200;
-              description = ''
+      default = {};
+      description = "Effect-slidingpopups";
+    };    
+    "Effect-thumbnailaside" = with types; mkOption {
+      type = submodule {
+        options = { 
+          MaxWidth = mkOption {
+            type = nullOr (either str int);
+            default = 200;
+            description = ''
+              
 
+              Type: Int
+            '';
+          };
+          Opacity = mkOption {
+            type = nullOr (either str float);
+            default = 50.0;
+            description = ''
+              
 
-                Type: Int
-              '';
-            };
-            "Opacity" = mkOption {
-              type = nullOr (either str float);
-              default = 50.0;
-              description = ''
+              Type: Double
+            '';
+          };
+          Screen = mkOption {
+            type = nullOr (either str int);
+            default = -1;
+            description = ''
+              
 
+              Type: Int
+            '';
+          };
+          Spacing = mkOption {
+            type = nullOr (either str int);
+            default = 10;
+            description = ''
+              
 
-                Type: Double
-              '';
-            };
-            "Screen" = mkOption {
-              type = nullOr (either str int);
-              default = -1;
-              description = ''
-
-
-                Type: Int
-              '';
-            };
-            "Spacing" = mkOption {
-              type = nullOr (either str int);
-              default = 10;
-              description = ''
-
-
-                Type: Int
-              '';
-            };
+              Type: Int
+            '';
           };
         };
-        default = { };
-        description = "Effect-thumbnailaside";
       };
-    "Effect-trackmouse" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "Alt" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "Effect-thumbnailaside";
+    };    
+    "Effect-trackmouse" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Alt = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          Control = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "Control" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+              Type: Bool
+            '';
+          };
+          Meta = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          Shift = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "Meta" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
-            "Shift" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
-
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "Effect-trackmouse";
       };
-    "Effect-zoom" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "EnableFocusTracking" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+      default = {};
+      description = "Effect-trackmouse";
+    };    
+    "Effect-zoom" = with types; mkOption {
+      type = submodule {
+        options = { 
+          EnableFocusTracking = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
+              Type: Bool
+            '';
+          };
+          EnableTextCaretTracking = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "EnableTextCaretTracking" = mkOption {
-              type = nullOr (either str bool);
-              default = false;
-              description = ''
+              Type: Bool
+            '';
+          };
+          FocusDelay = mkOption {
+            type = nullOr (either str int);
+            default = 350;
+            description = ''
+              
 
+              Type: UInt
+            '';
+          };
+          InitialZoom = mkOption {
+            type = nullOr (either str float);
+            default = 1.0;
+            description = ''
+              
 
-                Type: Bool
-              '';
-            };
-            "FocusDelay" = mkOption {
-              type = nullOr (either str int);
-              default = 350;
-              description = ''
+              Type: Double
+            '';
+          };
+          MousePointer = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
+              Type: UInt
+            '';
+          };
+          MouseTracking = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
 
-                Type: UInt
-              '';
-            };
-            "InitialZoom" = mkOption {
-              type = nullOr (either str float);
-              default = 1.0;
-              description = ''
+              Type: UInt
+            '';
+          };
+          MoveFactor = mkOption {
+            type = nullOr (either str float);
+            default = 20.0;
+            description = ''
+              
 
+              Type: Double
+            '';
+          };
+          ZoomFactor = mkOption {
+            type = nullOr (either str float);
+            default = 1.2;
+            description = ''
+              
 
-                Type: Double
-              '';
-            };
-            "MousePointer" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
-            "MouseTracking" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
-
-
-                Type: UInt
-              '';
-            };
-            "MoveFactor" = mkOption {
-              type = nullOr (either str float);
-              default = 20.0;
-              description = ''
-
-
-                Type: Double
-              '';
-            };
-            "ZoomFactor" = mkOption {
-              type = nullOr (either str float);
-              default = 1.2;
-              description = ''
-
-
-                Type: Double
-              '';
-            };
+              Type: Double
+            '';
           };
         };
-        default = { };
-        description = "Effect-zoom";
       };
-    "General" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "count" = mkOption {
-              type = nullOr (either str int);
-              default = 0;
-              description = ''
-                Total rules count (legacy)
+      default = {};
+      description = "Effect-zoom";
+    };    
+    "General" = with types; mkOption {
+      type = submodule {
+        options = { 
+          count = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              Total rules count (legacy)
 
-                Type: int
-              '';
-            };
-            "rules" = mkOption {
-              type = nullOr (either str (listOf str));
-              default = "QStringList()";
-              description = ''
-                Ordered list of rules groups
+              Type: int
+            '';
+          };
+          rules = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "QStringList()";
+            description = ''
+              Ordered list of rules groups
 
-                Type: stringList
-              '';
-            };
+              Type: stringList
+            '';
           };
         };
-        default = { };
-        description = "General";
       };
-    "Input" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "TabletMode" = mkOption {
-              type = nullOr str;
-              default = "auto";
-              description = ''
-                Automatically switch to touch-optimized mode
+      default = {};
+      description = "General";
+    };    
+    "Input" = with types; mkOption {
+      type = submodule {
+        options = { 
+          TabletMode = mkOption {
+            type = nullOr str;
+            default = "auto";
+            description = ''
+              Automatically switch to touch-optimized mode
 
-                Type: String
-              '';
-            };
+              Type: String
+            '';
           };
         };
-        default = { };
-        description = "Input";
       };
-    "Plugins" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "highlightwindowEnabled" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
+      default = {};
+      description = "Input";
+    };    
+    "Plugins" = with types; mkOption {
+      type = submodule {
+        options = { 
+          highlightwindowEnabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
 
-
-                Type: Bool
-              '';
-            };
+              Type: Bool
+            '';
           };
         };
-        default = { };
-        description = "Plugins";
       };
-    "Script-$(ScriptName)" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "BorderActivate" = mkOption {
-              type = nullOr (either str (listOf int));
-              default = "ElectricNone";
-              description = ''
+      default = {};
+      description = "Plugins";
+    };    
+    "Script-$(ScriptName)" = with types; mkOption {
+      type = submodule {
+        options = { 
+          BorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
 
+              Type: IntList
+            '';
+          };
+          TouchBorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
 
-                Type: IntList
-              '';
-            };
-            "TouchBorderActivate" = mkOption {
-              type = nullOr (either str (listOf int));
-              default = "ElectricNone";
-              description = ''
-
-
-                Type: IntList
-              '';
-            };
+              Type: IntList
+            '';
           };
         };
-        default = { };
-        description = "Script-$(ScriptName)";
       };
-    "Wayland" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "EnablePrimarySelection" = mkOption {
-              type = nullOr (either str bool);
-              default = true;
-              description = ''
-                Enable middle click selection pasting
+      default = {};
+      description = "Script-$(ScriptName)";
+    };    
+    "Wayland" = with types; mkOption {
+      type = submodule {
+        options = { 
+          EnablePrimarySelection = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Enable middle click selection pasting
 
-                Type: bool
-              '';
-            };
-            "InputMethod" = mkOption {
-              type = nullOr str;
-              default = "";
-              description = ''
+              Type: bool
+            '';
+          };
+          InputMethod = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
 
-
-                Type: Path
-              '';
-            };
+              Type: Path
+            '';
           };
         };
-        default = { };
-        description = "Wayland";
       };
-    "Xwayland" = with types;
-      mkOption {
-        type = submodule {
-          options = {
-            "XwaylandEavesdrops" = mkOption {
-              type = nullOr
-                (either str (enum [ "None" "Modifiers" "Combinations" "All" ]));
-              default = "None";
-              description = ''
+      default = {};
+      description = "Wayland";
+    };    
+    "Xwayland" = with types; mkOption {
+      type = submodule {
+        options = { 
+          XwaylandEavesdrops = mkOption {
+            type = nullOr (either str (enum [ 
+              "None"
+              "Modifiers"
+              "Combinations"
+              "All"
+            ]));
+            default = "None";
+            description = ''
+              
 
-
-                Type: Enum
-                Choices: 
-                  - None
-                  - Modifiers
-                  - Combinations
-                  - All
-              '';
-            };
+              Type: Enum
+              Choices: 
+                - None
+                - Modifiers
+                - Combinations
+                - All
+            '';
           };
         };
-        default = { };
-        description = "Xwayland";
       };
+      default = {};
+      description = "Xwayland";
+    };    
   };
-  config = mkIf cfg.enable { programs.plasma.files."kwinrc" = cfg.kwin; };
+  config = mkIf cfg.enable {
+    programs.plasma.files."kwinrc" = cfg.kwin;
+  };
 }

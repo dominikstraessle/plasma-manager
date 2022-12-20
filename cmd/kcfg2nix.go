@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -102,8 +103,9 @@ func (k *Kcfg2Nix) scanModules(fileInfo *KfcFileInfo, name string) {
 	}
 
 	if _, ok := rcToModuleMapping[kcfg.KcfgFile.Name]; !ok {
-		fmt.Println(kcfg.KcfgFile.Name)
-		//log.Printf("Skip %s: missing rc to module mapping", kcfg.KcfgFile.Name)
+		//For debugging and adding mappings
+		//fmt.Println(kcfg.KcfgFile.Name)
+		log.Printf("Skip %s: missing rc to module mapping", kcfg.KcfgFile.Name)
 		return
 	} else {
 		kcfg.Name = rcToModuleMapping[kcfg.KcfgFile.Name]
@@ -143,8 +145,8 @@ func (k *Kcfg2Nix) scanModules(fileInfo *KfcFileInfo, name string) {
 				name = entry.Name
 			}
 			optionGroup.Options[name] = &Option{
-				Name:          entry.Name,
-				Key:           entry.Key,
+				Name:          AsOptionName(entry.Name),
+				Key:           AsOptionName(entry.Key),
 				HasKey:        entry.HasKey(),
 				TypeValue:     entry.TypeValue(),
 				DefaultValue:  entry.DefaultValue(),
@@ -213,6 +215,13 @@ func AsString(text string) string {
 		return fmt.Sprintf(`''%s''`, text)
 	}
 	return fmt.Sprintf(`"%s"`, text)
+}
+func AsOptionName(text string) string {
+	var IsLetter = regexp.MustCompile(`^[a-zA-Z]+$`).MatchString
+	if !IsLetter(text) {
+		return fmt.Sprintf(`"%s"`, text)
+	}
+	return text
 }
 func (e ConfigEntry) DefaultValue() string {
 	if e.Default.Code == "true" {
