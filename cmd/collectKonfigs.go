@@ -379,6 +379,7 @@ var repos = []string{
 	// additional
 	"kwin",
 	"breeze",
+	"kstars",
 	"baloo",
 	"discover",
 	"fielding",

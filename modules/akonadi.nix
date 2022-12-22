@@ -360,15 +360,6 @@ in {
               Type: String
             '';
           };
-          Outbox = mkOption {
-            type = nullOr (either str int);
-            default = -1;
-            description = ''
-              Outbox collection id
-
-              Type: Int
-            '';
-          };
           PKeyCert = mkOption {
             type = nullOr str;
             default = "";
@@ -428,15 +419,6 @@ in {
             default = "";
             description = ''
               Retrieval
-
-              Type: Int
-            '';
-          };
-          SentMail = mkOption {
-            type = nullOr (either str int);
-            default = -1;
-            description = ''
-              Sent Mail collection id
 
               Type: Int
             '';
@@ -567,24 +549,6 @@ in {
               Type: String
             '';
           };
-          enabled = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          excludeEmailsFromMe = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
           filterCheckSize = mkOption {
             type = nullOr (either str int);
             default = 50000;
@@ -637,15 +601,6 @@ in {
               
 
               Type: Int
-            '';
-          };
-          keepPersistentNotification = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
             '';
           };
           leaveOnServer = mkOption {
@@ -765,24 +720,6 @@ in {
               Type: StringList
             '';
           };
-          replyMail = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          replyMailType = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
           requestToken = mkOption {
             type = nullOr str;
             default = "";
@@ -810,51 +747,6 @@ in {
               Type: Int
             '';
           };
-          showButtonToDisplayMail = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          showFolder = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          showFrom = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          showPhoto = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
-          showSubject = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
-            '';
-          };
           syncRangeStartNumber = mkOption {
             type = nullOr str;
             default = "3";
@@ -880,25 +772,6 @@ in {
               
 
               Type: Int
-            '';
-          };
-          textToSpeak = mkOption {
-            type = nullOr str;
-            default = ''i18nc("%f is a variable for agent. Do not change it", "A message was received from %f")'';
-            defaultText = "Code: true";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          textToSpeakEnabled = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              
-
-              Type: Bool
             '';
           };
           unitTestPassword = mkOption {
@@ -944,15 +817,6 @@ in {
               The URL to the user data on the Tomboy sync server
 
               Type: String
-            '';
-          };
-          verboseNotification = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              
-
-              Type: Bool
             '';
           };
         };
@@ -1072,7 +936,7 @@ in {
           };
           DisconnectedModeEnabled = mkOption {
             type = nullOr (either str bool);
-            default = false;
+            default = true;
             description = ''
               Defines if all the IMAP data should be cached locally all the time
 

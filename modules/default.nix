@@ -7,6 +7,8 @@
     ./shortcuts.nix
     ./GitKlientSettings.nix
     ./akonadi.nix
+    ./akonadi_maildispatcher.nix
+    ./akonadi_newmailnotifier.nix
     ./akregator.nix
     ./ark.nix
     ./baloo.nix
@@ -49,6 +51,7 @@
     ./kshisen.nix
     ./ksmserver.nix
     ./kspaceduel.nix
+    ./kstars.nix
     ./ktouch2.nix
     ./kwin.nix
     ./kxkb.nix

@@ -31,13 +31,6 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.plasma-manager.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
 	rootCmd.PersistentFlags().StringP("moduleInfosFile", "m", "modules.yaml", "File containing all infos used for the export/import")
+	rootCmd.PersistentFlags().StringP("modulesJsonFile", "j", "modules.json", "File containing all module options")
 }

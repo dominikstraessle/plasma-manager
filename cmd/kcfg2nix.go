@@ -47,7 +47,6 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(kcfg2nixCmd)
-	kcfg2nixCmd.Flags().StringP("modulesJsonFile", "j", "modules.json", "File to store all modules as json")
 	kcfg2nixCmd.Flags().StringP("nixModulesDirectory", "d", "modules", "Directory where nix modules are generated into")
 }
 
@@ -210,7 +209,7 @@ func (k *Kcfg2Nix) createDefaultNix() {
 	}
 }
 
-func AsString(text string) string {
+func asString(text string) string {
 	if strings.Contains(text, `"`) {
 		return fmt.Sprintf(`''%s''`, text)
 	}
@@ -225,7 +224,7 @@ func AsOptionName(text string) string {
 }
 func (e ConfigEntry) DefaultValue() string {
 	if e.Default.Code == "true" {
-		return AsString(e.Default.Text)
+		return asString(e.Default.Text)
 	}
 	switch strings.ToLower(e.Type) {
 	case "int", "int64":
@@ -257,9 +256,9 @@ func (e ConfigEntry) DefaultValue() string {
 			}
 			return "false"
 		}
-		return AsString(e.Default.Text)
+		return asString(e.Default.Text)
 	default:
-		return AsString(e.Default.Text)
+		return asString(e.Default.Text)
 	}
 }
 
