@@ -104,6 +104,7 @@ var noKonfig = map[string]map[string]string{
 		"src/plugins/kdecorations/aurorae/themes/plastik/package/contents/config/main.xml": "kwinrc",
 		"src/rulebooksettingsbase.kcfg":                                                    "kwinrc",
 		"src/scripts/videowall/contents/config/main.xml":                                   "kwinrc",
+		"src/effects/windowview/windowviewconfig.kcfg":                                     "kwinrc",
 	},
 	"plasma-desktop": {
 		"emojier/emojiersettings.kcfg":                                 "plasmarc",

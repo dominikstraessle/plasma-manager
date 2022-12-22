@@ -414,7 +414,16 @@ var collectKonfigsCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalf("missing info file: %v", err)
 		}
+		query, err := cmd.Flags().GetString("query")
+		if err != nil {
+			log.Fatalf("missing info file: %v", err)
+		}
 		downloader := NewDownloader(tokenFile, urlTemplate)
+
+		if query != "" {
+			downloader.PopulateFromQuery(moduleInfosFile, query)
+			return
+		}
 
 		repos, err := cmd.Flags().GetStringSlice("repos")
 		if err != nil {
@@ -438,6 +447,7 @@ func init() {
 	//urlTemplate := `https://api.github.com/search/code?q=kcfg+xmlns{{ . }}&type=Code`
 	collectKonfigsCmd.Flags().StringP("urlTemplate", "u", urlTemplate, "Url template where the kde repo name will be inserted for each repo")
 	collectKonfigsCmd.Flags().StringSliceP("repos", "r", repos, "All repo names to search for configs")
+	collectKonfigsCmd.Flags().StringP("query", "q", "", "A custom query to search for")
 }
 
 type searchResultRepository struct {
@@ -682,6 +692,39 @@ func (k *Downloader) exportInfos(file string, infos map[string][]*KfcFileInfo) {
 	if err != nil {
 		log.Fatalf("failed to export infos: %v", err)
 	}
+}
+
+func (k *Downloader) PopulateFromQuery(file string, query string) {
+	allInfos := LoadInfos(file)
+
+	searchUrl := "https://api.github.com/search/code" + query
+	log.Printf("download from %s", searchUrl)
+	r, closeFunc := k.download(searchUrl)
+	defer closeFunc()
+
+	result := decodeSearchResult(r)
+
+	log.Printf("found %d results", result.TotalCount)
+	for _, i := range result.Items {
+		log.Printf("file: %s", i.Path)
+	}
+
+	m := &sync.Mutex{}
+	wg := &sync.WaitGroup{}
+	wg.Add(len(result.Items))
+	for _, item := range result.Items {
+		if strings.Contains(item.Name, "xsd") || strings.Contains(item.Name, "'%{APPNAMELC}config.kcfg'") || strings.Contains(item.Name, "KDE.xml") {
+			fmt.Printf("Skip: %s\n", item)
+			wg.Done()
+			continue
+		}
+
+		i := item
+		go k.collectInfoFunc(m, wg, allInfos, i)
+	}
+
+	wg.Wait()
+	k.exportInfos(file, allInfos)
 }
 
 func sortInfos(infos map[string][]*KfcFileInfo) []*RepoKfcFileInfos {

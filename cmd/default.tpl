@@ -5,7 +5,7 @@
     ./files.nix
     ./hotkeys.nix
     ./shortcuts.nix{{ range . }}
-    ./{{.}}{{end}}
+    ./{{.}}.nix{{end}}
   ];
 
   options.programs.plasma.enable = lib.mkEnableOption ''

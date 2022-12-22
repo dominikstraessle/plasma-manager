@@ -14,8 +14,8 @@
     elisa = { "PlayerSettings" = { "UseFavoriteStyleRatings" = true; }; };
     krunner = { "General" = { "FreeFloating" = true; }; };
     kwin = {
-      "Effect-windowview" = { "BorderActivateAll" = "9"; };
-      "TabBox" = { "LayoutName" = "informative"; };
+#      "Effect-windowview" = { "BorderActivateAll" = "9"; };
+#      "TabBox" = { "LayoutName" = "informative"; };
     };
     spectacle = {
       "General" = { "onLaunchAction" = "DoNotTakeScreenshot"; };

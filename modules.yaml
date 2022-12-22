@@ -24305,6 +24305,162 @@
                     code: ""
                   min: ""
                   max: ""
+    - name: windowviewconfig.kcfg
+      path: src/effects/windowview/windowviewconfig.kcfg
+      url: https://api.github.com/repositories/42719584/contents/src/effects/windowview/windowviewconfig.kcfg?ref=77af052f9d9bcf1cb397ed61b91d40e6e3f7849c
+      download: https://raw.githubusercontent.com/KDE/kwin/77af052f9d9bcf1cb397ed61b91d40e6e3f7849c/src/effects/windowview/windowviewconfig.kcfg
+      content: ""
+      rcName: ""
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: ""
+        groups:
+            - name: Effect-windowview
+              entries:
+                - name: LayoutMode
+                  key: ""
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "1"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: IgnoreMinimized
+                  key: ""
+                  type: bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: BorderActivate
+                  key: ""
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: BorderActivateAll
+                  key: ""
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: QList<int>() << int(ElectricTopLeft)
+                    code: "true"
+                  min: ""
+                  max: ""
+                - name: BorderActivateClass
+                  key: ""
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: BorderActivateClassCurrentDesktop
+                  key: ""
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TouchBorderActivate
+                  key: ""
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TouchBorderActivateAll
+                  key: ""
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TouchBorderActivateClass
+                  key: ""
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TouchBorderActivateClassCurrentDesktop
+                  key: ""
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ""
+                    code: ""
+                  min: ""
+                  max: ""
     - name: zoom.kcfg
       path: src/effects/zoom/zoom.kcfg
       url: https://api.github.com/repositories/42719584/contents/src/effects/zoom/zoom.kcfg?ref=02171495bebf0d1297da91e546b7651b8a4d5c2b
@@ -24523,6 +24679,342 @@
                     code: ""
                   min: ""
                   max: ""
+    - name: kwinscreenedgesettings.kcfg
+      path: src/kcms/screenedges/kwinscreenedgesettings.kcfg
+      url: https://api.github.com/repositories/42719584/contents/src/kcms/screenedges/kwinscreenedgesettings.kcfg?ref=f94b8bfa860507ff478bf056d93f71068276dbe6
+      download: https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/screenedges/kwinscreenedgesettings.kcfg
+      content: ""
+      rcName: kwinrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: kwinrc
+        groups:
+            - name: Windows
+              entries:
+                - name: ""
+                  key: ElectricBorders
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: ElectricBorderDelay
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "150"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: ElectricBorderCooldown
+                  type: Int
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "350"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: ElectricBorderMaximize
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: ElectricBorderTiling
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "true"
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: ElectricBorderCornerRatio
+                  type: Double
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "0.25"
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: ElectricBorders
+              entries:
+                - name: ""
+                  key: Top
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: TopRight
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: Right
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: BottomRight
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: Bottom
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: BottomLeft
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: Left
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: TopLeft
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: Effect-windowview
+              entries:
+                - name: ""
+                  key: BorderActivateAll
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricTopLeft
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: BorderActivatePresentWindows
+                  key: BorderActivate
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: BorderActivateClass
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: Effect-DesktopGrid
+              entries:
+                - name: BorderActivateDesktopGrid
+                  key: BorderActivate
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: Effect-Overview
+              entries:
+                - name: BorderActivateOverview
+                  key: BorderActivate
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: TabBox
+              entries:
+                - name: BorderActivateTabBox
+                  key: BorderActivate
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: BorderAlternativeActivate
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: ScreenEdges
+              entries:
+                - name: RemainActiveOnFullscreen
+                  key: ""
+                  type: Bool
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: "false"
+                    code: ""
+                  min: ""
+                  max: ""
     - name: kwintouchscreenedgeeffectsettings.kcfg
       path: src/kcms/screenedges/kwintouchscreenedgeeffectsettings.kcfg
       url: https://api.github.com/repositories/42719584/contents/src/kcms/screenedges/kwintouchscreenedgeeffectsettings.kcfg?ref=f94b8bfa860507ff478bf056d93f71068276dbe6
@@ -24571,6 +25063,152 @@
               entries:
                 - name: ""
                   key: TouchBorderActivate
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+    - name: kwintouchscreensettings.kcfg
+      path: src/kcms/screenedges/kwintouchscreensettings.kcfg
+      url: https://api.github.com/repositories/42719584/contents/src/kcms/screenedges/kwintouchscreensettings.kcfg?ref=f94b8bfa860507ff478bf056d93f71068276dbe6
+      download: https://raw.githubusercontent.com/KDE/kwin/f94b8bfa860507ff478bf056d93f71068276dbe6/src/kcms/screenedges/kwintouchscreensettings.kcfg
+      content: ""
+      rcName: kwinrc
+      kcfg:
+        name: ""
+        xmlname:
+            space: http://www.kde.org/standards/kcfg/1.0
+            local: kcfg
+        kcfgfile:
+            name: kwinrc
+        groups:
+            - name: TouchEdges
+              entries:
+                - name: ""
+                  key: Top
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: Right
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: Bottom
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: Left
+                  type: String
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: None
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: Effect-windowview
+              entries:
+                - name: ""
+                  key: TouchBorderActivateAll
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: TouchBorderActivatePresentWindows
+                  key: TouchBorderActivate
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: TouchBorderActivateClass
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+            - name: TabBox
+              entries:
+                - name: TouchBorderActivateTabBox
+                  key: TouchBorderActivate
+                  type: IntList
+                  label: ""
+                  hidden: ""
+                  code: ""
+                  choices:
+                    name: ""
+                    choices: []
+                  default:
+                    text: ElectricNone
+                    code: ""
+                  min: ""
+                  max: ""
+                - name: ""
+                  key: TouchBorderAlternativeActivate
                   type: IntList
                   label: ""
                   hidden: ""

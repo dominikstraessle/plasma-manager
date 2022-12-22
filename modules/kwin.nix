@@ -288,6 +288,40 @@ in {
       default = {};
       description = "Effect-$(EffectName)";
     };    
+    "Effect-DesktopGrid" = with types; mkOption {
+      type = submodule {
+        options = { 
+          BorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Effect-DesktopGrid";
+    };    
+    "Effect-Overview" = with types; mkOption {
+      type = submodule {
+        options = { 
+          BorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Effect-Overview";
+    };    
     "Effect-blur" = with types; mkOption {
       type = submodule {
         options = { 
@@ -709,6 +743,104 @@ in {
       default = {};
       description = "Effect-trackmouse";
     };    
+    "Effect-windowview" = with types; mkOption {
+      type = submodule {
+        options = { 
+          BorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          BorderActivateAll = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricTopLeft";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          BorderActivateClass = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          BorderActivateClassCurrentDesktop = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          IgnoreMinimized = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: bool
+            '';
+          };
+          LayoutMode = mkOption {
+            type = nullOr (either str int);
+            default = 1;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          TouchBorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          TouchBorderActivateAll = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          TouchBorderActivateClass = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          TouchBorderActivateClassCurrentDesktop = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Effect-windowview";
+    };    
     "Effect-zoom" = with types; mkOption {
       type = submodule {
         options = { 
@@ -789,6 +921,86 @@ in {
       default = {};
       description = "Effect-zoom";
     };    
+    "ElectricBorders" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Bottom = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          BottomLeft = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          BottomRight = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Left = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Right = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Top = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          TopLeft = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          TopRight = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "ElectricBorders";
+    };    
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -849,6 +1061,23 @@ in {
       default = {};
       description = "Plugins";
     };    
+    "ScreenEdges" = with types; mkOption {
+      type = submodule {
+        options = { 
+          RemainActiveOnFullscreen = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "ScreenEdges";
+    };    
     "Script-$(ScriptName)" = with types; mkOption {
       type = submodule {
         options = { 
@@ -875,6 +1104,94 @@ in {
       default = {};
       description = "Script-$(ScriptName)";
     };    
+    "TabBox" = with types; mkOption {
+      type = submodule {
+        options = { 
+          BorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          BorderAlternativeActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          TouchBorderActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+          TouchBorderAlternativeActivate = mkOption {
+            type = nullOr (either str (listOf int));
+            default = "ElectricNone";
+            description = ''
+              
+
+              Type: IntList
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "TabBox";
+    };    
+    "TouchEdges" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Bottom = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Left = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Right = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          Top = mkOption {
+            type = nullOr str;
+            default = "None";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "TouchEdges";
+    };    
     "Wayland" = with types; mkOption {
       type = submodule {
         options = { 
@@ -900,6 +1217,68 @@ in {
       };
       default = {};
       description = "Wayland";
+    };    
+    "Windows" = with types; mkOption {
+      type = submodule {
+        options = { 
+          ElectricBorderCooldown = mkOption {
+            type = nullOr (either str int);
+            default = 350;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          ElectricBorderCornerRatio = mkOption {
+            type = nullOr (either str float);
+            default = 0.25;
+            description = ''
+              
+
+              Type: Double
+            '';
+          };
+          ElectricBorderDelay = mkOption {
+            type = nullOr (either str int);
+            default = 150;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          ElectricBorderMaximize = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          ElectricBorderTiling = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          ElectricBorders = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Windows";
     };    
     "Xwayland" = with types; mkOption {
       type = submodule {
