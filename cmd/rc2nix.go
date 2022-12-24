@@ -19,13 +19,8 @@ import (
 // rc2nixCmd represents the rc2nix command
 var rc2nixCmd = &cobra.Command{
 	Use:   "rc2nix",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Generate a plasma-manager configuration from your existing rc file configuration",
+	Long:  `Parse all known kde rc files and generate a valid plasma-manager configuration with these options.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("rc2nix called")
 		modulesJsonFile, err := cmd.Flags().GetString("modulesJsonFile")

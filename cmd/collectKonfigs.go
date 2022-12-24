@@ -407,6 +407,10 @@ var collectKonfigsCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalf("missing token file: %v", err)
 		}
+		username, err := cmd.Flags().GetString("username")
+		if err != nil {
+			log.Fatalf("missing username: %v", err)
+		}
 		moduleInfosFile, err := cmd.Flags().GetString("moduleInfosFile")
 		if err != nil {
 			log.Fatalf("missing info file: %v", err)
@@ -419,7 +423,7 @@ var collectKonfigsCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalf("missing info file: %v", err)
 		}
-		downloader := NewDownloader(tokenFile, urlTemplate)
+		downloader := NewDownloader(tokenFile, username, urlTemplate)
 
 		if query != "" {
 			downloader.PopulateFromQuery(moduleInfosFile, query)
@@ -443,6 +447,7 @@ var collectKonfigsCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(collectKonfigsCmd)
+	collectKonfigsCmd.Flags().StringP("username", "u", "", "Your github username")
 	collectKonfigsCmd.Flags().StringP("tokenFile", "t", "token.secret", "File with a github personal access token")
 	urlTemplate := `https://api.github.com/search/code?q=kcfg+xmlns{{ . }}+extension%3Akcfg+extension%3Axml+language%3AXML&type=Code&ref=advsearch&l=XML`
 	//urlTemplate := `https://api.github.com/search/code?q=kcfg+xmlns{{ . }}&type=Code`
@@ -470,10 +475,11 @@ type searchResult struct {
 type Downloader struct {
 	client   http.Client
 	token    string
+	username string
 	template *template.Template
 }
 
-func NewDownloader(tokenFile string, url string) *Downloader {
+func NewDownloader(tokenFile, username, url string) *Downloader {
 	token, err := ioutil.ReadFile(tokenFile)
 	if err != nil {
 		log.Fatalf("failed to read github token: %s", err)
@@ -486,6 +492,7 @@ func NewDownloader(tokenFile string, url string) *Downloader {
 	}
 	return &Downloader{
 		token:    string(token),
+		username: username,
 		client:   http.Client{},
 		template: t,
 	}
@@ -621,7 +628,7 @@ func (k *Downloader) download(url string) (io.ReadCloser, func()) {
 	//}
 	fmt.Println()
 	r, _ := http.NewRequest(http.MethodGet, url, nil)
-	r.Header.Add("Authorization", "Basic "+basicAuth("dominikstraessle", k.token))
+	r.Header.Add("Authorization", "Basic "+basicAuth(k.username, k.token))
 	r.Header.Add("user-agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36")
 	resp, err := k.client.Do(r)
 	if err != nil {

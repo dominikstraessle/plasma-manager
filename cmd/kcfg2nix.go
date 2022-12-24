@@ -19,13 +19,11 @@ import (
 // kcfg2nixCmd represents the kcfg2nix command
 var kcfg2nixCmd = &cobra.Command{
 	Use:   "kcfg2nix",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Generate home-manager modules from the collected .kcfg file definitions",
+	Long: `Generates home-manager modules for all available options.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+           The available options are stored in the modules.yaml file after they are collected with the collectKonfigs command.
+`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("kcfg2nix called")
 		moduleInfosFile, err := cmd.Flags().GetString("moduleInfosFile")
@@ -198,7 +196,7 @@ func (k *Kcfg2Nix) createDefaultNix() {
 	}
 
 	var moduleKeys []string
-	for key, _ := range k.modules {
+	for key := range k.modules {
 		moduleKeys = append(moduleKeys, key)
 	}
 
