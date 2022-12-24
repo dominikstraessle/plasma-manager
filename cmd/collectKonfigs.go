@@ -447,7 +447,7 @@ var collectKonfigsCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(collectKonfigsCmd)
-	collectKonfigsCmd.Flags().StringP("username", "u", "", "Your github username")
+	collectKonfigsCmd.Flags().StringP("username", "n", "", "Your github username")
 	collectKonfigsCmd.Flags().StringP("tokenFile", "t", "token.secret", "File with a github personal access token")
 	urlTemplate := `https://api.github.com/search/code?q=kcfg+xmlns{{ . }}+extension%3Akcfg+extension%3Axml+language%3AXML&type=Code&ref=advsearch&l=XML`
 	//urlTemplate := `https://api.github.com/search/code?q=kcfg+xmlns{{ . }}&type=Code`

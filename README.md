@@ -10,7 +10,7 @@ Configuration is broken down into three layers:
      ```nix
      {
        programs.plasma = {
-         workspace.clickItemTo = "select";
+         dolphin = { IconsMode = { PreviewSize = 256; }; };
        };
      }
      ```

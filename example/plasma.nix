@@ -10,7 +10,7 @@
         "exclude filters version" = "8";
       };
     };
-    dolphin = { "IconsMode" = { "PreviewSize" = "256"; }; };
+    dolphin = { IconsMode = { PreviewSize = 256; }; };
     elisa = { "PlayerSettings" = { "UseFavoriteStyleRatings" = "true"; }; };
     gwenview = {
       "General" = {

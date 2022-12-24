@@ -37,7 +37,7 @@ var rc2nixCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(rc2nixCmd)
-	rc2nixCmd.Flags().StringP("outputFile", "o", "modules", "Directory where nix modules are generated into")
+	rc2nixCmd.Flags().StringP("outputFile", "o", "", "Directory where nix modules are generated into")
 }
 
 type Rc2Nix struct {
@@ -167,11 +167,16 @@ func (r *Rc2Nix) Generate(outputFile string) {
 		panic(err)
 	}
 
-	nix, err := os.Create(outputFile)
-	if err != nil {
-		log.Fatal(err)
+	var file *os.File
+	if outputFile == "" {
+		file = os.Stdout
+	} else {
+		file, err = os.Create(outputFile)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
-	err = t.Execute(nix, modules)
+	err = t.Execute(file, modules)
 	if err != nil {
 		log.Fatalf("Failed to execute template: %v", err)
 	}

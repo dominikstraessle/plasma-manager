@@ -30,7 +30,7 @@ let
 
     programs.plasma = {
       enable = true;
-      workspace.clickItemTo = "select";
+      dolphin = { IconsMode = { PreviewSize = 256; }; };
     };
   };
 
