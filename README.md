@@ -75,7 +75,7 @@ To run the `rc2nix` tool without having to clone this repository run
 the following shell command:
 
 ```sh
-nix run github:pjones/plasma-manager rc2nix
+nix run github:dominikstraessle/plasma-manager rc2nix
 ```
 
 ## Contributions and Maintenance
