@@ -4,6 +4,7 @@
   imports = [
     ./files.nix
     ./hotkeys.nix
+    ./khotkeys.nix
     ./shortcuts.nix
     ./GitKlientSettings.nix
     ./akonadi.nix

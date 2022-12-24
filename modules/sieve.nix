@@ -75,6 +75,6 @@ in {
     };    
   };
   config = mkIf cfg.enable {
-    programs.plasma.files."vacationsettingsrc" = cfg.sieve;
+    programs.plasma.files."sieveeditorrc" = cfg.sieve;
   };
 }

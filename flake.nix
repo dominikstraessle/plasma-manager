@@ -6,9 +6,17 @@
 
     home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    utils.url = "github:numtide/flake-utils";
+
+    gomod2nix = {
+      url = "github:tweag/gomod2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "utils";
+    };
   };
 
-  outputs = inputs@{ self, ... }:
+  outputs = inputs@{ self, gomod2nix, ... }:
     let
       # Systems that can run tests:
       supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
@@ -17,15 +25,25 @@
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
 
       # Attribute set of nixpkgs for each system:
-      nixpkgsFor =
-        forAllSystems (system: import inputs.nixpkgs { inherit system; });
+      nixpkgsFor = forAllSystems (system:
+        import inputs.nixpkgs {
+          inherit system;
+          overlays = [ gomod2nix.overlays.default ];
+        });
     in {
       homeManagerModules.plasma-manager = { ... }: { imports = [ ./modules ]; };
 
       packages = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
         in {
-          default = self.packages.${system}.rc2nix;
+          default = self.packages.${system}.cmd;
+
+          cmd = pkgs.gomod2nix.buildGoApplication {
+            pname = "cmd";
+            version = "1.0.0";
+            src = ./.;
+            modules = ./gomod2nix.toml;
+          };
 
           demo = (inputs.nixpkgs.lib.nixosSystem {
             inherit system;
@@ -38,25 +56,19 @@
               })
             ];
           }).config.system.build.vm;
-
-          rc2nix = pkgs.writeShellApplication {
-            name = "rc2nix";
-            runtimeInputs = with pkgs; [ ruby ];
-            text = ''ruby ${script/rc2nix.rb} "$@"'';
-          };
         });
 
       apps = forAllSystems (system: {
-        default = self.apps.${system}.rc2nix;
+        default = self.apps.${system}.cmd;
 
         demo = {
           type = "app";
           program = "${self.packages.${system}.demo}/bin/run-plasma-demo-vm";
         };
 
-        rc2nix = {
+        cmd = {
           type = "app";
-          program = "${self.packages.${system}.rc2nix}/bin/rc2nix";
+          program = "${self.packages.${system}.cmd}/bin/plasma-manager";
         };
       });
 
@@ -73,12 +85,11 @@
       devShells = forAllSystems (system: {
         default = nixpkgsFor.${system}.mkShell {
           buildInputs = with nixpkgsFor.${system}; [
-            ruby
-            ruby.devdoc
             go
             gopls
             gotools
             go-tools
+            gomod2nix.packages.${system}.default
           ];
         };
       });

@@ -65,7 +65,7 @@ func NewRc2Nix(modulesJsonFile string) *Rc2Nix {
 }
 
 var skipChecks = []string{
-	//"hotkeys",
+	"khotkeys",
 	"shortcuts",
 }
 
@@ -112,9 +112,9 @@ var keyBlocklist = []string{
 }
 
 func (o *option) GetValue() string {
-	if strings.ToLower(o.Value) == "true" || strings.ToLower(o.Value) == "false" {
-		return strings.ToLower(o.Value)
-	}
+	//if strings.ToLower(o.Value) == "true" || strings.ToLower(o.Value) == "false" {
+	//	return strings.ToLower(o.Value)
+	//}
 
 	return AsStringName(o.Value)
 }

@@ -936,7 +936,7 @@ in {
           };
           DisconnectedModeEnabled = mkOption {
             type = nullOr (either str bool);
-            default = true;
+            default = false;
             description = ''
               Defines if all the IMAP data should be cached locally all the time
 
