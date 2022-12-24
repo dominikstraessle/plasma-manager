@@ -37,7 +37,8 @@ let
     triggers = [{
       Key = cmd.key;
       Type = "SHORTCUT";
-      Uuid = "{" + builtins.hashString "sha256" (builtins.toString idx + cmd.name) + "}";
+      Uuid = "{"
+        + builtins.hashString "sha256" (builtins.toString idx + cmd.name) + "}";
     }];
 
     actions = [{
@@ -55,15 +56,11 @@ let
       prefix = "Data_${toString idx}";
 
       toSection = name: items:
-        builtins.listToAttrs
-          (lib.imap0
-            (jdx: item: {
-              name = "${prefix}${name}${toString jdx}";
-              value = item;
-            })
-            items);
-    in
-    {
+        builtins.listToAttrs (lib.imap0 (jdx: item: {
+          name = "${prefix}${name}${toString jdx}";
+          value = item;
+        }) items);
+    in {
       ${prefix} = {
         Comment = hotkey.comment;
         Enabled = true;
@@ -74,26 +71,20 @@ let
       "${prefix}Conditions".ConditionsCount =
         builtins.length (hotkey.conditions);
 
-      "${prefix}Actions".ActionsCount =
-        builtins.length (hotkey.actions);
+      "${prefix}Actions".ActionsCount = builtins.length (hotkey.actions);
 
-      "${prefix}Triggers".TriggersCount =
-        builtins.length (hotkey.triggers);
-    }
-    // toSection "Conditions" hotkey.conditions
+      "${prefix}Triggers".TriggersCount = builtins.length (hotkey.triggers);
+    } // toSection "Conditions" hotkey.conditions
     // toSection "Actions" hotkey.actions
     // toSection "Triggers" hotkey.triggers;
 
   # Turn all options in this module into an attribute sets for
   # programs.plasma.files.
-  hotkeys =
-    let items =
-      (map commandToHotkey (builtins.attrValues cfg.hotkeys.commands));
-    in
-    lib.foldr (a: b: a // b) { Data.DataCount = builtins.length items; }
-      (lib.imap1 (idx: hotkey: hotkeyToSettings (hotkey idx) idx) items);
-in
-{
+  hotkeys = let
+    items = (map commandToHotkey (builtins.attrValues cfg.hotkeys.commands));
+  in lib.foldr (a: b: a // b) { Data.DataCount = builtins.length items; }
+  (lib.imap1 (idx: hotkey: hotkeyToSettings (hotkey idx) idx) items);
+in {
   options.programs.plasma.hotkeys = {
     commands = lib.mkOption {
       type = with lib.types; attrsOf (submodule commandType);
@@ -102,9 +93,7 @@ in
     };
   };
 
-  config = lib.mkIf
-    (cfg.enable && builtins.length (builtins.attrNames cfg.hotkeys.commands) != 0)
-    {
-      programs.plasma.files.khotkeysrc = hotkeys;
-    };
+  config = lib.mkIf (cfg.enable
+    && builtins.length (builtins.attrNames cfg.hotkeys.commands)
+    != 0) { programs.plasma.files.khotkeysrc = hotkeys; };
 }

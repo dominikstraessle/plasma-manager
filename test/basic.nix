@@ -30,20 +30,15 @@ let
 
     programs.plasma = {
       enable = true;
-      workspace.clickItemTo = "select";
+      dolphin = { IconsMode = { PreviewSize = 256; }; };
     };
   };
 
-  user = import ./user.nix {
-    inherit module home-manager homeConfig;
-  };
-in
-pkgs.nixosTest {
+  user = import ./user.nix { inherit module home-manager homeConfig; };
+in pkgs.nixosTest {
   name = "plasma-basic";
 
-  nodes.machine = { ... }: {
-    imports = [ user ];
-  };
+  nodes.machine = { ... }: { imports = [ user ]; };
 
   testScript = ''
     # Boot:

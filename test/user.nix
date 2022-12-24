@@ -1,7 +1,4 @@
-{ module
-, home-manager
-, homeConfig
-}:
+{ module, home-manager, homeConfig }:
 
 { ... }:
 
@@ -18,8 +15,6 @@
   home-manager = {
     useGlobalPkgs = true;
 
-    users.fake = { ... }: {
-      imports = [ module homeConfig ];
-    };
+    users.fake = { ... }: { imports = [ module homeConfig ]; };
   };
 }

@@ -10,10 +10,12 @@ Configuration is broken down into three layers:
      ```nix
      {
        programs.plasma = {
-         workspace.clickItemTo = "select";
+         dolphin = { IconsMode = { PreviewSize = 256; }; };
        };
      }
      ```
+     
+     Check out all available options at [modules/](modules).
 
      This layer is doesn't currently have many options.  If using a
      high-level interface like this sounds interesting to you please
@@ -73,7 +75,7 @@ To run the `rc2nix` tool without having to clone this repository run
 the following shell command:
 
 ```sh
-nix run github:pjones/plasma-manager
+nix run github:pjones/plasma-manager rc2nix
 ```
 
 ## Contributions and Maintenance

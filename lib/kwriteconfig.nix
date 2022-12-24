@@ -4,19 +4,24 @@ let
 
   ##############################################################################
   # Convert a Nix value into a command line argument to kwriteconfig.
-  toKdeValue = v:
+  toKdeValue = with builtins;
+    v:
     if v == null then
       "--delete"
-    else if builtins.isString v then
+    else if isString v then
       lib.escapeShellArg v
-    else if builtins.isBool v then
+    else if isBool v then
       "--type bool " + lib.boolToString v
-    else if builtins.isInt v then
-      builtins.toString v
-    else if builtins.isFloat v then
-      builtins.toString v
+    else if isInt v then
+      toString v
+    else if isFloat v then
+      toString v
+    else if isList v then
+      concatStringsSep "," (toString v)
+    else if isEnum v then
+      toString v
     else
-      builtins.abort ("Unknown value type: " ++ builtins.toString v);
+      abort ("Unknown value type: " ++ xtoString v);
 
   ##############################################################################
   # Generate a series of shell commands that will update a
@@ -30,17 +35,12 @@ let
   # The attribute set is the settings and values to set.
   #
   # Type: string -> [string] -> AttrSet -> string
-  kWriteConfig = file: groups: attrs:
-    lib.concatStringsSep "\n" (lib.mapAttrsToList
-      (key: value: ''
-        ${pkgs.libsForQt5.kconfig}/bin/kwriteconfig5 \
-          --file ''${XDG_CONFIG_HOME:-$HOME/.config}/${lib.escapeShellArg file} \
-          ${lib.concatMapStringsSep " " (g: "--group " + lib.escapeShellArg g) groups} \
-          --key ${lib.escapeShellArg key} \
-          ${toKdeValue value}
-      '')
-      attrs);
-in
-{
-  inherit kWriteConfig;
-}
+  kWriteConfig = file: group: attrs:
+    lib.concatStringsSep "\n" (lib.mapAttrsToList (key: value: ''
+      ${pkgs.libsForQt5.kconfig}/bin/kwriteconfig5 \
+        --file ''${XDG_CONFIG_HOME:-$HOME/.config}/${lib.escapeShellArg file} \
+        --group ${lib.escapeShellArg group} \
+        --key ${lib.escapeShellArg key} \
+        ${toKdeValue value}
+    '') attrs);
+in { inherit kWriteConfig; }
