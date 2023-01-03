@@ -2,7 +2,7 @@
 with lib;
 let cfg = config.programs.plasma;
 in {
-  options.programs.plasma.korganizer = { 
+  options.programs.plasma.eventviews = { 
     "Agenda View" = with types; mkOption {
       type = submodule {
         options = { 
@@ -36,9 +36,9 @@ in {
 
               Type: Enum
               Choices: 
-                - CategoryInsideResourceOutside: Tag inside, calendar outside
-                - ResourceInsideCategoryOutside: Calendar inside, tag outside
-                - CategoryOnly: Only tag
+                - CategoryInsideResourceOutside: Category inside, calendar outside
+                - ResourceInsideCategoryOutside: Calendar inside, category outside
+                - CategoryOnly: Only category
                 - ResourceOnly: Only calendar
             '';
           };
@@ -53,7 +53,7 @@ in {
           };
           "Current-time line shows seconds" = mkOption {
             type = nullOr (either str bool);
-            default = false;
+            default = true;
             description = ''
               Show seconds on the current-time (Marcus Bains) line
 
@@ -112,106 +112,12 @@ in {
       default = {};
       description = "Agenda View";
     };    
-    "Archive Dialog" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Archive Action" = mkOption {
-            type = nullOr (either str (enum [ 
-              "actionDelete"
-              "actionArchive"
-            ]));
-            default = "actionArchive";
-            description = ''
-              What to do when archiving
-
-              Type: Enum
-              Choices: 
-                - actionDelete: Delete old events
-                - actionArchive: Archive old events to a separate file
-            '';
-          };
-          "Archive Events" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Archive events
-
-              Type: Bool
-            '';
-          };
-          "Archive File" = mkOption {
-            type = nullOr str;
-            default = "";
-            description = ''
-              URL of the file where old events should be archived
-
-              Type: String
-            '';
-          };
-          "Archive Todos" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Archive to-dos
-
-              Type: Bool
-            '';
-          };
-          "Auto Archive" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Regularly archive events
-
-              Type: Bool
-            '';
-          };
-          "Expiry Time" = mkOption {
-            type = nullOr (either str int);
-            default = 1;
-            description = ''
-              If auto-archiving is enabled, events older than this amount will be archived. The unit of this value is specified in another field.
-
-              Type: Int
-            '';
-          };
-          "Expiry Unit" = mkOption {
-            type = nullOr (either str (enum [ 
-              "UnitDays"
-              "UnitWeeks"
-              "UnitMonths"
-            ]));
-            default = "UnitMonths";
-            description = ''
-              The unit in which the expiry time is expressed.
-
-              Type: Enum
-              Choices: 
-                - UnitDays: In days
-                - UnitWeeks: In weeks
-                - UnitMonths: In months
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Archive Dialog";
-    };    
     "Colors" = with types; mkOption {
       type = submodule {
         options = { 
-          "Agenda Background Color" = mkOption {
-            type = nullOr str;
-            default = "255, 255, 255";
-            description = ''
-              Agenda view background color
-
-              Type: Color
-            '';
-          };
           "Agenda MarcusBainsLine Line Color" = mkOption {
             type = nullOr str;
-            default = "255,0,0";
+            default = "0,0,255";
             description = ''
               Agenda view current-time line color
 
@@ -223,15 +129,6 @@ in {
             default = "255, 255, 255";
             description = ''
               Agenda view background color
-
-              Type: Color
-            '';
-          };
-          "Highlight Color" = mkOption {
-            type = nullOr str;
-            default = "100, 100, 255";
-            description = ''
-              Highlight color
 
               Type: Color
             '';
@@ -267,7 +164,7 @@ in {
             type = nullOr str;
             default = "151, 235, 121";
             description = ''
-              "No tag" color (for "Only tag" drawing schemes)
+              "No category" color (for "Only category" drawing schemes)
 
               Type: Color
             '';
@@ -276,7 +173,7 @@ in {
             type = nullOr str;
             default = "136, 255, 219";
             description = ''
-              Busy days background color
+              Agenda/Month view background busy color
 
               Type: Color
             '';
@@ -294,124 +191,6 @@ in {
       };
       default = {};
       description = "Colors";
-    };    
-    "Default Datetimes" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Default Reminder Time" = mkOption {
-            type = nullOr (either str int);
-            default = 15;
-            description = ''
-              Default reminder time
-
-              Type: Int
-            '';
-          };
-          "Default Reminder Time Units" = mkOption {
-            type = nullOr (either str int);
-            default = 0;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          DefaultDuration = mkOption {
-            type = nullOr str;
-            default = "QDateTime(QDate(1752,1,1), QTime(1,0))";
-            description = ''
-              Default duration of new appointment (HH:MM)
-
-              Type: DateTime
-            '';
-          };
-          "Enable Default Audio File" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Enable a default sound file for audio reminders
-
-              Type: Bool
-            '';
-          };
-          "Enable Event Reminders" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Enable reminders for new Events
-
-              Type: Bool
-            '';
-          };
-          "Enable To-do Reminders" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Enable reminders for new To-dos
-
-              Type: Bool
-            '';
-          };
-          "Reminder Audio File" = mkOption {
-            type = nullOr str;
-            default = "";
-            description = ''
-              Default audio file
-
-              Type: Path
-            '';
-          };
-          StartTime = mkOption {
-            type = nullOr str;
-            default = "QDateTime(QDate(1752,1,1), QTime(10,0))";
-            description = ''
-              Default appointment time
-
-              Type: DateTime
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Default Datetimes";
-    };    
-    "Email" = with types; mkOption {
-      type = submodule {
-        options = { 
-          EmailClient = mkOption {
-            type = nullOr (either str (enum [ 
-              "sendmail"
-              "kmail"
-            ]));
-            default = "kmail";
-            description = ''
-              Email client
-
-              Type: Enum
-              Choices: 
-                - sendmail: Sendmail
-                - kmail: KMail
-            '';
-          };
-          RemindUnits = mkOption {
-            type = nullOr (either str (enum [ 
-              "Minutes"
-              "HoursMinutes"
-            ]));
-            default = "HoursMinutes";
-            description = ''
-              Reminder units
-
-              Type: Enum
-              Choices: 
-                - Minutes
-                - HoursMinutes: Hours/Minutes
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Email";
     };    
     "Fonts" = with types; mkOption {
       type = submodule {
@@ -452,86 +231,10 @@ in {
               Type: Font
             '';
           };
-          "TimeBar Font" = mkOption {
-            type = nullOr str;
-            default = "";
-            description = ''
-              Time bar
-
-              Type: Font
-            '';
-          };
         };
       };
       default = {};
       description = "Fonts";
-    };    
-    "General" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Archive File" = mkOption {
-            type = nullOr str;
-            default = "";
-            description = ''
-              
-
-              Type: String
-            '';
-          };
-          "Auto Save" = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Enable automatic saving of calendar
-
-              Type: Bool
-            '';
-          };
-          "Auto Save Interval" = mkOption {
-            type = nullOr (either str int);
-            default = 10;
-            description = ''
-              
-
-              Type: Int
-              Min: 0
-              Max: 123
-            '';
-          };
-          "Confirm Deletes" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Confirm deletes
-
-              Type: Bool
-            '';
-          };
-          Destination = mkOption {
-            type = nullOr (either str (enum [ 
-              "standardDestination"
-              "askDestination"
-              "argl1"
-              "argl2"
-              "argl3"
-            ]));
-            default = "standardDestination";
-            description = ''
-              New Events/Todos Should
-
-              Type: Enum
-              Choices: 
-                - standardDestination
-                - askDestination
-                - argl1: Argl1 Label
-                - argl2
-                - argl3: Argl3 Label
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "General";
     };    
     "General View" = with types; mkOption {
       type = submodule {
@@ -594,7 +297,7 @@ in {
             type = nullOr (either str bool);
             default = false;
             description = ''
-              To-dos use tag colors
+              To-dos use category colors
 
               Type: Bool
             '';
@@ -616,35 +319,9 @@ in {
     "Group Scheduling" = with types; mkOption {
       type = submodule {
         options = { 
-          AdditionalMails = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "";
-            description = ''
-              
-
-              Type: StringList
-            '';
-          };
-          "Send Policy" = mkOption {
-            type = nullOr (either str (enum [ 
-              "InvitationPolicySend"
-              "InvitationPolicyAsk"
-              "InvitationPolicyDontSend"
-            ]));
-            default = "InvitationPolicySend";
-            description = ''
-              Default policy for invitations to other users:
-
-              Type: Enum
-              Choices: 
-                - InvitationPolicySend: Send mails without asking.
-                - InvitationPolicyAsk: Ask for every individual attendee what to do.
-                - InvitationPolicyDontSend: Do not send invitation emails at all (this can break group scheduling for iTip compliant clients).
-            '';
-          };
           "Use Groupware Communication" = mkOption {
             type = nullOr (either str bool);
-            default = true;
+            default = false;
             description = ''
               Use Groupware communication
 
@@ -703,15 +380,6 @@ in {
               Type: Bool
             '';
           };
-          ShowTimeZoneSelectorInIncidenceEditor = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Show timezone selectors in the event and todo editor dialog.
-
-              Type: Bool
-            '';
-          };
           "Todo Quick Search" = mkOption {
             type = nullOr (either str bool);
             default = true;
@@ -729,15 +397,6 @@ in {
     "Internal Settings" = with types; mkOption {
       type = submodule {
         options = { 
-          ActiveDesignerFields = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "";
-            description = ''
-              
-
-              Type: StringList
-            '';
-          };
           AssignDefaultResourceColors = mkOption {
             type = nullOr (either str bool);
             default = true;
@@ -792,62 +451,6 @@ in {
               Type: StringList
             '';
           };
-          EventTemplates = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "";
-            description = ''
-              
-
-              Type: StringList
-            '';
-          };
-          JournalTemplates = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "";
-            description = ''
-              
-
-              Type: StringList
-            '';
-          };
-          TodoTemplates = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "";
-            description = ''
-              
-
-              Type: StringList
-            '';
-          };
-          "Work Week Mask" = mkOption {
-            type = nullOr (either str int);
-            default = 31;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          "user_email" = mkOption {
-            type = nullOr str;
-            default = ''i18n("nobody@nowhere")'';
-            defaultText = "Code: true";
-            description = ''
-              E&mail address
-
-              Type: String
-            '';
-          };
-          "user_name" = mkOption {
-            type = nullOr str;
-            default = ''i18n("Anonymous")'';
-            defaultText = "Code: true";
-            description = ''
-              Full &name
-
-              Type: String
-            '';
-          };
         };
       };
       default = {};
@@ -858,7 +461,7 @@ in {
         options = { 
           SelectedPlugins = mkOption {
             type = nullOr (either str (listOf str));
-            default = "holidays,webexport";
+            default = "";
             description = ''
               
 
@@ -873,6 +476,15 @@ in {
     "Month View" = with types; mkOption {
       type = submodule {
         options = { 
+          ColorMonthBusyDaysEnabled = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Color busy days with a different background color
+
+              Type: Bool
+            '';
+          };
           "Full View Month" = mkOption {
             type = nullOr (either str bool);
             default = false;
@@ -895,9 +507,9 @@ in {
 
               Type: Enum
               Choices: 
-                - MonthItemCategoryInsideResourceOutside: Tag inside, calendar outside
-                - MonthItemResourceInsideCategoryOutside: Calendar inside, tag outside
-                - MonthItemCategoryOnly: Only tag
+                - MonthItemCategoryInsideResourceOutside: Category inside, calendar outside
+                - MonthItemResourceInsideCategoryOutside: Calendar inside, category outside
+                - MonthItemCategoryOnly: Only category
                 - MonthItemResourceOnly: Only calendar
             '';
           };
@@ -945,13 +557,23 @@ in {
     "Personal Settings" = with types; mkOption {
       type = submodule {
         options = { 
-          "Use Control Center Email" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
+          DefaultEmailAttachMethod = mkOption {
+            type = nullOr (either str (enum [ 
+              "Ask"
+              "Link"
+              "InlineFull"
+              "InlineBody"
+            ]));
+            default = "Ask";
             description = ''
-              Use email settings from System Settings
+              Default Email Attachment Method
 
-              Type: Bool
+              Type: Enum
+              Choices: 
+                - Ask: Always ask
+                - Link: Only attach link to message
+                - InlineFull: Attach complete message
+                - InlineBody: Attach message without attachments
             '';
           };
         };
@@ -959,36 +581,28 @@ in {
       default = {};
       description = "Personal Settings";
     };    
-    "QueueRates" = with types; mkOption {
+    "Save Settings" = with types; mkOption {
       type = submodule {
         options = { 
-          "EmptyingRate $(QueueIndex)" = mkOption {
-            type = nullOr (either str (listOf int));
-            default = "defaultRate[2]";
-            defaultText = "Code: true";
-            description = ''
-              
-
-              Type: IntList
-            '';
-          };
-          ShowQueueTuner = mkOption {
+          "Auto Save" = mkOption {
             type = nullOr (either str bool);
-            default = false;
+            default = true;
             description = ''
-              
+              Enable automatic saving of manually opened calendar files
 
               Type: Bool
             '';
           };
-        };
-      };
-      default = {};
-      description = "QueueRates";
-    };    
-    "Save Settings" = with types; mkOption {
-      type = submodule {
-        options = { 
+          "Auto Save Interval" = mkOption {
+            type = nullOr (either str int);
+            default = 10;
+            description = ''
+              Save &interval in minutes
+
+              Type: Int
+              Min: 1
+            '';
+          };
           "Confirm Deletes" = mkOption {
             type = nullOr (either str bool);
             default = true;
@@ -1009,14 +623,40 @@ in {
 
               Type: Enum
               Choices: 
-                - standardDestination: Be added to the default calendar
+                - standardDestination: Be added to the standard calendar
                 - askDestination: Be asked which calendar to use
+            '';
+          };
+          "Html With Save" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Export to HTML with every save
+
+              Type: Bool
             '';
           };
         };
       };
       default = {};
       description = "Save Settings";
+    };    
+    "System Tray" = with types; mkOption {
+      type = submodule {
+        options = { 
+          ShowReminderDaemon = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show Reminder Daemon in the System Tray
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "System Tray";
     };    
     "Theme/Month view" = with types; mkOption {
       type = submodule {
@@ -1309,6 +949,15 @@ in {
               Type: String
             '';
           };
+          "Use System Color" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Use system color
+
+              Type: Bool
+            '';
+          };
         };
       };
       default = {};
@@ -1416,6 +1065,15 @@ in {
               Type: String
             '';
           };
+          "Agenda CalendarItems ToDos DueToday Background Color" = mkOption {
+            type = nullOr str;
+            default = "255, 200, 50";
+            description = ''
+              To-do due today color
+
+              Type: Color
+            '';
+          };
           "Agenda CalendarItems ToDos DueToday Background Image" = mkOption {
             type = nullOr str;
             default = "";
@@ -1477,6 +1135,15 @@ in {
               
 
               Type: String
+            '';
+          };
+          "Agenda CalendarItems ToDos Overdue Background Color" = mkOption {
+            type = nullOr str;
+            default = "255, 100, 100";
+            description = ''
+              To-do overdue color
+
+              Type: Color
             '';
           };
           "Agenda CalendarItems ToDos Overdue Background Image" = mkOption {
@@ -1542,6 +1209,15 @@ in {
               Type: Color
             '';
           };
+          "Agenda Grid WorkHours Background Color" = mkOption {
+            type = nullOr str;
+            default = "225, 225, 255";
+            description = ''
+              Working hours color
+
+              Type: Color
+            '';
+          };
           "Agenda Grid WorkHours Background Image" = mkOption {
             type = nullOr str;
             default = "";
@@ -1569,15 +1245,6 @@ in {
               Type: String
             '';
           };
-          "Use System Color" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Use system color
-
-              Type: Bool
-            '';
-          };
         };
       };
       default = {};
@@ -1586,15 +1253,6 @@ in {
     "Time & Date" = with types; mkOption {
       type = submodule {
         options = { 
-          ColorMonthBusyDaysEnabled = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Color busy days with a different background color
-
-              Type: Bool
-            '';
-          };
           DayBegins = mkOption {
             type = nullOr str;
             default = "QDateTime(QDate(1752,1,1), QTime(7,0))";
@@ -1602,24 +1260,6 @@ in {
               Day begins at
 
               Type: DateTime
-            '';
-          };
-          "Exclude Holidays" = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Exclude holidays
-
-              Type: Bool
-            '';
-          };
-          Holidays = mkOption {
-            type = nullOr (either str (listOf str));
-            default = "";
-            description = ''
-              Use holiday regions:
-
-              Type: StringList
             '';
           };
           TimeZoneId = mkOption {
@@ -1678,7 +1318,7 @@ in {
           };
           "Full View Todo" = mkOption {
             type = nullOr (either str bool);
-            default = false;
+            default = true;
             description = ''
               To-do list view uses full window
 
@@ -1708,34 +1348,8 @@ in {
       default = {};
       description = "Todo View";
     };    
-    "Views" = with types; mkOption {
-      type = submodule {
-        options = { 
-          "Hour Size" = mkOption {
-            type = nullOr (either str int);
-            default = 10;
-            description = ''
-              
-
-              Type: Int
-            '';
-          };
-          SelectionStartsEditor = mkOption {
-            type = nullOr (either str bool);
-            default = false;
-            description = ''
-              Time range selection in agenda view starts event editor
-
-              Type: Bool
-            '';
-          };
-        };
-      };
-      default = {};
-      description = "Views";
-    };    
   };
   config = mkIf cfg.enable {
-    programs.plasma.files."korganizerrc" = cfg.korganizer;
+    programs.plasma.files."eventviewsrc" = cfg.eventviews;
   };
 }

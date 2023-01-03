@@ -112,6 +112,24 @@ in {
     "General" = with types; mkOption {
       type = submodule {
         options = { 
+          AutoRename = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          AutoRenameFormat = mkOption {
+            type = nullOr str;
+            default = "{date}_{time}.{ext.lower}";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
           BackgroundColorMode = mkOption {
             type = nullOr (either str (enum [ 
               "DocumentView::Auto"
@@ -156,6 +174,15 @@ in {
               
 
               Type: String
+            '';
+          };
+          DestinationUrl = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: Url
             '';
           };
           FullScreenBackground = mkOption {
@@ -795,6 +822,6 @@ in {
     };    
   };
   config = mkIf cfg.enable {
-    programs.plasma.files."gwenviewrc" = cfg.gwenview;
+    programs.plasma.files."gwenview_importerrc" = cfg.gwenview;
   };
 }

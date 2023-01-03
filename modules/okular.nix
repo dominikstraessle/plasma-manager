@@ -552,6 +552,15 @@ in {
                 - Shape
             '';
           };
+          PlatformFonts = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Use Platform Fonts
+
+              Type: Bool
+            '';
+          };
           ShellOpenFileInTabs = mkOption {
             type = nullOr (either str bool);
             default = false;

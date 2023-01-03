@@ -83,16 +83,36 @@ func (k *Kcfg2Nix) convert(loaded map[string][]*KfcFileInfo) {
 	}
 
 	k.createDefaultNix()
+
+	for k, v := range missingModules {
+		fmt.Printf(`"%s": "%s",
+`, k, v)
+	}
+
+	for k, v := range missingKcfgs {
+		fmt.Println()
+		fmt.Println(fmt.Sprintf(`"%s": {`, k))
+		for _, s := range v {
+			fmt.Printf(`"%s": "%src",
+`, s, k)
+		}
+		fmt.Println("},")
+	}
 }
+
+var missingModules = map[string]string{}
+var missingKcfgs = map[string][]string{}
 
 func (k *Kcfg2Nix) scanModules(fileInfo *KfcFileInfo, name string) {
 	kcfg := fileInfo.Kcfg
 	if kcfg.KcfgFile.Name == "" {
 		if _, ok := noKonfig[name]; !ok {
+			addToMissingKcfgs(fileInfo, name)
 			log.Printf("%s: No config file name provided in the .kfg file or via mapping: %s", name, fileInfo.Path)
 			return
 		}
 		if _, ok := noKonfig[name][fileInfo.Path]; !ok {
+			addToMissingKcfgs(fileInfo, name)
 			log.Printf("%s: No config file name provided in the .kfg file or via mapping: %s", name, fileInfo.Path)
 			return
 		}
@@ -102,7 +122,8 @@ func (k *Kcfg2Nix) scanModules(fileInfo *KfcFileInfo, name string) {
 	if _, ok := rcToModuleMapping[kcfg.KcfgFile.Name]; !ok {
 		//For debugging and adding mappings
 		//fmt.Println(kcfg.KcfgFile.Name)
-		log.Printf("Skip %s: missing rc to module mapping", kcfg.KcfgFile.Name)
+		missingModules[kcfg.KcfgFile.Name] = name
+		log.Printf("Skip %s -> missing rc to module mapping: name: %s", kcfg.KcfgFile.Name, name)
 		return
 	} else {
 		kcfg.Name = rcToModuleMapping[kcfg.KcfgFile.Name]
@@ -164,6 +185,13 @@ func (k *Kcfg2Nix) scanModules(fileInfo *KfcFileInfo, name string) {
 		module.Groups[optionGroup.Name] = optionGroup
 	}
 	k.modules[kcfg.Name] = module
+}
+
+func addToMissingKcfgs(info *KfcFileInfo, name string) {
+	if _, ok := missingKcfgs[name]; !ok {
+		missingKcfgs[name] = []string{}
+	}
+	missingKcfgs[name] = append(missingKcfgs[name], info.Path)
 }
 
 func (k *Kcfg2Nix) createModule(module *Module, name string) {

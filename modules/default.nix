@@ -8,67 +8,141 @@
     ./shortcuts.nix
     ./GitKlientSettings.nix
     ./akonadi.nix
+    ./akonadi-calendar.nix
+    ./akonadi-contacts.nix
     ./akonadi_maildispatcher.nix
     ./akonadi_newmailnotifier.nix
     ./akregator.nix
+    ./alligator.nix
+    ./angelfish.nix
     ./ark.nix
     ./baloo.nix
+    ./bluedevil.nix
+    ./bomber.nix
+    ./bovo.nix
     ./breeze.nix
     ./device_automounter_kcm.nix
     ./discover.nix
     ./dolphin.nix
+    ./dolphin-plugins.nix
     ./elisa.nix
+    ./eventviews.nix
     ./ffmpegthumbs.nix
     ./fielding.nix
+    ./granatier.nix
     ./gravatar.nix
     ./gwenview.nix
     ./haruna.nix
+    ./incidenceeditor.nix
     ./kactivitymanagerd.nix
     ./kactivitymanagerd-plugins.nix
+    ./kaddressbook.nix
     ./kalarm.nix
     ./kalendar.nix
     ./kalendarcontact.nix
     ./kalzium.nix
+    ./kamoso.nix
+    ./kapman.nix
+    ./kapptemplate.nix
+    ./kasts.nix
+    ./katomic.nix
     ./kblackbox.nix
+    ./kblocks.nix
+    ./kbounce.nix
+    ./kbreakout.nix
     ./kcalc.nix
+    ./kcalutils.nix
     ./kclock.nix
     ./kcmcddb.nix
     ./kcminput.nix
+    ./kcmutils.nix
+    ./kconfig.nix
+    ./kconfigwidgets.nix
     ./kde5.nix
+    ./kdeclarative.nix
     ./kded_device_automounter.nix
     ./kdeglobals.nix
     ./kdenlive.nix
+    ./kdepim-addons.nix
+    ./kdeplasma-addons.nix
     ./kdevelop.nix
+    ./kdiamond.nix
+    ./keditbookmarks.nix
+    ./kgeography.nix
+    ./kget.nix
+    ./kgpg.nix
+    ./khelpcenter.nix
+    ./kigo.nix
+    ./kio.nix
     ./kio_ftp.nix
     ./kioslave.nix
     ./klaunch.nix
     ./kleopatra.nix
+    ./klettres.nix
+    ./klines.nix
     ./klipper.nix
+    ./kmahjongg.nix
+    ./kmail.nix
+    ./kmailtransport.nix
+    ./kmines.nix
+    ./kmix.nix
+    ./kmplot.nix
+    ./knavalbattle.nix
+    ./knetwalk.nix
+    ./knotes.nix
+    ./koko.nix
+    ./kollision.nix
+    ./konqueror.nix
     ./konsole.nix
     ./kontact.nix
     ./konversation.nix
     ./korganizer.nix
     ./kpat.nix
+    ./krdc.nix
+    ./kreversi.nix
+    ./krfb.nix
+    ./kruler.nix
     ./krunner.nix
     ./kscreenlocker.nix
     ./kshisen.nix
     ./ksmserver.nix
     ./kspaceduel.nix
     ./ksplash.nix
+    ./ksquares.nix
     ./kstars.nix
+    ./ktorrent.nix
     ./ktouch2.nix
+    ./ktrip.nix
+    ./kweather.nix
     ./kwin.nix
     ./kxkb.nix
+    ./libksieve.nix
+    ./libksysguard.nix
+    ./mailcommon.nix
     ./marble.nix
+    ./messagelib.nix
     ./neochat.nix
     ./okular.nix
+    ./oxygen.nix
     ./pimcommon.nix
     ./plasma.nix
+    ./plasma-bigscreen.nix
+    ./plasma-desktop.nix
+    ./plasma-framework.nix
+    ./plasma-integration.nix
     ./plasma-locale.nix
+    ./plasma-mobile.nix
+    ./plasma-pa.nix
+    ./plasma-remotecontrollers.nix
+    ./plasma-systemmonitor.nix
+    ./plasma-workspace.nix
     ./plasmadialer.nix
     ./plasmanotify.nix
+    ./powerdevil.nix
+    ./sddm-kcm.nix
     ./sieve.nix
     ./skanpage.nix
+    ./spacebar.nix
     ./spectacle.nix
     ./systemsettings.nix
     ./templateparser.nix

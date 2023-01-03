@@ -13840,64 +13840,6 @@
                     code: "true"
                   min: ""
                   max: ""
-    - name: '%{APPNAME}Settings.kcfg'
-      path: src/templates/C++/kde-frameworks5/src/%{APPNAME}Settings.kcfg
-      url: https://api.github.com/repositories/42727361/contents/src/templates/C%2B%2B/kde-frameworks5/src/%25%7BAPPNAME%7DSettings.kcfg?ref=ee7d3143156dd332e9c1511a97b840fb33ffa247
-      download: https://raw.githubusercontent.com/KDE/kapptemplate/ee7d3143156dd332e9c1511a97b840fb33ffa247/src/templates/C%2B%2B/kde-frameworks5/src/%25%7BAPPNAME%7DSettings.kcfg
-      content: ""
-      rcName: '%{APPNAMELC}rc'
-      kcfg:
-        name: ""
-        xmlname:
-            space: http://www.kde.org/standards/kcfg/1.0
-            local: kcfg
-        kcfgfile:
-            name: '%{APPNAMELC}rc'
-        groups:
-            - name: Preferences
-              entries:
-                - name: colorBackground
-                  key: ""
-                  type: Color
-                  label: color of the background
-                  hidden: ""
-                  code: ""
-                  choices:
-                    name: ""
-                    choices: []
-                  default:
-                    text: black
-                    code: ""
-                  min: ""
-                  max: ""
-                - name: colorForeground
-                  key: ""
-                  type: Color
-                  label: color of the foreground
-                  hidden: ""
-                  code: ""
-                  choices:
-                    name: ""
-                    choices: []
-                  default:
-                    text: yellow
-                    code: ""
-                  min: ""
-                  max: ""
-                - name: ageInDays
-                  key: ""
-                  type: Int
-                  label: age of the project
-                  hidden: ""
-                  code: ""
-                  choices:
-                    name: ""
-                    choices: []
-                  default:
-                    text: "2"
-                    code: ""
-                  min: ""
-                  max: ""
 - name: kasts
   infos:
     - name: settingsmanager.kcfg
@@ -16037,7 +15979,7 @@
                   max: ""
                 - name: BarFoo
                   key: bar foo
-                  type: UrlList
+                  type: StringList
                   label: ""
                   hidden: ""
                   code: ""
@@ -16579,7 +16521,7 @@
               entries:
                 - name: RnRSource
                   key: ""
-                  type: UrlList
+                  type: StringList
                   label: ""
                   hidden: ""
                   code: ""

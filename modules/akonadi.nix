@@ -61,6 +61,23 @@ in {
       default = {};
       description = "Compacting";
     };    
+    "ConfigurationDialogRestrictions" = with types; mkOption {
+      type = submodule {
+        options = { 
+          MinimumCheckInterval = mkOption {
+            type = nullOr (either str int);
+            default = 5;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "ConfigurationDialogRestrictions";
+    };    
     "Filter" = with types; mkOption {
       type = submodule {
         options = { 
@@ -189,6 +206,15 @@ in {
               Type: String
             '';
           };
+          DataFile = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              Path to the Knut data file.
+
+              Type: Path
+            '';
+          };
           DisplayName = mkOption {
             type = nullOr str;
             default = "";
@@ -268,6 +294,15 @@ in {
               Ews Resource
 
               Type: String
+            '';
+          };
+          FileWatchingEnabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
             '';
           };
           FolderSyncState = mkOption {
