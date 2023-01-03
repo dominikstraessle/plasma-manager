@@ -3,6 +3,103 @@ with lib;
 let cfg = config.programs.plasma;
 in {
   options.programs.plasma.kdevelop = { 
+    "Background Parser" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Delay = mkOption {
+            type = nullOr (either str int);
+            default = 500;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+          Enabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          "Number of Threads" = mkOption {
+            type = nullOr (either str int);
+            default = 2;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Background Parser";
+    };    
+    "CMakeBuilder" = with types; mkOption {
+      type = submodule {
+        options = { 
+          cmakeExe = mkOption {
+            type = nullOr str;
+            default = "QUrl::fromLocalFile(CMake::findExecutable())";
+            defaultText = "Code: true";
+            description = ''
+              
+
+              Type: Url
+            '';
+          };
+          generator = mkOption {
+            type = nullOr (either str int);
+            default = 0;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "CMakeBuilder";
+    };    
+    "Clang Settings" = with types; mkOption {
+      type = submodule {
+        options = { 
+          forwardDeclare = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          lookAhead = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          macros = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Clang Settings";
+    };    
     "Language Support" = with types; mkOption {
       type = submodule {
         options = { 
@@ -232,6 +329,23 @@ in {
       };
       default = {};
       description = "MakeBuilder";
+    };    
+    "PHP Documentation" = with types; mkOption {
+      type = submodule {
+        options = { 
+          phpDocLocation = mkOption {
+            type = nullOr str;
+            default = "https://php.net";
+            description = ''
+              Specifies the location of the PHP documentation to use.
+
+              Type: Url
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "PHP Documentation";
     };    
   };
   config = mkIf cfg.enable {

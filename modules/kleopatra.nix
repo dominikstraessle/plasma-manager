@@ -232,6 +232,41 @@ in {
       default = {};
       description = "DN";
     };    
+    "EMailOperations" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "decrypt-verify-popup-geometry" = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              Decrypt/Verify Popup Geometry
+
+              Type: Rect
+            '';
+          };
+          "quick-encrypt-email" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Quick Encrypt EMail
+
+              Type: Bool
+            '';
+          };
+          "quick-sign-email" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Quick Sign EMail
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "EMailOperations";
+    };    
     "FileOperations" = with types; mkOption {
       type = submodule {
         options = { 
@@ -371,6 +406,50 @@ in {
       default = {};
       description = "Privacy";
     };    
+    "RemarkSettings" = with types; mkOption {
+      type = submodule {
+        options = { 
+          RemarkKeyFpr = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              Fingerprint of tag key
+
+              Type: String
+            '';
+          };
+          RemarksEnabled = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Use tags
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "RemarkSettings";
+    };    
+    "SMime Validation" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "refresh-interval" = mkOption {
+            type = nullOr (either str int);
+            default = 1;
+            description = ''
+              Certificate refresh interval (in hours). Zero (0) disables.
+
+              Type: UInt
+              Max: 24
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "SMime Validation";
+    };    
     "Smartcard" = with types; mkOption {
       type = submodule {
         options = { 
@@ -396,6 +475,41 @@ in {
       };
       default = {};
       description = "Smartcard";
+    };    
+    "Tooltip" = with types; mkOption {
+      type = submodule {
+        options = { 
+          "show-certificate-details" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Show certificate details
+
+              Type: Bool
+            '';
+          };
+          "show-owner-information" = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Show certificate owner information
+
+              Type: Bool
+            '';
+          };
+          "show-validity" = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Show certificate validity
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Tooltip";
     };    
   };
   config = mkIf cfg.enable {

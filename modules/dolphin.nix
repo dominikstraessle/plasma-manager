@@ -377,6 +377,41 @@ in {
       default = {};
       description = "Dolphin";
     };    
+    "FoldersPanel" = with types; mkOption {
+      type = submodule {
+        options = { 
+          AutoScrolling = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Automatic scrolling
+
+              Type: Bool
+            '';
+          };
+          HiddenFilesShown = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Hidden files shown
+
+              Type: Bool
+            '';
+          };
+          LimitFoldersPanelToHome = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Limit folders panel to home directory if inside home
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "FoldersPanel";
+    };    
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -730,6 +765,47 @@ in {
       default = {};
       description = "IconsMode";
     };    
+    "InformationPanel" = with types; mkOption {
+      type = submodule {
+        options = { 
+          dateFormat = mkOption {
+            type = nullOr (either str (enum [ 
+              "LongFormat"
+              "ShortFormat"
+            ]));
+            default = "0";
+            description = ''
+              Date display format
+
+              Type: Enum
+              Choices: 
+                - LongFormat
+                - ShortFormat
+            '';
+          };
+          previewsAutoPlay = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              Auto-Play media files
+
+              Type: Bool
+            '';
+          };
+          previewsShown = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Previews shown
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "InformationPanel";
+    };    
     "PlacesPanel" = with types; mkOption {
       type = submodule {
         options = { 
@@ -748,6 +824,32 @@ in {
       default = {};
       description = "PlacesPanel";
     };    
+    "Search" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Location = mkOption {
+            type = nullOr str;
+            default = "FromHere";
+            description = ''
+              Location
+
+              Type: String
+            '';
+          };
+          What = mkOption {
+            type = nullOr str;
+            default = "FileName";
+            description = ''
+              What
+
+              Type: String
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Search";
+    };    
     "Settings" = with types; mkOption {
       type = submodule {
         options = { 
@@ -764,6 +866,23 @@ in {
       };
       default = {};
       description = "Settings";
+    };    
+    "VersionControl" = with types; mkOption {
+      type = submodule {
+        options = { 
+          enabledPlugins = mkOption {
+            type = nullOr (either str (listOf str));
+            default = "";
+            description = ''
+              Enabled plugins
+
+              Type: StringList
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "VersionControl";
     };    
   };
   config = mkIf cfg.enable {

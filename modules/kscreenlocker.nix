@@ -80,6 +80,15 @@ in {
               Type: String
             '';
           };
+          ThemeBackground = mkOption {
+            type = nullOr str;
+            default = "";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
           WallpaperPlugin = mkOption {
             type = nullOr str;
             default = "org.kde.image";

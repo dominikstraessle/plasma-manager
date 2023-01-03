@@ -837,6 +837,24 @@ in {
               Type: Bool
             '';
           };
+          "Clipping256Value" = mkOption {
+            type = nullOr (either str int);
+            default = 250;
+            description = ''
+              Min value of pixels marked as clipped in the fitsviewer for 8-bit images.
+
+              Type: UInt
+            '';
+          };
+          "Clipping64KValue" = mkOption {
+            type = nullOr (either str int);
+            default = 60000;
+            description = ''
+              Min value of pixels marked as clipped in the fitsviewer for 16-bit images.
+
+              Type: UInt
+            '';
+          };
           DarkLibraryDuration = mkOption {
             type = nullOr (either str int);
             default = 30;
@@ -855,11 +873,11 @@ in {
               Type: String
             '';
           };
-          EnforceAutofocus = mkOption {
+          EnforceAutofocusHFR = mkOption {
             type = nullOr (either str bool);
             default = false;
             description = ''
-              Enforce Autofocus HFR limit.
+              Enforce Autofocus on HFR limit.
 
               Type: Bool
             '';
@@ -1026,7 +1044,7 @@ in {
               Type: UInt
             '';
           };
-          PlaceholderFomat = mkOption {
+          PlaceholderFormat = mkOption {
             type = nullOr str;
             default = ''KSUtils::getDefaultPath("placeholderFormat")'';
             defaultText = "Code: true";

@@ -1044,6 +1044,163 @@ in {
       default = {};
       description = "Input";
     };    
+    "NightColor" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Active = mkOption {
+            type = nullOr (either str bool);
+            default = false;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          ActiveEnabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          DayTemperature = mkOption {
+            type = nullOr (either str int);
+            default = 6500;
+            description = ''
+              
+
+              Type: Int
+              Min: 1000
+              Max: 6500
+            '';
+          };
+          EveningBeginFixed = mkOption {
+            type = nullOr str;
+            default = "1800";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          LatitudeAuto = mkOption {
+            type = nullOr (either str float);
+            default = 0.0;
+            description = ''
+              
+
+              Type: Double
+            '';
+          };
+          LatitudeFixed = mkOption {
+            type = nullOr (either str float);
+            default = 0.0;
+            description = ''
+              
+
+              Type: Double
+            '';
+          };
+          LocationEnabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          LongitudeAuto = mkOption {
+            type = nullOr (either str float);
+            default = 0.0;
+            description = ''
+              
+
+              Type: Double
+            '';
+          };
+          LongitudeFixed = mkOption {
+            type = nullOr (either str float);
+            default = 0.0;
+            description = ''
+              
+
+              Type: Double
+            '';
+          };
+          Mode = mkOption {
+            type = nullOr (either str (enum [ 
+              "Automatic"
+              "Location"
+              "Times"
+              "Constant"
+            ]));
+            default = "Automatic";
+            description = ''
+              
+
+              Type: Enum
+              Choices: 
+                - Automatic
+                - Location
+                - Times
+                - Constant
+            '';
+          };
+          ModeEnabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          MorningBeginFixed = mkOption {
+            type = nullOr str;
+            default = "0600";
+            description = ''
+              
+
+              Type: String
+            '';
+          };
+          NightTemperature = mkOption {
+            type = nullOr (either str int);
+            default = 4500;
+            description = ''
+              
+
+              Type: Int
+              Min: 1000
+              Max: 6500
+            '';
+          };
+          NightTemperatureEnabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              
+
+              Type: Bool
+            '';
+          };
+          TransitionTime = mkOption {
+            type = nullOr (either str int);
+            default = 30;
+            description = ''
+              
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "NightColor";
+    };    
     "Plugins" = with types; mkOption {
       type = submodule {
         options = { 

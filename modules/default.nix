@@ -41,7 +41,9 @@
     ./kdevelop.nix
     ./kio_ftp.nix
     ./kioslave.nix
+    ./klaunch.nix
     ./kleopatra.nix
+    ./klipper.nix
     ./konsole.nix
     ./kontact.nix
     ./konversation.nix
@@ -52,6 +54,7 @@
     ./kshisen.nix
     ./ksmserver.nix
     ./kspaceduel.nix
+    ./ksplash.nix
     ./kstars.nix
     ./ktouch2.nix
     ./kwin.nix
@@ -61,10 +64,13 @@
     ./okular.nix
     ./pimcommon.nix
     ./plasma.nix
+    ./plasma-locale.nix
     ./plasmadialer.nix
+    ./plasmanotify.nix
     ./sieve.nix
     ./skanpage.nix
     ./spectacle.nix
+    ./systemsettings.nix
     ./templateparser.nix
     ./touchpad.nix
     ./umbrellorc.nix

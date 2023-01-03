@@ -127,6 +127,32 @@ in {
       default = {};
       description = "Appearance";
     };    
+    "CachePolicies" = with types; mkOption {
+      type = submodule {
+        options = { 
+          CacheTheme = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Whether or not to create an on-disk cache for the theme.
+
+              Type: Bool
+            '';
+          };
+          ThemeCacheKb = mkOption {
+            type = nullOr (either str int);
+            default = 16384;
+            description = ''
+              The maximum size of the on-disk Theme cache in kilobytes. Note that these files are sparse files, so the maximum size may not be used. Setting a larger size is therefore often quite safe.
+
+              Type: Int
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "CachePolicies";
+    };    
     "Emojier" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1089,6 +1115,66 @@ in {
       };
       default = {};
       description = "General";
+    };    
+    "OSD" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Enabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              Display visual feedback for status changes
+
+              Type: Bool
+            '';
+          };
+          kbdLayoutChangedEnabled = mkOption {
+            type = nullOr (either str bool);
+            default = true;
+            description = ''
+              OSD on layout change
+
+              Type: Bool
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "OSD";
+    };    
+    "PlasmaToolTips" = with types; mkOption {
+      type = submodule {
+        options = { 
+          Delay = mkOption {
+            type = nullOr (either str float);
+            default = 0.7;
+            description = ''
+              Display informational tooltips on mouse hover
+
+              Type: Double
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "PlasmaToolTips";
+    };    
+    "Theme" = with types; mkOption {
+      type = submodule {
+        options = { 
+          name = mkOption {
+            type = nullOr str;
+            default = "default";
+            description = ''
+              Name of the current Plasma Style
+
+              Type: String
+            '';
+          };
+        };
+      };
+      default = {};
+      description = "Theme";
     };    
   };
   config = mkIf cfg.enable {

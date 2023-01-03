@@ -171,7 +171,7 @@ in {
             type = nullOr str;
             default = "<vector>";
             description = ''
-              Vector Class Name Include 
+              Vector Class Name Include
 
               Type: String
             '';
@@ -416,15 +416,6 @@ in {
               Type: Bool
             '';
           };
-          forceSections = mkOption {
-            type = nullOr (either str bool);
-            default = true;
-            description = ''
-              Force Section Documentation
-
-              Type: Bool
-            '';
-          };
           headingsDirectory = mkOption {
             type = nullOr str;
             default = "$HOME/kde/share/apps/umbrello/headings";
@@ -530,6 +521,23 @@ in {
                 - Ask
                 - Never
                 - Cancel
+            '';
+          };
+          writeSectionComments = mkOption {
+            type = nullOr (either str (enum [ 
+              "None"
+              "WhenNonEmpty"
+              "Always"
+            ]));
+            default = "CodeGenerationPolicy::None";
+            description = ''
+              Section Comment Policy
+
+              Type: Enum
+              Choices: 
+                - None
+                - WhenNonEmpty
+                - Always
             '';
           };
         };
@@ -706,7 +714,7 @@ in {
             type = nullOr (either str bool);
             default = true;
             description = ''
-              Auto Generate Attribute Accessors ( D ) 
+              Auto Generate Attribute Accessors ( D )
 
               Type: Bool
             '';
@@ -715,7 +723,7 @@ in {
             type = nullOr (either str bool);
             default = false;
             description = ''
-              Build ANT Document (D) 
+              Build ANT Document (D)
 
               Type: Bool
             '';
@@ -979,7 +987,7 @@ in {
             type = nullOr (either str bool);
             default = true;
             description = ''
-              Auto Generate Assoc Accessors (Java) 
+              Auto Generate Assoc Accessors (Java)
 
               Type: Bool
             '';
@@ -997,7 +1005,7 @@ in {
             type = nullOr (either str bool);
             default = false;
             description = ''
-              Build ANT Document (Java) 
+              Build ANT Document (Java)
 
               Type: Bool
             '';
@@ -1023,7 +1031,7 @@ in {
             type = nullOr (either str bool);
             default = true;
             description = ''
-              Auto Generate Attribute Accessors (Ruby) 
+              Auto Generate Attribute Accessors (Ruby)
 
               Type: Bool
             '';

@@ -1,4 +1,6 @@
 { ... }: {
+    home.stateVersion = "22.11";
+
   programs.plasma = {
     enable = true;
 
