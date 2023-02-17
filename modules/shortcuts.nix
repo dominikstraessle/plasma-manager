@@ -15,11 +15,7 @@ let
 
       # Don't allow un-escaped commas:
       escape = lib.escape [ "," ];
-    in lib.concatStringsSep "," [
-      (lib.concatStringsSep "	" (map escape keys))
-      "" # List of default keys, not needed.
-      "" # Display string, not needed.
-    ];
+    in lib.concatStringsSep "," (map escape keys);
 
   shortcutsToSettings = groups:
     lib.mapAttrs (group: attrs:
