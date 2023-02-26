@@ -1086,8 +1086,6 @@ in {
               
 
               Type: Int
-              Min: 1000
-              Max: 6500
             '';
           };
           EveningBeginFixed = mkOption {
@@ -1188,8 +1186,6 @@ in {
               
 
               Type: Int
-              Min: 1000
-              Max: 6500
             '';
           };
           NightTemperatureEnabled = mkOption {
@@ -1480,7 +1476,7 @@ in {
     };    
   };
   config = mkIf (cfg.enable && moduleCfg.enable) {
-    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    home.packages = mkIf (moduleCfg.package != false) [ moduleCfg.package ];
     programs.plasma.files."kwinrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

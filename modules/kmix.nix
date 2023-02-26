@@ -295,7 +295,7 @@ in {
     };    
   };
   config = mkIf (cfg.enable && moduleCfg.enable) {
-    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    home.packages = mkIf (moduleCfg.package != false) [ moduleCfg.package ];
     programs.plasma.files."kmixrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

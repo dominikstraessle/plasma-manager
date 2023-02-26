@@ -625,7 +625,7 @@ in {
     };    
   };
   config = mkIf (cfg.enable && moduleCfg.enable) {
-    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    home.packages = mkIf (moduleCfg.package != false) [ moduleCfg.package ];
     programs.plasma.files."kgpgrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

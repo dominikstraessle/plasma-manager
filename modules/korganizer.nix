@@ -1750,7 +1750,7 @@ in {
     };    
   };
   config = mkIf (cfg.enable && moduleCfg.enable) {
-    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    home.packages = mkIf (moduleCfg.package != false) [ moduleCfg.package ];
     programs.plasma.files."korganizerrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }
