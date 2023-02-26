@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? spacebar then pkgs.libsForQt5.spacebar else false);
       defaultText = literalExpression "pkgs.spacebar";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Appearance" = with types; mkOption {

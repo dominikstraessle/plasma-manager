@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? elisa then pkgs.libsForQt5.elisa else false);
       defaultText = literalExpression "pkgs.elisa";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "ElisaFileIndexer" = with types; mkOption {

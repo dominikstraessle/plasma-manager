@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? dolphin-plugins then pkgs.libsForQt5.dolphin-plugins else false);
       defaultText = literalExpression "pkgs.dolphin-plugins";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "BackoutDialogSettings" = with types; mkOption {

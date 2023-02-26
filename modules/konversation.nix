@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? konversation then pkgs.libsForQt5.konversation else false);
       defaultText = literalExpression "pkgs.konversation";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Aliases" = with types; mkOption {

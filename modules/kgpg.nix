@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kgpg then pkgs.libsForQt5.kgpg else false);
       defaultText = literalExpression "pkgs.kgpg";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Decryption" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kget then pkgs.libsForQt5.kget else false);
       defaultText = literalExpression "pkgs.kget";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Advanced" = with types; mkOption {

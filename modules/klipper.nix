@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? klipper then pkgs.libsForQt5.klipper else false);
       defaultText = literalExpression "pkgs.klipper";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Actions" = with types; mkOption {

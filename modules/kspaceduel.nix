@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kspaceduel then pkgs.libsForQt5.kspaceduel else false);
       defaultText = literalExpression "pkgs.kspaceduel";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Game" = with types; mkOption {

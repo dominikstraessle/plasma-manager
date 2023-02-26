@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasmadialer then pkgs.libsForQt5.plasmadialer else false);
       defaultText = literalExpression "pkgs.plasmadialer";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Adaptive blocking" = with types; mkOption {

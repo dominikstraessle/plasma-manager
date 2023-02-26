@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kcminput then pkgs.libsForQt5.kcminput else false);
       defaultText = literalExpression "pkgs.kcminput";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Keyboard" = with types; mkOption {

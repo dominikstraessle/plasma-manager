@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? akonadi_maildispatcher then pkgs.libsForQt5.akonadi_maildispatcher else false);
       defaultText = literalExpression "pkgs.akonadi_maildispatcher";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? yakuake then pkgs.libsForQt5.yakuake else false);
       defaultText = literalExpression "pkgs.yakuake";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Animation" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kio_ftp then pkgs.libsForQt5.kio_ftp else false);
       defaultText = literalExpression "pkgs.kio_ftp";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "DesktopIcons" = with types; mkOption {

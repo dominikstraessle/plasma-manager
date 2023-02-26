@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? granatier then pkgs.libsForQt5.granatier else false);
       defaultText = literalExpression "pkgs.granatier";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

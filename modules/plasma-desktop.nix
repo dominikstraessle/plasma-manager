@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasma-desktop then pkgs.libsForQt5.plasma-desktop else false);
       defaultText = literalExpression "pkgs.plasma-desktop";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Bell" = with types; mkOption {

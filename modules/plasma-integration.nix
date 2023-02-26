@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasma-integration then pkgs.libsForQt5.plasma-integration else false);
       defaultText = literalExpression "pkgs.plasma-integration";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "QtQuickRendererSettings" = with types; mkOption {

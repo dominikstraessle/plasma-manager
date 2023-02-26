@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? powerdevil then pkgs.libsForQt5.powerdevil else false);
       defaultText = literalExpression "pkgs.powerdevil";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "BatteryManagement" = with types; mkOption {

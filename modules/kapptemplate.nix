@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kapptemplate then pkgs.libsForQt5.kapptemplate else false);
       defaultText = literalExpression "pkgs.kapptemplate";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Project" = with types; mkOption {

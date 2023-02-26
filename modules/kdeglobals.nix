@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kdeglobals then pkgs.libsForQt5.kdeglobals else false);
       defaultText = literalExpression "pkgs.kdeglobals";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "DesktopIcons" = with types; mkOption {
@@ -232,7 +232,7 @@ in {
             type = nullOr str;
             default = "org.kde.breeze.desktop";
             description = ''
-              Global look and feel
+              Global Look and Feel package
 
               Type: String
             '';

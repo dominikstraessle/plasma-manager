@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasma-pa then pkgs.libsForQt5.plasma-pa else false);
       defaultText = literalExpression "pkgs.plasma-pa";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kleopatra then pkgs.libsForQt5.kleopatra else false);
       defaultText = literalExpression "pkgs.kleopatra";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "CMS" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kontact then pkgs.libsForQt5.kontact else false);
       defaultText = literalExpression "pkgs.kontact";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "View" = with types; mkOption {

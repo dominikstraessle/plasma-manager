@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kalarm then pkgs.libsForQt5.kalarm else false);
       defaultText = literalExpression "pkgs.kalarm";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Defaults" = with types; mkOption {

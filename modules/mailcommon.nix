@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? mailcommon then pkgs.libsForQt5.mailcommon else false);
       defaultText = literalExpression "pkgs.mailcommon";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "AccountOrder" = with types; mkOption {

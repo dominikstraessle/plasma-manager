@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? khelpcenter then pkgs.libsForQt5.khelpcenter else false);
       defaultText = literalExpression "pkgs.khelpcenter";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

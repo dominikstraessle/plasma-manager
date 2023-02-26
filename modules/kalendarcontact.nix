@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kalendarcontact then pkgs.libsForQt5.kalendarcontact else false);
       defaultText = literalExpression "pkgs.kalendarcontact";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Editor" = with types; mkOption {

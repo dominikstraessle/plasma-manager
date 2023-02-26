@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? knavalbattle then pkgs.libsForQt5.knavalbattle else false);
       defaultText = literalExpression "pkgs.knavalbattle";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "general" = with types; mkOption {

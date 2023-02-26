@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? ksquares then pkgs.libsForQt5.ksquares else false);
       defaultText = literalExpression "pkgs.ksquares";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "AI" = with types; mkOption {

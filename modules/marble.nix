@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? marble then pkgs.libsForQt5.marble else false);
       defaultText = literalExpression "pkgs.marble";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Cache" = with types; mkOption {

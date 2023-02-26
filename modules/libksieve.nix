@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? libksieve then pkgs.libsForQt5.libksieve else false);
       defaultText = literalExpression "pkgs.libksieve";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

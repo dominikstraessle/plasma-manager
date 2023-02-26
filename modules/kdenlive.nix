@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kdenlive then pkgs.libsForQt5.kdenlive else false);
       defaultText = literalExpression "pkgs.kdenlive";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "bezier_spline" = with types; mkOption {

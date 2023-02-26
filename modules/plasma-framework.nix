@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasma-framework then pkgs.libsForQt5.plasma-framework else false);
       defaultText = literalExpression "pkgs.plasma-framework";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

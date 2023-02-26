@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? oxygen then pkgs.libsForQt5.oxygen else false);
       defaultText = literalExpression "pkgs.oxygen";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Common" = with types; mkOption {

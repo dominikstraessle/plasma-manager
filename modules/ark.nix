@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? ark then pkgs.libsForQt5.ark else false);
       defaultText = literalExpression "pkgs.ark";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Extraction" = with types; mkOption {

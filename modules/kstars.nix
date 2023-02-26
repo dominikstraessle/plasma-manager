@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kstars then pkgs.libsForQt5.kstars else false);
       defaultText = literalExpression "pkgs.kstars";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "ASTAP" = with types; mkOption {

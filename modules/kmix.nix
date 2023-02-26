@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kmix then pkgs.libsForQt5.kmix else false);
       defaultText = literalExpression "pkgs.kmix";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Debug" = with types; mkOption {

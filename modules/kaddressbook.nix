@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kaddressbook then pkgs.libsForQt5.kaddressbook else false);
       defaultText = literalExpression "pkgs.kaddressbook";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Printing" = with types; mkOption {

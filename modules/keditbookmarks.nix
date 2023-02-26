@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? keditbookmarks then pkgs.libsForQt5.keditbookmarks else false);
       defaultText = literalExpression "pkgs.keditbookmarks";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Columns" = with types; mkOption {

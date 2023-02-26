@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? templateparser then pkgs.libsForQt5.templateparser else false);
       defaultText = literalExpression "pkgs.templateparser";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "TemplateParser" = with types; mkOption {

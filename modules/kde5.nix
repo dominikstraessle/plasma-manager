@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kde5 then pkgs.libsForQt5.kde5 else false);
       defaultText = literalExpression "pkgs.kde5";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
   };

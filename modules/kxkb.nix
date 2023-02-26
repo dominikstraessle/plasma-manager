@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kxkb then pkgs.libsForQt5.kxkb else false);
       defaultText = literalExpression "pkgs.kxkb";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Layout" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kwin then pkgs.libsForQt5.kwin else false);
       defaultText = literalExpression "pkgs.kwin";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "" = with types; mkOption {

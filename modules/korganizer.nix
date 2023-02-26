@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? korganizer then pkgs.libsForQt5.korganizer else false);
       defaultText = literalExpression "pkgs.korganizer";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Agenda View" = with types; mkOption {

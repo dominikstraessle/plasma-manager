@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? systemsettings then pkgs.libsForQt5.systemsettings else false);
       defaultText = literalExpression "pkgs.systemsettings";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Main" = with types; mkOption {

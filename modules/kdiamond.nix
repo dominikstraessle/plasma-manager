@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kdiamond then pkgs.libsForQt5.kdiamond else false);
       defaultText = literalExpression "pkgs.kdiamond";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Preferences" = with types; mkOption {

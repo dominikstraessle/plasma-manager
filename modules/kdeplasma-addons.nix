@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kdeplasma-addons then pkgs.libsForQt5.kdeplasma-addons else false);
       defaultText = literalExpression "pkgs.kdeplasma-addons";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Appearance" = with types; mkOption {

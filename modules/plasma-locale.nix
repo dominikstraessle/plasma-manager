@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasma-locale then pkgs.libsForQt5.plasma-locale else false);
       defaultText = literalExpression "pkgs.plasma-locale";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Formats" = with types; mkOption {

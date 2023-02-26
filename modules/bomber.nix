@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? bomber then pkgs.libsForQt5.bomber else false);
       defaultText = literalExpression "pkgs.bomber";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Sound" = with types; mkOption {

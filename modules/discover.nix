@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? discover then pkgs.libsForQt5.discover else false);
       defaultText = literalExpression "pkgs.discover";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "DiscoverUI" = with types; mkOption {

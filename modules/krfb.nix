@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? krfb then pkgs.libsForQt5.krfb else false);
       defaultText = literalExpression "pkgs.krfb";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "FrameBuffer" = with types; mkOption {

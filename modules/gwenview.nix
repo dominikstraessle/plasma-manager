@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? gwenview then pkgs.libsForQt5.gwenview else false);
       defaultText = literalExpression "pkgs.gwenview";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Crop" = with types; mkOption {

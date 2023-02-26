@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kruler then pkgs.libsForQt5.kruler else false);
       defaultText = literalExpression "pkgs.kruler";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "StoredSettings" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasma-mobile then pkgs.libsForQt5.plasma-mobile else false);
       defaultText = literalExpression "pkgs.plasma-mobile";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

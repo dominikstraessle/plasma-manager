@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kcalc then pkgs.libsForQt5.kcalc else false);
       defaultText = literalExpression "pkgs.kcalc";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Colors" = with types; mkOption {

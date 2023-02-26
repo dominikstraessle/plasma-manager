@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kcmutils then pkgs.libsForQt5.kcmutils else false);
       defaultText = literalExpression "pkgs.kcmutils";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Mouse" = with types; mkOption {

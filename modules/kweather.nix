@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kweather then pkgs.libsForQt5.kweather else false);
       defaultText = literalExpression "pkgs.kweather";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

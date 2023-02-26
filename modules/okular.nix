@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? okular then pkgs.libsForQt5.okular else false);
       defaultText = literalExpression "pkgs.okular";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Contents" = with types; mkOption {

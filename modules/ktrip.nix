@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? ktrip then pkgs.libsForQt5.ktrip else false);
       defaultText = literalExpression "pkgs.ktrip";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Backends" = with types; mkOption {

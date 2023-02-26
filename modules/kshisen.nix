@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kshisen then pkgs.libsForQt5.kshisen else false);
       defaultText = literalExpression "pkgs.kshisen";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Game" = with types; mkOption {

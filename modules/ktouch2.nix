@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? ktouch2 then pkgs.libsForQt5.ktouch2 else false);
       defaultText = literalExpression "pkgs.ktouch2";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Colors" = with types; mkOption {

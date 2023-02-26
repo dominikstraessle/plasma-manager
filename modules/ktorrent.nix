@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? ktorrent then pkgs.libsForQt5.ktorrent else false);
       defaultText = literalExpression "pkgs.ktorrent";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "downloads" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kmailtransport then pkgs.libsForQt5.kmailtransport else false);
       defaultText = literalExpression "pkgs.kmailtransport";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Transport $(transportId)" = with types; mkOption {

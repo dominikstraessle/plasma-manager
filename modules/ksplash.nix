@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? ksplash then pkgs.libsForQt5.ksplash else false);
       defaultText = literalExpression "pkgs.ksplash";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "KSplash" = with types; mkOption {

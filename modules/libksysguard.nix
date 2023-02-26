@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? libksysguard then pkgs.libsForQt5.libksysguard else false);
       defaultText = literalExpression "pkgs.libksysguard";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

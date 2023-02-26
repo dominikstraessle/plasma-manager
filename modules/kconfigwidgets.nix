@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kconfigwidgets then pkgs.libsForQt5.kconfigwidgets else false);
       defaultText = literalExpression "pkgs.kconfigwidgets";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Group1" = with types; mkOption {

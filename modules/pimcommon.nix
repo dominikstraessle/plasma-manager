@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? pimcommon then pkgs.libsForQt5.pimcommon else false);
       defaultText = literalExpression "pkgs.pimcommon";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Autocorrect" = with types; mkOption {

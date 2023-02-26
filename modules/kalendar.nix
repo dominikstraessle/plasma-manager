@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kalendar then pkgs.libsForQt5.kalendar else false);
       defaultText = literalExpression "pkgs.kalendar";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Editor" = with types; mkOption {

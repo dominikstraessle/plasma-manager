@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? klaunch then pkgs.libsForQt5.klaunch else false);
       defaultText = literalExpression "pkgs.klaunch";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "BusyCursorSettings" = with types; mkOption {

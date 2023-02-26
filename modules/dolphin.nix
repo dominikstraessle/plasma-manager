@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? dolphin then pkgs.libsForQt5.dolphin else false);
       defaultText = literalExpression "pkgs.dolphin";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "CompactMode" = with types; mkOption {

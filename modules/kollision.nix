@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kollision then pkgs.libsForQt5.kollision else false);
       defaultText = literalExpression "pkgs.kollision";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "game_options" = with types; mkOption {

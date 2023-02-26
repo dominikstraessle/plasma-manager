@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? knotes then pkgs.libsForQt5.knotes else false);
       defaultText = literalExpression "pkgs.knotes";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Actions" = with types; mkOption {

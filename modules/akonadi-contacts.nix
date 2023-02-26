@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? akonadi-contacts then pkgs.libsForQt5.akonadi-contacts else false);
       defaultText = literalExpression "pkgs.akonadi-contacts";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Phone Dial Settings" = with types; mkOption {

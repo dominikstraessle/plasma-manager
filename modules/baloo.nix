@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? baloo then pkgs.libsForQt5.baloo else false);
       defaultText = literalExpression "pkgs.baloo";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Basic Settings" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasma-workspace then pkgs.libsForQt5.plasma-workspace else false);
       defaultText = literalExpression "pkgs.plasma-workspace";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Agenda" = with types; mkOption {

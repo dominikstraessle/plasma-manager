@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? spectacle then pkgs.libsForQt5.spectacle else false);
       defaultText = literalExpression "pkgs.spectacle";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Annotations" = with types; mkOption {

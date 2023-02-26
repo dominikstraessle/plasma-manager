@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? device_automounter_kcm then pkgs.libsForQt5.device_automounter_kcm else false);
       defaultText = literalExpression "pkgs.device_automounter_kcm";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Layout" = with types; mkOption {

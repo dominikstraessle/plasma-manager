@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasma-remotecontrollers then pkgs.libsForQt5.plasma-remotecontrollers else false);
       defaultText = literalExpression "pkgs.plasma-remotecontrollers";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Inhibit" = with types; mkOption {

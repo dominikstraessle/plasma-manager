@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? touchpad then pkgs.libsForQt5.touchpad else false);
       defaultText = literalExpression "pkgs.touchpad";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "autodisable" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? messagelib then pkgs.libsForQt5.messagelib else false);
       defaultText = literalExpression "pkgs.messagelib";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "AutoResizeImage" = with types; mkOption {

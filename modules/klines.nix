@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? klines then pkgs.libsForQt5.klines else false);
       defaultText = literalExpression "pkgs.klines";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Game" = with types; mkOption {

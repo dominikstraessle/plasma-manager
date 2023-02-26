@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kactivitymanagerd then pkgs.libsForQt5.kactivitymanagerd else false);
       defaultText = literalExpression "pkgs.kactivitymanagerd";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Plugins" = with types; mkOption {

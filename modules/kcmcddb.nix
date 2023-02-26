@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kcmcddb then pkgs.libsForQt5.kcmcddb else false);
       defaultText = literalExpression "pkgs.kcmcddb";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Lookup" = with types; mkOption {

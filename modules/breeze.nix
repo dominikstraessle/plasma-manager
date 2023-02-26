@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? breeze then pkgs.libsForQt5.breeze else false);
       defaultText = literalExpression "pkgs.breeze";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Common" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? knetwalk then pkgs.libsForQt5.knetwalk else false);
       defaultText = literalExpression "pkgs.knetwalk";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Custom" = with types; mkOption {

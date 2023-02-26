@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? konqueror then pkgs.libsForQt5.konqueror else false);
       defaultText = literalExpression "pkgs.konqueror";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "FMSettings" = with types; mkOption {

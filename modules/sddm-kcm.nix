@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? sddm-kcm then pkgs.libsForQt5.sddm-kcm else false);
       defaultText = literalExpression "pkgs.sddm-kcm";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Autologin" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? angelfish then pkgs.libsForQt5.angelfish else false);
       defaultText = literalExpression "pkgs.angelfish";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Browser" = with types; mkOption {

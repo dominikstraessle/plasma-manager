@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kigo then pkgs.libsForQt5.kigo else false);
       defaultText = literalExpression "pkgs.kigo";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Backend" = with types; mkOption {

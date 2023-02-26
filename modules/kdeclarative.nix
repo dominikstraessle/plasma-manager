@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kdeclarative then pkgs.libsForQt5.kdeclarative else false);
       defaultText = literalExpression "pkgs.kdeclarative";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "QtQuickRendererSettings" = with types; mkOption {

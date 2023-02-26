@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? haruna then pkgs.libsForQt5.haruna else false);
       defaultText = literalExpression "pkgs.haruna";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Audio" = with types; mkOption {

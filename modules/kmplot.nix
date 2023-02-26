@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kmplot then pkgs.libsForQt5.kmplot else false);
       defaultText = literalExpression "pkgs.kmplot";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Colors" = with types; mkOption {

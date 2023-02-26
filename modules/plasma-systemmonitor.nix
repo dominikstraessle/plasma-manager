@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? plasma-systemmonitor then pkgs.libsForQt5.plasma-systemmonitor else false);
       defaultText = literalExpression "pkgs.plasma-systemmonitor";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kscreenlocker then pkgs.libsForQt5.kscreenlocker else false);
       defaultText = literalExpression "pkgs.kscreenlocker";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Daemon" = with types; mkOption {

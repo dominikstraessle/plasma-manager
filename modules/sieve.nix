@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? sieve then pkgs.libsForQt5.sieve else false);
       defaultText = literalExpression "pkgs.sieve";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "Editor" = with types; mkOption {

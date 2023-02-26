@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kcalutils then pkgs.libsForQt5.kcalutils else false);
       defaultText = literalExpression "pkgs.kcalutils";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "$(application)-Events" = with types; mkOption {

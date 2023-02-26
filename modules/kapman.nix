@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kapman then pkgs.libsForQt5.kapman else false);
       defaultText = literalExpression "pkgs.kapman";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

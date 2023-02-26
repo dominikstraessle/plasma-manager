@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? kioslave then pkgs.libsForQt5.kioslave else false);
       defaultText = literalExpression "pkgs.kioslave";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "General" = with types; mkOption {

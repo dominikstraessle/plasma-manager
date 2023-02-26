@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? incidenceeditor then pkgs.libsForQt5.incidenceeditor else false);
       defaultText = literalExpression "pkgs.incidenceeditor";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "AttachmentHandling" = with types; mkOption {

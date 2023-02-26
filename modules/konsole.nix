@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? konsole then pkgs.libsForQt5.konsole else false);
       defaultText = literalExpression "pkgs.konsole";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };
     "FileLocation" = with types; mkOption {
