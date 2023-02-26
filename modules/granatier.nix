@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.granatier;
 in {
-  options.programs.plasma.granatier = { 
+  options.programs.plasma.granatier = {
+    enable = mkEnableOption ''
+      Enable granatier
+    '';
+    package = mkOption {
+      default = if (pkgs ? granatier) then
+                        pkgs.granatier
+                      else
+                        (if pkgs.libsForQt5 ? granatier then pkgs.libsForQt5.granatier else false);
+      defaultText = literalExpression "pkgs.granatier";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -183,7 +197,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."granatierrc" = cfg.granatier;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."granatierrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

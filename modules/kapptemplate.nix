@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kapptemplate;
 in {
-  options.programs.plasma.kapptemplate = { 
+  options.programs.plasma.kapptemplate = {
+    enable = mkEnableOption ''
+      Enable kapptemplate
+    '';
+    package = mkOption {
+      default = if (pkgs ? kapptemplate) then
+                        pkgs.kapptemplate
+                      else
+                        (if pkgs.libsForQt5 ? kapptemplate then pkgs.libsForQt5.kapptemplate else false);
+      defaultText = literalExpression "pkgs.kapptemplate";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Project" = with types; mkOption {
       type = submodule {
         options = { 
@@ -68,7 +82,8 @@ in {
       description = "User";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kapptemplaterc" = cfg.kapptemplate;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kapptemplaterc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

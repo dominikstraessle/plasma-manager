@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kget;
 in {
-  options.programs.plasma.kget = { 
+  options.programs.plasma.kget = {
+    enable = mkEnableOption ''
+      Enable kget
+    '';
+    package = mkOption {
+      default = if (pkgs ? kget) then
+                        pkgs.kget
+                      else
+                        (if pkgs.libsForQt5 ? kget then pkgs.libsForQt5.kget else false);
+      defaultText = literalExpression "pkgs.kget";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Advanced" = with types; mkOption {
       type = submodule {
         options = { 
@@ -862,7 +876,8 @@ in {
       description = "Webinterface";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kgetrc" = cfg.kget;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kgetrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

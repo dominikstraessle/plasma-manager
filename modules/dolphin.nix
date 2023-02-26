@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.dolphin;
 in {
-  options.programs.plasma.dolphin = { 
+  options.programs.plasma.dolphin = {
+    enable = mkEnableOption ''
+      Enable dolphin
+    '';
+    package = mkOption {
+      default = if (pkgs ? dolphin) then
+                        pkgs.dolphin
+                      else
+                        (if pkgs.libsForQt5 ? dolphin then pkgs.libsForQt5.dolphin else false);
+      defaultText = literalExpression "pkgs.dolphin";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "CompactMode" = with types; mkOption {
       type = submodule {
         options = { 
@@ -885,7 +899,8 @@ in {
       description = "VersionControl";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."dolphinrc" = cfg.dolphin;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."dolphinrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.breeze;
 in {
-  options.programs.plasma.breeze = { 
+  options.programs.plasma.breeze = {
+    enable = mkEnableOption ''
+      Enable breeze
+    '';
+    package = mkOption {
+      default = if (pkgs ? breeze) then
+                        pkgs.breeze
+                      else
+                        (if pkgs.libsForQt5 ? breeze then pkgs.libsForQt5.breeze else false);
+      defaultText = literalExpression "pkgs.breeze";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Common" = with types; mkOption {
       type = submodule {
         options = { 
@@ -466,7 +480,8 @@ in {
       description = "Windeco";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."breezerc" = cfg.breeze;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."breezerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

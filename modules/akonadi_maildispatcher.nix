@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.akonadi_maildispatcher;
 in {
-  options.programs.plasma.akonadi_maildispatcher = { 
+  options.programs.plasma.akonadi_maildispatcher = {
+    enable = mkEnableOption ''
+      Enable akonadi_maildispatcher
+    '';
+    package = mkOption {
+      default = if (pkgs ? akonadi_maildispatcher) then
+                        pkgs.akonadi_maildispatcher
+                      else
+                        (if pkgs.libsForQt5 ? akonadi_maildispatcher then pkgs.libsForQt5.akonadi_maildispatcher else false);
+      defaultText = literalExpression "pkgs.akonadi_maildispatcher";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -30,7 +44,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."maildispatcheragentrc" = cfg.akonadi_maildispatcher;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."maildispatcheragentrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

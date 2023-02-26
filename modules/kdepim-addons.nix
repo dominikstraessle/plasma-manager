@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kdepim-addons;
 in {
-  options.programs.plasma.kdepim-addons = { 
+  options.programs.plasma.kdepim-addons = {
+    enable = mkEnableOption ''
+      Enable kdepim-addons
+    '';
+    package = mkOption {
+      default = if (pkgs ? kdepim-addons) then
+                        pkgs.kdepim-addons
+                      else
+                        (if pkgs.libsForQt5 ? kdepim-addons then pkgs.libsForQt5.kdepim-addons else false);
+      defaultText = literalExpression "pkgs.kdepim-addons";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -56,7 +70,8 @@ in {
       description = "Global";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."webengineurlinterceptoradblockrc" = cfg.kdepim-addons;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."webengineurlinterceptoradblockrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

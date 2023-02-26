@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.marble;
 in {
-  options.programs.plasma.marble = { 
+  options.programs.plasma.marble = {
+    enable = mkEnableOption ''
+      Enable marble
+    '';
+    package = mkOption {
+      default = if (pkgs ? marble) then
+                        pkgs.marble
+                      else
+                        (if pkgs.libsForQt5 ? marble then pkgs.libsForQt5.marble else false);
+      defaultText = literalExpression "pkgs.marble";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Cache" = with types; mkOption {
       type = submodule {
         options = { 
@@ -939,7 +953,8 @@ in {
       description = "View";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."marblerc" = cfg.marble;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."marblerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

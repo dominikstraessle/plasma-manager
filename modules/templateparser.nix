@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.templateparser;
 in {
-  options.programs.plasma.templateparser = { 
+  options.programs.plasma.templateparser = {
+    enable = mkEnableOption ''
+      Enable templateparser
+    '';
+    package = mkOption {
+      default = if (pkgs ? templateparser) then
+                        pkgs.templateparser
+                      else
+                        (if pkgs.libsForQt5 ? templateparser then pkgs.libsForQt5.templateparser else false);
+      defaultText = literalExpression "pkgs.templateparser";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "TemplateParser" = with types; mkOption {
       type = submodule {
         options = { 
@@ -98,7 +112,8 @@ in {
       description = "TemplateParser";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."templateparserrc" = cfg.templateparser;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."templateparserrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kmix;
 in {
-  options.programs.plasma.kmix = { 
+  options.programs.plasma.kmix = {
+    enable = mkEnableOption ''
+      Enable kmix
+    '';
+    package = mkOption {
+      default = if (pkgs ? kmix) then
+                        pkgs.kmix
+                      else
+                        (if pkgs.libsForQt5 ? kmix then pkgs.libsForQt5.kmix else false);
+      defaultText = literalExpression "pkgs.kmix";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Debug" = with types; mkOption {
       type = submodule {
         options = { 
@@ -280,7 +294,8 @@ in {
       description = "Profiles";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kmixrc" = cfg.kmix;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kmixrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

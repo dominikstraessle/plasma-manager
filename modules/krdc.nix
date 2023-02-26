@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.krdc;
 in {
-  options.programs.plasma.krdc = { 
+  options.programs.plasma.krdc = {
+    enable = mkEnableOption ''
+      Enable krdc
+    '';
+    package = mkOption {
+      default = if (pkgs ? krdc) then
+                        pkgs.krdc
+                      else
+                        (if pkgs.libsForQt5 ? krdc then pkgs.libsForQt5.krdc else false);
+      defaultText = literalExpression "pkgs.krdc";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -414,7 +428,8 @@ in {
       description = "VNC";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."krdcrc" = cfg.krdc;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."krdcrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

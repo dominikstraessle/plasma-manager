@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kmailtransport;
 in {
-  options.programs.plasma.kmailtransport = { 
+  options.programs.plasma.kmailtransport = {
+    enable = mkEnableOption ''
+      Enable kmailtransport
+    '';
+    package = mkOption {
+      default = if (pkgs ? kmailtransport) then
+                        pkgs.kmailtransport
+                      else
+                        (if pkgs.libsForQt5 ? kmailtransport then pkgs.libsForQt5.kmailtransport else false);
+      defaultText = literalExpression "pkgs.kmailtransport";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Transport $(transportId)" = with types; mkOption {
       type = submodule {
         options = { 
@@ -196,7 +210,8 @@ in {
       description = "Transport $(transportId)";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."mailtransports" = cfg.kmailtransport;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."mailtransports" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

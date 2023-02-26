@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.klettres;
 in {
-  options.programs.plasma.klettres = { 
+  options.programs.plasma.klettres = {
+    enable = mkEnableOption ''
+      Enable klettres
+    '';
+    package = mkOption {
+      default = if (pkgs ? klettres) then
+                        pkgs.klettres
+                      else
+                        (if pkgs.libsForQt5 ? klettres then pkgs.libsForQt5.klettres else false);
+      defaultText = literalExpression "pkgs.klettres";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -109,7 +123,8 @@ in {
       description = "mFont";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."klettresrc" = cfg.klettres;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."klettresrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

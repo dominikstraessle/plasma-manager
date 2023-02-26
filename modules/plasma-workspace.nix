@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.plasma-workspace;
 in {
-  options.programs.plasma.plasma-workspace = { 
+  options.programs.plasma.plasma-workspace = {
+    enable = mkEnableOption ''
+      Enable plasma-workspace
+    '';
+    package = mkOption {
+      default = if (pkgs ? plasma-workspace) then
+                        pkgs.plasma-workspace
+                      else
+                        (if pkgs.libsForQt5 ? plasma-workspace then pkgs.libsForQt5.plasma-workspace else false);
+      defaultText = literalExpression "pkgs.plasma-workspace";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Agenda" = with types; mkOption {
       type = submodule {
         options = { 
@@ -765,7 +779,8 @@ in {
       description = "Sensors";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."plasma-workspacerc" = cfg.plasma-workspace;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."plasma-workspacerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.plasma;
 in {
-  options.programs.plasma.plasma = { 
+  options.programs.plasma.plasma = {
+    enable = mkEnableOption ''
+      Enable plasma
+    '';
+    package = mkOption {
+      default = if (pkgs ? plasma) then
+                        pkgs.plasma
+                      else
+                        (if pkgs.libsForQt5 ? plasma then pkgs.libsForQt5.plasma else false);
+      defaultText = literalExpression "pkgs.plasma";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "$(udi)" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1177,7 +1191,8 @@ in {
       description = "Theme";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."plasmarc" = cfg.plasma;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."plasmarc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.plasmanotify;
 in {
-  options.programs.plasma.plasmanotify = { 
+  options.programs.plasma.plasmanotify = {
+    enable = mkEnableOption ''
+      Enable plasmanotify
+    '';
+    package = mkOption {
+      default = if (pkgs ? plasmanotify) then
+                        pkgs.plasmanotify
+                      else
+                        (if pkgs.libsForQt5 ? plasmanotify then pkgs.libsForQt5.plasmanotify else false);
+      defaultText = literalExpression "pkgs.plasmanotify";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "$(DesktopEntry)" = with types; mkOption {
       type = submodule {
         options = { 
@@ -222,7 +236,8 @@ in {
       description = "Notifications";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."plasmanotifyrc" = cfg.plasmanotify;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."plasmanotifyrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

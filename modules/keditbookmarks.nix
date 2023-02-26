@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.keditbookmarks;
 in {
-  options.programs.plasma.keditbookmarks = { 
+  options.programs.plasma.keditbookmarks = {
+    enable = mkEnableOption ''
+      Enable keditbookmarks
+    '';
+    package = mkOption {
+      default = if (pkgs ? keditbookmarks) then
+                        pkgs.keditbookmarks
+                      else
+                        (if pkgs.libsForQt5 ? keditbookmarks then pkgs.libsForQt5.keditbookmarks else false);
+      defaultText = literalExpression "pkgs.keditbookmarks";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Columns" = with types; mkOption {
       type = submodule {
         options = { 
@@ -74,7 +88,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."keditbookmarksrc" = cfg.keditbookmarks;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."keditbookmarksrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

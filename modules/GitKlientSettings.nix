@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.GitKlientSettings;
 in {
-  options.programs.plasma.GitKlientSettings = { 
+  options.programs.plasma.GitKlientSettings = {
+    enable = mkEnableOption ''
+      Enable GitKlientSettings
+    '';
+    package = mkOption {
+      default = if (pkgs ? GitKlientSettings) then
+                        pkgs.GitKlientSettings
+                      else
+                        (if pkgs.libsForQt5 ? GitKlientSettings then pkgs.libsForQt5.GitKlientSettings else false);
+      defaultText = literalExpression "pkgs.GitKlientSettings";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Preferences" = with types; mkOption {
       type = submodule {
         options = { 
@@ -102,7 +116,8 @@ in {
       description = "Preferences";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."GitKlientSettings" = cfg.GitKlientSettings;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."GitKlientSettings" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

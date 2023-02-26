@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.khelpcenter;
 in {
-  options.programs.plasma.khelpcenter = { 
+  options.programs.plasma.khelpcenter = {
+    enable = mkEnableOption ''
+      Enable khelpcenter
+    '';
+    package = mkOption {
+      default = if (pkgs ? khelpcenter) then
+                        pkgs.khelpcenter
+                      else
+                        (if pkgs.libsForQt5 ? khelpcenter then pkgs.libsForQt5.khelpcenter else false);
+      defaultText = literalExpression "pkgs.khelpcenter";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -195,7 +209,8 @@ in {
       description = "Search";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."khelpcenterrc" = cfg.khelpcenter;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."khelpcenterrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

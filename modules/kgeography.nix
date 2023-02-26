@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kgeography;
 in {
-  options.programs.plasma.kgeography = { 
+  options.programs.plasma.kgeography = {
+    enable = mkEnableOption ''
+      Enable kgeography
+    '';
+    package = mkOption {
+      default = if (pkgs ? kgeography) then
+                        pkgs.kgeography
+                      else
+                        (if pkgs.libsForQt5 ? kgeography then pkgs.libsForQt5.kgeography else false);
+      defaultText = literalExpression "pkgs.kgeography";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "general" = with types; mkOption {
       type = submodule {
         options = { 
@@ -83,7 +97,8 @@ in {
       description = "general";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kgeographyrc" = cfg.kgeography;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kgeographyrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

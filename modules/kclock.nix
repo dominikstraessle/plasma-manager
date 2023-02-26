@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kclock;
 in {
-  options.programs.plasma.kclock = { 
+  options.programs.plasma.kclock = {
+    enable = mkEnableOption ''
+      Enable kclock
+    '';
+    package = mkOption {
+      default = if (pkgs ? kclock) then
+                        pkgs.kclock
+                      else
+                        (if pkgs.libsForQt5 ? kclock then pkgs.libsForQt5.kclock else false);
+      defaultText = literalExpression "pkgs.kclock";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -65,7 +79,8 @@ in {
       description = "Global";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kclockrc" = cfg.kclock;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kclockrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

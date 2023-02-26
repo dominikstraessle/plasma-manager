@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.akonadi;
 in {
-  options.programs.plasma.akonadi = { 
+  options.programs.plasma.akonadi = {
+    enable = mkEnableOption ''
+      Enable akonadi
+    '';
+    package = mkOption {
+      default = if (pkgs ? akonadi) then
+                        pkgs.akonadi
+                      else
+                        (if pkgs.libsForQt5 ? akonadi then pkgs.libsForQt5.akonadi else false);
+      defaultText = literalExpression "pkgs.akonadi";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Alarm" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1305,7 +1319,8 @@ in {
       description = "siever";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."akonadirc" = cfg.akonadi;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."akonadirc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

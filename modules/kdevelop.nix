@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kdevelop;
 in {
-  options.programs.plasma.kdevelop = { 
+  options.programs.plasma.kdevelop = {
+    enable = mkEnableOption ''
+      Enable kdevelop
+    '';
+    package = mkOption {
+      default = if (pkgs ? kdevelop) then
+                        pkgs.kdevelop
+                      else
+                        (if pkgs.libsForQt5 ? kdevelop then pkgs.libsForQt5.kdevelop else false);
+      defaultText = literalExpression "pkgs.kdevelop";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1316,7 +1330,8 @@ in {
       description = "Zzz Group";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kdeveloprc" = cfg.kdevelop;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kdeveloprc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

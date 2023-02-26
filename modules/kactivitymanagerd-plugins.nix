@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kactivitymanagerd-plugins;
 in {
-  options.programs.plasma.kactivitymanagerd-plugins = { 
+  options.programs.plasma.kactivitymanagerd-plugins = {
+    enable = mkEnableOption ''
+      Enable kactivitymanagerd-plugins
+    '';
+    package = mkOption {
+      default = if (pkgs ? kactivitymanagerd-plugins) then
+                        pkgs.kactivitymanagerd-plugins
+                      else
+                        (if pkgs.libsForQt5 ? kactivitymanagerd-plugins then pkgs.libsForQt5.kactivitymanagerd-plugins else false);
+      defaultText = literalExpression "pkgs.kactivitymanagerd-plugins";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Plugin-org.kde.ActivityManager.Resources.Scoring" = with types; mkOption {
       type = submodule {
         options = { 
@@ -57,7 +71,8 @@ in {
       description = "Plugin-org.kde.ActivityManager.Resources.Scoring";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kactivitymanagerd-pluginsrc" = cfg.kactivitymanagerd-plugins;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kactivitymanagerd-pluginsrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

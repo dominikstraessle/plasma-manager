@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kconfig;
 in {
-  options.programs.plasma.kconfig = { 
+  options.programs.plasma.kconfig = {
+    enable = mkEnableOption ''
+      Enable kconfig
+    '';
+    package = mkOption {
+      default = if (pkgs ? kconfig) then
+                        pkgs.kconfig
+                      else
+                        (if pkgs.libsForQt5 ? kconfig then pkgs.libsForQt5.kconfig else false);
+      defaultText = literalExpression "pkgs.kconfig";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "$(AnotherSubGroup)" = with types; mkOption {
       type = submodule {
         options = { 
@@ -833,7 +847,8 @@ in {
       description = "test_group";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kconfigrc" = cfg.kconfig;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kconfigrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.korganizer;
 in {
-  options.programs.plasma.korganizer = { 
+  options.programs.plasma.korganizer = {
+    enable = mkEnableOption ''
+      Enable korganizer
+    '';
+    package = mkOption {
+      default = if (pkgs ? korganizer) then
+                        pkgs.korganizer
+                      else
+                        (if pkgs.libsForQt5 ? korganizer then pkgs.libsForQt5.korganizer else false);
+      defaultText = literalExpression "pkgs.korganizer";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Agenda View" = with types; mkOption {
       type = submodule {
         options = { 
@@ -858,7 +872,7 @@ in {
         options = { 
           SelectedPlugins = mkOption {
             type = nullOr (either str (listOf str));
-            default = "holidays,webexport";
+            default = "";
             description = ''
               
 
@@ -1735,7 +1749,8 @@ in {
       description = "Views";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."korganizerrc" = cfg.korganizer;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."korganizerrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

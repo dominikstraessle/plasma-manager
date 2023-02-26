@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kcmutils;
 in {
-  options.programs.plasma.kcmutils = { 
+  options.programs.plasma.kcmutils = {
+    enable = mkEnableOption ''
+      Enable kcmutils
+    '';
+    package = mkOption {
+      default = if (pkgs ? kcmutils) then
+                        pkgs.kcmutils
+                      else
+                        (if pkgs.libsForQt5 ? kcmutils then pkgs.libsForQt5.kcmutils else false);
+      defaultText = literalExpression "pkgs.kcmutils";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Mouse" = with types; mkOption {
       type = submodule {
         options = { 
@@ -30,7 +44,8 @@ in {
       description = "Mouse";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."sometestfilerc" = cfg.kcmutils;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."sometestfilerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

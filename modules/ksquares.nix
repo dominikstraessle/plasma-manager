@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.ksquares;
 in {
-  options.programs.plasma.ksquares = { 
+  options.programs.plasma.ksquares = {
+    enable = mkEnableOption ''
+      Enable ksquares
+    '';
+    package = mkOption {
+      default = if (pkgs ? ksquares) then
+                        pkgs.ksquares
+                      else
+                        (if pkgs.libsForQt5 ? ksquares then pkgs.libsForQt5.ksquares else false);
+      defaultText = literalExpression "pkgs.ksquares";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "AI" = with types; mkOption {
       type = submodule {
         options = { 
@@ -118,7 +132,8 @@ in {
       description = "Game Settings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."ksquaresrc" = cfg.ksquares;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."ksquaresrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

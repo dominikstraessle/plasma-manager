@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.bluedevil;
 in {
-  options.programs.plasma.bluedevil = { 
+  options.programs.plasma.bluedevil = {
+    enable = mkEnableOption ''
+      Enable bluedevil
+    '';
+    package = mkOption {
+      default = if (pkgs ? bluedevil) then
+                        pkgs.bluedevil
+                      else
+                        (if pkgs.libsForQt5 ? bluedevil then pkgs.libsForQt5.bluedevil else false);
+      defaultText = literalExpression "pkgs.bluedevil";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -31,7 +45,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."bluedevilreceiverrc" = cfg.bluedevil;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."bluedevilreceiverrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

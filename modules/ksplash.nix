@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.ksplash;
 in {
-  options.programs.plasma.ksplash = { 
+  options.programs.plasma.ksplash = {
+    enable = mkEnableOption ''
+      Enable ksplash
+    '';
+    package = mkOption {
+      default = if (pkgs ? ksplash) then
+                        pkgs.ksplash
+                      else
+                        (if pkgs.libsForQt5 ? ksplash then pkgs.libsForQt5.ksplash else false);
+      defaultText = literalExpression "pkgs.ksplash";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "KSplash" = with types; mkOption {
       type = submodule {
         options = { 
@@ -31,7 +45,8 @@ in {
       description = "KSplash";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."ksplashrc" = cfg.ksplash;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."ksplashrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

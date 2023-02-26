@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.okular;
 in {
-  options.programs.plasma.okular = { 
+  options.programs.plasma.okular = {
+    enable = mkEnableOption ''
+      Enable okular
+    '';
+    package = mkOption {
+      default = if (pkgs ? okular) then
+                        pkgs.okular
+                      else
+                        (if pkgs.libsForQt5 ? okular then pkgs.libsForQt5.okular else false);
+      defaultText = literalExpression "pkgs.okular";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Contents" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1156,7 +1170,8 @@ in {
       description = "Zoom";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."okularrc" = cfg.okular;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."okularrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

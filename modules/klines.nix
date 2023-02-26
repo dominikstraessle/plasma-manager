@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.klines;
 in {
-  options.programs.plasma.klines = { 
+  options.programs.plasma.klines = {
+    enable = mkEnableOption ''
+      Enable klines
+    '';
+    package = mkOption {
+      default = if (pkgs ? klines) then
+                        pkgs.klines
+                      else
+                        (if pkgs.libsForQt5 ? klines then pkgs.libsForQt5.klines else false);
+      defaultText = literalExpression "pkgs.klines";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Game" = with types; mkOption {
       type = submodule {
         options = { 
@@ -39,7 +53,8 @@ in {
       description = "Game";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."klinesrc" = cfg.klines;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."klinesrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

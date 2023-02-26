@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.undefined;
 in {
-  options.programs.plasma.undefined = { 
+  options.programs.plasma.undefined = {
+    enable = mkEnableOption ''
+      Enable undefined
+    '';
+    package = mkOption {
+      default = if (pkgs ? undefined) then
+                        pkgs.undefined
+                      else
+                        (if pkgs.libsForQt5 ? undefined then pkgs.libsForQt5.undefined else false);
+      defaultText = literalExpression "pkgs.undefined";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -66,7 +80,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."undefinedrc" = cfg.undefined;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."undefinedrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

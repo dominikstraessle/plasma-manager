@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kasts;
 in {
-  options.programs.plasma.kasts = { 
+  options.programs.plasma.kasts = {
+    enable = mkEnableOption ''
+      Enable kasts
+    '';
+    package = mkOption {
+      default = if (pkgs ? kasts) then
+                        pkgs.kasts
+                      else
+                        (if pkgs.libsForQt5 ? kasts then pkgs.libsForQt5.kasts else false);
+      defaultText = literalExpression "pkgs.kasts";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -339,7 +353,8 @@ in {
       description = "Synchronization";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kastsrc" = cfg.kasts;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kastsrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

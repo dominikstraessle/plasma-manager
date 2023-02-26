@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.eventviews;
 in {
-  options.programs.plasma.eventviews = { 
+  options.programs.plasma.eventviews = {
+    enable = mkEnableOption ''
+      Enable eventviews
+    '';
+    package = mkOption {
+      default = if (pkgs ? eventviews) then
+                        pkgs.eventviews
+                      else
+                        (if pkgs.libsForQt5 ? eventviews then pkgs.libsForQt5.eventviews else false);
+      defaultText = literalExpression "pkgs.eventviews";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Agenda View" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1349,7 +1363,8 @@ in {
       description = "Todo View";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."eventviewsrc" = cfg.eventviews;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."eventviewsrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

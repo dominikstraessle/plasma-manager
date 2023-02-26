@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kwin;
 in {
-  options.programs.plasma.kwin = { 
+  options.programs.plasma.kwin = {
+    enable = mkEnableOption ''
+      Enable kwin
+    '';
+    package = mkOption {
+      default = if (pkgs ? kwin) then
+                        pkgs.kwin
+                      else
+                        (if pkgs.libsForQt5 ? kwin then pkgs.libsForQt5.kwin else false);
+      defaultText = literalExpression "pkgs.kwin";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1461,7 +1475,8 @@ in {
       description = "Xwayland";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kwinrc" = cfg.kwin;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kwinrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

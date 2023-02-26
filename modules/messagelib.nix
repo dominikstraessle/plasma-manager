@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.messagelib;
 in {
-  options.programs.plasma.messagelib = { 
+  options.programs.plasma.messagelib = {
+    enable = mkEnableOption ''
+      Enable messagelib
+    '';
+    package = mkOption {
+      default = if (pkgs ? messagelib) then
+                        pkgs.messagelib
+                      else
+                        (if pkgs.libsForQt5 ? messagelib then pkgs.libsForQt5.messagelib else false);
+      defaultText = literalExpression "pkgs.messagelib";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "AutoResizeImage" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1718,7 +1732,8 @@ in {
       description = "sending mail";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."mailcomposerrc" = cfg.messagelib;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."mailcomposerrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

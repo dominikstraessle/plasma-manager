@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.knetwalk;
 in {
-  options.programs.plasma.knetwalk = { 
+  options.programs.plasma.knetwalk = {
+    enable = mkEnableOption ''
+      Enable knetwalk
+    '';
+    package = mkOption {
+      default = if (pkgs ? knetwalk) then
+                        pkgs.knetwalk
+                      else
+                        (if pkgs.libsForQt5 ? knetwalk then pkgs.libsForQt5.knetwalk else false);
+      defaultText = literalExpression "pkgs.knetwalk";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Custom" = with types; mkOption {
       type = submodule {
         options = { 
@@ -106,7 +120,8 @@ in {
       description = "Preferences";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."knetwalkrc" = cfg.knetwalk;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."knetwalkrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

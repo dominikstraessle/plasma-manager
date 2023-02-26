@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.angelfish;
 in {
-  options.programs.plasma.angelfish = { 
+  options.programs.plasma.angelfish = {
+    enable = mkEnableOption ''
+      Enable angelfish
+    '';
+    package = mkOption {
+      default = if (pkgs ? angelfish) then
+                        pkgs.angelfish
+                      else
+                        (if pkgs.libsForQt5 ? angelfish then pkgs.libsForQt5.angelfish else false);
+      defaultText = literalExpression "pkgs.angelfish";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Browser" = with types; mkOption {
       type = submodule {
         options = { 
@@ -188,7 +202,8 @@ in {
       description = "Window";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."angelfishrc" = cfg.angelfish;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."angelfishrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

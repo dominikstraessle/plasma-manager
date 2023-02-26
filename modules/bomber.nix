@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.bomber;
 in {
-  options.programs.plasma.bomber = { 
+  options.programs.plasma.bomber = {
+    enable = mkEnableOption ''
+      Enable bomber
+    '';
+    package = mkOption {
+      default = if (pkgs ? bomber) then
+                        pkgs.bomber
+                      else
+                        (if pkgs.libsForQt5 ? bomber then pkgs.libsForQt5.bomber else false);
+      defaultText = literalExpression "pkgs.bomber";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Sound" = with types; mkOption {
       type = submodule {
         options = { 
@@ -21,7 +35,8 @@ in {
       description = "Sound";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."bomberrc" = cfg.bomber;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."bomberrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

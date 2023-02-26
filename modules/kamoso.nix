@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kamoso;
 in {
-  options.programs.plasma.kamoso = { 
+  options.programs.plasma.kamoso = {
+    enable = mkEnableOption ''
+      Enable kamoso
+    '';
+    package = mkOption {
+      default = if (pkgs ? kamoso) then
+                        pkgs.kamoso
+                      else
+                        (if pkgs.libsForQt5 ? kamoso then pkgs.libsForQt5.kamoso else false);
+      defaultText = literalExpression "pkgs.kamoso";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -58,7 +72,8 @@ in {
       description = "WebcamSettings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kamosorc" = cfg.kamoso;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kamosorc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

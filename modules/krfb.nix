@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.krfb;
 in {
-  options.programs.plasma.krfb = { 
+  options.programs.plasma.krfb = {
+    enable = mkEnableOption ''
+      Enable krfb
+    '';
+    package = mkOption {
+      default = if (pkgs ? krfb) then
+                        pkgs.krfb
+                      else
+                        (if pkgs.libsForQt5 ? krfb then pkgs.libsForQt5.krfb else false);
+      defaultText = literalExpression "pkgs.krfb";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "FrameBuffer" = with types; mkOption {
       type = submodule {
         options = { 
@@ -126,7 +140,8 @@ in {
       description = "TCP";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."krfbrc" = cfg.krfb;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."krfbrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

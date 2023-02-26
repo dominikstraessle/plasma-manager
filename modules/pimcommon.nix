@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.pimcommon;
 in {
-  options.programs.plasma.pimcommon = { 
+  options.programs.plasma.pimcommon = {
+    enable = mkEnableOption ''
+      Enable pimcommon
+    '';
+    package = mkOption {
+      default = if (pkgs ? pimcommon) then
+                        pkgs.pimcommon
+                      else
+                        (if pkgs.libsForQt5 ? pimcommon then pkgs.libsForQt5.pimcommon else false);
+      defaultText = literalExpression "pkgs.pimcommon";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Autocorrect" = with types; mkOption {
       type = submodule {
         options = { 
@@ -174,7 +188,8 @@ in {
       description = "Autocorrect";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."pimcommonrc" = cfg.pimcommon;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."pimcommonrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

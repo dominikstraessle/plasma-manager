@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.spectacle;
 in {
-  options.programs.plasma.spectacle = { 
+  options.programs.plasma.spectacle = {
+    enable = mkEnableOption ''
+      Enable spectacle
+    '';
+    package = mkOption {
+      default = if (pkgs ? spectacle) then
+                        pkgs.spectacle
+                      else
+                        (if pkgs.libsForQt5 ? spectacle then pkgs.libsForQt5.spectacle else false);
+      defaultText = literalExpression "pkgs.spectacle";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Annotations" = with types; mkOption {
       type = submodule {
         options = { 
@@ -534,7 +548,8 @@ in {
       description = "Save";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."spectaclerc" = cfg.spectacle;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."spectaclerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

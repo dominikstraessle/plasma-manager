@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kcmcddb;
 in {
-  options.programs.plasma.kcmcddb = { 
+  options.programs.plasma.kcmcddb = {
+    enable = mkEnableOption ''
+      Enable kcmcddb
+    '';
+    package = mkOption {
+      default = if (pkgs ? kcmcddb) then
+                        pkgs.kcmcddb
+                      else
+                        (if pkgs.libsForQt5 ? kcmcddb then pkgs.libsForQt5.kcmcddb else false);
+      defaultText = literalExpression "pkgs.kcmcddb";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Lookup" = with types; mkOption {
       type = submodule {
         options = { 
@@ -186,7 +200,8 @@ in {
       description = "Submit";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kcmcddbrc" = cfg.kcmcddb;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kcmcddbrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kio_ftp;
 in {
-  options.programs.plasma.kio_ftp = { 
+  options.programs.plasma.kio_ftp = {
+    enable = mkEnableOption ''
+      Enable kio_ftp
+    '';
+    package = mkOption {
+      default = if (pkgs ? kio_ftp) then
+                        pkgs.kio_ftp
+                      else
+                        (if pkgs.libsForQt5 ? kio_ftp then pkgs.libsForQt5.kio_ftp else false);
+      defaultText = literalExpression "pkgs.kio_ftp";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "DesktopIcons" = with types; mkOption {
       type = submodule {
         options = { 
@@ -30,7 +44,8 @@ in {
       description = "DesktopIcons";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kio_ftprc" = cfg.kio_ftp;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kio_ftprc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

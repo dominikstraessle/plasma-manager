@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.ark;
 in {
-  options.programs.plasma.ark = { 
+  options.programs.plasma.ark = {
+    enable = mkEnableOption ''
+      Enable ark
+    '';
+    package = mkOption {
+      default = if (pkgs ? ark) then
+                        pkgs.ark
+                      else
+                        (if pkgs.libsForQt5 ? ark then pkgs.libsForQt5.ark else false);
+      defaultText = literalExpression "pkgs.ark";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Extraction" = with types; mkOption {
       type = submodule {
         options = { 
@@ -149,7 +163,8 @@ in {
       description = "Preview";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."arkrc" = cfg.ark;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."arkrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

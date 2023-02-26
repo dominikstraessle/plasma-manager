@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.konqueror;
 in {
-  options.programs.plasma.konqueror = { 
+  options.programs.plasma.konqueror = {
+    enable = mkEnableOption ''
+      Enable konqueror
+    '';
+    package = mkOption {
+      default = if (pkgs ? konqueror) then
+                        pkgs.konqueror
+                      else
+                        (if pkgs.libsForQt5 ? konqueror then pkgs.libsForQt5.konqueror else false);
+      defaultText = literalExpression "pkgs.konqueror";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "FMSettings" = with types; mkOption {
       type = submodule {
         options = { 
@@ -906,7 +920,8 @@ PATH_JAVA
       description = "UserSettings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."konquerorrc" = cfg.konqueror;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."konquerorrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

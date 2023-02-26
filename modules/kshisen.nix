@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kshisen;
 in {
-  options.programs.plasma.kshisen = { 
+  options.programs.plasma.kshisen = {
+    enable = mkEnableOption ''
+      Enable kshisen
+    '';
+    package = mkOption {
+      default = if (pkgs ? kshisen) then
+                        pkgs.kshisen
+                      else
+                        (if pkgs.libsForQt5 ? kshisen then pkgs.libsForQt5.kshisen else false);
+      defaultText = literalExpression "pkgs.kshisen";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Game" = with types; mkOption {
       type = submodule {
         options = { 
@@ -125,7 +139,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kshisenrc" = cfg.kshisen;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kshisenrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

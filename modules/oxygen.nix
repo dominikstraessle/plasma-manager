@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.oxygen;
 in {
-  options.programs.plasma.oxygen = { 
+  options.programs.plasma.oxygen = {
+    enable = mkEnableOption ''
+      Enable oxygen
+    '';
+    package = mkOption {
+      default = if (pkgs ? oxygen) then
+                        pkgs.oxygen
+                      else
+                        (if pkgs.libsForQt5 ? oxygen then pkgs.libsForQt5.oxygen else false);
+      defaultText = literalExpression "pkgs.oxygen";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Common" = with types; mkOption {
       type = submodule {
         options = { 
@@ -508,7 +522,8 @@ in {
       description = "Style";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."oxygenrc" = cfg.oxygen;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."oxygenrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

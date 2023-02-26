@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kalendar;
 in {
-  options.programs.plasma.kalendar = { 
+  options.programs.plasma.kalendar = {
+    enable = mkEnableOption ''
+      Enable kalendar
+    '';
+    package = mkOption {
+      default = if (pkgs ? kalendar) then
+                        pkgs.kalendar
+                      else
+                        (if pkgs.libsForQt5 ? kalendar then pkgs.libsForQt5.kalendar else false);
+      defaultText = literalExpression "pkgs.kalendar";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Editor" = with types; mkOption {
       type = submodule {
         options = { 
@@ -386,7 +400,8 @@ in {
       description = "WeekView";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kalendarrc" = cfg.kalendar;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kalendarrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

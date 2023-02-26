@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.alligator;
 in {
-  options.programs.plasma.alligator = { 
+  options.programs.plasma.alligator = {
+    enable = mkEnableOption ''
+      Enable alligator
+    '';
+    package = mkOption {
+      default = if (pkgs ? alligator) then
+                        pkgs.alligator
+                      else
+                        (if pkgs.libsForQt5 ? alligator then pkgs.libsForQt5.alligator else false);
+      defaultText = literalExpression "pkgs.alligator";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -48,7 +62,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."alligatorrc" = cfg.alligator;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."alligatorrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

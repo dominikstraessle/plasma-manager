@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.klipper;
 in {
-  options.programs.plasma.klipper = { 
+  options.programs.plasma.klipper = {
+    enable = mkEnableOption ''
+      Enable klipper
+    '';
+    package = mkOption {
+      default = if (pkgs ? klipper) then
+                        pkgs.klipper
+                      else
+                        (if pkgs.libsForQt5 ? klipper then pkgs.libsForQt5.klipper else false);
+      defaultText = literalExpression "pkgs.klipper";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Actions" = with types; mkOption {
       type = submodule {
         options = { 
@@ -186,7 +200,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."klipperrc" = cfg.klipper;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."klipperrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

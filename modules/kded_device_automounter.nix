@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kded_device_automounter;
 in {
-  options.programs.plasma.kded_device_automounter = { 
+  options.programs.plasma.kded_device_automounter = {
+    enable = mkEnableOption ''
+      Enable kded_device_automounter
+    '';
+    package = mkOption {
+      default = if (pkgs ? kded_device_automounter) then
+                        pkgs.kded_device_automounter
+                      else
+                        (if pkgs.libsForQt5 ? kded_device_automounter then pkgs.libsForQt5.kded_device_automounter else false);
+      defaultText = literalExpression "pkgs.kded_device_automounter";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -48,7 +62,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kded_device_automounterrc" = cfg.kded_device_automounter;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kded_device_automounterrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

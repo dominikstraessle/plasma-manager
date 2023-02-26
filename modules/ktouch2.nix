@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.ktouch2;
 in {
-  options.programs.plasma.ktouch2 = { 
+  options.programs.plasma.ktouch2 = {
+    enable = mkEnableOption ''
+      Enable ktouch2
+    '';
+    package = mkOption {
+      default = if (pkgs ? ktouch2) then
+                        pkgs.ktouch2
+                      else
+                        (if pkgs.libsForQt5 ? ktouch2 then pkgs.libsForQt5.ktouch2 else false);
+      defaultText = literalExpression "pkgs.ktouch2";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Colors" = with types; mkOption {
       type = submodule {
         options = { 
@@ -141,7 +155,8 @@ in {
       description = "Training";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."ktouch2rc" = cfg.ktouch2;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."ktouch2rc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

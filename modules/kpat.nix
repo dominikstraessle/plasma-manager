@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kpat;
 in {
-  options.programs.plasma.kpat = { 
+  options.programs.plasma.kpat = {
+    enable = mkEnableOption ''
+      Enable kpat
+    '';
+    package = mkOption {
+      default = if (pkgs ? kpat) then
+                        pkgs.kpat
+                      else
+                        (if pkgs.libsForQt5 ? kpat then pkgs.libsForQt5.kpat else false);
+      defaultText = literalExpression "pkgs.kpat";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General Settings" = with types; mkOption {
       type = submodule {
         options = { 
@@ -264,7 +278,8 @@ in {
       description = "General Settings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kpatrc" = cfg.kpat;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kpatrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

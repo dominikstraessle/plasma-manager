@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.plasma-locale;
 in {
-  options.programs.plasma.plasma-locale = { 
+  options.programs.plasma.plasma-locale = {
+    enable = mkEnableOption ''
+      Enable plasma-locale
+    '';
+    package = mkOption {
+      default = if (pkgs ? plasma-locale) then
+                        pkgs.plasma-locale
+                      else
+                        (if pkgs.libsForQt5 ? plasma-locale then pkgs.libsForQt5.plasma-locale else false);
+      defaultText = literalExpression "pkgs.plasma-locale";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Formats" = with types; mkOption {
       type = submodule {
         options = { 
@@ -129,7 +143,8 @@ in {
       description = "Translations";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."plasma-localerc" = cfg.plasma-locale;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."plasma-localerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

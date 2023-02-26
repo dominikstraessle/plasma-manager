@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kdeglobals;
 in {
-  options.programs.plasma.kdeglobals = { 
+  options.programs.plasma.kdeglobals = {
+    enable = mkEnableOption ''
+      Enable kdeglobals
+    '';
+    package = mkOption {
+      default = if (pkgs ? kdeglobals) then
+                        pkgs.kdeglobals
+                      else
+                        (if pkgs.libsForQt5 ? kdeglobals then pkgs.libsForQt5.kdeglobals else false);
+      defaultText = literalExpression "pkgs.kdeglobals";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "DesktopIcons" = with types; mkOption {
       type = submodule {
         options = { 
@@ -412,7 +426,8 @@ in {
       description = "WM";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kdeglobals" = cfg.kdeglobals;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kdeglobals" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

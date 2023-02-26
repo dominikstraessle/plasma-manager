@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kleopatra;
 in {
-  options.programs.plasma.kleopatra = { 
+  options.programs.plasma.kleopatra = {
+    enable = mkEnableOption ''
+      Enable kleopatra
+    '';
+    package = mkOption {
+      default = if (pkgs ? kleopatra) then
+                        pkgs.kleopatra
+                      else
+                        (if pkgs.libsForQt5 ? kleopatra then pkgs.libsForQt5.kleopatra else false);
+      defaultText = literalExpression "pkgs.kleopatra";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "CMS" = with types; mkOption {
       type = submodule {
         options = { 
@@ -512,7 +526,8 @@ in {
       description = "Tooltip";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kleopatrarc" = cfg.kleopatra;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kleopatrarc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.systemsettings;
 in {
-  options.programs.plasma.systemsettings = { 
+  options.programs.plasma.systemsettings = {
+    enable = mkEnableOption ''
+      Enable systemsettings
+    '';
+    package = mkOption {
+      default = if (pkgs ? systemsettings) then
+                        pkgs.systemsettings
+                      else
+                        (if pkgs.libsForQt5 ? systemsettings then pkgs.libsForQt5.systemsettings else false);
+      defaultText = literalExpression "pkgs.systemsettings";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Main" = with types; mkOption {
       type = submodule {
         options = { 
@@ -21,7 +35,8 @@ in {
       description = "Main";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."systemsettingsrc" = cfg.systemsettings;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."systemsettingsrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

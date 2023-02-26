@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kmplot;
 in {
-  options.programs.plasma.kmplot = { 
+  options.programs.plasma.kmplot = {
+    enable = mkEnableOption ''
+      Enable kmplot
+    '';
+    package = mkOption {
+      default = if (pkgs ? kmplot) then
+                        pkgs.kmplot
+                      else
+                        (if pkgs.libsForQt5 ? kmplot then pkgs.libsForQt5.kmplot else false);
+      defaultText = literalExpression "pkgs.kmplot";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Colors" = with types; mkOption {
       type = submodule {
         options = { 
@@ -404,7 +418,8 @@ in {
       description = "Scaling";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kmplotrc" = cfg.kmplot;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kmplotrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

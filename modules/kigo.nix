@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kigo;
 in {
-  options.programs.plasma.kigo = { 
+  options.programs.plasma.kigo = {
+    enable = mkEnableOption ''
+      Enable kigo
+    '';
+    package = mkOption {
+      default = if (pkgs ? kigo) then
+                        pkgs.kigo
+                      else
+                        (if pkgs.libsForQt5 ? kigo then pkgs.libsForQt5.kigo else false);
+      defaultText = literalExpression "pkgs.kigo";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Backend" = with types; mkOption {
       type = submodule {
         options = { 
@@ -180,7 +194,8 @@ in {
       description = "UserInterface";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kigorc" = cfg.kigo;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kigorc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

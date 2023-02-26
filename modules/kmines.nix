@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kmines;
 in {
-  options.programs.plasma.kmines = { 
+  options.programs.plasma.kmines = {
+    enable = mkEnableOption ''
+      Enable kmines
+    '';
+    package = mkOption {
+      default = if (pkgs ? kmines) then
+                        pkgs.kmines
+                      else
+                        (if pkgs.libsForQt5 ? kmines then pkgs.libsForQt5.kmines else false);
+      defaultText = literalExpression "pkgs.kmines";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -88,7 +102,8 @@ in {
       description = "Options";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kminesrc" = cfg.kmines;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kminesrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.powerdevil;
 in {
-  options.programs.plasma.powerdevil = { 
+  options.programs.plasma.powerdevil = {
+    enable = mkEnableOption ''
+      Enable powerdevil
+    '';
+    package = mkOption {
+      default = if (pkgs ? powerdevil) then
+                        pkgs.powerdevil
+                      else
+                        (if pkgs.libsForQt5 ? powerdevil then pkgs.libsForQt5.powerdevil else false);
+      defaultText = literalExpression "pkgs.powerdevil";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "BatteryManagement" = with types; mkOption {
       type = submodule {
         options = { 
@@ -100,7 +114,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."powerdevilrc" = cfg.powerdevil;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."powerdevilrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

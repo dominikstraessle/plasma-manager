@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kcalc;
 in {
-  options.programs.plasma.kcalc = { 
+  options.programs.plasma.kcalc = {
+    enable = mkEnableOption ''
+      Enable kcalc
+    '';
+    package = mkOption {
+      default = if (pkgs ? kcalc) then
+                        pkgs.kcalc
+                      else
+                        (if pkgs.libsForQt5 ? kcalc then pkgs.libsForQt5.kcalc else false);
+      defaultText = literalExpression "pkgs.kcalc";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Colors" = with types; mkOption {
       type = submodule {
         options = { 
@@ -426,7 +440,8 @@ in {
       description = "UserConstants";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kcalcrc" = cfg.kcalc;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kcalcrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

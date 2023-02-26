@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kblackbox;
 in {
-  options.programs.plasma.kblackbox = { 
+  options.programs.plasma.kblackbox = {
+    enable = mkEnableOption ''
+      Enable kblackbox
+    '';
+    package = mkOption {
+      default = if (pkgs ? kblackbox) then
+                        pkgs.kblackbox
+                      else
+                        (if pkgs.libsForQt5 ? kblackbox then pkgs.libsForQt5.kblackbox else false);
+      defaultText = literalExpression "pkgs.kblackbox";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "KBlackBox Setup" = with types; mkOption {
       type = submodule {
         options = { 
@@ -48,7 +62,8 @@ in {
       description = "KBlackBox Setup";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kblackboxrc" = cfg.kblackbox;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kblackboxrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

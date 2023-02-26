@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.touchpad;
 in {
-  options.programs.plasma.touchpad = { 
+  options.programs.plasma.touchpad = {
+    enable = mkEnableOption ''
+      Enable touchpad
+    '';
+    package = mkOption {
+      default = if (pkgs ? touchpad) then
+                        pkgs.touchpad
+                      else
+                        (if pkgs.libsForQt5 ? touchpad then pkgs.libsForQt5.touchpad else false);
+      defaultText = literalExpression "pkgs.touchpad";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "autodisable" = with types; mkOption {
       type = submodule {
         options = { 
@@ -599,7 +613,8 @@ in {
       description = "parameters";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."touchpadrc" = cfg.touchpad;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."touchpadrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

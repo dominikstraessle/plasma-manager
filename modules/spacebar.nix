@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.spacebar;
 in {
-  options.programs.plasma.spacebar = { 
+  options.programs.plasma.spacebar = {
+    enable = mkEnableOption ''
+      Enable spacebar
+    '';
+    package = mkOption {
+      default = if (pkgs ? spacebar) then
+                        pkgs.spacebar
+                      else
+                        (if pkgs.libsForQt5 ? spacebar then pkgs.libsForQt5.spacebar else false);
+      defaultText = literalExpression "pkgs.spacebar";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Appearance" = with types; mkOption {
       type = submodule {
         options = { 
@@ -217,7 +231,8 @@ in {
       description = "Notifications";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."spacebarrc" = cfg.spacebar;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."spacebarrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

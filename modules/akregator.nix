@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.akregator;
 in {
-  options.programs.plasma.akregator = { 
+  options.programs.plasma.akregator = {
+    enable = mkEnableOption ''
+      Enable akregator
+    '';
+    package = mkOption {
+      default = if (pkgs ? akregator) then
+                        pkgs.akregator
+                      else
+                        (if pkgs.libsForQt5 ? akregator then pkgs.libsForQt5.akregator else false);
+      defaultText = literalExpression "pkgs.akregator";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Advanced" = with types; mkOption {
       type = submodule {
         options = { 
@@ -623,7 +637,8 @@ in {
       description = "View";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."akregatorrc" = cfg.akregator;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."akregatorrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.sddm-kcm;
 in {
-  options.programs.plasma.sddm-kcm = { 
+  options.programs.plasma.sddm-kcm = {
+    enable = mkEnableOption ''
+      Enable sddm-kcm
+    '';
+    package = mkOption {
+      default = if (pkgs ? sddm-kcm) then
+                        pkgs.sddm-kcm
+                      else
+                        (if pkgs.libsForQt5 ? sddm-kcm then pkgs.libsForQt5.sddm-kcm else false);
+      defaultText = literalExpression "pkgs.sddm-kcm";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Autologin" = with types; mkOption {
       type = submodule {
         options = { 
@@ -116,7 +130,8 @@ in {
       description = "Users";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."sddm-kcmrc" = cfg.sddm-kcm;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."sddm-kcmrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

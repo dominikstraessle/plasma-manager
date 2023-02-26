@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kdiamond;
 in {
-  options.programs.plasma.kdiamond = { 
+  options.programs.plasma.kdiamond = {
+    enable = mkEnableOption ''
+      Enable kdiamond
+    '';
+    package = mkOption {
+      default = if (pkgs ? kdiamond) then
+                        pkgs.kdiamond
+                      else
+                        (if pkgs.libsForQt5 ? kdiamond then pkgs.libsForQt5.kdiamond else false);
+      defaultText = literalExpression "pkgs.kdiamond";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Preferences" = with types; mkOption {
       type = submodule {
         options = { 
@@ -21,7 +35,8 @@ in {
       description = "Preferences";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kdiamondrc" = cfg.kdiamond;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kdiamondrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

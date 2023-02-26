@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.libksysguard;
 in {
-  options.programs.plasma.libksysguard = { 
+  options.programs.plasma.libksysguard = {
+    enable = mkEnableOption ''
+      Enable libksysguard
+    '';
+    package = mkOption {
+      default = if (pkgs ? libksysguard) then
+                        pkgs.libksysguard
+                      else
+                        (if pkgs.libsForQt5 ? libksysguard then pkgs.libsForQt5.libksysguard else false);
+      defaultText = literalExpression "pkgs.libksysguard";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -300,7 +314,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."libksysguardrc" = cfg.libksysguard;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."libksysguardrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

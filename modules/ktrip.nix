@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.ktrip;
 in {
-  options.programs.plasma.ktrip = { 
+  options.programs.plasma.ktrip = {
+    enable = mkEnableOption ''
+      Enable ktrip
+    '';
+    package = mkOption {
+      default = if (pkgs ? ktrip) then
+                        pkgs.ktrip
+                      else
+                        (if pkgs.libsForQt5 ? ktrip then pkgs.libsForQt5.ktrip else false);
+      defaultText = literalExpression "pkgs.ktrip";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Backends" = with types; mkOption {
       type = submodule {
         options = { 
@@ -38,7 +52,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."ktriprc" = cfg.ktrip;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."ktriprc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

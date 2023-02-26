@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.konsole;
 in {
-  options.programs.plasma.konsole = { 
+  options.programs.plasma.konsole = {
+    enable = mkEnableOption ''
+      Enable konsole
+    '';
+    package = mkOption {
+      default = if (pkgs ? konsole) then
+                        pkgs.konsole
+                      else
+                        (if pkgs.libsForQt5 ? konsole then pkgs.libsForQt5.konsole else false);
+      defaultText = literalExpression "pkgs.konsole";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "FileLocation" = with types; mkOption {
       type = submodule {
         options = { 
@@ -401,7 +415,8 @@ in {
       description = "ThumbnailsSettings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."konsolerc" = cfg.konsole;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."konsolerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

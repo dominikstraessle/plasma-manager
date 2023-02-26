@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.akonadi-contacts;
 in {
-  options.programs.plasma.akonadi-contacts = { 
+  options.programs.plasma.akonadi-contacts = {
+    enable = mkEnableOption ''
+      Enable akonadi-contacts
+    '';
+    package = mkOption {
+      default = if (pkgs ? akonadi-contacts) then
+                        pkgs.akonadi-contacts
+                      else
+                        (if pkgs.libsForQt5 ? akonadi-contacts then pkgs.libsForQt5.akonadi-contacts else false);
+      defaultText = literalExpression "pkgs.akonadi-contacts";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Phone Dial Settings" = with types; mkOption {
       type = submodule {
         options = { 
@@ -78,7 +92,8 @@ in {
       description = "Send SMS Settings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."akonadi_contactrc" = cfg.akonadi-contacts;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."akonadi_contactrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

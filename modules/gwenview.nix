@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.gwenview;
 in {
-  options.programs.plasma.gwenview = { 
+  options.programs.plasma.gwenview = {
+    enable = mkEnableOption ''
+      Enable gwenview
+    '';
+    package = mkOption {
+      default = if (pkgs ? gwenview) then
+                        pkgs.gwenview
+                      else
+                        (if pkgs.libsForQt5 ? gwenview then pkgs.libsForQt5.gwenview else false);
+      defaultText = literalExpression "pkgs.gwenview";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Crop" = with types; mkOption {
       type = submodule {
         options = { 
@@ -821,7 +835,8 @@ in {
       description = "slide show";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."gwenview_importerrc" = cfg.gwenview;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."gwenview_importerrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

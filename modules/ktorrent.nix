@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.ktorrent;
 in {
-  options.programs.plasma.ktorrent = { 
+  options.programs.plasma.ktorrent = {
+    enable = mkEnableOption ''
+      Enable ktorrent
+    '';
+    package = mkOption {
+      default = if (pkgs ? ktorrent) then
+                        pkgs.ktorrent
+                      else
+                        (if pkgs.libsForQt5 ? ktorrent then pkgs.libsForQt5.ktorrent else false);
+      defaultText = literalExpression "pkgs.ktorrent";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "downloads" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1594,7 +1608,8 @@ in {
       description = "general";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."ktorrentrc" = cfg.ktorrent;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."ktorrentrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

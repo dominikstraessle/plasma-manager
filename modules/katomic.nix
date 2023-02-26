@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.katomic;
 in {
-  options.programs.plasma.katomic = { 
+  options.programs.plasma.katomic = {
+    enable = mkEnableOption ''
+      Enable katomic
+    '';
+    package = mkOption {
+      default = if (pkgs ? katomic) then
+                        pkgs.katomic
+                      else
+                        (if pkgs.libsForQt5 ? katomic then pkgs.libsForQt5.katomic else false);
+      defaultText = literalExpression "pkgs.katomic";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Game" = with types; mkOption {
       type = submodule {
         options = { 
@@ -64,7 +78,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."katomicrc" = cfg.katomic;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."katomicrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

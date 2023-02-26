@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kweather;
 in {
-  options.programs.plasma.kweather = { 
+  options.programs.plasma.kweather = {
+    enable = mkEnableOption ''
+      Enable kweather
+    '';
+    package = mkOption {
+      default = if (pkgs ? kweather) then
+                        pkgs.kweather
+                      else
+                        (if pkgs.libsForQt5 ? kweather then pkgs.libsForQt5.kweather else false);
+      defaultText = literalExpression "pkgs.kweather";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -74,7 +88,8 @@ in {
       description = "WeatherLocations";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kweather/kweatherrc" = cfg.kweather;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kweather/kweatherrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

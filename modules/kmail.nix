@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kmail;
 in {
-  options.programs.plasma.kmail = { 
+  options.programs.plasma.kmail = {
+    enable = mkEnableOption ''
+      Enable kmail
+    '';
+    package = mkOption {
+      default = if (pkgs ? kmail) then
+                        pkgs.kmail
+                      else
+                        (if pkgs.libsForQt5 ? kmail then pkgs.libsForQt5.kmail else false);
+      defaultText = literalExpression "pkgs.kmail";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Behaviour" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1028,7 +1042,8 @@ in {
       description = "UserInterface";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kmailrc" = cfg.kmail;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kmailrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

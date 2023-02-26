@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.plasmadialer;
 in {
-  options.programs.plasma.plasmadialer = { 
+  options.programs.plasma.plasmadialer = {
+    enable = mkEnableOption ''
+      Enable plasmadialer
+    '';
+    package = mkOption {
+      default = if (pkgs ? plasmadialer) then
+                        pkgs.plasmadialer
+                      else
+                        (if pkgs.libsForQt5 ? plasmadialer then pkgs.libsForQt5.plasmadialer else false);
+      defaultText = literalExpression "pkgs.plasmadialer";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Adaptive blocking" = with types; mkOption {
       type = submodule {
         options = { 
@@ -100,7 +114,8 @@ in {
       description = "Answer control for the incoming screen";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."plasmadialerrc" = cfg.plasmadialer;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."plasmadialerrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

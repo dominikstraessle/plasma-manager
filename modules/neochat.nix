@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.neochat;
 in {
-  options.programs.plasma.neochat = { 
+  options.programs.plasma.neochat = {
+    enable = mkEnableOption ''
+      Enable neochat
+    '';
+    package = mkOption {
+      default = if (pkgs ? neochat) then
+                        pkgs.neochat
+                      else
+                        (if pkgs.libsForQt5 ? neochat then pkgs.libsForQt5.neochat else false);
+      defaultText = literalExpression "pkgs.neochat";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -332,7 +346,8 @@ in {
       description = "Timeline";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."neochatrc" = cfg.neochat;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."neochatrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

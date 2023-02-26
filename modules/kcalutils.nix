@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kcalutils;
 in {
-  options.programs.plasma.kcalutils = { 
+  options.programs.plasma.kcalutils = {
+    enable = mkEnableOption ''
+      Enable kcalutils
+    '';
+    package = mkOption {
+      default = if (pkgs ? kcalutils) then
+                        pkgs.kcalutils
+                      else
+                        (if pkgs.libsForQt5 ? kcalutils then pkgs.libsForQt5.kcalutils else false);
+      defaultText = literalExpression "pkgs.kcalutils";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "$(application)-Events" = with types; mkOption {
       type = submodule {
         options = { 
@@ -301,7 +315,8 @@ in {
       description = "$(application)-Todos";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."libkcalutils_htmlexportrc" = cfg.kcalutils;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."libkcalutils_htmlexportrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

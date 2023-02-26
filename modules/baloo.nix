@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.baloo;
 in {
-  options.programs.plasma.baloo = { 
+  options.programs.plasma.baloo = {
+    enable = mkEnableOption ''
+      Enable baloo
+    '';
+    package = mkOption {
+      default = if (pkgs ? baloo) then
+                        pkgs.baloo
+                      else
+                        (if pkgs.libsForQt5 ? baloo then pkgs.libsForQt5.baloo else false);
+      defaultText = literalExpression "pkgs.baloo";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Basic Settings" = with types; mkOption {
       type = submodule {
         options = { 
@@ -105,7 +119,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."baloofilerc" = cfg.baloo;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."baloofilerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

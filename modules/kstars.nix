@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kstars;
 in {
-  options.programs.plasma.kstars = { 
+  options.programs.plasma.kstars = {
+    enable = mkEnableOption ''
+      Enable kstars
+    '';
+    package = mkOption {
+      default = if (pkgs ? kstars) then
+                        pkgs.kstars
+                      else
+                        (if pkgs.libsForQt5 ? kstars then pkgs.libsForQt5.kstars else false);
+      defaultText = literalExpression "pkgs.kstars";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "ASTAP" = with types; mkOption {
       type = submodule {
         options = { 
@@ -6254,7 +6268,8 @@ in {
       description = "indi";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kstarsrc" = cfg.kstars;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kstarsrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

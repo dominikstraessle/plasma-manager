@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.knavalbattle;
 in {
-  options.programs.plasma.knavalbattle = { 
+  options.programs.plasma.knavalbattle = {
+    enable = mkEnableOption ''
+      Enable knavalbattle
+    '';
+    package = mkOption {
+      default = if (pkgs ? knavalbattle) then
+                        pkgs.knavalbattle
+                      else
+                        (if pkgs.libsForQt5 ? knavalbattle then pkgs.libsForQt5.knavalbattle else false);
+      defaultText = literalExpression "pkgs.knavalbattle";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "general" = with types; mkOption {
       type = submodule {
         options = { 
@@ -74,7 +88,8 @@ in {
       description = "network";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."knavalbattlerc" = cfg.knavalbattle;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."knavalbattlerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

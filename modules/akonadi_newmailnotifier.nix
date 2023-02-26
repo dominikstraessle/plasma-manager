@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.akonadi_newmailnotifier;
 in {
-  options.programs.plasma.akonadi_newmailnotifier = { 
+  options.programs.plasma.akonadi_newmailnotifier = {
+    enable = mkEnableOption ''
+      Enable akonadi_newmailnotifier
+    '';
+    package = mkOption {
+      default = if (pkgs ? akonadi_newmailnotifier) then
+                        pkgs.akonadi_newmailnotifier
+                      else
+                        (if pkgs.libsForQt5 ? akonadi_newmailnotifier then pkgs.libsForQt5.akonadi_newmailnotifier else false);
+      defaultText = literalExpression "pkgs.akonadi_newmailnotifier";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -130,7 +144,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."akonadi_newmailnotifier_agentrc" = cfg.akonadi_newmailnotifier;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."akonadi_newmailnotifier_agentrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

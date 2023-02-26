@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kreversi;
 in {
-  options.programs.plasma.kreversi = { 
+  options.programs.plasma.kreversi = {
+    enable = mkEnableOption ''
+      Enable kreversi
+    '';
+    package = mkOption {
+      default = if (pkgs ? kreversi) then
+                        pkgs.kreversi
+                      else
+                        (if pkgs.libsForQt5 ? kreversi then pkgs.libsForQt5.kreversi else false);
+      defaultText = literalExpression "pkgs.kreversi";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Game" = with types; mkOption {
       type = submodule {
         options = { 
@@ -47,7 +61,8 @@ in {
       description = "Game";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kreversirc" = cfg.kreversi;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kreversirc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

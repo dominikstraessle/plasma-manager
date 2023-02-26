@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kbreakout;
 in {
-  options.programs.plasma.kbreakout = { 
+  options.programs.plasma.kbreakout = {
+    enable = mkEnableOption ''
+      Enable kbreakout
+    '';
+    package = mkOption {
+      default = if (pkgs ? kbreakout) then
+                        pkgs.kbreakout
+                      else
+                        (if pkgs.libsForQt5 ? kbreakout then pkgs.libsForQt5.kbreakout else false);
+      defaultText = literalExpression "pkgs.kbreakout";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -21,7 +35,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kbreakoutrc" = cfg.kbreakout;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kbreakoutrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

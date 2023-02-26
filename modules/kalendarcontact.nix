@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kalendarcontact;
 in {
-  options.programs.plasma.kalendarcontact = { 
+  options.programs.plasma.kalendarcontact = {
+    enable = mkEnableOption ''
+      Enable kalendarcontact
+    '';
+    package = mkOption {
+      default = if (pkgs ? kalendarcontact) then
+                        pkgs.kalendarcontact
+                      else
+                        (if pkgs.libsForQt5 ? kalendarcontact then pkgs.libsForQt5.kalendarcontact else false);
+      defaultText = literalExpression "pkgs.kalendarcontact";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Editor" = with types; mkOption {
       type = submodule {
         options = { 
@@ -21,7 +35,8 @@ in {
       description = "Editor";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kalendarcontactrc" = cfg.kalendarcontact;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kalendarcontactrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

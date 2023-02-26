@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.plasma-systemmonitor;
 in {
-  options.programs.plasma.plasma-systemmonitor = { 
+  options.programs.plasma.plasma-systemmonitor = {
+    enable = mkEnableOption ''
+      Enable plasma-systemmonitor
+    '';
+    package = mkOption {
+      default = if (pkgs ? plasma-systemmonitor) then
+                        pkgs.plasma-systemmonitor
+                      else
+                        (if pkgs.libsForQt5 ? plasma-systemmonitor then pkgs.libsForQt5.plasma-systemmonitor else false);
+      defaultText = literalExpression "pkgs.plasma-systemmonitor";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -183,7 +197,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."plasma-systemmonitorrc" = cfg.plasma-systemmonitor;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."plasma-systemmonitorrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

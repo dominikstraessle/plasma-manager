@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.yakuake;
 in {
-  options.programs.plasma.yakuake = { 
+  options.programs.plasma.yakuake = {
+    enable = mkEnableOption ''
+      Enable yakuake
+    '';
+    package = mkOption {
+      default = if (pkgs ? yakuake) then
+                        pkgs.yakuake
+                      else
+                        (if pkgs.libsForQt5 ? yakuake then pkgs.libsForQt5.yakuake else false);
+      defaultText = literalExpression "pkgs.yakuake";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Animation" = with types; mkOption {
       type = submodule {
         options = { 
@@ -376,7 +390,8 @@ in {
       description = "Window";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."yakuakerc" = cfg.yakuake;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."yakuakerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

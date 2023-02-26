@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.knotes;
 in {
-  options.programs.plasma.knotes = { 
+  options.programs.plasma.knotes = {
+    enable = mkEnableOption ''
+      Enable knotes
+    '';
+    package = mkOption {
+      default = if (pkgs ? knotes) then
+                        pkgs.knotes
+                      else
+                        (if pkgs.libsForQt5 ? knotes then pkgs.libsForQt5.knotes else false);
+      defaultText = literalExpression "pkgs.knotes";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Actions" = with types; mkOption {
       type = submodule {
         options = { 
@@ -403,7 +417,8 @@ in {
       description = "WindowDisplay";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."akonadi_sendlater_agentrc" = cfg.knotes;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."akonadi_sendlater_agentrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

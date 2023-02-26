@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.plasma-framework;
 in {
-  options.programs.plasma.plasma-framework = { 
+  options.programs.plasma.plasma-framework = {
+    enable = mkEnableOption ''
+      Enable plasma-framework
+    '';
+    package = mkOption {
+      default = if (pkgs ? plasma-framework) then
+                        pkgs.plasma-framework
+                      else
+                        (if pkgs.libsForQt5 ? plasma-framework then pkgs.libsForQt5.plasma-framework else false);
+      defaultText = literalExpression "pkgs.plasma-framework";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -130,7 +144,8 @@ in {
       description = "Group2";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."plasma-frameworkrc" = cfg.plasma-framework;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."plasma-frameworkrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

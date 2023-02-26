@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kaddressbook;
 in {
-  options.programs.plasma.kaddressbook = { 
+  options.programs.plasma.kaddressbook = {
+    enable = mkEnableOption ''
+      Enable kaddressbook
+    '';
+    package = mkOption {
+      default = if (pkgs ? kaddressbook) then
+                        pkgs.kaddressbook
+                      else
+                        (if pkgs.libsForQt5 ? kaddressbook then pkgs.libsForQt5.kaddressbook else false);
+      defaultText = literalExpression "pkgs.kaddressbook";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Printing" = with types; mkOption {
       type = submodule {
         options = { 
@@ -90,7 +104,8 @@ in {
       description = "Views";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kaddressbookrc" = cfg.kaddressbook;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kaddressbookrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

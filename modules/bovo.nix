@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.bovo;
 in {
-  options.programs.plasma.bovo = { 
+  options.programs.plasma.bovo = {
+    enable = mkEnableOption ''
+      Enable bovo
+    '';
+    package = mkOption {
+      default = if (pkgs ? bovo) then
+                        pkgs.bovo
+                      else
+                        (if pkgs.libsForQt5 ? bovo then pkgs.libsForQt5.bovo else false);
+      defaultText = literalExpression "pkgs.bovo";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "bovo" = with types; mkOption {
       type = submodule {
         options = { 
@@ -56,7 +70,8 @@ in {
       description = "bovo";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."bovorc" = cfg.bovo;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."bovorc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

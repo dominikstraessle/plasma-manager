@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kontact;
 in {
-  options.programs.plasma.kontact = { 
+  options.programs.plasma.kontact = {
+    enable = mkEnableOption ''
+      Enable kontact
+    '';
+    package = mkOption {
+      default = if (pkgs ? kontact) then
+                        pkgs.kontact
+                      else
+                        (if pkgs.libsForQt5 ? kontact then pkgs.libsForQt5.kontact else false);
+      defaultText = literalExpression "pkgs.kontact";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "View" = with types; mkOption {
       type = submodule {
         options = { 
@@ -102,7 +116,8 @@ in {
       description = "View";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kontactrc" = cfg.kontact;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kontactrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

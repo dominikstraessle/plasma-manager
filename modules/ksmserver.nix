@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.ksmserver;
 in {
-  options.programs.plasma.ksmserver = { 
+  options.programs.plasma.ksmserver = {
+    enable = mkEnableOption ''
+      Enable ksmserver
+    '';
+    package = mkOption {
+      default = if (pkgs ? ksmserver) then
+                        pkgs.ksmserver
+                      else
+                        (if pkgs.libsForQt5 ? ksmserver then pkgs.libsForQt5.ksmserver else false);
+      defaultText = literalExpression "pkgs.ksmserver";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -56,7 +70,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."ksmserverrc" = cfg.ksmserver;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."ksmserverrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

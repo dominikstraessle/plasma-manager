@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.mailcommon;
 in {
-  options.programs.plasma.mailcommon = { 
+  options.programs.plasma.mailcommon = {
+    enable = mkEnableOption ''
+      Enable mailcommon
+    '';
+    package = mkOption {
+      default = if (pkgs ? mailcommon) then
+                        pkgs.mailcommon
+                      else
+                        (if pkgs.libsForQt5 ? mailcommon then pkgs.libsForQt5.mailcommon else false);
+      defaultText = literalExpression "pkgs.mailcommon";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "AccountOrder" = with types; mkOption {
       type = submodule {
         options = { 
@@ -295,7 +309,8 @@ in {
       description = "LeaveOnServer";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."mailcommonrc" = cfg.mailcommon;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."mailcommonrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

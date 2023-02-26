@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kmahjongg;
 in {
-  options.programs.plasma.kmahjongg = { 
+  options.programs.plasma.kmahjongg = {
+    enable = mkEnableOption ''
+      Enable kmahjongg
+    '';
+    package = mkOption {
+      default = if (pkgs ? kmahjongg) then
+                        pkgs.kmahjongg
+                      else
+                        (if pkgs.libsForQt5 ? kmahjongg then pkgs.libsForQt5.kmahjongg else false);
+      defaultText = literalExpression "pkgs.kmahjongg";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -93,7 +107,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kmahjonggrc" = cfg.kmahjongg;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kmahjonggrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

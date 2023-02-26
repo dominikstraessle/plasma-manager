@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.plasma-desktop;
 in {
-  options.programs.plasma.plasma-desktop = { 
+  options.programs.plasma.plasma-desktop = {
+    enable = mkEnableOption ''
+      Enable plasma-desktop
+    '';
+    package = mkOption {
+      default = if (pkgs ? plasma-desktop) then
+                        pkgs.plasma-desktop
+                      else
+                        (if pkgs.libsForQt5 ? plasma-desktop then pkgs.libsForQt5.plasma-desktop else false);
+      defaultText = literalExpression "pkgs.plasma-desktop";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Bell" = with types; mkOption {
       type = submodule {
         options = { 
@@ -240,7 +254,8 @@ in {
       description = "ScreenReader";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kaccessrc" = cfg.plasma-desktop;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kaccessrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kspaceduel;
 in {
-  options.programs.plasma.kspaceduel = { 
+  options.programs.plasma.kspaceduel = {
+    enable = mkEnableOption ''
+      Enable kspaceduel
+    '';
+    package = mkOption {
+      default = if (pkgs ? kspaceduel) then
+                        pkgs.kspaceduel
+                      else
+                        (if pkgs.libsForQt5 ? kspaceduel then pkgs.libsForQt5.kspaceduel else false);
+      defaultText = literalExpression "pkgs.kspaceduel";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Game" = with types; mkOption {
       type = submodule {
         options = { 
@@ -80,7 +94,8 @@ in {
       description = "Game";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kspaceduelrc" = cfg.kspaceduel;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kspaceduelrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

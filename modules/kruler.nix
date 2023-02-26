@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kruler;
 in {
-  options.programs.plasma.kruler = { 
+  options.programs.plasma.kruler = {
+    enable = mkEnableOption ''
+      Enable kruler
+    '';
+    package = mkOption {
+      default = if (pkgs ? kruler) then
+                        pkgs.kruler
+                      else
+                        (if pkgs.libsForQt5 ? kruler then pkgs.libsForQt5.kruler else false);
+      defaultText = literalExpression "pkgs.kruler";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "StoredSettings" = with types; mkOption {
       type = submodule {
         options = { 
@@ -104,7 +118,8 @@ in {
       description = "StoredSettings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."krulerrc" = cfg.kruler;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."krulerrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

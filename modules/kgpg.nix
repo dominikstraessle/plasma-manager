@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kgpg;
 in {
-  options.programs.plasma.kgpg = { 
+  options.programs.plasma.kgpg = {
+    enable = mkEnableOption ''
+      Enable kgpg
+    '';
+    package = mkOption {
+      default = if (pkgs ? kgpg) then
+                        pkgs.kgpg
+                      else
+                        (if pkgs.libsForQt5 ? kgpg then pkgs.libsForQt5.kgpg else false);
+      defaultText = literalExpression "pkgs.kgpg";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Decryption" = with types; mkOption {
       type = submodule {
         options = { 
@@ -610,7 +624,8 @@ in {
       description = "User Interface";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kgpgrc" = cfg.kgpg;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kgpgrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

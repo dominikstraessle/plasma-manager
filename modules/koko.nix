@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.koko;
 in {
-  options.programs.plasma.koko = { 
+  options.programs.plasma.koko = {
+    enable = mkEnableOption ''
+      Enable koko
+    '';
+    package = mkOption {
+      default = if (pkgs ? koko) then
+                        pkgs.koko
+                      else
+                        (if pkgs.libsForQt5 ? koko then pkgs.libsForQt5.koko else false);
+      defaultText = literalExpression "pkgs.koko";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Backend" = with types; mkOption {
       type = submodule {
         options = { 
@@ -149,7 +163,8 @@ in {
       description = "WindowState";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kokorc" = cfg.koko;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kokorc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kapman;
 in {
-  options.programs.plasma.kapman = { 
+  options.programs.plasma.kapman = {
+    enable = mkEnableOption ''
+      Enable kapman
+    '';
+    package = mkOption {
+      default = if (pkgs ? kapman) then
+                        pkgs.kapman
+                      else
+                        (if pkgs.libsForQt5 ? kapman then pkgs.libsForQt5.kapman else false);
+      defaultText = literalExpression "pkgs.kapman";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -30,7 +44,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kapmanrc" = cfg.kapman;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kapmanrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

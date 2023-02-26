@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.konversation;
 in {
-  options.programs.plasma.konversation = { 
+  options.programs.plasma.konversation = {
+    enable = mkEnableOption ''
+      Enable konversation
+    '';
+    package = mkOption {
+      default = if (pkgs ? konversation) then
+                        pkgs.konversation
+                      else
+                        (if pkgs.libsForQt5 ? konversation then pkgs.libsForQt5.konversation else false);
+      defaultText = literalExpression "pkgs.konversation";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Aliases" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1901,7 +1915,8 @@ in {
       description = "Web Browser Settings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."konversationrc" = cfg.konversation;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."konversationrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

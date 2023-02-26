@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.umbrellorc;
 in {
-  options.programs.plasma.umbrellorc = { 
+  options.programs.plasma.umbrellorc = {
+    enable = mkEnableOption ''
+      Enable umbrellorc
+    '';
+    package = mkOption {
+      default = if (pkgs ? umbrellorc) then
+                        pkgs.umbrellorc
+                      else
+                        (if pkgs.libsForQt5 ? umbrellorc then pkgs.libsForQt5.umbrellorc else false);
+      defaultText = literalExpression "pkgs.umbrellorc";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Auto Layout" = with types; mkOption {
       type = submodule {
         options = { 
@@ -1141,7 +1155,8 @@ in {
       description = "UI Options";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."umbrellorc" = cfg.umbrellorc;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."umbrellorc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

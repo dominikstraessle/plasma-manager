@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.dolphin-plugins;
 in {
-  options.programs.plasma.dolphin-plugins = { 
+  options.programs.plasma.dolphin-plugins = {
+    enable = mkEnableOption ''
+      Enable dolphin-plugins
+    '';
+    package = mkOption {
+      default = if (pkgs ? dolphin-plugins) then
+                        pkgs.dolphin-plugins
+                      else
+                        (if pkgs.libsForQt5 ? dolphin-plugins then pkgs.libsForQt5.dolphin-plugins else false);
+      defaultText = literalExpression "pkgs.dolphin-plugins";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "BackoutDialogSettings" = with types; mkOption {
       type = submodule {
         options = { 
@@ -329,7 +343,8 @@ in {
       description = "ServeDialogSettings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."fileviewgitpluginrc" = cfg.dolphin-plugins;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."fileviewgitpluginrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

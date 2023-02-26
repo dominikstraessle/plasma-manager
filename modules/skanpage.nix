@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.skanpage;
 in {
-  options.programs.plasma.skanpage = { 
+  options.programs.plasma.skanpage = {
+    enable = mkEnableOption ''
+      Enable skanpage
+    '';
+    package = mkOption {
+      default = if (pkgs ? skanpage) then
+                        pkgs.skanpage
+                      else
+                        (if pkgs.libsForQt5 ? skanpage then pkgs.libsForQt5.skanpage else false);
+      defaultText = literalExpression "pkgs.skanpage";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -217,7 +231,8 @@ in {
       description = "UiSettings";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."skanpagerc" = cfg.skanpage;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."skanpagerc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

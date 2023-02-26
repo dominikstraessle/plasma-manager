@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kalarm;
 in {
-  options.programs.plasma.kalarm = { 
+  options.programs.plasma.kalarm = {
+    enable = mkEnableOption ''
+      Enable kalarm
+    '';
+    package = mkOption {
+      default = if (pkgs ? kalarm) then
+                        pkgs.kalarm
+                      else
+                        (if pkgs.libsForQt5 ? kalarm then pkgs.libsForQt5.kalarm else false);
+      defaultText = literalExpression "pkgs.kalarm";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Defaults" = with types; mkOption {
       type = submodule {
         options = { 
@@ -659,7 +673,8 @@ in {
       description = "Notification Messages";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kalarmrc" = cfg.kalarm;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kalarmrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

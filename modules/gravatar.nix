@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.gravatar;
 in {
-  options.programs.plasma.gravatar = { 
+  options.programs.plasma.gravatar = {
+    enable = mkEnableOption ''
+      Enable gravatar
+    '';
+    package = mkOption {
+      default = if (pkgs ? gravatar) then
+                        pkgs.gravatar
+                      else
+                        (if pkgs.libsForQt5 ? gravatar then pkgs.libsForQt5.gravatar else false);
+      defaultText = literalExpression "pkgs.gravatar";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Gravatar" = with types; mkOption {
       type = submodule {
         options = { 
@@ -57,7 +71,8 @@ in {
       description = "Gravatar";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."gravatarrc" = cfg.gravatar;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."gravatarrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

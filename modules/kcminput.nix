@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kcminput;
 in {
-  options.programs.plasma.kcminput = { 
+  options.programs.plasma.kcminput = {
+    enable = mkEnableOption ''
+      Enable kcminput
+    '';
+    package = mkOption {
+      default = if (pkgs ? kcminput) then
+                        pkgs.kcminput
+                      else
+                        (if pkgs.libsForQt5 ? kcminput then pkgs.libsForQt5.kcminput else false);
+      defaultText = literalExpression "pkgs.kcminput";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Keyboard" = with types; mkOption {
       type = submodule {
         options = { 
@@ -79,7 +93,8 @@ in {
       description = "Mouse";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kcminputrc" = cfg.kcminput;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kcminputrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

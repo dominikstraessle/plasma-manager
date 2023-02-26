@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kalzium;
 in {
-  options.programs.plasma.kalzium = { 
+  options.programs.plasma.kalzium = {
+    enable = mkEnableOption ''
+      Enable kalzium
+    '';
+    package = mkOption {
+      default = if (pkgs ? kalzium) then
+                        pkgs.kalzium
+                      else
+                        (if pkgs.libsForQt5 ? kalzium then pkgs.libsForQt5.kalzium else false);
+      defaultText = literalExpression "pkgs.kalzium";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Calculator" = with types; mkOption {
       type = submodule {
         options = { 
@@ -645,7 +659,8 @@ in {
       description = "Units";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kalziumrc" = cfg.kalzium;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kalziumrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

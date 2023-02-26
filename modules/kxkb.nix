@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kxkb;
 in {
-  options.programs.plasma.kxkb = { 
+  options.programs.plasma.kxkb = {
+    enable = mkEnableOption ''
+      Enable kxkb
+    '';
+    package = mkOption {
+      default = if (pkgs ? kxkb) then
+                        pkgs.kxkb
+                      else
+                        (if pkgs.libsForQt5 ? kxkb then pkgs.libsForQt5.kxkb else false);
+      defaultText = literalExpression "pkgs.kxkb";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Layout" = with types; mkOption {
       type = submodule {
         options = { 
@@ -97,7 +111,8 @@ in {
       description = "Layout";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kxkbrc" = cfg.kxkb;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kxkbrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

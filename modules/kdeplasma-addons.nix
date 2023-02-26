@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kdeplasma-addons;
 in {
-  options.programs.plasma.kdeplasma-addons = { 
+  options.programs.plasma.kdeplasma-addons = {
+    enable = mkEnableOption ''
+      Enable kdeplasma-addons
+    '';
+    package = mkOption {
+      default = if (pkgs ? kdeplasma-addons) then
+                        pkgs.kdeplasma-addons
+                      else
+                        (if pkgs.libsForQt5 ? kdeplasma-addons then pkgs.libsForQt5.kdeplasma-addons else false);
+      defaultText = literalExpression "pkgs.kdeplasma-addons";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Appearance" = with types; mkOption {
       type = submodule {
         options = { 
@@ -800,7 +814,8 @@ in {
       description = "WeatherStation";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kdeplasma-addonsrc" = cfg.kdeplasma-addons;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kdeplasma-addonsrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

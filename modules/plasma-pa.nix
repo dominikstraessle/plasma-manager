@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.plasma-pa;
 in {
-  options.programs.plasma.plasma-pa = { 
+  options.programs.plasma.plasma-pa = {
+    enable = mkEnableOption ''
+      Enable plasma-pa
+    '';
+    package = mkOption {
+      default = if (pkgs ? plasma-pa) then
+                        pkgs.plasma-pa
+                      else
+                        (if pkgs.libsForQt5 ? plasma-pa then pkgs.libsForQt5.plasma-pa else false);
+      defaultText = literalExpression "pkgs.plasma-pa";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "General" = with types; mkOption {
       type = submodule {
         options = { 
@@ -201,7 +215,8 @@ in {
       description = "General";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."plasma-parc" = cfg.plasma-pa;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."plasma-parc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

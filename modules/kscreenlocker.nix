@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.kscreenlocker;
 in {
-  options.programs.plasma.kscreenlocker = { 
+  options.programs.plasma.kscreenlocker = {
+    enable = mkEnableOption ''
+      Enable kscreenlocker
+    '';
+    package = mkOption {
+      default = if (pkgs ? kscreenlocker) then
+                        pkgs.kscreenlocker
+                      else
+                        (if pkgs.libsForQt5 ? kscreenlocker then pkgs.libsForQt5.kscreenlocker else false);
+      defaultText = literalExpression "pkgs.kscreenlocker";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Daemon" = with types; mkOption {
       type = submodule {
         options = { 
@@ -104,7 +118,8 @@ in {
       description = "Greeter";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."kscreenlockerrc" = cfg.kscreenlocker;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."kscreenlockerrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

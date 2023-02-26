@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.elisa;
 in {
-  options.programs.plasma.elisa = { 
+  options.programs.plasma.elisa = {
+    enable = mkEnableOption ''
+      Enable elisa
+    '';
+    package = mkOption {
+      default = if (pkgs ? elisa) then
+                        pkgs.elisa
+                      else
+                        (if pkgs.libsForQt5 ? elisa then pkgs.libsForQt5.elisa else false);
+      defaultText = literalExpression "pkgs.elisa";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "ElisaFileIndexer" = with types; mkOption {
       type = submodule {
         options = { 
@@ -206,7 +220,8 @@ in {
       description = "Views";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."elisarc" = cfg.elisa;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."elisarc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

@@ -1,8 +1,22 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.programs.plasma;
+let
+  cfg = config.programs.plasma;
+  moduleCfg = config.programs.plasma.sieve;
 in {
-  options.programs.plasma.sieve = { 
+  options.programs.plasma.sieve = {
+    enable = mkEnableOption ''
+      Enable sieve
+    '';
+    package = mkOption {
+      default = if (pkgs ? sieve) then
+                        pkgs.sieve
+                      else
+                        (if pkgs.libsForQt5 ? sieve then pkgs.libsForQt5.sieve else false);
+      defaultText = literalExpression "pkgs.sieve";
+      type = either bool types.package;
+      description = mdDoc "Package to use.";
+    };
     "Editor" = with types; mkOption {
       type = submodule {
         options = { 
@@ -74,7 +88,8 @@ in {
       description = "OutOfOffice";
     };    
   };
-  config = mkIf cfg.enable {
-    programs.plasma.files."sieveeditorrc" = cfg.sieve;
+  config = mkIf (cfg.enable && moduleCfg.enable) {
+    home.packages = mkIf moduleCfg.package [ moduleCfg.package ];
+    programs.plasma.files."vacationsettingsrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }
