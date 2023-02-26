@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.programs.plasma;
@@ -872,7 +872,7 @@ in {
         options = { 
           SelectedPlugins = mkOption {
             type = nullOr (either str (listOf str));
-            default = "";
+            default = "holidays,webexport";
             description = ''
               
 
