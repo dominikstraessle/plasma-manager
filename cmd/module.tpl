@@ -14,7 +14,7 @@ in {
                       else
                         (if pkgs.libsForQt5 ? {{ .Name }} then pkgs.libsForQt5.{{ .Name }} else false);
       defaultText = literalExpression "pkgs.{{ .Name }}";
-      type = either bool types.package;
+      type = with types; either bool package;
       description = mdDoc "Package to use.";
     };{{ range .Groups }}
     "{{ .Name }}" = with types; mkOption {
