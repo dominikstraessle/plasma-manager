@@ -3,7 +3,8 @@
   programs.plasma = {
     enable = true;
 {{range .}}
-    {{ .Name }} = { {{range .Groups}}
+    {{ .Name }} = {
+      enable = true;{{range .Groups}}
       "{{ .Name }}" = { {{range .Options }}
         "{{ .Name }}" = {{ .GetValue }};{{end}}
       };{{end}}
