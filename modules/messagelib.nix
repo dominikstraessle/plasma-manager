@@ -465,7 +465,7 @@ in {
         options = { 
           AllowSemicolonAsAddressSeparator = mkOption {
             type = nullOr (either str bool);
-            default = "${ALLOW_SEMICOLON_AS_ADDRESS_SEPARATOR_DEFAULT}";
+            default = null;
             description = ''
               Allow the semicolon character (';') to be used as separator in the message composer
 
@@ -1073,7 +1073,7 @@ in {
           };
           ExchangeCompatibleInvitations = mkOption {
             type = nullOr (either str bool);
-            default = "${EXCHANGE_COMPATIBLE_INVITATIONS}";
+            default = null;
             description = ''
               Exchange-compatible invitation naming
 
@@ -1082,7 +1082,7 @@ in {
           };
           LegacyBodyInvites = mkOption {
             type = nullOr (either str bool);
-            default = "${LEGACY_BODY_INVITES}";
+            default = null;
             description = ''
               Send groupware invitations in the mail body
 
@@ -1091,7 +1091,7 @@ in {
           };
           LegacyMangleFromToHeaders = mkOption {
             type = nullOr (either str bool);
-            default = "${LEGACY_MANGLE_FROM_TO_HEADERS}";
+            default = null;
             description = ''
               Mangle From:/To: headers in replies to replies
 

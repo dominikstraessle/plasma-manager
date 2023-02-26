@@ -236,6 +236,10 @@ func (k *Kcfg2Nix) createDefaultNix() {
 }
 
 func asString(text string) string {
+	// some strings contain nix string interpolation
+	if strings.Contains(text, "${") && strings.Contains(text, "}") {
+		return `null`
+	}
 	if strings.Contains(text, `"`) {
 		return fmt.Sprintf(`''%s''`, text)
 	}

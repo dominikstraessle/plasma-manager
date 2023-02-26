@@ -310,7 +310,7 @@ in {
         options = { 
           Theme = mkOption {
             type = nullOr str;
-            default = "${KDE_INSTALL_DATADIR}/knotes/print/themes/default/";
+            default = null;
             description = ''
               
 

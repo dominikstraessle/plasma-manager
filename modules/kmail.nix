@@ -377,7 +377,7 @@ in {
           };
           "too-many-recipients" = mkOption {
             type = nullOr (either str bool);
-            default = "${WARN_TOOMANY_RECIPIENTS_DEFAULT}";
+            default = null;
             description = ''
               Warn if the number of recipients is more than:
 

@@ -218,7 +218,7 @@ in {
             type = nullOr str;
             default = "org.kde.breeze.desktop";
             description = ''
-              Global Look and Feel package
+              Global look and feel
 
               Type: String
             '';

@@ -8,7 +8,7 @@ in {
         options = { 
           UseGraphicEditorByDefault = mkOption {
             type = nullOr (either str bool);
-            default = "${USE_GRAPHICAL_SIEVE_EDITOR}";
+            default = null;
             description = ''
               Use graphical editor by default to edit sieve script.
 
