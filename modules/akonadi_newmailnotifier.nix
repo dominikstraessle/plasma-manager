@@ -112,7 +112,7 @@ in {
           };
           textToSpeak = mkOption {
             type = nullOr str;
-            default = ''i18nc("%f is a variable for agent. Do not change it", "A message was received from %f")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               

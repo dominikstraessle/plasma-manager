@@ -22,7 +22,7 @@ in {
         options = { 
           BackColor = mkOption {
             type = nullOr str;
-            default = "defaultColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The background color of the display.
@@ -32,7 +32,7 @@ in {
           };
           ConstantsButtonsColor = mkOption {
             type = nullOr str;
-            default = "defaultButtonColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of constants buttons.
@@ -42,7 +42,7 @@ in {
           };
           ConstantsFontsColor = mkOption {
             type = nullOr str;
-            default = "defaultFontColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of constants fonts.
@@ -52,7 +52,7 @@ in {
           };
           ForeColor = mkOption {
             type = nullOr str;
-            default = "defaultColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The foreground color of the display.
@@ -62,7 +62,7 @@ in {
           };
           FunctionButtonsColor = mkOption {
             type = nullOr str;
-            default = "defaultButtonColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of function buttons.
@@ -72,7 +72,7 @@ in {
           };
           FunctionFontsColor = mkOption {
             type = nullOr str;
-            default = "defaultFontColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of function fonts.
@@ -82,7 +82,7 @@ in {
           };
           HexButtonsColor = mkOption {
             type = nullOr str;
-            default = "defaultButtonColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of hex buttons.
@@ -92,7 +92,7 @@ in {
           };
           HexFontsColor = mkOption {
             type = nullOr str;
-            default = "defaultFontColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of hex fonts.
@@ -102,7 +102,7 @@ in {
           };
           MemoryButtonsColor = mkOption {
             type = nullOr str;
-            default = "defaultButtonColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of memory buttons.
@@ -112,7 +112,7 @@ in {
           };
           MemoryFontsColor = mkOption {
             type = nullOr str;
-            default = "defaultFontColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of memory fonts.
@@ -122,7 +122,7 @@ in {
           };
           NumberButtonsColor = mkOption {
             type = nullOr str;
-            default = "defaultButtonColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of number buttons.
@@ -132,7 +132,7 @@ in {
           };
           NumberFontsColor = mkOption {
             type = nullOr str;
-            default = "defaultFontColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of number fonts.
@@ -142,7 +142,7 @@ in {
           };
           OperationButtonsColor = mkOption {
             type = nullOr str;
-            default = "defaultButtonColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of operation buttons.
@@ -152,7 +152,7 @@ in {
           };
           OperationFontsColor = mkOption {
             type = nullOr str;
-            default = "defaultFontColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of operation font.
@@ -162,7 +162,7 @@ in {
           };
           StatButtonsColor = mkOption {
             type = nullOr str;
-            default = "defaultButtonColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of statistical buttons.
@@ -172,7 +172,7 @@ in {
           };
           StatFontsColor = mkOption {
             type = nullOr str;
-            default = "defaultFontColor";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The color of statistical fonts.
@@ -190,7 +190,7 @@ in {
         options = { 
           ButtonFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The font to use for the buttons.
@@ -200,7 +200,7 @@ in {
           };
           DisplayFont = mkOption {
             type = nullOr str;
-            default = "defaultDisplayFont";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The font to use in the display.
@@ -210,7 +210,7 @@ in {
           };
           HistoryFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The font to use in the history.
@@ -417,7 +417,7 @@ in {
         options = { 
           "nameConstant$(ConstIndex)" = mkOption {
             type = nullOr str;
-            default = "nameConstant5";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Name of the user programmable constants.

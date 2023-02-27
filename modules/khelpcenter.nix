@@ -177,7 +177,7 @@ in {
         options = { 
           IndexDirectory = mkOption {
             type = nullOr str;
-            default = ''QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QStringLiteral("/index/")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               Path to index directory.

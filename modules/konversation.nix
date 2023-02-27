@@ -138,7 +138,7 @@ in {
           };
           ListFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -283,7 +283,7 @@ in {
           };
           TabFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -293,7 +293,7 @@ in {
           };
           TextFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1415,7 +1415,7 @@ in {
           };
           OSDFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1523,7 +1523,7 @@ in {
         options = { 
           DccPath = mkOption {
             type = nullOr str;
-            default = "QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation))";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1533,7 +1533,7 @@ in {
           };
           LogfilePath = mkOption {
             type = nullOr str;
-            default = ''QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+QLatin1String("/logs"))'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1645,7 +1645,7 @@ in {
         options = { 
           "EmptyingRate $(QueueIndex)" = mkOption {
             type = nullOr (either str (listOf int));
-            default = "defaultRate[$(QueueIndex)]";
+            default = null;
             defaultText = "Code: true";
             description = ''
               

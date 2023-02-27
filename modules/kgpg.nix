@@ -398,7 +398,7 @@ in {
         options = { 
           "Email_Template" = mkOption {
             type = nullOr str;
-            default = "EMailTemplateText";
+            default = null;
             defaultText = "Code: true";
             description = ''
               This is the text of the email sent by the "Sign and Mail User ID" action.
@@ -459,7 +459,7 @@ in {
         options = { 
           KEditFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::FixedFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Font

@@ -22,7 +22,7 @@ in {
         options = { 
           saveUrl = mkOption {
             type = nullOr str;
-            default = "QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::PicturesLocation))";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Where the photos are saved.
@@ -32,7 +32,7 @@ in {
           };
           saveVideos = mkOption {
             type = nullOr str;
-            default = "QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::MoviesLocation))";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Where the photos are saved.

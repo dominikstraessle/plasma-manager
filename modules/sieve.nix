@@ -90,6 +90,6 @@ in {
   };
   config = mkIf (cfg.enable && moduleCfg.enable) {
     home.packages = mkIf (moduleCfg.package != false) [ moduleCfg.package ];
-    programs.plasma.files."vacationsettingsrc" = removeAttrs moduleCfg [ "enable" "package" ];
+    programs.plasma.files."sieveeditorrc" = removeAttrs moduleCfg [ "enable" "package" ];
   };
 }

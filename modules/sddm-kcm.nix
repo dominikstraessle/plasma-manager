@@ -22,7 +22,7 @@ in {
         options = { 
           Relogin = mkOption {
             type = nullOr (either str bool);
-            default = "defaultRelogin()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -32,7 +32,7 @@ in {
           };
           Session = mkOption {
             type = nullOr str;
-            default = "defaultSession()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -42,7 +42,7 @@ in {
           };
           User = mkOption {
             type = nullOr str;
-            default = "defaultUser()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -60,7 +60,7 @@ in {
         options = { 
           HaltCommand = mkOption {
             type = nullOr str;
-            default = "defaultHaltCommand()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -70,7 +70,7 @@ in {
           };
           RebootCommand = mkOption {
             type = nullOr str;
-            default = "defaultRebootCommand()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -88,7 +88,7 @@ in {
         options = { 
           Current = mkOption {
             type = nullOr str;
-            default = "defaultCurrent()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -106,7 +106,7 @@ in {
         options = { 
           MaximumUid = mkOption {
             type = nullOr (either str int);
-            default = "defaultMaximumUid()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -116,7 +116,7 @@ in {
           };
           MinimumUid = mkOption {
             type = nullOr (either str int);
-            default = "defaultMinimumUid()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               

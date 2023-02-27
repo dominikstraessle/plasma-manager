@@ -22,7 +22,7 @@ in {
         options = { 
           KeyRepeat = mkOption {
             type = nullOr str;
-            default = ''qgetenv("QT_IM_MODULE") == "plasmaim" ? QStringLiteral("accent") : QStringLiteral("repeat")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               

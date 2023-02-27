@@ -22,9 +22,7 @@ in {
         options = { 
           EngineCommand = mkOption {
             type = nullOr str;
-            default = ''
-                QStandardPaths::findExecutable(QStringLiteral("gnugo")) + QStringLiteral(" --mode gtp")
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               The current game engine command with (optional) parameters
@@ -60,7 +58,7 @@ in {
           };
           BlackPlayerName = mkOption {
             type = nullOr str;
-            default = ''i18n("Black Player")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               The name of the black player
@@ -123,7 +121,7 @@ in {
           };
           WhitePlayerName = mkOption {
             type = nullOr str;
-            default = ''i18n("White Player")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               The name of the white player

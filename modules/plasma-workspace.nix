@@ -721,7 +721,7 @@ in {
         options = { 
           FeedbackLevel = mkOption {
             type = nullOr (either str int);
-            default = "KUserFeedback::Provider::NoTelemetry";
+            default = null;
             defaultText = "Code: true";
             description = ''
               

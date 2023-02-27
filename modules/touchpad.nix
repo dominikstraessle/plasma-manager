@@ -82,9 +82,7 @@ in {
               "MiddleButton"
               "RightButton"
             ]));
-            default = ''
-                systemDefaultEnum("RBCornerButton", NoButton)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -99,9 +97,7 @@ in {
           };
           AccelFactor = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("AccelFactor", 0.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -113,9 +109,7 @@ in {
           };
           CircScrollDelta = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("CircScrollDelta", 10.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -137,9 +131,7 @@ in {
               "LeftEdge"
               "TopLeftCorner"
             ]));
-            default = ''
-                systemDefaultEnum("CircScrollTrigger", AllEdges)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -159,9 +151,7 @@ in {
           };
           CircularScrolling = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("CircularScrolling", false)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -171,9 +161,7 @@ in {
           };
           Coasting = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("Coasting", true)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -183,9 +171,7 @@ in {
           };
           CoastingFriction = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("CoastingFriction", 50.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -197,9 +183,7 @@ in {
           };
           CoastingSpeed = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("CoastingSpeed", 20.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -211,9 +195,7 @@ in {
           };
           CornerCoasting = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("CornerCoasting", false)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -223,9 +205,7 @@ in {
           };
           FingerHigh = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("FingerHigh", 30)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -237,9 +217,7 @@ in {
           };
           FingerLow = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("FingerLow", 25)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -251,9 +229,7 @@ in {
           };
           HorizEdgeScroll = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("HorizEdgeScroll", true)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -263,9 +239,7 @@ in {
           };
           HorizHysteresis = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("HorizHysteresis", 0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -277,9 +251,7 @@ in {
           };
           HorizScrollDelta = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("HorizScrollDelta", 1.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -291,9 +263,7 @@ in {
           };
           HorizTwoFingerScroll = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("HorizTwoFingerScroll", true)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -303,9 +273,7 @@ in {
           };
           InvertHorizScroll = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("InvertHorizScroll", false)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -315,9 +283,7 @@ in {
           };
           InvertVertScroll = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("InvertVertScroll", false)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -327,9 +293,7 @@ in {
           };
           LockedDragTimeout = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("LockedDragTimeout", 5000)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -341,9 +305,7 @@ in {
           };
           LockedDrags = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("LockedDrags", false)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -353,9 +315,7 @@ in {
           };
           MaxDoubleTapTime = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("MaxDoubleTapTime", 180)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -367,9 +327,7 @@ in {
           };
           MaxSpeed = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("MaxSpeed", 255.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -381,9 +339,7 @@ in {
           };
           MaxTapMove = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("MaxTapMove", 2.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -395,9 +351,7 @@ in {
           };
           MaxTapTime = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("MaxTapTime", 180)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -409,9 +363,7 @@ in {
           };
           MinSpeed = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("MinSpeed", 0.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -423,9 +375,7 @@ in {
           };
           PalmDetect = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("PalmDetect", false)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -435,9 +385,7 @@ in {
           };
           PalmMinWidth = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("PalmMinWidth", 10)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -449,9 +397,7 @@ in {
           };
           PalmMinZ = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("PalmMinZ", 200)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -463,9 +409,7 @@ in {
           };
           PressureMotionMaxFactor = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("PressureMotionMaxFactor", 1.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -477,9 +421,7 @@ in {
           };
           PressureMotionMaxZ = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("PressureMotionMaxZ", 160)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -491,9 +433,7 @@ in {
           };
           PressureMotionMinFactor = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("PressureMotionMinFactor", 1.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -505,9 +445,7 @@ in {
           };
           PressureMotionMinZ = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("PressureMotionMinZ", 30)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -519,9 +457,7 @@ in {
           };
           SingleTapTimeout = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("SingleTapTimeout", 180)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -533,9 +469,7 @@ in {
           };
           TapAndDragGesture = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("TapAndDragGesture", true)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -545,9 +479,7 @@ in {
           };
           Tapping = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("Tapping", true)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -557,9 +489,7 @@ in {
           };
           VertEdgeScroll = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("VertEdgeScroll", true)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -569,9 +499,7 @@ in {
           };
           VertHysteresis = mkOption {
             type = nullOr (either str int);
-            default = ''
-                systemDefault("VertHysteresis", 0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -583,9 +511,7 @@ in {
           };
           VertScrollDelta = mkOption {
             type = nullOr (either str float);
-            default = ''
-                systemDefault("VertScrollDelta", 1.0)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -597,9 +523,7 @@ in {
           };
           VertTwoFingerScroll = mkOption {
             type = nullOr (either str bool);
-            default = ''
-                systemDefault("VertTwoFingerScroll", true)
-            '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               

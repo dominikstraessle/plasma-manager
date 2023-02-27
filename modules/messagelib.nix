@@ -961,7 +961,7 @@ in {
           };
           "body-font" = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Specifies the font to use for the message body
@@ -980,7 +980,7 @@ in {
           };
           "fixed-font" = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::FixedFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -990,7 +990,7 @@ in {
           };
           "print-font" = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Specifies the font to use for printing
@@ -1017,7 +1017,7 @@ in {
           };
           dateFormat = mkOption {
             type = nullOr (either str int);
-            default = "int( KMime::DateFormatter::Fancy )";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1192,7 +1192,7 @@ in {
         options = { 
           ImportantMessageColor = mkOption {
             type = nullOr str;
-            default = "MessageList::Util::importantDefaultMessageColor()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1202,7 +1202,7 @@ in {
           };
           TodoMessageColor = mkOption {
             type = nullOr str;
-            default = "MessageList::Util::todoDefaultMessageColor()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1212,7 +1212,7 @@ in {
           };
           UnreadMessageColor = mkOption {
             type = nullOr str;
-            default = "MessageList::Util::unreadDefaultMessageColor()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1441,7 +1441,7 @@ in {
           };
           "QuotedText1" = mkOption {
             type = nullOr str;
-            default = "MessageCore::ColorUtil::self()->quoteLevel1DefaultTextColor()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               This is the color used in the 1st level of quoted text
@@ -1451,7 +1451,7 @@ in {
           };
           "QuotedText2" = mkOption {
             type = nullOr str;
-            default = "MessageCore::ColorUtil::self()->quoteLevel2DefaultTextColor()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               This is the color used in the 2nd level of quoted text
@@ -1461,7 +1461,7 @@ in {
           };
           "QuotedText3" = mkOption {
             type = nullOr str;
-            default = "MessageCore::ColorUtil::self()->quoteLevel3DefaultTextColor()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               This is the color used in the 3rd level of quoted text

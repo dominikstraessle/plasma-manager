@@ -40,7 +40,7 @@ in {
           };
           url = mkOption {
             type = nullOr str;
-            default = "defaultDir";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Home dir of the user
@@ -58,7 +58,7 @@ in {
         options = { 
           email = mkOption {
             type = nullOr str;
-            default = "address";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Email of the user
@@ -68,7 +68,7 @@ in {
           };
           name = mkOption {
             type = nullOr str;
-            default = "name";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Name of the user

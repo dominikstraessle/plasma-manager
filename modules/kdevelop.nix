@@ -118,7 +118,7 @@ in {
           };
           cmakeToolchain = mkOption {
             type = nullOr str;
-            default = ''QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("ECM/toolchain/Android.cmake"))'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -137,7 +137,7 @@ in {
           };
           ndk = mkOption {
             type = nullOr str;
-            default = ''QString::fromUtf8(qgetenv("ANDROID_NDK"))'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -147,7 +147,7 @@ in {
           };
           sdk = mkOption {
             type = nullOr str;
-            default = ''QString::fromUtf8(qgetenv("ANDROID_HOME"))'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -226,7 +226,7 @@ in {
         options = { 
           cmakeExe = mkOption {
             type = nullOr str;
-            default = "QUrl::fromLocalFile(CMake::findExecutable())";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -324,7 +324,7 @@ in {
           };
           ExecutablePath = mkOption {
             type = nullOr str;
-            default = ''KDevelop::Utils::findExecutable(QStringLiteral("clang-tidy"))'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -387,7 +387,7 @@ in {
         options = { 
           docsPath = mkOption {
             type = nullOr str;
-            default = "JobGlobalParameters::defaultDocsPath()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -397,7 +397,7 @@ in {
           };
           executablePath = mkOption {
             type = nullOr str;
-            default = "JobGlobalParameters::defaultExecutablePath()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -407,7 +407,7 @@ in {
           };
           hideOutputView = mkOption {
             type = nullOr (either str bool);
-            default = "true";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -444,7 +444,7 @@ in {
           };
           verboseOutput = mkOption {
             type = nullOr (either str bool);
-            default = "false";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -462,7 +462,7 @@ in {
         options = { 
           executablePath = mkOption {
             type = nullOr str;
-            default = ''QStandardPaths::findExecutable(QStringLiteral("cppcheck"))'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -472,7 +472,7 @@ in {
           };
           hideOutputView = mkOption {
             type = nullOr (either str bool);
-            default = "defaults::hideOutputView";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -482,7 +482,7 @@ in {
           };
           showXmlOutput = mkOption {
             type = nullOr (either str bool);
-            default = "defaults::showXmlOutput";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -673,7 +673,7 @@ in {
         options = { 
           heaptrackExecutable = mkOption {
             type = nullOr str;
-            default = ''findExecutable(QStringLiteral("heaptrack"))'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -683,7 +683,7 @@ in {
           };
           heaptrackGuiExecutable = mkOption {
             type = nullOr str;
-            default = ''findExecutable(QStringLiteral("heaptrack_gui"))'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -947,7 +947,7 @@ in {
           };
           "Make Binary" = mkOption {
             type = nullOr str;
-            default = "MakeBuilderPreferences::standardMakeExecutable()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               

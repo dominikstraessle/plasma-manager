@@ -22,7 +22,7 @@ in {
         options = { 
           IconSize = mkOption {
             type = nullOr (either str int);
-            default = "KIconLoader::SizeSmall";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Icon size
@@ -41,7 +41,7 @@ in {
           };
           PreviewSize = mkOption {
             type = nullOr (either str int);
-            default = "KIconLoader::SizeLarge";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Preview size
@@ -60,7 +60,7 @@ in {
           };
           ViewFont = mkOption {
             type = nullOr str;
-            default = "QFont()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -203,7 +203,7 @@ in {
           };
           IconSize = mkOption {
             type = nullOr (either str int);
-            default = "KIconLoader::SizeSmall";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Icon size
@@ -213,7 +213,7 @@ in {
           };
           PreviewSize = mkOption {
             type = nullOr (either str int);
-            default = "KIconLoader::SizeLarge";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Preview size
@@ -259,7 +259,7 @@ in {
           };
           ViewFont = mkOption {
             type = nullOr str;
-            default = "QFont()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -331,7 +331,7 @@ in {
           };
           SortOrder = mkOption {
             type = nullOr (either str int);
-            default = "Qt::AscendingOrder";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Order in which to sort files
@@ -512,7 +512,7 @@ in {
           };
           HomeUrl = mkOption {
             type = nullOr str;
-            default = "QUrl::fromLocalFile(QDir::homePath()).toDisplayString(QUrl::PreferLocalFile)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Home URL
@@ -719,7 +719,7 @@ in {
         options = { 
           IconSize = mkOption {
             type = nullOr (either str int);
-            default = "KIconLoader::SizeMedium";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Icon size
@@ -738,7 +738,7 @@ in {
           };
           PreviewSize = mkOption {
             type = nullOr (either str int);
-            default = "KIconLoader::SizeHuge";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Preview size
@@ -766,7 +766,7 @@ in {
           };
           ViewFont = mkOption {
             type = nullOr str;
-            default = "QFont()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -825,7 +825,7 @@ in {
         options = { 
           IconSize = mkOption {
             type = nullOr (either str int);
-            default = "KIconLoader::SizeSmallMedium";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Size of icons in the Places Panel (-1 means "automatic")

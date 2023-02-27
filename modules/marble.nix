@@ -548,7 +548,7 @@ in {
           };
           routeColorAlternative = mkOption {
             type = nullOr str;
-            default = "Marble::Oxygen::aluminumGray4";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -558,7 +558,7 @@ in {
           };
           routeColorHighlighted = mkOption {
             type = nullOr str;
-            default = "Marble::Oxygen::seaBlue2";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -568,7 +568,7 @@ in {
           };
           routeColorStandard = mkOption {
             type = nullOr str;
-            default = "Marble::Oxygen::skyBlue4";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -792,7 +792,7 @@ in {
           };
           lastTrackOpenPath = mkOption {
             type = nullOr str;
-            default = "QDir::homePath()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -802,7 +802,7 @@ in {
           };
           lastTrackSavePath = mkOption {
             type = nullOr str;
-            default = "QDir::homePath()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -908,7 +908,7 @@ in {
           };
           lastFileOpenDir = mkOption {
             type = nullOr str;
-            default = "QDir::homePath()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The last directory that was opened by File->Open.
@@ -918,7 +918,7 @@ in {
           };
           mapFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               The general font used on the map.

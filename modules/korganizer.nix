@@ -844,7 +844,7 @@ in {
           };
           "user_email" = mkOption {
             type = nullOr str;
-            default = ''i18n("nobody@nowhere")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               E&mail address
@@ -854,7 +854,7 @@ in {
           };
           "user_name" = mkOption {
             type = nullOr str;
-            default = ''i18n("Anonymous")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               Full &name
@@ -978,7 +978,7 @@ in {
         options = { 
           "EmptyingRate $(QueueIndex)" = mkOption {
             type = nullOr (either str (listOf int));
-            default = "defaultRate[2]";
+            default = null;
             defaultText = "Code: true";
             description = ''
               

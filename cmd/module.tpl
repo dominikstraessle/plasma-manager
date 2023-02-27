@@ -21,9 +21,10 @@ in {
       type = submodule {
         options = { {{ range .Options }}
           {{if .HasKey }}{{ .Key }}{{else}}{{ .Name }}{{end}} = mkOption {
-            type = nullOr {{ .TypeValue }};
-            default = {{ .DefaultValue }};{{if .IsDefaultCode }}
-            defaultText = "Code: true";{{end}}
+            type = nullOr {{ .TypeValue }};{{if .IsDefaultCode }}
+            default = null;
+            defaultText = "Code: true";{{else}}
+            default = {{ .DefaultValue }};{{end}}
             description = ''
               {{ .Label }}
 

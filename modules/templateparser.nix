@@ -31,7 +31,7 @@ in {
           };
           QuoteString = mkOption {
             type = nullOr str;
-            default = "DefaultTemplates::defaultQuoteString()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Quote characters
@@ -50,7 +50,7 @@ in {
           };
           TemplateForward = mkOption {
             type = nullOr str;
-            default = "DefaultTemplates::defaultForward()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Message template for forward
@@ -60,7 +60,7 @@ in {
           };
           TemplateNewMessage = mkOption {
             type = nullOr str;
-            default = "DefaultTemplates::defaultNewMessage()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Message template for new message
@@ -70,7 +70,7 @@ in {
           };
           TemplateReply = mkOption {
             type = nullOr str;
-            default = "DefaultTemplates::defaultReply()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Message template for reply
@@ -80,7 +80,7 @@ in {
           };
           TemplateReplyAll = mkOption {
             type = nullOr str;
-            default = "DefaultTemplates::defaultReplyAll()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Message template for reply to all

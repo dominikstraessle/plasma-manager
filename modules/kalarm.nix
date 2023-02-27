@@ -338,7 +338,7 @@ in {
           };
           DisabledColour = mkOption {
             type = nullOr str;
-            default = "KColorScheme(QPalette::Disabled).foreground(KColorScheme::InactiveText).color()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Disabled alarm color
@@ -348,7 +348,7 @@ in {
           };
           EmailBccAddress = mkOption {
             type = nullOr str;
-            default = ''QLatin1String("@SystemSettings")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               'Bcc' email address
@@ -382,7 +382,7 @@ in {
           };
           EmailFrom = mkOption {
             type = nullOr str;
-            default = ''KAlarmCal::Identities::identitiesExist() ? QLatin1String("@KMail") : QLatin1String("@SystemSettings")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               'From' email address
@@ -392,7 +392,7 @@ in {
           };
           ExpiredColour = mkOption {
             type = nullOr str;
-            default = "KColorScheme(QPalette::Active).foreground(KColorScheme::VisitedText).color()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Archived alarm color
@@ -429,7 +429,7 @@ in {
           };
           MessageBackgroundColour = mkOption {
             type = nullOr str;
-            default = "KColorScheme(QPalette::Active).background(KColorScheme::NegativeBackground).color()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Background color
@@ -450,7 +450,7 @@ in {
           };
           MessageFont = mkOption {
             type = nullOr str;
-            default = "QFont(QFontDatabase::systemFont(QFontDatabase::GeneralFont).family(), 16, QFont::Bold)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Message font
@@ -460,7 +460,7 @@ in {
           };
           MessageForegroundColour = mkOption {
             type = nullOr str;
-            default = "KColorScheme(QPalette::Active).foreground().color()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Foreground color
@@ -560,7 +560,7 @@ in {
           };
           TooltipTimeToPrefix = mkOption {
             type = nullOr str;
-            default = ''QLatin1String("+")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               Time-to-alarm prefix in system tray tooltip
@@ -624,7 +624,7 @@ in {
           };
           WorkDays = mkOption {
             type = nullOr (either str int);
-            default = "Locale::defaultWorkDays()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Working days

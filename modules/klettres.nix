@@ -109,7 +109,7 @@ in {
         options = { 
           mFont = mkOption {
             type = nullOr str;
-            default = "defaultFont";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Font

@@ -311,7 +311,7 @@ in {
           };
           RecolorBackground = mkOption {
             type = nullOr str;
-            default = "0xF0F0F0";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -321,7 +321,7 @@ in {
           };
           RecolorForeground = mkOption {
             type = nullOr str;
-            default = "0x600000";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -356,7 +356,7 @@ in {
         options = { 
           SlidesBackgroundColor = mkOption {
             type = nullOr str;
-            default = "Qt::black";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -480,7 +480,7 @@ in {
           };
           PaperColor = mkOption {
             type = nullOr str;
-            default = "Qt::white";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -666,7 +666,7 @@ in {
         options = { 
           IdentityAuthor = mkOption {
             type = nullOr str;
-            default = "userString";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1021,7 +1021,7 @@ in {
           };
           BuiltinAnnotationTools = mkOption {
             type = nullOr (either str (listOf str));
-            default = "builtinAnnotationTools";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1031,7 +1031,7 @@ in {
           };
           DrawingTools = mkOption {
             type = nullOr (either str (listOf str));
-            default = "drawingTools";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1050,7 +1050,7 @@ in {
           };
           QuickAnnotationTools = mkOption {
             type = nullOr (either str (listOf str));
-            default = "quickAnnotationTools";
+            default = null;
             defaultText = "Code: true";
             description = ''
               

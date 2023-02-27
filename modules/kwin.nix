@@ -1086,6 +1086,8 @@ in {
               
 
               Type: Int
+              Min: 1000
+              Max: 6500
             '';
           };
           EveningBeginFixed = mkOption {
@@ -1186,6 +1188,8 @@ in {
               
 
               Type: Int
+              Min: 1000
+              Max: 6500
             '';
           };
           NightTemperatureEnabled = mkOption {

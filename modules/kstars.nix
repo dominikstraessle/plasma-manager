@@ -40,7 +40,7 @@ in {
           };
           ASTAPExecutable = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("ASTAP")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               Full path to the ASTAP executable.
@@ -211,7 +211,7 @@ in {
           };
           AstrometryConfFile = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("AstrometryConfFile")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               astrometry.net configuration file
@@ -320,7 +320,7 @@ in {
           };
           AstrometrySolverBinary = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("AstrometrySolverBinary")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               astrometry.net solve-field binary
@@ -429,7 +429,7 @@ in {
           };
           AstrometryWCSInfo = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("AstrometryWCSInfo")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               astrometry.net wcsinfo binary
@@ -502,7 +502,7 @@ in {
           };
           SextractorBinary = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("SextractorBinary")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -521,7 +521,7 @@ in {
           };
           WatneyBinary = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("WatneyBinary")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -1060,7 +1060,7 @@ in {
           };
           PlaceholderFormat = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("placeholderFormat")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               How to format captured image filename.
@@ -2239,7 +2239,7 @@ in {
           };
           PositionFocusBox = mkOption {
             type = nullOr str;
-            default = "QPoint(600,0)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Position of the focus InfoBox.
@@ -2249,7 +2249,7 @@ in {
           };
           PositionGeoBox = mkOption {
             type = nullOr str;
-            default = "QPoint(0,600)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Position of the geographic InfoBox.
@@ -2259,7 +2259,7 @@ in {
           };
           PositionTimeBox = mkOption {
             type = nullOr str;
-            default = "QPoint(0,0)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Position of the time InfoBox.
@@ -4386,7 +4386,7 @@ in {
         options = { 
           AstrometryIndexFolderList = mkOption {
             type = nullOr (either str (listOf str));
-            default = "KSUtils::getAstrometryDefaultIndexFolderPaths()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               List of index folder paths.
@@ -4396,7 +4396,7 @@ in {
           };
           AstrometryLogFilepath = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("AstrometryLogFilepath")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               Path of the log file to save astrometry logging to.
@@ -5855,7 +5855,7 @@ in {
           };
           XplanetPath = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("XplanetPath")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               Path to xplanet binary
@@ -6026,7 +6026,7 @@ in {
           };
           INDIHubAgent = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("INDIHubAgent")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               PATH to indihub-agent binary
@@ -6090,7 +6090,7 @@ in {
           };
           fitsDir = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("fitsDir")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               FITS Default directory
@@ -6118,7 +6118,7 @@ in {
           };
           indiDriversDir = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("indiDriversDir")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               PATH to indi drivers directory
@@ -6128,7 +6128,7 @@ in {
           };
           indiServer = mkOption {
             type = nullOr str;
-            default = ''KSUtils::getDefaultPath("indiServer")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               PATH to indiserver binary

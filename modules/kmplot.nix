@@ -272,7 +272,7 @@ in {
         options = { 
           AxesFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Font of the axis labels
@@ -282,7 +282,7 @@ in {
           };
           HeaderTableFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Font of the printed header table
@@ -292,7 +292,7 @@ in {
           };
           LabelFont = mkOption {
             type = nullOr str;
-            default = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Font of diagram labels

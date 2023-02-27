@@ -22,7 +22,7 @@ in {
         options = { 
           DisplayNames = mkOption {
             type = nullOr (either str (listOf str));
-            default = "QStringList()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -32,7 +32,7 @@ in {
           };
           LayoutList = mkOption {
             type = nullOr (either str (listOf str));
-            default = "QStringList()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -60,7 +60,7 @@ in {
           };
           Options = mkOption {
             type = nullOr (either str (listOf str));
-            default = "QStringList()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -97,7 +97,7 @@ in {
           };
           VariantList = mkOption {
             type = nullOr (either str (listOf str));
-            default = "QStringList()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               

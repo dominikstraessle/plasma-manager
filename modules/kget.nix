@@ -184,7 +184,7 @@ in {
           };
           TimedDisconnectDateTime = mkOption {
             type = nullOr str;
-            default = "QDateTime::currentDateTime()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -203,7 +203,7 @@ in {
           };
           TimedDownloadDateTime = mkOption {
             type = nullOr str;
-            default = "QDateTime::currentDateTime()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -543,7 +543,7 @@ in {
         options = { 
           DropPosition = mkOption {
             type = nullOr str;
-            default = "QPoint(-1, -1)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -571,7 +571,7 @@ in {
           };
           LastDirectory = mkOption {
             type = nullOr str;
-            default = "QStandardPaths::writableLocation(QStandardPaths::DownloadLocation)";
+            default = null;
             defaultText = "Code: true";
             description = ''
               

@@ -128,7 +128,7 @@ in {
           };
           fixed = mkOption {
             type = nullOr str;
-            default = "fixedWidthFont";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Fixed width font
@@ -138,7 +138,7 @@ in {
           };
           font = mkOption {
             type = nullOr str;
-            default = "generalFont";
+            default = null;
             defaultText = "Code: true";
             description = ''
               General font
@@ -148,7 +148,7 @@ in {
           };
           menuFont = mkOption {
             type = nullOr str;
-            default = "menuFont";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Menu font
@@ -158,7 +158,7 @@ in {
           };
           smallestReadableFont = mkOption {
             type = nullOr str;
-            default = "smallFont";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Small font
@@ -168,7 +168,7 @@ in {
           };
           toolBarFont = mkOption {
             type = nullOr str;
-            default = "toolBarFont";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Tool bar font
@@ -412,7 +412,7 @@ in {
         options = { 
           activeFont = mkOption {
             type = nullOr str;
-            default = "windowTitleFont";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Window title font

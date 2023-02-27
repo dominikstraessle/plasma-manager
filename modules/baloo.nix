@@ -48,7 +48,7 @@ in {
           };
           "exclude filters" = mkOption {
             type = nullOr (either str (listOf str));
-            default = "Baloo::defaultExcludeFilterList()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               exclude filters
@@ -67,7 +67,7 @@ in {
           };
           "exclude folders" = mkOption {
             type = nullOr (either str (listOf str));
-            default = "QStringList()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               exclude folders
@@ -77,7 +77,7 @@ in {
           };
           "exclude mimetypes" = mkOption {
             type = nullOr (either str (listOf str));
-            default = "Baloo::defaultExcludeMimetypes()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               exclude mimetypes
@@ -87,7 +87,7 @@ in {
           };
           folders = mkOption {
             type = nullOr (either str (listOf str));
-            default = "QStringList() << QDir::homePath()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               folders

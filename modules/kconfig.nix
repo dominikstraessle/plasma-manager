@@ -220,9 +220,7 @@ in {
           };
           "color string #$(Number)" = mkOption {
             type = nullOr str;
-            default = "
-      QString::number($(Number))
-      ";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Gray colors as string.
@@ -241,9 +239,7 @@ in {
           };
           "gray color #$(Number)" = mkOption {
             type = nullOr str;
-            default = "
-      QColor::fromRgbF($(Number) / 10.0, $(Number) / 10.0, $(Number) / 10.0)
-      ";
+            default = null;
             defaultText = "Code: true";
             description = ''
               Gray colors.
@@ -330,7 +326,7 @@ in {
         options = { 
           Font = mkOption {
             type = nullOr str;
-            default = "QFont()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -340,7 +336,7 @@ in {
           };
           TitleFont = mkOption {
             type = nullOr str;
-            default = "QFont()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -419,7 +415,7 @@ in {
           };
           MyPath = mkOption {
             type = nullOr str;
-            default = ''QDir::homePath()+QString::fromLatin1(".hidden_file")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               This is a path
@@ -473,7 +469,7 @@ in {
           };
           "MyPathsList2" = mkOption {
             type = nullOr (either str (listOf str));
-            default = ''QStringList(QString::fromLatin1("/usr/bin")) << QDir::homePath()'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               This is an additional test for PathList

@@ -22,7 +22,7 @@ in {
         options = { 
           LANG = mkOption {
             type = nullOr str;
-            default = "lang";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -32,7 +32,7 @@ in {
           };
           "LC_ADDRESS" = mkOption {
             type = nullOr str;
-            default = ''i18n("Inherit Language")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -42,7 +42,7 @@ in {
           };
           "LC_CTYPE" = mkOption {
             type = nullOr str;
-            default = ''i18n("Inherit Language")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -52,7 +52,7 @@ in {
           };
           "LC_MEASUREMENT" = mkOption {
             type = nullOr str;
-            default = ''i18n("Inherit Language")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -62,7 +62,7 @@ in {
           };
           "LC_MONETARY" = mkOption {
             type = nullOr str;
-            default = ''i18n("Inherit Language")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -72,7 +72,7 @@ in {
           };
           "LC_NAME" = mkOption {
             type = nullOr str;
-            default = ''i18n("Inherit Language")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -82,7 +82,7 @@ in {
           };
           "LC_NUMERIC" = mkOption {
             type = nullOr str;
-            default = ''i18n("Inherit Language")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -92,7 +92,7 @@ in {
           };
           "LC_PAGE" = mkOption {
             type = nullOr str;
-            default = ''i18n("Inherit Language")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -102,7 +102,7 @@ in {
           };
           "LC_TELEPHONE" = mkOption {
             type = nullOr str;
-            default = ''i18n("Inherit Language")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -112,7 +112,7 @@ in {
           };
           "LC_TIME" = mkOption {
             type = nullOr str;
-            default = ''i18n("Inherit Language")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               

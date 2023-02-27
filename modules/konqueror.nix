@@ -246,7 +246,7 @@ in {
           };
           DefaultEncoding = mkOption {
             type = nullOr str;
-            default = "QString()";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -319,7 +319,7 @@ in {
           };
           MinimumFontSize = mkOption {
             type = nullOr (either str int);
-            default = "7";
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -338,7 +338,7 @@ in {
           };
           StandardFont = mkOption {
             type = nullOr str;
-            default = ''QFont("Sans Serif")'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               Standard font
@@ -481,13 +481,7 @@ in {
           };
           JavaPath = mkOption {
             type = nullOr str;
-            default = ''
-#if defined(PATH_JAVA)
-PATH_JAVA
-#else
-"java"
-#endif
-      '';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
@@ -809,7 +803,7 @@ PATH_JAVA
           CompletionMode = mkOption {
             type = nullOr (either str (enum [ 
             ]));
-            default = "KCompletion::CompletionPopup";
+            default = null;
             defaultText = "Code: true";
             description = ''
               

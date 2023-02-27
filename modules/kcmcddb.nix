@@ -64,7 +64,7 @@ in {
           };
           cacheLocations = mkOption {
             type = nullOr (either str (listOf str));
-            default = ''QStringList(QDir::homePath()+QLatin1String("/.cddb/"))'';
+            default = null;
             defaultText = "Code: true";
             description = ''
               
