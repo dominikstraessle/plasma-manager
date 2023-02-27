@@ -1079,7 +1079,7 @@ in {
           font = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "Uml::systemFont()";
             description = ''
               Font
 

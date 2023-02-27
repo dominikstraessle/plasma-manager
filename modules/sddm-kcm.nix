@@ -23,7 +23,7 @@ in {
           Relogin = mkOption {
             type = nullOr (either str bool);
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultRelogin()";
             description = ''
               
 
@@ -33,7 +33,7 @@ in {
           Session = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultSession()";
             description = ''
               
 
@@ -43,7 +43,7 @@ in {
           User = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultUser()";
             description = ''
               
 
@@ -61,7 +61,7 @@ in {
           HaltCommand = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultHaltCommand()";
             description = ''
               
 
@@ -71,7 +71,7 @@ in {
           RebootCommand = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultRebootCommand()";
             description = ''
               
 
@@ -89,7 +89,7 @@ in {
           Current = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultCurrent()";
             description = ''
               
 
@@ -107,7 +107,7 @@ in {
           MaximumUid = mkOption {
             type = nullOr (either str int);
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultMaximumUid()";
             description = ''
               
 
@@ -117,7 +117,7 @@ in {
           MinimumUid = mkOption {
             type = nullOr (either str int);
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultMinimumUid()";
             description = ''
               
 

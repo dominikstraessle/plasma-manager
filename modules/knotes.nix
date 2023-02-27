@@ -75,7 +75,7 @@ in {
           bgcolor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "Qt::yellow";
             description = ''
               
 
@@ -85,7 +85,7 @@ in {
           fgcolor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "Qt::black";
             description = ''
               
 
@@ -139,7 +139,7 @@ in {
           font = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             description = ''
               
 
@@ -167,7 +167,7 @@ in {
           titlefont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QFontDatabase::systemFont(QFontDatabase::TitleFont)";
             description = ''
               
 
@@ -404,7 +404,7 @@ in {
           position = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QPoint( -10000, -10000 )";
             description = ''
               
 

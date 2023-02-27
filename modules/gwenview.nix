@@ -529,7 +529,9 @@ in {
           PrintPosition = mkOption {
             type = nullOr (either str int);
             default = null;
-            defaultText = "Code: true";
+            defaultText = "
+                Qt::AlignHCenter | Qt::AlignVCenter
+            ";
             description = ''
               
 

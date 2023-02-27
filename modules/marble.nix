@@ -549,7 +549,7 @@ in {
           routeColorAlternative = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "Marble::Oxygen::aluminumGray4";
             description = ''
               
 
@@ -559,7 +559,7 @@ in {
           routeColorHighlighted = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "Marble::Oxygen::seaBlue2";
             description = ''
               
 
@@ -569,7 +569,7 @@ in {
           routeColorStandard = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "Marble::Oxygen::skyBlue4";
             description = ''
               
 
@@ -793,7 +793,7 @@ in {
           lastTrackOpenPath = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QDir::homePath()";
             description = ''
               
 
@@ -803,7 +803,7 @@ in {
           lastTrackSavePath = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QDir::homePath()";
             description = ''
               
 
@@ -909,7 +909,7 @@ in {
           lastFileOpenDir = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QDir::homePath()";
             description = ''
               The last directory that was opened by File->Open.
 
@@ -919,7 +919,7 @@ in {
           mapFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             description = ''
               The general font used on the map.
 

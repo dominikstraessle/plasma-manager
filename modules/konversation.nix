@@ -139,7 +139,7 @@ in {
           ListFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             description = ''
               
 
@@ -284,7 +284,7 @@ in {
           TabFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             description = ''
               
 
@@ -294,7 +294,7 @@ in {
           TextFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             description = ''
               
 
@@ -1416,7 +1416,7 @@ in {
           OSDFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             description = ''
               
 
@@ -1524,7 +1524,7 @@ in {
           DccPath = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation))";
             description = ''
               
 
@@ -1534,7 +1534,7 @@ in {
           LogfilePath = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = ''QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+QLatin1String("/logs"))'';
             description = ''
               
 
@@ -1646,7 +1646,7 @@ in {
           "EmptyingRate $(QueueIndex)" = mkOption {
             type = nullOr (either str (listOf int));
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultRate[$(QueueIndex)]";
             description = ''
               
 

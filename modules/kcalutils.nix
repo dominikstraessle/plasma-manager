@@ -68,7 +68,7 @@ in {
           Title = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = ''QLatin1String("Calendar")'';
             description = ''
               Title of the calendar
 
@@ -95,7 +95,7 @@ in {
           "Free/Busy Title" = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = ''QLatin1String("Busy times")'';
             description = ''
               Title of the free/busy list
 
@@ -203,7 +203,7 @@ in {
           "Page Title" = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = ''QLatin1String("Calendar")'';
             description = ''
               Page Title
 
@@ -230,7 +230,7 @@ in {
           "Journal Title" = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = ''QLatin1String("Journals")'';
             description = ''
               Title of the journal list
 
@@ -302,7 +302,7 @@ in {
           "TodoList Title" = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = ''QLatin1String("To-do List")'';
             description = ''
               Title of the to-do list
 

@@ -129,7 +129,7 @@ in {
           fixed = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "fixedWidthFont";
             description = ''
               Fixed width font
 
@@ -139,7 +139,7 @@ in {
           font = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "generalFont";
             description = ''
               General font
 
@@ -149,7 +149,7 @@ in {
           menuFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "menuFont";
             description = ''
               Menu font
 
@@ -159,7 +159,7 @@ in {
           smallestReadableFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "smallFont";
             description = ''
               Small font
 
@@ -169,7 +169,7 @@ in {
           toolBarFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "toolBarFont";
             description = ''
               Tool bar font
 
@@ -232,7 +232,7 @@ in {
             type = nullOr str;
             default = "org.kde.breeze.desktop";
             description = ''
-              Global Look and Feel package
+              Global look and feel
 
               Type: String
             '';
@@ -413,7 +413,7 @@ in {
           activeFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "windowTitleFont";
             description = ''
               Window title font
 

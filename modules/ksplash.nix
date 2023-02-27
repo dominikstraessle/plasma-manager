@@ -23,7 +23,7 @@ in {
           Engine = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = ''theme() == QStringLiteral("None") ? QStringLiteral("none") : QStringLiteral("KSplashQML")'';
             description = ''
               For future use
 

@@ -116,7 +116,7 @@ in {
           name = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = ''i18n("Unnamed")'';
             description = ''
               User-visible transport name
 

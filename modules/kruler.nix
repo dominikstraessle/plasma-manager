@@ -32,7 +32,7 @@ in {
           BgColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(255, 200, 80)";
             description = ''
               Background color of the ruler.
 
@@ -96,7 +96,7 @@ in {
           ScaleFont = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont)";
             description = ''
               Font of the text on the ruler scale.
 

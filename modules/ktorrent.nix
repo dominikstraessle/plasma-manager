@@ -79,7 +79,7 @@ in {
           customIP = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QString()";
             description = ''
               IP to pass to the tracker
 
@@ -149,7 +149,7 @@ in {
           errorTorrentColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(Qt::red)";
             description = ''
               
 
@@ -168,7 +168,7 @@ in {
           goodShareRatioColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(40, 205, 40)";
             description = ''
               
 
@@ -217,7 +217,7 @@ in {
           httpProxy = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QString()";
             description = ''
               
 
@@ -247,7 +247,7 @@ in {
           lastSaveDir = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QString()";
             description = ''
               Directory which was used as the last save directory
 
@@ -266,7 +266,7 @@ in {
           lowShareRatioColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(Qt::red)";
             description = ''
               
 
@@ -396,7 +396,7 @@ in {
           noTrackerConnectionColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(Qt::red)";
             description = ''
               
 
@@ -428,7 +428,7 @@ in {
           okTorrentColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(40, 205, 40)";
             description = ''
               
 
@@ -438,7 +438,7 @@ in {
           okTrackerConnectionColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(40, 205, 40)";
             description = ''
               
 
@@ -609,7 +609,7 @@ in {
           socksPassword = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QString()";
             description = ''
               
 
@@ -630,7 +630,7 @@ in {
           socksProxy = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QString()";
             description = ''
               
 
@@ -649,7 +649,7 @@ in {
           socksUsername = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QString()";
             description = ''
               
 
@@ -680,7 +680,7 @@ in {
           stalledTorrentColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(255, 174, 0)";
             description = ''
               
 
@@ -717,7 +717,7 @@ in {
           timeoutTrackerConnectionColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(0, 170, 110)";
             description = ''
               
 
@@ -859,7 +859,7 @@ in {
           warningsTrackerConnectionColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(255, 80, 0)";
             description = ''
               
 
@@ -1286,7 +1286,7 @@ in {
           filterURL = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = ''QUrl(QStringLiteral("http://list.iblocklist.com/?list=bt_level1&fileformat=p2p&archiveformat=gz"))'';
             description = ''
               Level1 filter url
 
@@ -1296,7 +1296,7 @@ in {
           firstColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor()";
             description = ''
               
 
@@ -1324,7 +1324,7 @@ in {
           itemColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(0,255,0,255)";
             description = ''
               
 
@@ -1334,7 +1334,7 @@ in {
           lastColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor()";
             description = ''
               
 
@@ -1420,7 +1420,7 @@ in {
           scheduleBackgroundColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(Qt::yellow)";
             description = ''
               
 
@@ -1430,7 +1430,7 @@ in {
           scheduleLineColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(Qt::blue)";
             description = ''
               
 
@@ -1532,7 +1532,7 @@ in {
           suspendedColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QColor(255,0,0,255)";
             description = ''
               
 

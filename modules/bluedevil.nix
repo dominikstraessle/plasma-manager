@@ -32,7 +32,7 @@ in {
           saveUrl = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation))";
             description = ''
               Save received files to:
 

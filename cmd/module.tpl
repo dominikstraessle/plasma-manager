@@ -23,7 +23,7 @@ in {
           {{if .HasKey }}{{ .Key }}{{else}}{{ .Name }}{{end}} = mkOption {
             type = nullOr {{ .TypeValue }};{{if .IsDefaultCode }}
             default = null;
-            defaultText = "Code: true";{{else}}
+            defaultText = {{ .DefaultValue }};{{else}}
             default = {{ .DefaultValue }};{{end}}
             description = ''
               {{ .Label }}

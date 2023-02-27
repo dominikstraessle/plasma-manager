@@ -504,7 +504,9 @@ in {
           defaultSaveLocation = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "
+            QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)+QLatin1Char('/')) 
+        ";
             description = ''
               Default filename
 
@@ -514,7 +516,7 @@ in {
           lastSaveAsLocation = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultSaveLocation()";
             description = ''
               Last path used for "save as" action
 
@@ -524,7 +526,7 @@ in {
           lastSaveLocation = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "defaultSaveLocation()";
             description = ''
               The path of the file saved last
 

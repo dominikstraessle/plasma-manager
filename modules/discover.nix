@@ -76,7 +76,7 @@ in {
           RequiredNotificationInterval = mkOption {
             type = nullOr (either str int);
             default = null;
-            defaultText = "Code: true";
+            defaultText = "60 * 60 * 24";
             description = ''
               
 

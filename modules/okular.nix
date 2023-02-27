@@ -312,7 +312,7 @@ in {
           RecolorBackground = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "0xF0F0F0";
             description = ''
               
 
@@ -322,7 +322,7 @@ in {
           RecolorForeground = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "0x600000";
             description = ''
               
 
@@ -357,7 +357,7 @@ in {
           SlidesBackgroundColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "Qt::black";
             description = ''
               
 
@@ -481,7 +481,7 @@ in {
           PaperColor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "Qt::white";
             description = ''
               
 
@@ -667,7 +667,7 @@ in {
           IdentityAuthor = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "userString";
             description = ''
               
 
@@ -1022,7 +1022,7 @@ in {
           BuiltinAnnotationTools = mkOption {
             type = nullOr (either str (listOf str));
             default = null;
-            defaultText = "Code: true";
+            defaultText = "builtinAnnotationTools";
             description = ''
               
 
@@ -1032,7 +1032,7 @@ in {
           DrawingTools = mkOption {
             type = nullOr (either str (listOf str));
             default = null;
-            defaultText = "Code: true";
+            defaultText = "drawingTools";
             description = ''
               
 
@@ -1051,7 +1051,7 @@ in {
           QuickAnnotationTools = mkOption {
             type = nullOr (either str (listOf str));
             default = null;
-            defaultText = "Code: true";
+            defaultText = "quickAnnotationTools";
             description = ''
               
 

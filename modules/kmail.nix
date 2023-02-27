@@ -146,7 +146,7 @@ in {
           "Completion Mode" = mkOption {
             type = nullOr (either str int);
             default = null;
-            defaultText = "Code: true";
+            defaultText = "KCompletion::CompletionPopup";
             description = ''
               
 
@@ -228,7 +228,9 @@ in {
           "attachment-keywords" = mkOption {
             type = nullOr (either str (listOf str));
             default = null;
-            defaultText = "Code: true";
+            defaultText = "
+        MessageComposer::Util::AttachmentKeywords()
+        ";
             description = ''
               
 
@@ -337,7 +339,9 @@ in {
           "recent-encoding" = mkOption {
             type = nullOr (either str (listOf str));
             default = null;
-            defaultText = "Code: true";
+            defaultText = "
+        QStringList()
+        ";
             description = ''
               A list of all the recently used encodings
 
@@ -347,7 +351,9 @@ in {
           "recent-urls" = mkOption {
             type = nullOr (either str (listOf str));
             default = null;
-            defaultText = "Code: true";
+            defaultText = "
+        QStringList()
+        ";
             description = ''
               A list of all the recently used URLs
 
@@ -420,7 +426,7 @@ in {
           "composer-font" = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "QFontDatabase::systemFont(QFontDatabase::GeneralFont)";
             description = ''
               
 
@@ -801,7 +807,7 @@ in {
           QuoteString = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "TemplateParser::DefaultTemplates::defaultQuoteString()";
             description = ''
               Quote characters
 
@@ -811,7 +817,7 @@ in {
           TemplateForward = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "TemplateParser::DefaultTemplates::defaultForward()";
             description = ''
               Message template for forward
 
@@ -821,7 +827,7 @@ in {
           TemplateNewMessage = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "TemplateParser::DefaultTemplates::defaultNewMessage()";
             description = ''
               Message template for new message
 
@@ -831,7 +837,7 @@ in {
           TemplateReply = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "TemplateParser::DefaultTemplates::defaultReply()";
             description = ''
               Message template for reply
 
@@ -841,7 +847,7 @@ in {
           TemplateReplyAll = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "TemplateParser::DefaultTemplates::defaultReplyAll()";
             description = ''
               Message template for reply to all
 

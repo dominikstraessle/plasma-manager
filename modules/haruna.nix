@@ -58,7 +58,7 @@ in {
           FileDialogLastLocation = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "videoFolder";
             description = ''
               
 
@@ -684,7 +684,7 @@ in {
           ScreenshotTemplate = mkOption {
             type = nullOr str;
             default = null;
-            defaultText = "Code: true";
+            defaultText = "screenshotsFolder";
             description = ''
               
 
